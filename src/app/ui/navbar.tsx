@@ -1,18 +1,36 @@
-import Image from "next/image";
+'use client';
 
+import Image from "next/image";
 import styles from "./navbar.module.css";
 import Link from "next/link";
+import { usePathname } from 'next/navigation';
+// Usar clsx para mostrar opções de administrador e usuário logado?
+import clsx from 'clsx';
+
+const links = [
+  { name: 'Explorar', href: '/',},
+  { name: 'Mapa', href: '/map',},
+  { name: 'Incluir café', href: '/new-coffee' },
+];
 
 export function Navbar() {
-
+  const pathname = usePathname();
   return (
     <div className={styles.container}>
       <Image src="/logo.svg" alt="" width={120} height={30} />
       <div className={styles['centered-container']}>
-        <Link href={'/'} className={styles.link}>Explorar</Link>
-        <Link href={'/map'} className={styles.link}>Mapa</Link>
-        <Link href={'/profile'} className={styles.link}>Perfil</Link>
-        <Link href={'/new-coffee'} className={styles.link}>Incluir café</Link>
+        {links.map(link => {
+          return (
+            <Link 
+              key={link.name}
+              href={link.href} 
+              className={clsx({
+                [styles.link]: true,
+                [styles.active]: pathname === link.href
+              })}
+            >{link.name}</Link>
+          )
+        })}
       </div>
       <Link href={'/login'}>Login</Link>
     </div>
