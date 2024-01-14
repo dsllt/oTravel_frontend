@@ -1,0 +1,43 @@
+.main {
+  border: 1px solid rgb(156 163 175);
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 20rem;
+}
+
+.main:has(input:focus) {
+  border-color: #545454;
+}
+
+.icon {
+  color:  rgb(156 163 175);
+  height: 24px;
+  width: 24px;
+}
+
+.main:has(input:focus) .icon {
+  color: #545454;
+
+}
+
+.search-input {
+  background: transparent;
+  border: none;
+  width: 100%;
+  color: #333;
+}
+
+.search-input::placeholder {
+  color: rgb(156 163 175);
+}
+
+.search-input:focus{
+  outline: none;
+}
+
+.search-input:focus::placeholder {
+  color: #545454;
+}
