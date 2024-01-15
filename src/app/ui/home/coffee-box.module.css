@@ -1,0 +1,54 @@
+.container{
+  cursor: pointer;
+}
+
+.image{
+  object-fit: cover;
+}
+
+.info{
+  color: var(--text-gray-700);
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}
+
+.info h2{
+  font-family: sans-serif;
+  text-transform: uppercase;
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: 0.1rem;
+  color: rgb(84 84 84);
+}
+
+.info-text{
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.info-text span{
+  font-family: serif;
+  font-size: 0.875rem;
+
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.info-text span:nth-child(2){
+  font-weight: bold;
+  font-family: sans-serif;
+  letter-spacing: 0.1rem;
+}
+
+.info-text svg{
+  height: 20px;
+  width: 20px;
+}
