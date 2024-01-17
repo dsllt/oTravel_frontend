@@ -35,10 +35,9 @@ body {
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: var(--background-100);
   color: var(--text-gray-100);
   -webkit-font-smoothing: 'antialiased';
+  background-color:#fdfbf7 ;
 }
 
 a {
