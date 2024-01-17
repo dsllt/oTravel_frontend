@@ -28,34 +28,27 @@
 .marker {
   padding: 0.5rem;
   background: lightblue;
-  /* position: relative; */
   border-radius: 1000px;
-  /* transition: all 0.8s ease-in; */
   cursor: pointer;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 0.5rem;
-  /* background-color: #a2e092; */
   transition: all 0.8s ease-in;
 }
 
 .marker:hover{
-    animation: forwards;
-}
-
-.marker svg{
-    height: 20px;
-    width: 20px;
-}
-
-.marker .hovered {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 0.5rem;
   background-color: #a2e092;
   transition: all 0.8s ease-in;
+}
+
+.marker svg{
+    height: 20px;
+    width: 20px;
 }
 
 .marker-info {
