@@ -2,9 +2,8 @@
 import {APIProvider, Map} from '@vis.gl/react-google-maps';
 import styles from "./page.module.css"
 import { AdvancedMarker } from '@vis.gl/react-google-maps';
-import { CoffeeIcon } from '../ui/coffee-icon';
 import { useState } from 'react';
-import { StarIcon } from '../ui/star-icon';
+import { StarIcon, CoffeeIcon } from '../ui';
 
 const mapOptions = {
   apiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!,
