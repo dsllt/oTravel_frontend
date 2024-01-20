@@ -15,7 +15,7 @@
   font-size: 2rem;
   font-weight: 700;
 
-  background-image: url('../../public/coffee-image.jpeg');
+  background-image: url('../../../public/coffee-image.jpeg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

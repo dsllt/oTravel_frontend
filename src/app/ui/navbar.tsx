@@ -8,8 +8,9 @@ import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 
 const links = [
-  { name: 'Explorar', href: '/',},
+  { name: 'Explorar', href: '/explore',},
   { name: 'Mapa', href: '/map',},
+  { name: 'Perfil', href: '/profile',},
   { name: 'Incluir café', href: '/new-coffee' },
 ];
 
