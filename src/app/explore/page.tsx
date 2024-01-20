@@ -18,7 +18,7 @@ const coffeeInfo = [{
 {
   createdAt: "2024-01-13T15:56:56.376Z",
   name:'ESPAÇO BRASCO',
-  image: "https://loremflickr.com/640/480/business",
+  image: "https://loremflickr.com/640/484/business",
   description: "secondary",
   address: 'Rua Fernandes Vieira, 286 - Bom Fim',
   phone: "1-392-289-9430",
@@ -31,7 +31,7 @@ const coffeeInfo = [{
 {
   createdAt: "2024-01-13T15:56:56.376Z",
   name:'OURO PÃES',
-  image: "https://loremflickr.com/640/480/business",
+  image: "https://loremflickr.com/640/481/business",
   description: "secondary",
   address: 'Rua Fernandes Vieira, 286 - Bom Fim',
   phone: "1-392-289-9430",
@@ -42,7 +42,11 @@ const coffeeInfo = [{
   id: "3"
 }]
 
-export default async function Page() {
+export default async function Page({searchParams}: {searchParams?: { query?: string}}) {
+  const query = searchParams?.query || '';
+  
+  let filteredCoffees = coffeeInfo.filter(coffee => {return coffee.name.toLowerCase().includes(query.toLowerCase())})
+  
   const coffeeData = await fetchCoffees();
   
   return (
@@ -54,7 +58,7 @@ export default async function Page() {
       <div className={styles['body-container']}>
         <SearchHeader />
         <div className={styles['coffees-container']}>
-          {coffeeInfo.map(coffee => {
+          {filteredCoffees.map(coffee => {
             return(
               <CoffeeBox key={coffee.id} coffeeInfo={coffee} />
             )
