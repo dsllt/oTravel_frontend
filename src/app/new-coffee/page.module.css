@@ -1,70 +1,85 @@
 .container{
-  margin: 2.5rem 6rem;
+  background: #ded8cc;
+  color: #333;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  padding: 80px 40px 40px;
+  margin: 2.5rem 20rem;
+  border-radius: 8px;
 }
 
-.container h2{
-  font-family: sans-serif;
-  text-transform: uppercase;
-  font-weight: 500;
-  border-bottom: 2px solid #333;
-  margin-bottom: 2rem;
-}
-
-.map{
+.container form {
   width: 100%;
-  height: 500px;
-  border-radius: 10px;
 }
 
-#map {
+.container h1{
+  font-family: serif;
+  font-size: 28px;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.coffeeLabel{
+  color: rgb(51, 51, 51);
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1rem;
   width: 100%;
-  height: 600px;
-  border-radius: 10px;
 }
 
-.marker {
-  padding: 0.5rem;
-  background: lightblue;
-  border-radius: 1000px;
-  cursor: pointer;
+.coffeeLabel input{
+  color: rgb(51, 51, 51);
+  background: transparent;
+  border: 1px solid rgb(156, 163, 175);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  width: 100%;
+  margin-top: 0.3rem;
+}
+
+.coffeeLabel input:focus {
+  outline: none;
+}
+
+.coffeeCoordinates{
   display: flex;
-  flex-direction: row;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+
+.coffeeCoordinates input{
+  width: 100%;
+
+}
+
+.coffeeCoordinates input:last-child{
+  align-self: last;
+}
+
+.buttons{
+  display: flex;
   align-items: center;
-  gap: 0.5rem;
-  transition: all 0.8s ease-in;
+  justify-content: center;
+  margin-top: 1rem;
+  gap: 2.5rem;
 }
 
-.marker:hover{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.5rem;
-  background-color: #a2e092;
-  transition: all 0.8s ease-in;
+.buttons button{
+    padding: 1rem;
+    border-radius: 6px;
+    border: 1px solid rgb(156, 163, 175);
+    background: rgb(255, 255, 255);
+    color: rgb(51, 51, 51);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-
-.marker svg{
-    height: 20px;
-    width: 20px;
-}
-
-.marker-info {
-  display: 'flex';
-  flex-direction: 'column';
-}
-
-.marker-info p:first-child{
-    font-weight: bold;
-    font-size: 0.75rem;
-}
-
-.marker-rating {
-  font-size: 0.875rem;
-  display: flex;
-  flex-direction: row;
-  gap: 0.1rem;
-  margin-left: 0.5rem;
+.buttons button:hover{
+  opacity: 0.6;
 }

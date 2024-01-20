@@ -1,7 +1,7 @@
 ## TO-DO:
 - [x] Seguir com tutorial até autenticação
-- [ ] Pesquisa na página de explorar
-- [ ] Fazer a página de inclusão de café
+- [x] Pesquisa na página de explorar
+- [x] Fazer a página de inclusão de café
 - [ ] Fazer a inclusão de cafés
 - [ ] Fazer a página de perfil
 - [ ] Fazer a página de login
