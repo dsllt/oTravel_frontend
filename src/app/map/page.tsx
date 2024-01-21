@@ -44,6 +44,21 @@ type HoveredMarkerProps = string | null;
 
 export default function Page() {
   const [hoveredMarker, setHoveredMarker] = useState<HoveredMarkerProps>(null)
+/** This function was created because in some cases the browser does not 
+ * recognize the div element which contains the advanced marker. This makes
+ * that the onMouseEnter and onMouseLeave events are not triggered, and 
+ * the hovered stated is not changed.
+ * In case this happens, when clicking the marker the hovered state will be
+ * changed.
+*/
+  function handleMarkerClick(slug: string){
+    if(slug === hoveredMarker){
+      return setHoveredMarker(null)
+    } else {
+      return setHoveredMarker(slug)
+    }
+  }
+
   return (
     <div className={styles.container}>
       <h2>Encontre sua próxima experiência</h2>
@@ -62,7 +77,9 @@ export default function Page() {
                   onMouseEnter={() => setHoveredMarker(coffee.slug)}
                   onMouseLeave={() => setHoveredMarker(null)}
                 >
-                  <AdvancedMarker key={coffee.id} className={styles.marker} position={{lat: parseFloat(coffee.latitude), lng: parseFloat(coffee.longitude)}} > 
+                <AdvancedMarker key={coffee.id} className={styles.marker} position={{lat: parseFloat(coffee.latitude), lng: parseFloat(coffee.longitude)}} 
+                onClick={() => handleMarkerClick(coffee.slug)}
+                > 
                     <CoffeeIcon />
                     {hoveredMarker === coffee.slug ? (
                       <>
