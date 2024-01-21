@@ -7,6 +7,11 @@ const nextConfig = {
         hostname: 'loremflickr.com',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'img.redbull.com',
+        port: '',
+      },
     ],
   },
   async redirects() {

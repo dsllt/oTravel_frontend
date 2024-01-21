@@ -2,7 +2,7 @@
 
 export async function fetchCoffees(){
   try {
-    const data = await fetch('https://65a2bb8542ecd7d7f0a825df.mockapi.io/api/v1/coffees');
+    const data = await fetch('https://65a2bb8542ecd7d7f0a825df.mockapi.io/api/v1/coffees', { cache: 'no-store' });
     return data.json();
   } catch (e) {
     console.error('Failed to fetch coffees data.',e);
@@ -10,9 +10,11 @@ export async function fetchCoffees(){
   }
 }
 
+
 export async function createCoffee(data: any){
   try{
-      await fetch('http://127.0.0.1:3333/register/coffees', {
+      // await fetch('http://127.0.0.1:3333/register/coffees', {
+      await fetch('https://65a2bb8542ecd7d7f0a825df.mockapi.io/api/v1/coffees', {
       method: 'POST',
       body: JSON.stringify(data),
       cache: 'no-cache',

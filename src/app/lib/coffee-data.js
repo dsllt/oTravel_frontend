@@ -15,7 +15,7 @@ const coffees = [
     address: 'Rua Fernandes Vieira, 656 - Bom Fim',
     phone: '',
     rating: 4.5,
-    imageUrl:
+    image:
       'https://res.cloudinary.com/hbhhv9rz9/image/upload/f_auto,c_limit,w_3840,q_auto/cafes/Cafe%20Landing%20Page/Cafe-Jackson-Square-Hero.jpg',
     slug: 'the-coffee',
     latitude: 10.456,
@@ -28,7 +28,7 @@ const coffees = [
     address: 'Rua Fernandes Vieira, 656 - Bom Fim',
     phone: '',
     rating: 4.5,
-    imageUrl:
+    image:
       'https://res.cloudinary.com/hbhhv9rz9/image/upload/f_auto,c_limit,w_3840,q_auto/cafes/Cafe%20Landing%20Page/Cafe-Jackson-Square-Hero.jpg',
     slug: 'the-coffee',
     latitude: 10.456,
@@ -41,7 +41,7 @@ const coffees = [
     address: 'Rua Fernandes Vieira, 656 - Bom Fim',
     phone: '',
     rating: 4.5,
-    imageUrl:
+    image:
       'https://res.cloudinary.com/hbhhv9rz9/image/upload/f_auto,c_limit,w_3840,q_auto/cafes/Cafe%20Landing%20Page/Cafe-Jackson-Square-Hero.jpg',
     slug: 'the-coffee',
     latitude: 10.456,

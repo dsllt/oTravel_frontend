@@ -1,4 +1,5 @@
 import { fetchCoffees } from "../lib/data";
+import { Coffee } from "../lib/type-definitions";
 import { CoffeeBox, SearchHeader } from "../ui";
 import styles from './page.module.css'
 
@@ -44,10 +45,9 @@ const coffeeInfo = [{
 
 export default async function Page({searchParams}: {searchParams?: { query?: string}}) {
   const query = searchParams?.query || '';
+  const coffeeData: Coffee[] = await fetchCoffees();
   
-  let filteredCoffees = coffeeInfo.filter(coffee => {return coffee.name.toLowerCase().includes(query.toLowerCase())})
-  
-  const coffeeData = await fetchCoffees();
+  let filteredCoffees = coffeeData.filter(coffee => {return coffee.name.toLowerCase().includes(query.toLowerCase())})
   
   return (
     <main className={styles.main}>

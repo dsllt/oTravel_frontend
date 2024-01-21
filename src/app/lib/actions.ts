@@ -17,7 +17,7 @@ const CoffeeFormSchema = z.object({
   }),
   phone:  z.string(),
   rating: z.coerce.number(),
-  imageUrl:  z.string({
+  image:  z.string({
     invalid_type_error: 'Defina uma imagem para o café.',
   }),
   slug: z.string({
@@ -41,7 +41,7 @@ export type State = {
     latitude?: string[];
     longitude?: string[];
     phone?: string[];
-    imageUrl?: string[];
+    image?: string[];
     description?: string[];
     slug?: string[];
     rating?: string[];
@@ -57,7 +57,7 @@ export async function includeCoffee(prevState: State, formData: FormData){
     latitude: formData.get('coffeeLatitude'),
     longitude: formData.get('coffeeLongitude'),
     phone: formData.get('coffeePhone'),
-    imageUrl: formData.get('coffeeImage'),
+    image: formData.get('coffeeImage'),
     description: formData.get('coffeeDescription'),
     slug: formData.get('coffeeSlug'),
     rating: 0

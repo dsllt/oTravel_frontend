@@ -9,6 +9,7 @@
 .info{
   color: var(--text-gray-700);
   width: 100%;
+  max-width: 400px;
   display: flex;
   flex-direction: row;
   gap: 2rem;
