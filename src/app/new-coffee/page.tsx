@@ -55,15 +55,6 @@ export default function Page() {
           </label>
         </div>
 
-        <label htmlFor="coffeePhone" className={styles.coffeeLabel}>
-          Telefone do café
-          <input 
-            id="coffeePhone" 
-            name="coffeePhone" 
-            type="tel" 
-          />
-        </label>
-
         <label htmlFor="coffeeImage" className={styles.coffeeLabel}>
           URL da imagem
           <input 
@@ -74,25 +65,38 @@ export default function Page() {
           />
         </label>
 
-        <label htmlFor="coffeeDescription" className={styles.coffeeLabel}>
-          Descrição
-          <input 
-            id="coffeeDescription" 
-            name="coffeeDescription" 
-            type="text" 
-            required
-          />
-        </label>
-
-        <label htmlFor="coffeeSlug" className={styles.coffeeLabel}>
-          Slug
-          <input 
-            id="coffeeSlug" 
-            name="coffeeSlug" 
-            type="text" 
-            required
-          />
-        </label>
+        <div className={styles.bottomDiv}>
+          <div className={styles.leftDiv}>
+          <label htmlFor="coffeeDescription" className={styles.coffeeLabel}>
+            Descrição
+            <textarea 
+              id="coffeeDescription" 
+              name="coffeeDescription" 
+              className={styles.coffeeDescription}
+              required
+            />
+          </label>
+          </div>
+          <div className={styles.rightDiv}>
+            <label htmlFor="coffeePhone" className={styles.coffeeLabel}>
+            Telefone do café
+            <input 
+              id="coffeePhone" 
+              name="coffeePhone" 
+              type="tel" 
+            />
+            </label>
+            <label htmlFor="coffeeSlug" className={styles.coffeeLabel}>
+            Slug
+            <input 
+              id="coffeeSlug" 
+              name="coffeeSlug" 
+              type="text" 
+              required
+            />
+          </label>
+          </div>
+        </div>
 
         <div className={styles.buttons}>
           <button type="submit" 
