@@ -1,6 +1,6 @@
 'use server'
 import { z } from 'zod';
-import { createCoffee } from './data';
+import { fetchCreateCoffee, fetchUpdateCoffee } from './data';
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -71,7 +71,7 @@ export async function includeCoffee(prevState: State, formData: FormData){
   }
 
   try{
-    await createCoffee(validatedFields.data);
+    await fetchCreateCoffee(validatedFields.data);
   } catch (err) {
     return{
       message: 'Database Error: Falha ao criar café'
@@ -79,5 +79,39 @@ export async function includeCoffee(prevState: State, formData: FormData){
   }
 
   revalidatePath('/new-coffee');
+  redirect('/');
+}
+
+const UpdateCoffee = CoffeeFormSchema.omit({ id: true, created_at: true, rating: true});
+
+export async function updateCoffee(id: string,
+  prevState: State, formData: FormData){
+  const validatedFields = UpdateCoffee.safeParse({
+    name: formData.get('coffeeName'),
+    address: formData.get('coffeeAddress'),
+    latitude: formData.get('coffeeLatitude'),
+    longitude: formData.get('coffeeLongitude'),
+    phone: formData.get('coffeePhone'),
+    image: formData.get('coffeeImage'),
+    description: formData.get('coffeeDescription'),
+    slug: formData.get('coffeeSlug'),
+  });
+
+  if (!validatedFields.success){
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Existem campos não preenchidos. Falha ao editar café.'
+    }
+  }
+
+  try{
+    await fetchUpdateCoffee(validatedFields.data, id);
+  } catch (err) {
+    return{
+      message: 'Database Error: Falha ao editar café'
+    }
+  }
+
+  revalidatePath('/');
   redirect('/');
 }

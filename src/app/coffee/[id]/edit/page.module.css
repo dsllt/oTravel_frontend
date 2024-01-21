@@ -1,0 +1,85 @@
+.container{
+  background: #ded8cc;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 40px 40px;
+  margin: 2.5rem 20rem;
+  border-radius: 8px;
+}
+
+.container form {
+  width: 100%;
+}
+
+.container h1{
+  font-family: serif;
+  font-size: 28px;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.coffeeLabel{
+  color: rgb(51, 51, 51);
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.coffeeLabel input{
+  color: rgb(51, 51, 51);
+  background: transparent;
+  border: 1px solid rgb(156, 163, 175);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  width: 100%;
+  margin-top: 0.3rem;
+}
+
+.coffeeLabel input:focus {
+  outline: none;
+}
+
+.coffeeCoordinates{
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+
+.coffeeCoordinates input{
+  width: 100%;
+
+}
+
+.coffeeCoordinates input:last-child{
+  align-self: last;
+}
+
+.buttons{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  gap: 2.5rem;
+}
+
+.buttons button{
+    padding: 1rem;
+    border-radius: 6px;
+    border: 1px solid rgb(156, 163, 175);
+    background: rgb(255, 255, 255);
+    color: rgb(51, 51, 51);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.buttons button:hover{
+  opacity: 0.6;
+}
