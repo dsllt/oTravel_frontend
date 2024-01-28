@@ -1,7 +1,10 @@
-import { fetchCoffees } from "../lib/data";
-import { Coffee } from "../lib/type-definitions";
-import { CoffeeBox, SearchHeader } from "../ui";
+import { CoffeeBox, SearchHeader } from "@ui/index";
+
 import styles from './page.module.css'
+import { fetchCoffees } from "@lib/data";
+import { Coffee } from "@app/lib/type-definitions";
+
+
 
 const coffeeInfo = [{
   createdAt: "2024-01-13T15:56:56.376Z",

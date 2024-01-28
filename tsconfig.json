@@ -23,12 +23,15 @@
       }
     ],
     "paths": {
-      "@/*": [
-        "./src/*"
+      "@lib/*": [
+        "./src/app/lib/*"
       ],
-      "@ui": [
-        "/src/app/ui/*"
-      ]
+      "@ui/*": [
+        "./src/app/ui/*"
+      ],
+      "@app/*": [
+        "./src/app/*"
+      ],
     }
   },
   "include": [

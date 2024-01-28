@@ -12,6 +12,11 @@ const nextConfig = {
         hostname: 'img.redbull.com',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'img.freepik.com',
+        port: '',
+      },
     ],
   },
   async redirects() {
