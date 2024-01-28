@@ -1,0 +1,17 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  margin: 4rem 6rem;
+}
+.main{
+  display: flex;
+}
+.reviews{
+  display: flex;
+  flex-direction: column;
+}
+
+.reviews h3{
+  font-size: 24px;
+  margin-bottom: 1rem;
+}
