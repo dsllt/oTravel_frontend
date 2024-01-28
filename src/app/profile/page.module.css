@@ -5,7 +5,9 @@
 }
 .main{
   display: flex;
+  gap: 4rem;
 }
+
 .reviews{
   display: flex;
   flex-direction: column;
@@ -14,4 +16,6 @@
 .reviews h3{
   font-size: 24px;
   margin-bottom: 1rem;
+  font-family: serif;
+  color: rgb(51, 51, 51);
 }

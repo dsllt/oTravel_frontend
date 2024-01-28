@@ -3,11 +3,23 @@
 // For simplicity of teaching, we're manually defining these types.
 // However, these types are generated automatically if you're using an ORM such as Prisma.
 export type User = {
-  id: string;
+  id: number;
   name: string;
   email: string;
-  password: string;
+  image: string;
+  password_hash: string;
+  is_admin: boolean;
+  created_at: string;
 };
+
+export type UserDTO = {
+  id: number;
+  name: string;
+  email: string;
+  image: string;
+  is_admin: boolean;
+  created_at: string;
+}
 
 export type Coffee = {
   id:  string; // '3958dc9e-742f-4377-85e9-fec4b6a6442a',
@@ -50,6 +62,14 @@ export type UpdateCoffeeDTO = {
 export type FoodType = {
   category: string;
   name: string;
-  type:string;
+  type: string;
 };
 
+export type Review =   {
+  id: number; // 1,
+  review: string; // "Fui apenas uma vez e eu pedi um chocolate quente, mas achei muito forte! Claro isso vai de pessoa para pessoa. Não consegui tomar todo por conta disso. O ambiente é pequeno mas é bem organizado, um lugar muito bonito. O atendimento é ótimo.",
+  rating: number; // 4.5,
+  created_at: string; // "2024-01-21T09:46:10.477Z",
+  user_id: number; // 1,
+  coffee_id: number; // 1
+}
