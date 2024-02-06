@@ -11,6 +11,16 @@ export async function fetchCoffees(){
   }
 }
 
+export async function fetchCoffee(coffeeId: string){
+  try {
+    const data = await fetch(`https://65a2bb8542ecd7d7f0a825df.mockapi.io/api/v1/coffees/${coffeeId}`, { cache: 'no-store' });
+    return data.json();
+  } catch (e) {
+    console.error('Failed to fetch coffee data.',e);
+    throw new Error('Failed to fetch coffee data.');
+  }
+}
+
 export async function fetchCreateCoffee(data: CreateCoffeeDTO){
   try{
       // await fetch('http://127.0.0.1:3333/register/coffees', {
