@@ -30,7 +30,7 @@ export default function Page() {
           <Image src="/google-logo.svg" alt="Google Logo"  width={32} height={32}/> Entrar com o Google
         </button>
         <button className={styles['login-button']} onClick={handleEmailLogin}>
-          <Image src="/email-icon.svg" alt="Email Logo"  width={32} height={32}/> Entrar com email
+          <Image src="/email-icon.svg" alt="Email Logo"  width={32} height={32}/>    Entrar com email &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </button>
         <button className={styles['login-button']} onClick={handleVisitorLogin}>
           <Image src="/visitor-logo.svg" alt="Visitor Logo"  width={32} height={32}/> Entrar como visitante
