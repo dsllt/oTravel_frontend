@@ -1,6 +1,6 @@
 "use client"
 import { useFormState } from "react-dom";
-import { updateCoffee } from "../../../lib/actions";
+import { updatePlace } from "../../../lib/actions";
 import styles from "./page.module.css"
 
 const coffeeInfo = {
@@ -19,8 +19,8 @@ const coffeeInfo = {
 
 export default function Page() {
   const initialState = { message: "", errors: {} };
-  const updateCoffeeWithId = updateCoffee.bind(null, (coffeeInfo.id));
-  const [state, dispatch] = useFormState(updateCoffeeWithId, initialState);
+  const updatePlaceWithId = updatePlace.bind(null, (coffeeInfo.id));
+  const [state, dispatch] = useFormState(updatePlaceWithId, initialState);
 
   return (
     <div className={styles.container}>

@@ -1,15 +1,15 @@
-import { CoffeeBox, SearchHeader } from "@ui/index";
+import { PlaceBox, SearchHeader } from "@ui/index";
 
 import styles from './page.module.css'
 import { fetchCoffees } from "@lib/data";
-import { Coffee } from "@app/lib/type-definitions";
+import { Place } from "@app/lib/type-definitions";
 
 
 export default async function Page({searchParams}: {searchParams?: { query?: string}}) {
   const query = searchParams?.query || '';
-  const coffeeData: Coffee[] = await fetchCoffees();
+  const placeData: Place[] = await fetchCoffees();
   
-  let filteredCoffees = coffeeData.filter(coffee => {return coffee.name.toLowerCase().includes(query.toLowerCase())})
+  let filteredPlaces = placeData.filter(coffee => {return coffee.name.toLowerCase().includes(query.toLowerCase())})
   
   return (
     <main className={styles.main}>
@@ -20,9 +20,9 @@ export default async function Page({searchParams}: {searchParams?: { query?: str
       <div className={styles['body-container']}>
         <SearchHeader />
         <div className={styles['coffees-container']}>
-          {filteredCoffees.map(coffee => {
+          {filteredPlaces.map(place => {
             return(
-              <CoffeeBox key={coffee.id} coffeeInfo={coffee} />
+              <PlaceBox key={place.id} placeInfo={place} />
             )
           })}
         </div>

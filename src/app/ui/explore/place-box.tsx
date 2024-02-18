@@ -1,30 +1,30 @@
 'use client'
 
 import Image from 'next/image'
-import styles from './coffee-box.module.css'
+import styles from './place-box.module.css'
 import { CoffeeIcon } from '../coffee-icon'
 import { useRouter } from 'next/navigation'
 
-export function CoffeeBox({coffeeInfo}: any){
+export function PlaceBox({placeInfo}: any){
   const router = useRouter();
   function handleClickCoffeeBox(id: string){
     router.push(`/explore/${id}`)
   }
   return(
-    <div className={styles.container} onClick={() => handleClickCoffeeBox(coffeeInfo.id)}>
+    <div className={styles.container} onClick={() => handleClickCoffeeBox(placeInfo.id)}>
       <Image 
-        src={coffeeInfo.image} 
+        src={placeInfo.image_url} 
         alt="coffee" 
         width={400} 
         height={400}
         className={styles.image}
       />
       <div className={styles.info}>
-        <h2>{coffeeInfo.name}</h2>
+        <h2>{placeInfo.name}</h2>
         <div className={styles['info-text']}>
-          <span>{coffeeInfo.address}</span>
+          <span>{placeInfo.address}</span>
           <span>
-            {coffeeInfo.rating} 
+            {placeInfo.rating} 
             <CoffeeIcon />
           </span>
         </div>

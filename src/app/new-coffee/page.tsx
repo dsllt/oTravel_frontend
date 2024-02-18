@@ -1,13 +1,13 @@
 "use client"
 import { useFormState } from "react-dom";
-import { includeCoffee } from "../lib/actions";
+import { includePlace } from "../lib/actions";
 import styles from "./page.module.css"
 
 
 
 export default function Page() {
   const initialState = { message: "", errors: {} };
-  const [state, dispatch] = useFormState(includeCoffee, initialState);
+  const [state, dispatch] = useFormState(includePlace, initialState);
 
   return (
     <div className={styles.container}>

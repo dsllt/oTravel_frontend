@@ -1,47 +1,47 @@
 'use server'
 import { z } from 'zod';
-import { fetchCreateCoffee, fetchUpdateCoffee } from './data';
+import { fetchCreatePlace, fetchUpdatePlace } from './data';
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-const CoffeeFormSchema = z.object({
+const PlaceFormSchema = z.object({
   id:  z.string(),
   name:  z.string({
-    invalid_type_error: 'Defina o nome do café.',
+    invalid_type_error: 'Defina o nome do local.',
+  }),
+  image_url:  z.string({
+    invalid_type_error: 'Defina uma imagem para o local.',
   }),
   description:  z.string({
-    invalid_type_error: 'Defina uma descrição para o café.',
+    invalid_type_error: 'Defina uma descrição para o local.',
   }),
   address:  z.string({
-    invalid_type_error: 'Defina um endereço para o café.',
+    invalid_type_error: 'Defina um endereço para o local.',
   }),
   phone:  z.string(),
   rating: z.coerce.number(),
-  image:  z.string({
-    invalid_type_error: 'Defina uma imagem para o café.',
-  }),
   slug: z.string({
-    invalid_type_error: 'Defina um slug para o café.',
+    invalid_type_error: 'Defina um slug para o local.',
   }),
   latitude: z.coerce.number({
-    invalid_type_error: 'Defina a latitude do endereço do café.',
+    invalid_type_error: 'Defina a latitude do endereço do local.',
   }),
   longitude: z.coerce.number({
-    invalid_type_error: 'Defina a longitude do endereço do café.',
+    invalid_type_error: 'Defina a longitude do endereço do local.',
   }),
   created_at: z.date(),
 });
 
-const CreateCoffee = CoffeeFormSchema.omit({ id: true, created_at: true });
+const CreatePlace = PlaceFormSchema.omit({ id: true, created_at: true });
 
 export type State = {
   errors?: {
     name?: string[];
+    image_url?: string[];
     address?: string[];
     latitude?: string[];
     longitude?: string[];
     phone?: string[];
-    image?: string[];
     description?: string[];
     slug?: string[];
     rating?: string[];
@@ -49,66 +49,66 @@ export type State = {
   message?: string | null;
 };
 
-export async function includeCoffee(prevState: State, formData: FormData){
+export async function includePlace(prevState: State, formData: FormData){
 
-  const validatedFields = CreateCoffee.safeParse({
-    name: formData.get('coffeeName'),
-    address: formData.get('coffeeAddress'),
-    latitude: formData.get('coffeeLatitude'),
-    longitude: formData.get('coffeeLongitude'),
-    phone: formData.get('coffeePhone'),
-    image: formData.get('coffeeImage'),
-    description: formData.get('coffeeDescription'),
-    slug: formData.get('coffeeSlug'),
+  const validatedFields = CreatePlace.safeParse({
+    name: formData.get('placeName'),
+    image_url: formData.get('placeImage'),
+    description: formData.get('placeDescription'),
+    address: formData.get('placeAddress'),
+    latitude: formData.get('placeLatitude'),
+    longitude: formData.get('placeLongitude'),
+    phone: formData.get('placePhone'),
+    slug: formData.get('placeSlug'),
     rating: 0
   });
 
   if (!validatedFields.success){
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: 'Existem campos não preenchidos. Falha ao criar novo café.'
+      message: 'Existem campos não preenchidos. Falha ao criar novo local.'
     }
   }
 
   try{
-    await fetchCreateCoffee(validatedFields.data);
+    await fetchCreatePlace(validatedFields.data);
   } catch (err) {
     return{
-      message: 'Database Error: Falha ao criar café'
+      message: 'Database Error: Falha ao criar local'
     }
   }
 
-  revalidatePath('/new-coffee');
+  revalidatePath('/new-place');
   redirect('/');
 }
 
-const UpdateCoffee = CoffeeFormSchema.omit({ id: true, created_at: true, rating: true});
+const UpdatePlace = PlaceFormSchema.omit({ id: true, created_at: true, rating: true});
 
-export async function updateCoffee(id: string,
+export async function updatePlace(id: string,
   prevState: State, formData: FormData){
-  const validatedFields = UpdateCoffee.safeParse({
-    name: formData.get('coffeeName'),
-    address: formData.get('coffeeAddress'),
-    latitude: formData.get('coffeeLatitude'),
-    longitude: formData.get('coffeeLongitude'),
-    phone: formData.get('coffeePhone'),
-    image: formData.get('coffeeImage'),
-    description: formData.get('coffeeDescription'),
-    slug: formData.get('coffeeSlug'),
+  const validatedFields = UpdatePlace.safeParse({
+    name: formData.get('placeName'),
+    address: formData.get('placeAddress'),
+    latitude: formData.get('placeLatitude'),
+    longitude: formData.get('placeLongitude'),
+    phone: formData.get('placePhone'),
+    image: formData.get('placeImage'),
+    description: formData.get('placeDescription'),
+    slug: formData.get('placeSlug'),
   });
 
   if (!validatedFields.success){
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: 'Existem campos não preenchidos. Falha ao editar café.'
+      message: 'Existem campos não preenchidos. Falha ao editar local.'
     }
   }
 
   try{
-    await fetchUpdateCoffee(validatedFields.data, id);
+    await fetchUpdatePlace(validatedFields.data, id);
   } catch (err) {
     return{
-      message: 'Database Error: Falha ao editar café'
+      message: 'Database Error: Falha ao editar local'
     }
   }
 

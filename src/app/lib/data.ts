@@ -1,9 +1,9 @@
-import { CreateCoffeeDTO, UpdateCoffeeDTO } from "./type-definitions";
+import { CreatePlaceDTO, UpdatePlaceDTO } from "./type-definitions";
 
 
 export async function fetchCoffees(){
   try {
-    const data = await fetch('https://65a2bb8542ecd7d7f0a825df.mockapi.io/api/v1/coffees', { cache: 'no-store' });
+    const data = await fetch('https://65a2bb8542ecd7d7f0a825df.mockapi.io/api/v1/places', { cache: 'no-store' });
     return data.json();
   } catch (e) {
     console.error('Failed to fetch coffees data.',e);
@@ -13,7 +13,7 @@ export async function fetchCoffees(){
 
 export async function fetchCoffee(coffeeId: string){
   try {
-    const data = await fetch(`https://65a2bb8542ecd7d7f0a825df.mockapi.io/api/v1/coffees/${coffeeId}`, { cache: 'no-store' });
+    const data = await fetch(`https://65a2bb8542ecd7d7f0a825df.mockapi.io/api/v1/places/${coffeeId}`, { cache: 'no-store' });
     return data.json();
   } catch (e) {
     console.error('Failed to fetch coffee data.',e);
@@ -21,10 +21,10 @@ export async function fetchCoffee(coffeeId: string){
   }
 }
 
-export async function fetchCreateCoffee(data: CreateCoffeeDTO){
+export async function fetchCreatePlace(data: CreatePlaceDTO){
   try{
-      // await fetch('http://127.0.0.1:3333/register/coffees', {
-      await fetch('https://65a2bb8542ecd7d7f0a825df.mockapi.io/api/v1/coffees', {
+      // await fetch('http://127.0.0.1:3333/register/places', {
+      await fetch('https://65a2bb8542ecd7d7f0a825df.mockapi.io/api/v1/places', {
       method: 'POST',
       body: JSON.stringify(data),
       cache: 'no-cache',
@@ -34,14 +34,14 @@ export async function fetchCreateCoffee(data: CreateCoffeeDTO){
     })
 
   } catch(err){
-    console.error('Failed to create coffee.', err);
+    console.error('Failed to create place.', err);
   }
 
 }
 
-export async function fetchUpdateCoffee(data: UpdateCoffeeDTO, id: string){
+export async function fetchUpdatePlace(data: UpdatePlaceDTO, id: string){
   try{
-    await fetch(`https://65a2bb8542ecd7d7f0a825df.mockapi.io/api/v1/coffees/${id}`, {
+    await fetch(`https://65a2bb8542ecd7d7f0a825df.mockapi.io/api/v1/places/${id}`, {
     method: 'PUT',
     body: JSON.stringify(data),
     cache: 'no-cache',
@@ -50,6 +50,6 @@ export async function fetchUpdateCoffee(data: UpdateCoffeeDTO, id: string){
     }),
   })
 } catch(err){
-  console.error('Failed to update coffee.', err);
+  console.error('Failed to update place.', err);
 }
 }

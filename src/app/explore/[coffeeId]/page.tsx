@@ -1,5 +1,5 @@
 import { fetchCoffee } from "@lib/data";
-import { Coffee, UserDTO } from "@lib/type-definitions";
+import { Place, UserDTO } from "@lib/type-definitions";
 import Image from "next/image";
 import styles from "./page.module.css"
 import ReviewBox from "@ui/profile/review-box";
@@ -41,15 +41,15 @@ const users: UserDTO[] = [{
 }]
 
 export default async function CoffeePage({params}: { params: {coffeeId: string}}){
-  const coffeeData: Coffee = await fetchCoffee(params.coffeeId);
-  const coffeeName = coffeeData.name.toLowerCase();
+  const placeData: Place = await fetchCoffee(params.coffeeId);
+  const coffeeName = placeData.name.toLowerCase();
 
   return(
     <div className={styles.container}>
       <div className={styles.info}>
         <div className={styles.image}>
           <Image 
-            src={coffeeData.image} 
+            src={placeData.image_url} 
             alt=""
             style={{objectFit: 'cover', borderRadius: '1rem'}}
             width={800} 
@@ -59,8 +59,8 @@ export default async function CoffeePage({params}: { params: {coffeeId: string}}
         </div>
         <div className={styles.description}>
           <h1>{coffeeName}</h1>
-          <p>{coffeeData.address}</p>
-          <p>{coffeeData.description}</p>
+          <p>{placeData.address}</p>
+          <p>{placeData.description}</p>
         </div>
       </div>
       <div className={styles.reviews}>

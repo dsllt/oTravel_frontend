@@ -21,41 +21,45 @@ export type UserDTO = {
   created_at: string;
 }
 
-export type Coffee = {
+export type Place = {
   id:  string; // '3958dc9e-742f-4377-85e9-fec4b6a6442a',
+  image_url:  string; // 'https://res.cloudinary.com/hbhhv9rz9/image/upload/f_auto,c_limit,w_3840,q_auto/cafes/Cafe%20Landing%20Page/Cafe-Jackson-Square-Hero.jpg',
   name:  string; // 'THE COFFEE',
   description:  string; // '',
   address:  string; // 'Rua Fernandes Vieira, 656 - Bom Fim',
-  phone:  string; // '',
-  rating: number; // 4.5,
-  image:  string; // 'https://res.cloudinary.com/hbhhv9rz9/image/upload/f_auto,c_limit,w_3840,q_auto/cafes/Cafe%20Landing%20Page/Cafe-Jackson-Square-Hero.jpg',
-  slug: string;// 'the-coffee',
   latitude: number;// 10.456,
   longitude: number;// 10.98,
+  phone:  string; // '',
+  slug: string;// 'the-coffee',
+  type: string; // 'coffee',
+  rating: number; // 4.5,
   created_at: Date;// 2024-01-13T15:56:56.376Z
+  updated_at: Date;// 2024-01-13T15:56:56.376Z
+  is_deleted: boolean;// false
 };
 
-export type CreateCoffeeDTO = {
+
+export type CreatePlaceDTO = {
     name: string;//'THE COFFEE',
+    image_url: string;//'https://loremflickr.com/640/480/business',
     description: string;//'secondary',
     address: string;//'Rua Fernandes Vieira, 656 - Bom Fim',
-    phone: string;//'1-392-289-9430',
-    rating: number;//0,
-    image: string;//'https://loremflickr.com/640/480/business',
-    slug: string;//'the-coffee',
     latitude: number;//-30.035212829644085,
     longitude: number;//-51.210918285789916
+    phone: string;//'1-392-289-9430',
+    slug: string;//'the-coffee',
+    rating: number;//0,
 }
 
-export type UpdateCoffeeDTO = {
+export type UpdatePlaceDTO = {
     name: string;//'THE COFFEE',
+    image_url: string;//'https://loremflickr.com/640/480/business',
     description: string;//'secondary',
     address: string;//'Rua Fernandes Vieira, 656 - Bom Fim',
-    phone: string;//'1-392-289-9430',
-    image: string;//'https://loremflickr.com/640/480/business',
-    slug: string;//'the-coffee',
     latitude: number;//-30.035212829644085,
     longitude: number;//-51.210918285789916
+    phone: string;//'1-392-289-9430',
+    slug: string;//'the-coffee',
 }
 
 
