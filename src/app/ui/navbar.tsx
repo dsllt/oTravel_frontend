@@ -11,7 +11,7 @@ const links = [
   { name: 'Explorar', href: '/explore',},
   { name: 'Mapa', href: '/map',},
   { name: 'Perfil', href: '/profile',},
-  { name: 'Incluir café', href: '/new-coffee' },
+  { name: 'Incluir café', href: '/new-place' },
 ];
 
 export function Navbar() {

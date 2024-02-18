@@ -19,7 +19,7 @@ export default async function Page({searchParams}: {searchParams?: { query?: str
 
       <div className={styles['body-container']}>
         <SearchHeader />
-        <div className={styles['coffees-container']}>
+        <div className={styles['places-container']}>
           {filteredPlaces.map(place => {
             return(
               <PlaceBox key={place.id} placeInfo={place} />

@@ -3,7 +3,7 @@ import { useFormState } from "react-dom";
 import { updatePlace } from "../../../lib/actions";
 import styles from "./page.module.css"
 
-const coffeeInfo = {
+const placeInfo = {
   createdAt: "2024-01-13T15:56:56.376Z",
   name:'THE COFFEE',
   image: "https://loremflickr.com/640/480/business",
@@ -19,7 +19,7 @@ const coffeeInfo = {
 
 export default function Page() {
   const initialState = { message: "", errors: {} };
-  const updatePlaceWithId = updatePlace.bind(null, (coffeeInfo.id));
+  const updatePlaceWithId = updatePlace.bind(null, (placeInfo.id));
   const [state, dispatch] = useFormState(updatePlaceWithId, initialState);
 
   return (
@@ -27,92 +27,92 @@ export default function Page() {
       <form action={dispatch}>
         <h1> Edite os dados de um café </h1>
 
-        <label htmlFor="coffeeName" className={styles.coffeeLabel}>
+        <label htmlFor="placeName" className={styles.placeLabel}>
           Nome do café
           <input 
-            id="coffeeName" 
-            name="coffeeName" 
+            id="placeName" 
+            name="placeName" 
             type="text"
-            defaultValue={coffeeInfo.name}
+            defaultValue={placeInfo.name}
             required
           />
         </label>
 
-        <label htmlFor="coffeeAddress" className={styles.coffeeLabel}>
+        <label htmlFor="placeAddress" className={styles.placeLabel}>
           Endereço do café
           <input 
-            id="coffeeAddress" 
-            name="coffeeAddress" 
+            id="placeAddress" 
+            name="placeAddress" 
             type="text" 
-            defaultValue={coffeeInfo.address}
+            defaultValue={placeInfo.address}
             required
           />
         </label>
 
-        <div className={styles.coffeeCoordinates}>
-          <label htmlFor="coffeeLatitude" className={styles.coffeeLabel}>
+        <div className={styles.placeCoordinates}>
+          <label htmlFor="placeLatitude" className={styles.placeLabel}>
             Latitude
             <input 
-              id="coffeeLatitude" 
-              name="coffeeLatitude" 
+              id="placeLatitude" 
+              name="placeLatitude" 
               type="text" 
-              defaultValue={coffeeInfo.latitude}
+              defaultValue={placeInfo.latitude}
               required
             />
           </label>
-          <label htmlFor="coffeeLongitude" className={styles.coffeeLabel}>
+          <label htmlFor="placeLongitude" className={styles.placeLabel}>
             Longitude
             <input 
-              id="coffeeLongitude" 
-              name="coffeeLongitude" 
+              id="placeLongitude" 
+              name="placeLongitude" 
               type="text" 
-              defaultValue={coffeeInfo.longitude}
+              defaultValue={placeInfo.longitude}
               required
             />
           </label>
         </div>
 
-        <label htmlFor="coffeeImage" className={styles.coffeeLabel}>
+        <label htmlFor="placeImage" className={styles.placeLabel}>
           URL da imagem
           <input 
-            id="coffeeImage" 
-            name="coffeeImage" 
+            id="placeImage" 
+            name="placeImage" 
             type="url" 
-            defaultValue={coffeeInfo.image}
+            defaultValue={placeInfo.image}
             required
           />
         </label>
 
         <div className={styles.bottomDiv}>
           <div className={styles.leftDiv}>
-          <label htmlFor="coffeeDescription" className={styles.coffeeLabel}>
+          <label htmlFor="placeDescription" className={styles.placeLabel}>
             Descrição
             <textarea 
-              id="coffeeDescription" 
-              name="coffeeDescription" 
-              className={styles.coffeeDescription}
-              defaultValue={coffeeInfo.description}
+              id="placeDescription" 
+              name="placeDescription" 
+              className={styles.placeDescription}
+              defaultValue={placeInfo.description}
               required
             />
           </label>
           </div>
           <div className={styles.rightDiv}>
-            <label htmlFor="coffeePhone" className={styles.coffeeLabel}>
+            <label htmlFor="placePhone" className={styles.placeLabel}>
             Telefone do café
             <input 
-              id="coffeePhone" 
-              name="coffeePhone" 
+              id="placePhone" 
+              name="placePhone" 
               type="tel" 
-              defaultValue={coffeeInfo.phone}
+              defaultValue={placeInfo.phone}
             />
             </label>
-            <label htmlFor="coffeeSlug" className={styles.coffeeLabel}>
+            <label htmlFor="placeSlug" className={styles.placeLabel}>
             Slug
             <input 
-              id="coffeeSlug" 
-              name="coffeeSlug" 
+              id="placeSlug" 
+              name="placeSlug" 
               type="text" 
-              defaultValue={coffeeInfo.slug}
+              defaultValue={placeInfo.slug}
               required
             />
           </label>

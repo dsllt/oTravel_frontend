@@ -75,5 +75,5 @@ export type Review =   {
   rating: number; // 4.5,
   created_at: string; // "2024-01-21T09:46:10.477Z",
   user_id: number; // 1,
-  coffee_id: number; // 1
+  place_id: number; // 1
 }

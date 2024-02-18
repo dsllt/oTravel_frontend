@@ -13,7 +13,7 @@ const mapOptions = {
   disableDefaultUI: true,
 }
 
-const coffeeInfo = [{
+const placeInfo = [{
   createdAt: "2024-01-13T15:56:56.376Z",
   name:'THE COFFEE',
   image: "https://loremflickr.com/640/480/business",
@@ -71,24 +71,24 @@ export default function Page() {
             disableDefaultUI={mapOptions.disableDefaultUI}
             mapId={mapOptions.mapId}
           >
-            {coffeeInfo.map(coffee => {
+            {placeInfo.map(place => {
               return(
-                <div key={coffee.id}
-                  onMouseEnter={() => setHoveredMarker(coffee.slug)}
+                <div key={place.id}
+                  onMouseEnter={() => setHoveredMarker(place.slug)}
                   onMouseLeave={() => setHoveredMarker(null)}
                 >
-                <AdvancedMarker key={coffee.id} className={styles.marker} position={{lat: parseFloat(coffee.latitude), lng: parseFloat(coffee.longitude)}} 
-                onClick={() => handleMarkerClick(coffee.slug)}
+                <AdvancedMarker key={place.id} className={styles.marker} position={{lat: parseFloat(place.latitude), lng: parseFloat(place.longitude)}} 
+                onClick={() => handleMarkerClick(place.slug)}
                 > 
                     <CoffeeIcon />
-                    {hoveredMarker === coffee.slug ? (
+                    {hoveredMarker === place.slug ? (
                       <>
                         <div className={styles['marker-info']}>
-                          <p>{coffee.name}</p>
-                          <p>{coffee.address}</p>
+                          <p>{place.name}</p>
+                          <p>{place.address}</p>
                         </div>
                         <div className={styles['marker-rating']}>
-                          <p>{coffee.rating}</p>
+                          <p>{place.rating}</p>
                           <StarIcon />
                         </div>
                       </>

@@ -11,7 +11,7 @@ const reviews = [
     rating: 4.5,
     created_at: "2024-01-21T09:46:10.477Z",
     user_id: 1,
-    coffee_id: 1
+    place_id: 1
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ const reviews = [
     rating: 4.0,
     created_at: "2024-01-24T09:46:10.477Z",
     user_id: 2,
-    coffee_id: 2
+    place_id: 2
   },
 ]
 
