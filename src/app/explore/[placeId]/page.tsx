@@ -1,4 +1,4 @@
-import { fetchCoffee } from "@lib/data";
+import { fetchPlace } from "@lib/data";
 import { Place, UserDTO } from "@lib/type-definitions";
 import Image from "next/image";
 import styles from "./page.module.css"
@@ -40,9 +40,9 @@ const users: UserDTO[] = [{
   created_at: "2020-01-12T09:46:10.477Z"
 }]
 
-export default async function CoffeePage({params}: { params: {coffeeId: string}}){
-  const placeData: Place = await fetchCoffee(params.coffeeId);
-  const coffeeName = placeData.name.toLowerCase();
+export default async function PlacePage({params}: { params: {placeId: string}}){
+  const placeData: Place = await fetchPlace(params.placeId);
+  const placeName = placeData.name.toLowerCase();
 
   return(
     <div className={styles.container}>
@@ -58,7 +58,7 @@ export default async function CoffeePage({params}: { params: {coffeeId: string}}
           />
         </div>
         <div className={styles.description}>
-          <h1>{coffeeName}</h1>
+          <h1>{placeName}</h1>
           <p>{placeData.address}</p>
           <p>{placeData.description}</p>
         </div>

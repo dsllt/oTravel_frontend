@@ -7,11 +7,11 @@ import { useRouter } from 'next/navigation'
 
 export function PlaceBox({placeInfo}: any){
   const router = useRouter();
-  function handleClickCoffeeBox(id: string){
+  function handleClickPlaceBox(id: string){
     router.push(`/explore/${id}`)
   }
   return(
-    <div className={styles.container} onClick={() => handleClickCoffeeBox(placeInfo.id)}>
+    <div className={styles.container} onClick={() => handleClickPlaceBox(placeInfo.id)}>
       <Image 
         src={placeInfo.image_url} 
         alt="coffee" 

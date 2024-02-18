@@ -1,15 +1,15 @@
 import { PlaceBox, SearchHeader } from "@ui/index";
 
 import styles from './page.module.css'
-import { fetchCoffees } from "@lib/data";
+import { fetchPlaces } from "@lib/data";
 import { Place } from "@app/lib/type-definitions";
 
 
 export default async function Page({searchParams}: {searchParams?: { query?: string}}) {
   const query = searchParams?.query || '';
-  const placeData: Place[] = await fetchCoffees();
+  const placeData: Place[] = await fetchPlaces();
   
-  let filteredPlaces = placeData.filter(coffee => {return coffee.name.toLowerCase().includes(query.toLowerCase())})
+  let filteredPlaces = placeData.filter(place => {return place.name.toLowerCase().includes(query.toLowerCase())})
   
   return (
     <main className={styles.main}>
