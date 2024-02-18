@@ -29,8 +29,8 @@ export function dateDifference(dateISO: string): string{
   }
 
   const diffInWeeks = Math.floor(diffInDays / 7);
-  if (diffInWeeks < 4) {
-    if (diffInWeeks < 2) return `há ${diffInWeeks} semana`;
+  if (diffInWeeks < 5) {
+    if (diffInWeeks === 1) return `há ${diffInWeeks} semana`;
     return `há ${diffInWeeks} semanas`;
   }
 

@@ -5,7 +5,6 @@ import { dateDifference } from '@app/utils/dateUtils'
 
 export default function ReviewBox({review, user}: {review: Review, user: UserDTO}) {
   
-  
   return (
     <div className={styles.container}>
       <div className={styles.header}>
