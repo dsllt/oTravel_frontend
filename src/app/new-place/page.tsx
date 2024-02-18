@@ -14,52 +14,52 @@ export default function Page() {
       <form action={dispatch}>
         <h1> Inclua um novo café </h1>
 
-        <label htmlFor="coffeeName" className={styles.coffeeLabel}>
+        <label htmlFor="placeName" className={styles.placeLabel}>
           Nome do café
           <input 
-            id="coffeeName" 
-            name="coffeeName" 
+            id="placeName" 
+            name="placeName" 
             type="text" 
             required
           />
         </label>
 
-        <label htmlFor="coffeeAddress" className={styles.coffeeLabel}>
+        <label htmlFor="placeAddress" className={styles.placeLabel}>
           Endereço do café
           <input 
-            id="coffeeAddress" 
-            name="coffeeAddress" 
+            id="placeAddress" 
+            name="placeAddress" 
             type="text" 
             required
           />
         </label>
 
-        <div className={styles.coffeeCoordinates}>
-          <label htmlFor="coffeeLatitude" className={styles.coffeeLabel}>
+        <div className={styles.placeCoordinates}>
+          <label htmlFor="placeLatitude" className={styles.placeLabel}>
             Latitude
             <input 
-              id="coffeeLatitude" 
-              name="coffeeLatitude" 
+              id="placeLatitude" 
+              name="placeLatitude" 
               type="text" 
               required
             />
           </label>
-          <label htmlFor="coffeeLongitude" className={styles.coffeeLabel}>
+          <label htmlFor="placeLongitude" className={styles.placeLabel}>
             Longitude
             <input 
-              id="coffeeLongitude" 
-              name="coffeeLongitude" 
+              id="placeLongitude" 
+              name="placeLongitude" 
               type="text" 
               required
             />
           </label>
         </div>
 
-        <label htmlFor="coffeeImage" className={styles.coffeeLabel}>
+        <label htmlFor="placeImage" className={styles.placeLabel}>
           URL da imagem
           <input 
-            id="coffeeImage" 
-            name="coffeeImage" 
+            id="placeImage" 
+            name="placeImage" 
             type="url" 
             required
           />
@@ -67,30 +67,30 @@ export default function Page() {
 
         <div className={styles.bottomDiv}>
           <div className={styles.leftDiv}>
-          <label htmlFor="coffeeDescription" className={styles.coffeeLabel}>
+          <label htmlFor="placeDescription" className={styles.placeLabel}>
             Descrição
             <textarea 
-              id="coffeeDescription" 
-              name="coffeeDescription" 
-              className={styles.coffeeDescription}
+              id="placeDescription" 
+              name="placeDescription" 
+              className={styles.placeDescription}
               required
             />
           </label>
           </div>
           <div className={styles.rightDiv}>
-            <label htmlFor="coffeePhone" className={styles.coffeeLabel}>
+            <label htmlFor="placePhone" className={styles.placeLabel}>
             Telefone do café
             <input 
-              id="coffeePhone" 
-              name="coffeePhone" 
+              id="placePhone" 
+              name="placePhone" 
               type="tel" 
             />
             </label>
-            <label htmlFor="coffeeSlug" className={styles.coffeeLabel}>
+            <label htmlFor="placeSlug" className={styles.placeLabel}>
             Slug
             <input 
-              id="coffeeSlug" 
-              name="coffeeSlug" 
+              id="placeSlug" 
+              name="placeSlug" 
               type="text" 
               required
             />
