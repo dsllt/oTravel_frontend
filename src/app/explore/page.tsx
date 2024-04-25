@@ -5,12 +5,12 @@ import { fetchPlaces } from "@lib/data";
 import { Place } from "@app/lib/type-definitions";
 
 
-export default async function Page({searchParams}: {searchParams?: { query?: string}}) {
+export default async function Page({ searchParams }: { searchParams?: { query?: string } }) {
   const query = searchParams?.query || '';
   const placeData: Place[] = await fetchPlaces();
-  
-  let filteredPlaces = placeData.filter(place => {return place.name.toLowerCase().includes(query.toLowerCase())})
-  
+
+  let filteredPlaces = placeData.filter(place => { return place.name.toLowerCase().includes(query.toLowerCase()) })
+
   return (
     <main className={styles.main}>
       <div className={styles.header}>
@@ -20,8 +20,9 @@ export default async function Page({searchParams}: {searchParams?: { query?: str
       <div className={styles['body-container']}>
         <SearchHeader />
         <div className={styles['places-container']}>
+
           {filteredPlaces.map(place => {
-            return(
+            return (
               <PlaceBox key={place.id} placeInfo={place} />
             )
           })}
@@ -30,4 +31,3 @@ export default async function Page({searchParams}: {searchParams?: { query?: str
     </main>
   )
 }
- 
