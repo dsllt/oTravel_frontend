@@ -1,3 +1,4 @@
+import { placesData } from "@app/explore/page";
 import { CreatePlaceDTO, UpdatePlaceDTO } from "./type-definitions";
 
 
@@ -11,14 +12,17 @@ export async function fetchPlaces(){
   }
 }
 
-export async function fetchPlace(placeId: string){
-  try {
-    const data = await fetch(`https://65a2bb8542ecd7d7f0a825df.mockapi.io/api/v1/places/${placeId}`, { cache: 'no-store' });
-    return data.json();
-  } catch (e) {
-    console.error('Failed to fetch place data.',e);
-    throw new Error('Failed to fetch place data.');
-  }
+export function fetchPlace(placeId: string){
+  console.log(placeId, 'ID');
+  const place = placesData.filter(place => place.id === placeId);
+  return place[0];
+  // try {
+  //   const data = await fetch(`https://65a2bb8542ecd7d7f0a825df.mockapi.io/api/v1/places/${placeId}`, { cache: 'no-store' });
+  //   return data.json();
+  // } catch (e) {
+  //   console.error('Failed to fetch place data.',e);
+  //   throw new Error('Failed to fetch place data.');
+  // }
 }
 
 export async function fetchCreatePlace(data: CreatePlaceDTO){

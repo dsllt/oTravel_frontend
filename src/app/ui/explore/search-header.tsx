@@ -20,7 +20,7 @@ export function SearchHeader() {
   }, 300);
 
   return (
-    <div className="navbar bg-base-100 px-8">
+    <div className="navbar bg-base-100 px-8 w-full">
       <div className="flex-1">
         <a className="btn btn-ghost text-xl">Busque por um local</a>
       </div>
@@ -29,7 +29,7 @@ export function SearchHeader() {
           <input
             type="text"
             placeholder="Busque por um local"
-            className="input input-bordered w-32 md:w-auto mr-10"
+            className="input input-bordered w-32 md:w-auto"
             defaultValue={searchParams.get('query')?.toString()}
             onChange={(e) => {
               handleSearch(e.target.value);

@@ -30,7 +30,7 @@ export default function RootLayout({
   }
 
   return (
-    <html lang="en" data-theme="pastel">
+    <html lang="en" data-theme="dim">
       <body className={inter.className}>
         <Navbar isLogged={isLogged} isAdmin={isAdmin} />
         {children}

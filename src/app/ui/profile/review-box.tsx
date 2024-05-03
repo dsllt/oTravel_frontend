@@ -3,27 +3,23 @@ import styles from './review-box.module.css'
 import { Review, UserDTO } from '@lib/type-definitions'
 import { dateDifference } from '@app/utils/dateUtils'
 
-export default function ReviewBox({review, user}: {review: Review, user: UserDTO}) {
-  
+export default function ReviewBox({ review, user }: { review: Review, user: UserDTO }) {
+
   return (
-    <div className={styles.container}>
-      <div className={styles.header}>
-        <div className={styles.personalInfo}>
-          <Image
-            src={user.image}
-            alt="Image"
-            className={styles.avatar}
-            width={50}
-            height={50}
-          />
+    <div className="flex flex-col gap-4 px-6 py-8 border-2 border-stone-500 rounded-lg bg-slate-800 mb-10">
+      <div className="flex justify-between font-dmSans">
+        <div className="flex gap-4 items-center">
+          <div className='bg-gray-700 text-white rounded-full border-2 border-white p-2 w-12 h-12 flex items-center justify-center text-2xl'>
+            {user.name[0]}
+          </div>
           <div className="text">
-            <h4>{user.name}</h4>
-            <span>{dateDifference(review.created_at)}</span>
+            <h4 className='text-md font-medium'>{user.name}</h4>
+            <span className='text-sm'>{dateDifference(review.created_at)}</span>
           </div>
         </div>
-        <span className="rating"> {review.rating.toFixed(1)} ⭐️</span>
+        <span className="badge badge-secondary"> {review.rating.toFixed(1)} </span>
       </div>
-      <p>{review.review}</p>
+      <p className='text-md'>{review.review}</p>
     </div>
   )
 }

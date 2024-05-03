@@ -1,7 +1,6 @@
 import { fetchPlace } from "@lib/data";
 import { Place, UserDTO } from "@lib/type-definitions";
 import Image from "next/image";
-import styles from "./page.module.css"
 import ReviewBox from "@ui/profile/review-box";
 
 const reviews = [
@@ -40,38 +39,40 @@ const users: UserDTO[] = [{
   created_at: "2020-01-12T09:46:10.477Z"
 }]
 
-export default async function PlacePage({params}: { params: {placeId: string}}){
-  const placeData: Place = await fetchPlace(params.placeId);
+export default async function PlacePage({ params }: { params: { placeId: string } }) {
+  const placeData: Place = fetchPlace(params.placeId);
   const placeName = placeData.name.toLowerCase();
 
-  return(
-    <div className={styles.container}>
-      <div className={styles.info}>
-        <div className={styles.image}>
-          <Image 
-            src={placeData.image_url} 
+  return (
+    <div className="w-full flex flex-col gap-16 my-10 items-center justify-center">
+
+      <div className="flex w-full h-[350px] justify-center items-start gap-16">
+        <div className="max-h-[350px] overflow-hidden">
+          <Image
+            src={placeData.image_url}
             alt=""
-            style={{objectFit: 'cover', borderRadius: '1rem'}}
-            width={800} 
-            height={400}
+            style={{ objectFit: 'cover', borderRadius: '1rem' }}
+            width={500}
+            height={500}
             priority
           />
         </div>
-        <div className={styles.description}>
-          <h1>{placeName}</h1>
-          <p>{placeData.address}</p>
+        <div className="flex flex-col gap-4 font-dmSans">
+          <h1 className="text-5xl uppercase font-semibold mb-4">{placeName}</h1>
+          <p className="text-lg text-gray-400 mb-2">{placeData.address}</p>
           <p>{placeData.description}</p>
         </div>
       </div>
-      <div className={styles.reviews}>
-        <h1>
+
+      <div className="w-2/4">
+        <h1 className="font-bold text-xl font-dmSans mb-4">
           Reviews
         </h1>
         {reviews.map(review => {
           const user = users.find(user => user.id === review.user_id);
 
-          if (user !== undefined){
-            return <ReviewBox key={review.id} review={review} user={user}/>
+          if (user !== undefined) {
+            return <ReviewBox key={review.id} review={review} user={user} />
           }
 
         })}

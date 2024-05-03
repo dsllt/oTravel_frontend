@@ -1,10 +1,9 @@
 import { PlaceBox, SearchHeader } from "@ui/index";
 
-import styles from './page.module.css'
 import { fetchPlaces } from "@lib/data";
 import { Place } from "@app/lib/type-definitions";
 
-const placeData: Place[] = [
+export const placesData: Place[] = [
   {
     id: '3958dc9e-742f-4377-85e9-fec4b6a6442a',
     image_url: 'https://res.cloudinary.com/hbhhv9rz9/image/upload/f_auto,c_limit,w_3840,q_auto/cafes/Cafe%20Landing%20Page/Cafe-Jackson-Square-Hero.jpg',
@@ -172,17 +171,24 @@ export default async function Page({ searchParams }: { searchParams?: { query?: 
   const query = searchParams?.query || '';
   // const placeData: Place[] = await fetchPlaces();
 
-  let filteredPlaces = placeData.filter(place => { return place.name.toLowerCase().includes(query.toLowerCase()) })
+  let filteredPlaces = placesData.filter(place => { return place.name.toLowerCase().includes(query.toLowerCase()) })
 
   return (
-    <main className={styles.main}>
-      <div className={styles.header}>
-        <span className={`${styles['header-text']} font-inter`}>Descubra sua próxima experiência</span>
+    <main className="flex flex-col w-full items-center">
+      <div className="hero min-h-screen" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1538334421852-687c439c92f4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)' }}>
+        <div className="hero-overlay bg-opacity-60"></div>
+        <div className="hero-content text-center text-neutral-content">
+          <div className="max-w-md">
+            <h1 className="mb-5 text-5xl font-bold">Olá</h1>
+            <p className="mb-5">Descubra restaurantes e cafés com ambientes perfeitos perto de você com apenas alguns cliques. </p>
+            <a href="#search" className="btn btn-primary">Encontrar</a>
+          </div>
+        </div>
       </div>
 
-      <div className={styles['body-container']}>
+      <div id='search' className="mt-12 px-16 w-full">
         <SearchHeader />
-        <div className={styles['places-container']}>
+        <div className="flex flex-wrap gap-5 justify-center items-center mt-4">
 
           {filteredPlaces.map(place => {
             return (
