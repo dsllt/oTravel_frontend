@@ -1,13 +1,3 @@
-'use client';
-
-import Image from "next/image";
-import styles from "./navbar.module.css";
-import Link from "next/link";
-import { usePathname } from 'next/navigation';
-// Usar clsx para mostrar opções de administrador e usuário logado?
-import clsx from 'clsx';
-
-
 export function Navbar({ isLogged, isAdmin }: { isLogged: boolean, isAdmin: boolean }) {
   const links = [
     { name: 'Explorar', href: '/explore', display: true },
@@ -17,7 +7,6 @@ export function Navbar({ isLogged, isAdmin }: { isLogged: boolean, isAdmin: bool
   ];
 
 
-  const pathname = usePathname();
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
