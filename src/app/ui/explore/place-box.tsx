@@ -1,8 +1,6 @@
 'use client'
 
 import Image from 'next/image'
-import styles from './place-box.module.css'
-import { CoffeeIcon } from '../coffee-icon'
 import { useRouter } from 'next/navigation'
 
 export function PlaceBox({ placeInfo }: any) {
