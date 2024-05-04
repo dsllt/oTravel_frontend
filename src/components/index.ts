@@ -1,4 +1,4 @@
-export * from './coffee-icon'
+export * from './coffee-icon.svg'
 export * from './star-icon'
 export * from './font-styles'
 export * from './navbar'

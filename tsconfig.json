@@ -24,10 +24,10 @@
     ],
     "paths": {
       "@lib/*": [
-        "./src/app/lib/*"
+        "./src/lib/*"
       ],
       "@ui/*": [
-        "./src/app/ui/*"
+        "./src/components/*"
       ],
       "@app/*": [
         "./src/app/*"

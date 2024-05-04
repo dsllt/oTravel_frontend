@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 
 export default async function Page({ }) {
   const Map = useMemo(() => dynamic(
-    () => import('@ui/Map'),
+    () => import('../../components/Map'),
     {
       loading: () => <p>Um mapa está sendo carregado</p>,
       ssr: false

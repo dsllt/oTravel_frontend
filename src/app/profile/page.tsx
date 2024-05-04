@@ -1,7 +1,7 @@
-import ReviewBox from '@app/ui/profile/review-box';
+import ReviewBox from '../../components/profile/review-box';
 import styles from './page.module.css';
-import { ProfileInfoBox } from '@ui/profile/profile-info-box';
-import { UserDTO } from '@lib/type-definitions';
+import { ProfileInfoBox } from '../../components/profile/profile-info-box';
+import { UserDTO } from '../../lib/type-definitions';
 
 const reviews = [
   {
@@ -10,7 +10,7 @@ const reviews = [
     rating: 4.5,
     created_at: "2024-01-21T09:46:10.477Z",
     user_id: 1,
-    coffee_id: 1
+    place_id: 1
   },
   {
     id: 2,
@@ -18,7 +18,7 @@ const reviews = [
     rating: 4.0,
     created_at: "2024-01-24T09:46:10.477Z",
     user_id: 1,
-    coffee_id: 2
+    place_id: 2
   },
 ]
 
@@ -53,20 +53,20 @@ const favorites = [
     coffee_id: 4
   },
 ]
-  
+
 export default function Page() {
-  return(
-  <div className={styles.container}>
-    <div className={styles.main}>
-      <div className={styles.reviews}>
-        <h3>Reviews</h3>
-        {reviews.map(review => {
-          return <ReviewBox  review={review} user={user}/>
-        })}
-        {/* <ReviewBox review={reviews[0]} user={user}/> */}
+  return (
+    <div className={styles.container}>
+      <div className={styles.main}>
+        <div className={styles.reviews}>
+          <h3>Reviews</h3>
+          {reviews.map(review => {
+            return <ReviewBox key={review.id} review={review} user={user} />
+          })}
+          {/* <ReviewBox review={reviews[0]} user={user}/> */}
+        </div>
+        <ProfileInfoBox user={user} reviews={reviews.length} favorites={favorites.length} />
       </div>
-      <ProfileInfoBox user={user} reviews={reviews.length} favorites = {favorites.length}/>
     </div>
-  </div>
-    )
+  )
 }
