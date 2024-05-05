@@ -5,34 +5,23 @@ import 'leaflet/dist/leaflet.css'
 import { MapContainer, TileLayer, Marker, Popup, Tooltip } from 'react-leaflet'
 import CoffeeIcon from '../../../public/assets/icons/coffee-icon.svg'
 
-const placeInfo = [{
-  createdAt: "2024-01-13T15:56:56.376Z",
-  name: 'THE COFFEE',
-  image: "https://loremflickr.com/640/480/business",
-  description: "secondary",
-  address: 'Rua Fernandes Vieira, 656 - Bom Fim',
-  phone: "1-392-289-9430",
-  latitude: "-30.035212829644085",
-  longitude: "-51.210918285789916",
-  rating: 4.4,
-  slug: "the-coffee",
-  id: "1"
-},
-{
-  createdAt: "2024-01-13T15:56:56.376Z",
-  name: 'ESPAÇO BRASCO',
-  image: "https://loremflickr.com/640/480/business",
-  description: "secondary",
-  address: 'Rua Fernandes Vieira, 286 - Bom Fim',
-  phone: "1-392-289-9430",
-  latitude: "-30.03193402658714",
-  longitude: "-51.21070994496208",
-  rating: 4.7,
-  slug: "brasco-cafe",
-  id: "2"
-}]
+type MapProps = {
+  places: {
+    createdAt: string;
+    name: string;
+    image: string;
+    description: string;
+    address: string;
+    phone: string;
+    latitude: string;
+    longitude: string;
+    rating: number;
+    slug: string;
+    id: string;
+  }[]
+}
 
-export default function Map() {
+export default function Map({ places }: MapProps) {
   return (
     <div>
       <MapContainer
@@ -45,7 +34,7 @@ export default function Map() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
           url="https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png"
         />
-        {placeInfo.map(place => {
+        {places.map(place => {
           return (
             <Marker
               key={place.id}
@@ -57,6 +46,9 @@ export default function Map() {
                 })}
               position={[Number(place.latitude), Number(place.longitude)]}
             >
+              <Popup offset={[0, -20]}>
+                <a href={`/explore/${place.id}`}>Visitar página</a>
+              </Popup>
               <Tooltip direction="bottom" offset={[0, 0]} opacity={1}>
                 <div className="flex flex-col">
                   <div className='flex justify-between items-center'>

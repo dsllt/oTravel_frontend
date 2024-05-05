@@ -2,6 +2,7 @@ import { fetchPlace } from "../../../lib/data";
 import { Place, UserDTO } from "../../../lib/type-definitions";
 import Image from "next/image";
 import ReviewBox from "../../../components/review-box";
+import MenuContainer from "@ui/explore/menu-container";
 
 const reviews = [
   {
@@ -39,14 +40,52 @@ const users: UserDTO[] = [{
   created_at: "2020-01-12T09:46:10.477Z"
 }]
 
+const menu = {
+  drinks: [
+    {
+      item: 'Expresso',
+      price: 9.0
+    },
+    {
+      item: 'Cappuccino',
+      price: 15.0
+    },
+    {
+      item: 'Latte',
+      price: 19.0
+    },
+    {
+      item: 'Cortado',
+      price: 12.0
+    },
+  ],
+  foods: [
+    {
+      item: 'Bolo caseiro',
+      price: 17.0
+    },
+    {
+      item: 'Cookie',
+      price: 15.0
+    },
+    {
+      item: 'Brownie',
+      price: 19.0
+    },
+    {
+      item: 'Applestrudel',
+      price: 25.0
+    },
+  ]
+}
+
 export default async function PlacePage({ params }: { params: { placeId: string } }) {
   const placeData: Place = fetchPlace(params.placeId);
   const placeName = placeData.name.toLowerCase();
 
   return (
-    <div className="w-full flex flex-col gap-16 my-10 items-center justify-center">
-
-      <div className="flex w-full h-[350px] justify-center items-start gap-16">
+    <div className="w-full flex flex-col gap-10 mt-10 mb-2 items-center justify-center">
+      <div className="flex w-full h-full justify-center items-start gap-16">
         <div className="max-h-[350px] overflow-hidden">
           <Image
             src={placeData.image_url}
@@ -64,6 +103,11 @@ export default async function PlacePage({ params }: { params: { placeId: string 
         </div>
       </div>
 
+      <div className="w-2/4">
+        <h1 className="font-bold text-xl font-dmSans mb-4">Menu</h1>
+        <MenuContainer menu={menu} />
+
+      </div>
       <div className="w-2/4">
         <h1 className="font-bold text-xl font-dmSans mb-4">
           Reviews
