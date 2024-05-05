@@ -1,7 +1,7 @@
 import { fetchPlace } from "../../../lib/data";
 import { Place, UserDTO } from "../../../lib/type-definitions";
 import Image from "next/image";
-import ReviewBox from "../../../components/profile/review-box";
+import ReviewBox from "../../../components/review-box";
 
 const reviews = [
   {

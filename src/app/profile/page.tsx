@@ -1,7 +1,8 @@
-import ReviewBox from '../../components/profile/review-box';
+import ReviewBox from '../../components/review-box';
 import styles from './page.module.css';
 import { ProfileInfoBox } from '../../components/profile/profile-info-box';
 import { UserDTO } from '../../lib/type-definitions';
+import { ProfileFavorite } from '@ui/profile/profile-favorite';
 
 const reviews = [
   {
@@ -35,37 +36,42 @@ const favorites = [
   {
     id: 1,
     user_id: 1,
-    coffee_id: 1
+    coffee_id: '3958dc9e-742f-4377-85e9-fec4b6a6442a'
   },
   {
     id: 2,
     user_id: 1,
-    coffee_id: 2
+    coffee_id: '3958dc9e-742f-4377-85e9-fec4b6a6442a'
   },
   {
     id: 3,
     user_id: 1,
-    coffee_id: 3
+    coffee_id: '3958dc9e-742f-4377-85e9-fec4b6a6442a'
   },
   {
     id: 4,
     user_id: 1,
-    coffee_id: 4
+    coffee_id: '3958dc9e-742f-4377-85e9-fec4b6a6442a'
   },
 ]
 
 export default function Page() {
   return (
-    <div className={styles.container}>
-      <div className={styles.main}>
-        <div className={styles.reviews}>
-          <h3>Reviews</h3>
+    <div className="flex flex-col my-16 mx-24">
+      <div className="flex gap-16">
+        <ProfileInfoBox user={user} reviews={reviews.length} favorites={favorites.length} />
+        <div className="flex flex-col">
+          <h3 className='font-dmSans text-2xl mb-4'>Locais favoritados</h3>
+          <div className='flex gap-4'>
+            {favorites.map(favorite => {
+              return <ProfileFavorite key={favorite.id} favorite={favorite} />
+            })}
+          </div>
+          <h3 className='font-dmSans text-2xl mb-4 mt-8'>Reviews</h3>
           {reviews.map(review => {
             return <ReviewBox key={review.id} review={review} user={user} />
           })}
-          {/* <ReviewBox review={reviews[0]} user={user}/> */}
         </div>
-        <ProfileInfoBox user={user} reviews={reviews.length} favorites={favorites.length} />
       </div>
     </div>
   )
