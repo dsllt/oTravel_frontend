@@ -1,7 +1,6 @@
 "use client"
 import { useFormState } from "react-dom";
 import { updatePlace } from "../../../../lib/actions";
-import styles from "./page.module.css"
 
 const placeInfo = {
   createdAt: "2024-01-13T15:56:56.376Z",
@@ -51,7 +50,7 @@ export default function Page() {
           />
         </label>
 
-        <div className={styles.placeCoordinates}>
+        <div className="flex gap-4">
           <label htmlFor="placeLatitude" className="text-sm mb-4 flex flex-col w-full">
             Latitude
             <input
@@ -88,8 +87,8 @@ export default function Page() {
           />
         </label>
 
-        <div className={styles.bottomDiv}>
-          <div className={styles.leftDiv}>
+        <div className="flex justify-between gap-4">
+          <div className="flex w-1/2 h-[184px]">
             <label htmlFor="placeDescription" className="text-sm mb-4 flex flex-col w-full">
               Descrição
               <textarea
@@ -101,7 +100,7 @@ export default function Page() {
               />
             </label>
           </div>
-          <div className={styles.rightDiv}>
+          <div className="flex w-1/2 flex-col">
             <label htmlFor="placePhone" className="text-sm mb-4 flex flex-col w-full">
               Telefone
               <input
