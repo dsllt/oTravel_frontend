@@ -9,10 +9,10 @@ export default function Page() {
   return (
     <div className="flex flex-col items-center justify-center rounded-lg my-10 mx-80 py-12 bg-base-300">
       <form action={dispatch}>
-        <h1 className="text-2xl text-center mb-5"> Inclua um novo café </h1>
+        <h1 className="text-2xl text-center mb-5"> Inclua um novo local </h1>
 
         <label htmlFor="placeName" className="text-sm mb-4 flex flex-col w-full">
-          Nome do café
+          Nome do local
           <input
             id="placeName"
             name="placeName"
@@ -23,7 +23,7 @@ export default function Page() {
         </label>
 
         <label htmlFor="placeAddress" className="text-sm mb-4 flex flex-col w-full">
-          Endereço do café
+          Endereço
           <input
             id="placeAddress"
             name="placeAddress"
@@ -81,7 +81,7 @@ export default function Page() {
           </div>
           <div className="flex w-1/2 flex-col">
             <label htmlFor="placePhone" className="text-sm mb-4 flex flex-col w-full">
-              Telefone do café
+              Telefone
               <input
                 id="placePhone"
                 name="placePhone"
