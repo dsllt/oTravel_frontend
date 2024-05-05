@@ -1,5 +1,5 @@
+'use client'
 import ReviewBox from '../../components/review-box';
-import styles from './page.module.css';
 import { ProfileInfoBox } from '../../components/profile/profile-info-box';
 import { UserDTO } from '../../lib/type-definitions';
 import { ProfileFavorite } from '@ui/profile/profile-favorite';

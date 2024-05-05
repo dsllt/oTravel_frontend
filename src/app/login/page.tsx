@@ -1,6 +1,5 @@
 'use client'
 import Image from "next/image"
-import styles from "./page.module.css"
 
 export default function Page() {
 
@@ -18,7 +17,7 @@ export default function Page() {
 
   return (
     <div className="flex gap-20 m-12 justify-center items-center h-full">
-      <div className="h-[88vh] w-[50vw] flex rounded-lg bg-center bg-no-repeat bg-cover opacity-60"
+      <div className="h-[80vh] w-[50vw] flex rounded-lg bg-center bg-no-repeat bg-cover opacity-60"
         style={{
           backgroundImage: `url('/assets/images/login-background.jpg')`
         }}
@@ -31,13 +30,13 @@ export default function Page() {
         </div>
 
         <button className="rounded-md flex items-center justify-center p-4 gap-8 cursor-pointer w-3/5 bg-neutral hover:opacity-50" onClick={handleGoogleLogin}>
-          <Image src="/assets/images/google-logo.svg" alt="Google Logo" width={32} height={32} /> Entrar com o Google
+          <Image src="/assets/icons/google-icon.svg" alt="Google Logo" width={32} height={32} /> Entrar com o Google
         </button>
         <button className="rounded-md flex items-center justify-center p-4 gap-8 cursor-pointer w-3/5 bg-neutral hover:opacity-50" onClick={handleEmailLogin}>
-          <Image src="/assets/images/email-icon.svg" alt="Email Logo" width={32} height={32} />    Entrar com email &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <Image src="/assets/icons/email-icon.svg" alt="Email Logo" width={32} height={32} />    Entrar com email &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </button>
         <button className="rounded-md flex items-center justify-center p-4 gap-8 cursor-pointer w-3/5 bg-neutral hover:opacity-50" onClick={handleVisitorLogin}>
-          <Image src="/assets/images/visitor-logo.svg" alt="Visitor Logo" width={32} height={32} /> Entrar como visitante
+          <Image src="/assets/icons/visitor-icon.svg" alt="Visitor Logo" width={32} height={32} /> Entrar como visitante
         </button>
       </div>
     </div>

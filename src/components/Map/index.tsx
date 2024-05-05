@@ -3,7 +3,7 @@
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { MapContainer, TileLayer, Marker, Popup, Tooltip } from 'react-leaflet'
-import CoffeeIcon from '../coffee-icon.svg'
+import CoffeeIcon from '../../../public/assets/icons/coffee-icon.svg'
 
 const placeInfo = [{
   createdAt: "2024-01-13T15:56:56.376Z",

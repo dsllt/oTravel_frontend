@@ -19,7 +19,7 @@ export function Navbar({ isLogged, isAdmin }: { isLogged: boolean, isAdmin: bool
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Login</a>
+        <a className="btn" href="/login">Login</a>
       </div>
     </div>
   )

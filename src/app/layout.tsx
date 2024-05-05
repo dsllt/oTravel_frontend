@@ -1,9 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { Navbar } from '../components/navbar'
-import { inter } from '../components/font-styles'
 import { cookies } from 'next/headers'
-import { useState } from 'react'
 
 
 export const metadata: Metadata = {
@@ -31,7 +29,7 @@ export default function RootLayout({
 
   return (
     <html lang="en" data-theme="dim">
-      <body className={inter.className}>
+      <body>
         <Navbar isLogged={isLogged} isAdmin={isAdmin} />
         {children}
       </body>

@@ -1,7 +1,7 @@
-import { PlaceBox, SearchHeader } from "../../components/index";
-
-import { fetchPlaces } from "../../lib/data";
+import { SearchHeader } from "@ui/explore/search-header";
+import { fetchPlaces } from "../../lib/data"
 import { Place } from "../../lib/type-definitions";
+import { PlaceBox } from "@ui/explore/place-box";
 
 export const placesData: Place[] = [
   {
