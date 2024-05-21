@@ -27,17 +27,16 @@ export type Place = {
   name:  string; // 'THE COFFEE',
   description:  string; // '',
   address:  string; // 'Rua Fernandes Vieira, 656 - Bom Fim',
+  city:  string; // 'Rua Fernandes Vieira, 656 - Bom Fim',
+  country:  string; // 'Rua Fernandes Vieira, 656 - Bom Fim',
   latitude: number;// 10.456,
   longitude: number;// 10.98,
   phone:  string; // '',
   slug: string;// 'the-coffee',
-  type: string; // 'coffee',
+  category: string; // 'coffee',
   rating: number; // 4.5,
   created_at: Date;// 2024-01-13T15:56:56.376Z
-  updated_at: Date;// 2024-01-13T15:56:56.376Z
-  is_deleted: boolean;// false
 };
-
 
 export type CreatePlaceDTO = {
     name: string;//'THE COFFEE',

@@ -1,8 +1,10 @@
+'use client'
 import { fetchPlace } from "../../../lib/data";
 import { Place, UserDTO } from "../../../lib/type-definitions";
 import Image from "next/image";
 import ReviewBox from "../../../components/review-box";
 import MenuContainer from "@ui/explore/menu-container";
+import React, { useEffect, useState } from "react";
 
 const reviews = [
   {
@@ -79,16 +81,42 @@ const menu = {
   ]
 }
 
-export default async function PlacePage({ params }: { params: { placeId: string } }) {
-  const placeData: Place = fetchPlace(params.placeId);
-  const placeName = placeData.name.toLowerCase();
+export default function PlacePage({ params }: { params: { placeId: string } }) {
+  const [place, setPlace] = useState<Place>({
+    id: "",
+    image_url: "",
+    name: "",
+    description: "",
+    address: "",
+    city: "",
+    country: "",
+    latitude: 0,
+    longitude: 0,
+    phone: "",
+    slug: "",
+    category: "",
+    rating: 0,
+    created_at: new Date(),
+  })
+  const [placeName, setPlaceName] = useState('')
+
+  useEffect(() => {
+    async function fetchData() {
+      const placesResponse = await fetchPlace(params.placeId);
+      setPlaceName(placesResponse.name.toLowerCase());
+
+      setPlace(placesResponse);
+    }
+
+    fetchData();
+  }, [params.placeId])
 
   return (
     <div className="w-full flex flex-col gap-10 mt-10 mb-2 items-center justify-center">
       <div className="flex w-full h-full justify-center items-start gap-16">
-        <div className="max-h-[350px] overflow-hidden">
+        <div className="max-h-[500px] overflow-hidden">
           <Image
-            src={placeData.image_url}
+            src={place.image_url}
             alt=""
             style={{ objectFit: 'cover', borderRadius: '1rem' }}
             width={500}
@@ -98,8 +126,14 @@ export default async function PlacePage({ params }: { params: { placeId: string 
         </div>
         <div className="flex flex-col gap-4 font-dmSans">
           <h1 className="text-5xl uppercase font-semibold mb-4">{placeName}</h1>
-          <p className="text-lg text-gray-400 mb-2">{placeData.address}</p>
-          <p>{placeData.description}</p>
+          <p className="text-lg text-gray-400 mb-2">{place.address}</p>
+          <p className="max-w-[500px] leading-8 text-justify">
+            {place.description.split('\n').map((line, i) => (
+              <p key={i} className="mb-4 indent-10">
+                {line}
+              </p>
+            ))}
+          </p>
         </div>
       </div>
 

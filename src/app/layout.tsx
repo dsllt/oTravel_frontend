@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import { Navbar } from '../components/navbar'
 import { cookies } from 'next/headers'
-
+import UserProvider from '../context/userContext'
 
 export const metadata: Metadata = {
   title: 'OTravel',
@@ -29,9 +29,11 @@ export default function RootLayout({
 
   return (
     <html lang="en" data-theme="dim">
-      <body>
-        <Navbar isLogged={isLogged} isAdmin={isAdmin} />
-        {children}
+      <body suppressHydrationWarning={true}>
+        <UserProvider>
+          <Navbar isLogged={isLogged} isAdmin={isAdmin} />
+          {children}
+        </UserProvider>
       </body>
     </html>
   )
