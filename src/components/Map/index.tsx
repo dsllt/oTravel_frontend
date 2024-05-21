@@ -1,24 +1,12 @@
 'use client'
-
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { MapContainer, TileLayer, Marker, Popup, Tooltip } from 'react-leaflet'
 import CoffeeIcon from '../../../public/assets/icons/coffee-icon.svg'
+import { Place } from '@lib/type-definitions'
 
 type MapProps = {
-  places: {
-    createdAt: string;
-    name: string;
-    image: string;
-    description: string;
-    address: string;
-    phone: string;
-    latitude: string;
-    longitude: string;
-    rating: number;
-    slug: string;
-    id: string;
-  }[]
+  places: Place[]
 }
 
 export default function Map({ places }: MapProps) {
