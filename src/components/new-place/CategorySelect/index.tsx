@@ -44,8 +44,7 @@ function CategorySelect({ availableCategories, selectedCategories, initialCatego
     });
   }
   useEffect(() => {
-    const finalCategories = Object.keys(selectedCategories);
-    setValue('placeCategory', finalCategories);
+    setValue('placeCategory', selectedCategories);
   }, [selectedCategories, setValue]);
 
   return (

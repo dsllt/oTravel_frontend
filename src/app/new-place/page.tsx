@@ -7,6 +7,7 @@ import FormButtons from "@ui/new-place/FormButtons";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { error } from "console";
 
 export type Categories = {
   [key: string]: string;
@@ -18,22 +19,29 @@ const initialCategories: Categories = {
   bakery: 'Padaria',
   market: 'Mercado',
 };
-
+const urlPattern = new RegExp('^(https?:\\/\\/)?' + // protocol
+  '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name and extension
+  '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+  '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+  '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+  '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
 const newPlaceSchema = z.object({
   placeName: z.string(),
   placeAddress: z.string(),
   placeCity: z.string(),
   placeCountry: z.string(),
-  placeLatitude: z.string().transform((value) => parseFloat(value)).refine(value => !isNaN(value) && typeof value === 'number', {
+  placeLatitude: z.string().transform((value) => parseFloat(value.replace(',', '.'))).refine(value => !isNaN(value), {
     message: 'Latitude must be a valid number',
   }),
-  placeLongitude: z.string().transform((value) => parseFloat(value)).refine(value => !isNaN(value) && typeof value === 'number', {
+  placeLongitude: z.string().transform((value) => parseFloat(value.replace(',', '.'))).refine(value => !isNaN(value), {
     message: 'Longitude must be a valid number',
   }),
-  placeImage: z.string(),
-  placeCategory: z.record(z.string()).transform((value) => Object.keys(value)),
+  placeImage: z.string().refine(value => urlPattern.test(value), {
+    message: "Must be a valid URL",
+  }),
+  placeCategory: z.record(z.string()),
   placeDescription: z.string(),
-  placeSlug: z.string(),
+  placeSlug: z.string().transform(value => value.toLowerCase().replace(/\s+/g, '-')),
   placePhone: z.string(),
 })
 
@@ -47,8 +55,31 @@ export default function Page() {
   const [selectedCategories, setSelectedCategories] = useState<Categories>({});
   const [availableCategories, setAvailableCategories] = useState<Categories>(initialCategories);
 
-  function handleIncludeNewPlace(data: NewPlaceSchema) {
-    console.log(data)
+  async function handleIncludeNewPlace(data: NewPlaceSchema) {
+    const placeCategory = Object.keys(data.placeCategory);
+    const place = {
+      name: data.placeName,
+      image_url: data.placeImage,
+      description: data.placeDescription,
+      address: data.placeAddress,
+      city: data.placeCity,
+      country: data.placeCountry,
+      latitude: data.placeLatitude,
+      longitude: data.placeLongitude,
+      phone: data.placePhone,
+      slug: data.placeSlug,
+      category: placeCategory,
+      rating: 0,
+    }
+    const baseUrl = process.env.API_BASE_URL;
+
+    await fetch(`${baseUrl}/places`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(place),
+    });
   }
 
 
