@@ -1,9 +1,14 @@
 "use client"
-import {useState} from "react";
-import { useFormState } from "react-dom";
-import { includePlace } from "../../lib/actions";
+import React, { useState } from "react";
+import Input from "@ui/new-place/Input";
+import CategorySelect from "@ui/new-place/CategorySelect";
+import TextArea from "@ui/new-place/TextArea";
+import FormButtons from "@ui/new-place/FormButtons";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-type Categories = {
+export type Categories = {
   [key: string]: string;
 };
 
@@ -14,175 +19,81 @@ const initialCategories: Categories = {
   market: 'Mercado',
 };
 
-// type Category = 'restaurant' | 'coffee' | 'bakery' | 'market';
+const newPlaceSchema = z.object({
+  placeName: z.string(),
+  placeAddress: z.string(),
+  placeCity: z.string(),
+  placeCountry: z.string(),
+  placeLatitude: z.string().transform((value) => parseFloat(value)).refine(value => !isNaN(value) && typeof value === 'number', {
+    message: 'Latitude must be a valid number',
+  }),
+  placeLongitude: z.string().transform((value) => parseFloat(value)).refine(value => !isNaN(value) && typeof value === 'number', {
+    message: 'Longitude must be a valid number',
+  }),
+  placeImage: z.string(),
+  placeCategory: z.record(z.string()).transform((value) => Object.keys(value)),
+  placeDescription: z.string(),
+  placeSlug: z.string(),
+  placePhone: z.string(),
+})
 
-// const initialCategories: Category[] = ['restaurant', 'coffee', 'bakery', 'market'];
+export type NewPlaceSchema = z.infer<typeof newPlaceSchema>
 
 export default function Page() {
-  const initialState = { message: "", errors: {} };
-  const [state, dispatch] = useFormState(includePlace, initialState);
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm<NewPlaceSchema>({
+    resolver: zodResolver(newPlaceSchema)
+  })
 
   const [selectedCategories, setSelectedCategories] = useState<Categories>({});
   const [availableCategories, setAvailableCategories] = useState<Categories>(initialCategories);
 
-  const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedCategory = event.target.value as keyof Categories;
+  function handleIncludeNewPlace(data: NewPlaceSchema) {
+    console.log(data)
+  }
 
-    setSelectedCategories(prevSelectedCategories => ({
-      ...prevSelectedCategories,
-      [selectedCategory]: initialCategories[selectedCategory]
-    }));
-  
-    setAvailableCategories(prevAvailableCategories => {
-      const newAvailableCategories = { ...prevAvailableCategories };
-      delete newAvailableCategories[selectedCategory];
-      return newAvailableCategories;
-    });
-  };
 
   return (
     <div className="flex flex-col items-center justify-center rounded-lg my-10 mx-80 py-12 bg-base-300">
-      <form action={dispatch}>
+      <form onSubmit={handleSubmit(handleIncludeNewPlace)} className="min-w-[600px]">
         <h1 className="text-2xl text-center mb-5"> Inclua um novo local </h1>
 
-        <label htmlFor="placeName" className="text-sm mb-4 flex flex-col w-full">
-          Nome do local
-          <input
-            id="placeName"
-            name="placeName"
-            type="text"
-            className="input input-bordered w-full mt-2"
-            required
-          />
-        </label>
+        <Input label="Nome do local" id="placeName" required register={register} errors={errors} />
 
-        <label htmlFor="placeAddress" className="text-sm mb-4 flex flex-col w-full">
-          Endereço
-          <input
-            id="placeAddress"
-            name="placeAddress"
-            type="text"
-            className="input input-bordered w-full mt-2"
-            required
-          />
-        </label>
+        <Input label="Endereço" id="placeAddress" required register={register} errors={errors} />
 
         <div className="flex gap-4">
-          <label htmlFor="placeCity" className="text-sm mb-4 flex flex-col w-full">
-            Cidade
-            <input
-              id="placeCity"
-              name="placeCity"
-              type="text"
-              className="input input-bordered w-full mt-2"
-              required
-            />
-          </label>
-          <label htmlFor="placeCountry" className="text-sm mb-4 flex flex-col w-full">
-            País
-            <input
-              id="placeCountry"
-              name="placeCountry"
-              type="text"
-              className="input input-bordered w-full mt-2"
-              required
-            />
-          </label>
+          <Input label="Cidade" id="placeCity" required register={register} errors={errors} />
+          <Input label="País" id="placeCountry" required register={register} errors={errors} />
         </div>
 
         <div className="flex gap-4">
-          <label htmlFor="placeLatitude" className="text-sm mb-4 flex flex-col w-full">
-            Latitude
-            <input
-              id="placeLatitude"
-              name="placeLatitude"
-              type="text"
-              className="input input-bordered w-full mt-2"
-              required
-            />
-          </label>
-          <label htmlFor="placeLongitude" className="text-sm mb-4 flex flex-col w-full">
-            Longitude
-            <input
-              id="placeLongitude"
-              name="placeLongitude"
-              type="text"
-              className="input input-bordered w-full mt-2"
-              required
-            />
-          </label>
+          <Input label="Latitude" id="placeLatitude" required register={register} errors={errors} />
+          <Input label="Longitude" id="placeLongitude" required register={register} errors={errors} />
         </div>
 
-        <label htmlFor="placeImage" className="text-sm mb-4 flex flex-col w-full">
-          URL da imagem
-          <input
-            id="placeImage"
-            name="placeImage"
-            type="url"
-            className="input input-bordered w-full mt-2"
-            required
-          />
-        </label>
+        <Input label="URL da imagem" id="placeImage" type="url" required register={register} errors={errors} />
 
-      <div className="flex items-center gap-2">
-      <label htmlFor="placeCategory" className="text-sm mb-4 flex flex-col w-full">
-        Categoria
-        <select id="placeCategory" className="select select-ghost w-full max-w-xs" onChange={handleSelect}>
-          <option selected>Selecione a categoria</option>
-          {Object.keys(availableCategories).map((category) => <option key={category} value={category}>{availableCategories[category]}</option>)}
-        </select>
-      </label>
-      <div className="flex gap-2">
-        {Object.keys(selectedCategories).map((category) => (
-          <div key={category} className="card">
-            {selectedCategories[category]}
-          </div>
-        ))}
-      </div>
-    </div>
-
+        <CategorySelect
+          availableCategories={availableCategories}
+          initialCategories={initialCategories}
+          selectedCategories={selectedCategories}
+          setAvailableCategories={setAvailableCategories}
+          setSelectedCategories={setSelectedCategories}
+          register={register}
+          errors={errors}
+          setValue={setValue}
+        />
 
         <div className="flex justify-between gap-4">
-          <div className="flex w-1/2 h-[184px]">
-            <label htmlFor="placeDescription" className="text-sm mb-4 flex flex-col w-full">
-              Descrição
-              <textarea
-                id="placeDescription"
-                name="placeDescription"
-                className="textarea textarea-bordered mt-2 h-full"
-                required
-              />
-            </label>
-          </div>
+          <TextArea label="Descrição" id="placeDescription" required register={register} errors={errors} />
+
           <div className="flex w-1/2 flex-col">
-            <label htmlFor="placeSlug" className="text-sm mb-4 flex flex-col w-full">
-              Slug
-              <input
-                id="placeSlug"
-                name="placeSlug"
-                type="text"
-                className="input input-bordered w-full mt-2"
-                required
-              />
-            </label>
-            <label htmlFor="placePhone" className="text-sm mb-4 flex flex-col w-full">
-              Telefone
-              <input
-                id="placePhone"
-                name="placePhone"
-                type="tel"
-                className="input input-bordered w-full mt-2"
-              />
-            </label>
+            <Input label="Slug" id="placeSlug" required register={register} errors={errors} />
+            <Input label="Telefone" id="placePhone" required register={register} errors={errors} />
           </div>
         </div>
 
-        <div className="flex items-center justify-center mt-4 gap-10">
-          <button type="submit"
-            className="btn btn-accent"
-          >Cadastrar</button>
-          <button type="button" className="btn btn-neutral">Voltar</button>
-        </div>
+        <FormButtons />
 
       </form>
 

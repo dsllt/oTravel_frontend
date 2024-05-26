@@ -9,7 +9,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'img.redbull.com',
+        hostname: 'lh3.googleusercontent.com',
         port: '',
       },
       {
