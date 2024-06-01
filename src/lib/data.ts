@@ -1,9 +1,10 @@
 import { CreatePlaceDTO, UpdatePlaceDTO } from "./type-definitions";
 
+const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export async function fetchPlaces(){
   try {
-    const response = await fetch('http://localhost:8080/places', { cache: 'no-store' });
+    const response = await fetch(`${baseUrl}/places`, { cache: 'no-store' });
     const data = await response.json();
     return data;
   } catch (e) {
@@ -14,8 +15,19 @@ export async function fetchPlaces(){
 
 export async function fetchPlace(placeId: string){
   try {
-    const data = await fetch(`http://localhost:8080/places/${placeId}`, { cache: 'no-store' });
-    console.log(data);
+    const data = await fetch(`${baseUrl}/places/${placeId}`, { cache: 'no-store' });
+    
+    return data.json();
+  } catch (e) {
+    console.error('Failed to fetch place data.',e);
+    throw new Error('Failed to fetch place data.');
+  }
+}
+
+export async function fetchMenu(placeId: string){
+  try {
+    const data = await fetch(`${baseUrl}/menus/place/${placeId}`, { cache: 'no-store' });
+    
     return data.json();
   } catch (e) {
     console.error('Failed to fetch place data.',e);

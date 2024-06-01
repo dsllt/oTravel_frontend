@@ -1,5 +1,5 @@
 'use client'
-import { fetchPlace } from "../../../lib/data";
+import { fetchMenu, fetchPlace } from "../../../lib/data";
 import { Place, UserDTO } from "../../../lib/type-definitions";
 import Image from "next/image";
 import ReviewBox from "../../../components/review-box";
@@ -42,44 +42,6 @@ const users: UserDTO[] = [{
   created_at: "2020-01-12T09:46:10.477Z"
 }]
 
-const menu = {
-  drinks: [
-    {
-      item: 'Expresso',
-      price: 9.0
-    },
-    {
-      item: 'Cappuccino',
-      price: 15.0
-    },
-    {
-      item: 'Latte',
-      price: 19.0
-    },
-    {
-      item: 'Cortado',
-      price: 12.0
-    },
-  ],
-  foods: [
-    {
-      item: 'Bolo caseiro',
-      price: 17.0
-    },
-    {
-      item: 'Cookie',
-      price: 15.0
-    },
-    {
-      item: 'Brownie',
-      price: 19.0
-    },
-    {
-      item: 'Applestrudel',
-      price: 25.0
-    },
-  ]
-}
 
 export default function PlacePage({ params }: { params: { placeId: string } }) {
   const [place, setPlace] = useState<Place>({
@@ -99,20 +61,23 @@ export default function PlacePage({ params }: { params: { placeId: string } }) {
     created_at: new Date(),
   })
   const [placeName, setPlaceName] = useState('')
+  const [placeMenu, setPlaceMenu] = useState([])
 
   useEffect(() => {
     async function fetchData() {
       const placesResponse = await fetchPlace(params.placeId);
-      setPlaceName(placesResponse.name.toLowerCase());
+      const menuResponse = await fetchMenu(params.placeId);
 
+      setPlaceName(placesResponse.name.toLowerCase());
       setPlace(placesResponse);
+      setPlaceMenu(menuResponse);
     }
 
     fetchData();
   }, [params.placeId])
 
   return (
-    <div className="w-full flex flex-col gap-10 mt-10 mb-2 items-center justify-center">
+    <div className="w-full flex flex-col gap-10 mt-10 mb-20 items-center justify-center">
       <div className="flex w-full h-full justify-center items-start gap-16">
         <div className="max-h-[500px] overflow-hidden">
           <Image
@@ -125,7 +90,7 @@ export default function PlacePage({ params }: { params: { placeId: string } }) {
           />
         </div>
         <div className="flex flex-col gap-4 font-dmSans">
-          <h1 className="text-5xl uppercase font-semibold mb-4">{placeName}</h1>
+          <h1 className="text-5xl uppercase font-semibold mb-4 max-w-[500px] break-words">{placeName}</h1>
           <p className="text-lg text-gray-400 mb-2">{place.address}</p>
           <p className="max-w-[500px] leading-8 text-justify">
             {place.description.split('\n').map((line, i) => (
@@ -139,10 +104,10 @@ export default function PlacePage({ params }: { params: { placeId: string } }) {
 
       <div className="w-2/4">
         <h1 className="font-bold text-xl font-dmSans mb-4">Menu</h1>
-        <MenuContainer menu={menu} />
-
+        <MenuContainer menu={placeMenu} />
       </div>
-      <div className="w-2/4">
+
+      {/* <div className="w-2/4">
         <h1 className="font-bold text-xl font-dmSans mb-4">
           Reviews
         </h1>
@@ -154,6 +119,9 @@ export default function PlacePage({ params }: { params: { placeId: string } }) {
           }
 
         })}
+      </div> */}
+      <div className="flex w-full justify-center items-center">
+        <a href="/explore#search" className="btn btn-primary ">Voltar</a>
       </div>
     </div>
   )

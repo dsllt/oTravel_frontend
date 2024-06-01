@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'storage.googleapis.com',
+        hostname: 'lh3.googleusercontent.com',
         port: '',
       },
       {
@@ -14,7 +14,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'img.freepik.com',
+        hostname: 'onnerevista.com.br',
         port: '',
       },
       {
@@ -24,7 +24,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'images.unsplash.com',
+        hostname: 'images.squarespace-cdn.com',
         port: '',
       },
     ],

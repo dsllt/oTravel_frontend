@@ -11,12 +11,12 @@ function FormButtons({ }: Props) {
       >
         Cadastrar
       </button>
-      <button
-        type="button"
+      <a
+        href="/explore#search"
         className="btn btn-neutral"
       >
         Voltar
-      </button>
+      </a>
     </div>
   )
 }

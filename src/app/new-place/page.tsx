@@ -48,7 +48,7 @@ const newPlaceSchema = z.object({
 export type NewPlaceSchema = z.infer<typeof newPlaceSchema>
 
 export default function Page() {
-  const { register, handleSubmit, setValue, formState: { errors } } = useForm<NewPlaceSchema>({
+  const { register, handleSubmit, setValue, formState: { errors }, reset } = useForm<NewPlaceSchema>({
     resolver: zodResolver(newPlaceSchema)
   })
 
@@ -71,7 +71,7 @@ export default function Page() {
       category: placeCategory,
       rating: 0,
     }
-    const baseUrl = process.env.API_BASE_URL;
+    const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
     await fetch(`${baseUrl}/places`, {
       method: 'POST',
@@ -80,6 +80,7 @@ export default function Page() {
       },
       body: JSON.stringify(place),
     });
+    reset();
   }
 
 
@@ -120,7 +121,7 @@ export default function Page() {
 
           <div className="flex w-1/2 flex-col">
             <Input label="Slug" id="placeSlug" required register={register} errors={errors} />
-            <Input label="Telefone" id="placePhone" required register={register} errors={errors} />
+            <Input label="Telefone" id="placePhone" required={false} register={register} errors={errors} />
           </div>
         </div>
 
