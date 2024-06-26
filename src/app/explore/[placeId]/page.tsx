@@ -1,6 +1,6 @@
 'use client'
-import { fetchMenu, fetchPlace } from "../../../lib/data";
-import { Place, UserDTO } from "../../../lib/type-definitions";
+import { fetchMenu, fetchPlace } from "../../../services/data";
+import { Place, UserDTO } from "../../../utils/type-definitions";
 import Image from "next/image";
 import ReviewBox from "../../../components/review-box";
 import MenuContainer from "@ui/explore/menu-container";

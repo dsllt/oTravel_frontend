@@ -24,7 +24,7 @@
     ],
     "paths": {
       "@lib/*": [
-        "./src/lib/*"
+        "./src/services/*"
       ],
       "@ui/*": [
         "./src/components/*"

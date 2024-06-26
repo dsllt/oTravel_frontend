@@ -33,7 +33,7 @@ export type Place = {
   longitude: number;// 10.98,
   phone:  string; // '',
   slug: string;// 'the-coffee',
-  category: string; // 'coffee',
+  category: string[]; // 'coffee',
   rating: number; // 4.5,
   created_at: Date;// 2024-01-13T15:56:56.376Z
 };

@@ -3,7 +3,7 @@ import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { MapContainer, TileLayer, Marker, Popup, Tooltip } from 'react-leaflet'
 import CoffeeIcon from '../../../public/assets/icons/coffee-icon.svg'
-import { Place } from '@lib/type-definitions'
+import { Place } from '../../utils/type-definitions'
 
 type MapProps = {
   places: Place[]

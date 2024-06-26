@@ -4,11 +4,21 @@ import { PlaceBox } from "@ui/explore/place-box";
 import { useContext } from "react";
 import { UserContext } from "../../context/userContext";
 
-export default function Page({ searchParams }: { searchParams?: { query?: string } }) {
+export default function Page({ searchParams }: { searchParams?: { query?: string, category?: string, city?: string } }) {
   const query = searchParams?.query || '';
+  const category = searchParams?.category || '';
+  const city = searchParams?.city || '';
   const { places } = useContext(UserContext);
 
-  let filteredPlaces = places.filter(place => { return place.name.toLowerCase().includes(query.toLowerCase()) })
+  let filteredPlaces = places.filter(place => {
+    const matchesName = place.name.toLowerCase().includes(query.toLowerCase());
+
+    const matchesCategory = !category || place.category.some(cat => cat.toLowerCase() === category.toLowerCase());
+
+    const matchesCity = !city || place.city.toLowerCase() === city.toLowerCase();
+
+    return matchesName && matchesCategory && matchesCity;
+  });
 
   return (
     <main className="flex flex-col w-full items-center mb-16">
@@ -16,7 +26,7 @@ export default function Page({ searchParams }: { searchParams?: { query?: string
         <div className="hero-overlay bg-opacity-60"></div>
         <div className="hero-content text-center text-neutral-content">
           <div className="max-w-md">
-            <h1 className="mb-5 text-5xl font-bold">Olá</h1>
+            <h1 className="mb-5 text-5xl font-bold">Encontre o próximo lugar que vai te encantar</h1>
             <p className="mb-5">Descubra restaurantes e cafés com ambientes perfeitos perto de você com apenas alguns cliques. </p>
             <a href="#search" className="btn btn-primary">Encontrar</a>
           </div>

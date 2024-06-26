@@ -1,4 +1,4 @@
-import { UserDTO } from "../../lib/type-definitions"
+import { UserDTO } from "../../utils/type-definitions"
 import { BookmarkIcon, HeartIcon } from "@heroicons/react/24/outline"
 
 export function ProfileInfoBox({ user, reviews, favorites }: { user: UserDTO, reviews: number, favorites: number }) {

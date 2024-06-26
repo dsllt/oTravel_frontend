@@ -1,8 +1,9 @@
 'use client'
 import ReviewBox from '../../components/review-box';
 import { ProfileInfoBox } from '../../components/profile/profile-info-box';
-import { UserDTO } from '../../lib/type-definitions';
+
 import { ProfileFavorite } from '@ui/profile/profile-favorite';
+import { UserDTO } from '../../utils/type-definitions';
 
 const reviews = [
   {

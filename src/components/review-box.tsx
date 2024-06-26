@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import styles from './review-box.module.css'
-import { Review, UserDTO } from '../lib/type-definitions'
+import { Review, UserDTO } from '../utils/type-definitions'
 import { dateDifference } from '../utils/dateUtils'
 
 export default function ReviewBox({ review, user }: { review: Review, user: UserDTO }) {

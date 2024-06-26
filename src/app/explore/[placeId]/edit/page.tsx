@@ -1,6 +1,6 @@
 "use client"
+import { updatePlace } from "@lib/actions";
 import { useFormState } from "react-dom";
-import { updatePlace } from "../../../../lib/actions";
 
 const placeInfo = {
   createdAt: "2024-01-13T15:56:56.376Z",

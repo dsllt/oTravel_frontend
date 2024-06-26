@@ -1,4 +1,4 @@
-import { CreatePlaceDTO, UpdatePlaceDTO } from "./type-definitions";
+import { CreatePlaceDTO, UpdatePlaceDTO } from "../utils/type-definitions";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -6,6 +6,7 @@ export async function fetchPlaces(){
   try {
     const response = await fetch(`${baseUrl}/places`, { cache: 'no-store' });
     const data = await response.json();
+    console.log(data);
     return data;
   } catch (e) {
     console.error('Failed to fetch places data.',e);
