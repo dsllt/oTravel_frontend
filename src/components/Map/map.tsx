@@ -13,10 +13,10 @@ export default function Map({ places }: MapProps) {
   return (
     <div>
       <MapContainer
-        style={{ height: '70vh', width: '80vw' }}
+        style={{ height: '93vh', width: '80vw' }}
         center={[-30.0352, -51.2109]}
         zoom={15}
-        scrollWheelZoom={false}
+        scrollWheelZoom={true}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'

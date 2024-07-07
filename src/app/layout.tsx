@@ -29,10 +29,14 @@ export default function RootLayout({
 
   return (
     <html lang="en" data-theme="dim">
-      <body suppressHydrationWarning={true}>
+      <body suppressHydrationWarning={true} className='h-screen overflow-hidden flex flex-col'>
         <UserProvider>
-          <Navbar isLogged={isLogged} isAdmin={isAdmin} />
-          {children}
+          <div className='fixed top-0 left-0 right-0 z-50'>
+            <Navbar isLogged={isLogged} isAdmin={isAdmin} />
+          </div>
+          <div className='flex-1 overflow-y-auto pt-16'>
+            {children}
+          </div>
         </UserProvider>
       </body>
     </html>

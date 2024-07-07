@@ -8,7 +8,7 @@ export function Navbar({ isLogged, isAdmin }: { isLogged: boolean, isAdmin: bool
 
 
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-100 h-16">
       <div className="navbar-start">
         <a className="btn btn-ghost text-xl" href="/explore">OTravel</a>
       </div>
