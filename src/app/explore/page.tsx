@@ -3,13 +3,14 @@ import { SearchHeader } from "@ui/explore/search-header";
 import { PlaceBox } from "@ui/explore/place-box";
 import { useContext } from "react";
 import { UserContext } from "../../context/userContext";
+import { UserBox } from "@ui/explore/user-box";
 
-export default function Page({ searchParams }: { searchParams?: { queryPlace?: string, category?: string, city?: string, queryUsers?: string, } }) {
+export default function Page({ searchParams }: { searchParams?: { queryPlace?: string, category?: string, city?: string, queryUser?: string, } }) {
   const queryPlace = searchParams?.queryPlace || '';
-  const queryUsers = searchParams?.queryUsers || '';
+  const queryUsers = searchParams?.queryUser || '';
   const category = searchParams?.category || '';
   const city = searchParams?.city || '';
-  const { places } = useContext(UserContext);
+  const { places, usersWithFavorites } = useContext(UserContext);
 
   let filteredPlaces = places.filter(place => {
     const matchesName = place.name.toLowerCase().includes(queryPlace.toLowerCase());
@@ -20,6 +21,11 @@ export default function Page({ searchParams }: { searchParams?: { queryPlace?: s
 
     return matchesName && matchesCategory && matchesCity;
   });
+
+  let filteredUsersWithFavorites = usersWithFavorites.filter(user => {
+    const matchesName = user.name.toLowerCase().includes(queryUsers.toLocaleLowerCase());
+    return matchesName;
+  })
 
   return (
     <main className="flex flex-col w-full items-center mb-16">
@@ -37,12 +43,21 @@ export default function Page({ searchParams }: { searchParams?: { queryPlace?: s
       <div id='search' className="mt-12 px-16 w-full">
         <SearchHeader />
         <div className="flex flex-wrap gap-5 justify-center items-center mt-4">
+          {queryUsers !== '' ? (
+            filteredUsersWithFavorites.map(user => {
+              return (
+                <UserBox key={user.id} userInfo={user} />
 
-          {filteredPlaces.map(place => {
-            return (
-              <PlaceBox key={place.id} placeInfo={place} />
-            )
-          })}
+              )
+            })
+          ) : (
+            filteredPlaces.map(place => {
+              return (
+                <PlaceBox key={place.id} placeInfo={place} />
+              )
+            })
+          )}
+
         </div>
       </div>
     </main>

@@ -38,6 +38,27 @@ export type Place = {
   created_at: Date;// 2024-01-13T15:56:56.376Z
 };
 
+export type PlaceFavorite ={
+  name: string;
+  image_url: string;
+  address: string;
+  city: string;
+  country: string;
+  slug: string;
+  rating: number;
+}
+
+export type UserFavorites = {
+  id: string;
+  name: string;
+  email: string;
+  is_admin: boolean; 
+  is_public: boolean;
+  image_url: string;
+  created_at: Date;
+  favorites: PlaceFavorite[],
+}
+
 export type CreatePlaceDTO = {
     name: string;//'THE COFFEE',
     image_url: string;//'https://loremflickr.com/640/480/business',

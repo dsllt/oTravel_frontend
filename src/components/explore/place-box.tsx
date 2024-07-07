@@ -16,7 +16,7 @@ export function PlaceBox({ placeInfo }: any) {
       <div className="card-body">
         <h2 className="card-title flex justify-between h-16">
           {placeInfo.name}
-          <div className="badge badge-secondary">4.5 </div>
+          <div className="badge badge-secondary">{placeInfo.rating}</div>
         </h2>
         <p>{placeInfo.address}</p>
       </div>

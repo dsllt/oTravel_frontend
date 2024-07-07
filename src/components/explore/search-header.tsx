@@ -58,10 +58,8 @@ export function SearchHeader() {
   }
 
   const clearSearchParams = () => {
-    // Create a new instance of URLSearchParams without any parameters
     const params = new URLSearchParams();
 
-    // Use the replace function to update the URL without any search parameters
     replace(`${pathname}?${params.toString()}`, { scroll: false });
   }
 
