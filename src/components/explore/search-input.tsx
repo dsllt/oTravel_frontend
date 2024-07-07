@@ -1,14 +1,34 @@
-import { ReadonlyURLSearchParams } from "next/navigation";
-import { useState } from "react";
+import { ReadonlyURLSearchParams, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import { DebouncedState } from "use-debounce";
 
 type SearchInputProps = {
-  handleSearch: DebouncedState<(term: any) => void>,
-  searchParams: ReadonlyURLSearchParams
+  handleSearchPlace: DebouncedState<(term: any) => void>,
+  handleSearchUser: DebouncedState<(term: any) => void>,
 }
 
-export function SearchInput({ handleSearch, searchParams }: SearchInputProps) {
+export function SearchInput({ handleSearchPlace, handleSearchUser }: SearchInputProps) {
   const [searchInput, setSearchInput] = useState('place');
+  const [placeValue, setPlaceValue] = useState('');
+  const [userValue, setUserValue] = useState('');
+  const searchParams = useSearchParams();
+
+
+  useEffect(() => {
+    const placeQuery = searchParams.get('queryPlace')?.toString();
+    const userQuery = searchParams.get('queryUser')?.toString();
+
+    if (placeQuery) {
+      return setPlaceValue(placeQuery);
+    }
+
+    if (userQuery) {
+      return setPlaceValue(userQuery);
+    }
+    setPlaceValue('');
+    setUserValue('');
+  }, [searchParams]);
+
 
   return (
     <div className='flex'>
@@ -34,9 +54,10 @@ export function SearchInput({ handleSearch, searchParams }: SearchInputProps) {
             type="text"
             placeholder="Busque por um local"
             className="bg-transparent border rounded-tr-lg rounded-br-lg border-[#b2ccd633] p-[13px] w-32 md:w-auto text-sm text-gray-400"
-            defaultValue={searchParams.get('query')?.toString()}
+            value={placeValue}
             onChange={(e) => {
-              handleSearch(e.target.value);
+              handleSearchPlace(e.target.value);
+              setPlaceValue(e.target.value);
             }}
           />
         </div>
@@ -46,9 +67,10 @@ export function SearchInput({ handleSearch, searchParams }: SearchInputProps) {
             type="text"
             placeholder="Busque por um usuário"
             className="bg-transparent border rounded-tr-lg rounded-br-lg border-[#b2ccd633] p-[13px] w-32 md:w-auto text-sm text-gray-400"
-            defaultValue={searchParams.get('query')?.toString()}
+            value={userValue}
             onChange={(e) => {
-              handleSearch(e.target.value);
+              handleSearchUser(e.target.value);
+              setUserValue(e.target.value);
             }}
           />
         </div>

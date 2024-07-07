@@ -6,7 +6,6 @@ export async function fetchPlaces(){
   try {
     const response = await fetch(`${baseUrl}/places`, { cache: 'no-store' });
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (e) {
     console.error('Failed to fetch places data.',e);

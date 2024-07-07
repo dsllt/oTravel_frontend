@@ -5,16 +5,16 @@ import { CategoryDictionary } from "./search-header";
 
 type SearchFiltersProps = {
   handleFilter: (event: React.ChangeEvent<HTMLSelectElement>, type: string) => void,
-  handleSearch: DebouncedState<(term: any) => void>,
+  handleSearchPlace: DebouncedState<(term: any) => void>,
+  handleSearchUser: DebouncedState<(term: any) => void>,
   cities: string[],
   mappedCategories: CategoryDictionary,
   searchParams: ReadonlyURLSearchParams,
   setDisplayFilters: React.Dispatch<React.SetStateAction<boolean>>,
-  clearSearchParams: () => void,
-
+  clearSearchParams: () => void
 }
 
-export function SearchFilters({ handleFilter, handleSearch, cities, searchParams, mappedCategories, setDisplayFilters, clearSearchParams }: SearchFiltersProps) {
+export function SearchFilters({ handleFilter, handleSearchPlace, handleSearchUser, cities, mappedCategories, setDisplayFilters, clearSearchParams }: SearchFiltersProps) {
   return (
     <div className='flex gap-2'>
       <select
@@ -33,7 +33,7 @@ export function SearchFilters({ handleFilter, handleSearch, cities, searchParams
         <option value="" className=''>Filtre por uma cidade</option>
         {cities.map((c: string) => <option key={c}>{c}</option>)}
       </select>
-      <SearchInput handleSearch={handleSearch} searchParams={searchParams} />
+      <SearchInput handleSearchPlace={handleSearchPlace} handleSearchUser={handleSearchUser} />
       <div className="flex flex-col">
         <button
           className="text-sm w-full h-full pl-2 pr-2 hover:bg-[#b2ccd633] rounded-lg"

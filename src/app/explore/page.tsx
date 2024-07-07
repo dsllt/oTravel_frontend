@@ -4,14 +4,15 @@ import { PlaceBox } from "@ui/explore/place-box";
 import { useContext } from "react";
 import { UserContext } from "../../context/userContext";
 
-export default function Page({ searchParams }: { searchParams?: { query?: string, category?: string, city?: string } }) {
-  const query = searchParams?.query || '';
+export default function Page({ searchParams }: { searchParams?: { queryPlace?: string, category?: string, city?: string, queryUsers?: string, } }) {
+  const queryPlace = searchParams?.queryPlace || '';
+  const queryUsers = searchParams?.queryUsers || '';
   const category = searchParams?.category || '';
   const city = searchParams?.city || '';
   const { places } = useContext(UserContext);
 
   let filteredPlaces = places.filter(place => {
-    const matchesName = place.name.toLowerCase().includes(query.toLowerCase());
+    const matchesName = place.name.toLowerCase().includes(queryPlace.toLowerCase());
 
     const matchesCategory = !category || place.category.some(cat => cat.toLowerCase() === category.toLowerCase());
 

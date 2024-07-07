@@ -4,15 +4,15 @@ import React, { useContext, useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { UserContext } from '../../context/userContext';
 import { categoryDictionary } from '../../utils/dictionary';
-import { SearchFilters } from './SearchFilters';
+import { SearchFilters } from './search-filters';
 
 export interface CategoryDictionary {
   [key: string]: string;
 }
 
 export function SearchHeader() {
-  const [displayFilters, setDisplayFilters] = useState(false);
   const searchParams = useSearchParams();
+  const [displayFilters, setDisplayFilters] = useState(false);
   const pathname = usePathname();
   const { replace } = useRouter();
   const { cities, categories } = useContext(UserContext);
@@ -22,13 +22,25 @@ export function SearchHeader() {
   }, {});
 
 
-  const handleSearch = useDebouncedCallback((term) => {
+  const handleSearchPlace = useDebouncedCallback((term) => {
     const params = new URLSearchParams(searchParams);
 
     if (term) {
-      params.set('query', term)
+      params.set('queryPlace', term)
     } else {
-      params.delete('query')
+      params.delete('queryPlace')
+    }
+
+    replace(`${pathname}?${params.toString()}`, { scroll: false })
+  }, 300);
+
+  const handleSearchUser = useDebouncedCallback((term) => {
+    const params = new URLSearchParams(searchParams);
+
+    if (term) {
+      params.set('queryUser', term)
+    } else {
+      params.delete('queryUser')
     }
 
     replace(`${pathname}?${params.toString()}`, { scroll: false })
@@ -59,7 +71,7 @@ export function SearchHeader() {
         <a className="btn btn-ghost text-xl">Busque por um local</a>
       </div>
       {displayFilters ? (
-        <SearchFilters cities={cities} handleFilter={handleFilter} handleSearch={handleSearch} mappedCategories={mappedCategories} searchParams={searchParams} setDisplayFilters={setDisplayFilters} clearSearchParams={clearSearchParams} />
+        <SearchFilters cities={cities} handleFilter={handleFilter} handleSearchPlace={handleSearchPlace} handleSearchUser={handleSearchUser} mappedCategories={mappedCategories} searchParams={searchParams} setDisplayFilters={setDisplayFilters} clearSearchParams={clearSearchParams} />
       ) : (
         <div>
           <a className="btn btn-primary text-md" onClick={() => setDisplayFilters(true)}>Filtros</a>
