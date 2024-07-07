@@ -1,38 +1,58 @@
-'use client'
-import { usePathname, useSearchParams, useRouter } from 'next/navigation';
-import styles from './search-input.module.css'
-import { useDebouncedCallback } from 'use-debounce';
+import { ReadonlyURLSearchParams } from "next/navigation";
+import { useState } from "react";
+import { DebouncedState } from "use-debounce";
 
-export function SearchInput() {
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const { replace } = useRouter();
+type SearchInputProps = {
+  handleSearch: DebouncedState<(term: any) => void>,
+  searchParams: ReadonlyURLSearchParams
+}
 
-  const handleSearch = useDebouncedCallback((term) => {
-    const params = new URLSearchParams(searchParams);
-
-    if (term) {
-      params.set('query', term)
-    } else {
-      params.delete('query')
-    }
-
-    replace(`${pathname}?${params.toString()}`, { scroll: false })
-  }, 300);
+export function SearchInput({ handleSearch, searchParams }: SearchInputProps) {
+  const [searchInput, setSearchInput] = useState('place');
 
   return (
-    <div className={styles.main}>
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" strokeWidth="1.5" stroke="currentColor" className={styles.icon}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-      </svg>
-      <input
-        className={styles['search-input']} type="text"
-        placeholder='Busque por um local'
-        defaultValue={searchParams.get('query')?.toString()}
-        onChange={(e) => {
-          handleSearch(e.target.value);
-        }}
-      />
+    <div className='flex'>
+      <div className='flex flex-col justify-between items-start'>
+        <button
+          className="text-sm w-full h-full rounded-tl-md pl-2 pr-2"
+          style={{ backgroundColor: searchInput === 'place' ? '#b2ccd633' : 'transparent' }}
+          onClick={() => setSearchInput('place')}
+        >
+          Local
+        </button>
+        <button
+          className="text-sm w-full h-full rounded-bl-md pl-2 pr-2"
+          onClick={() => setSearchInput('user')}
+          style={{ backgroundColor: searchInput === 'user' ? '#b2ccd633' : 'transparent' }}
+        >
+          Usuário
+        </button>
+      </div>
+      {searchInput === 'place' ? (
+        <div className="form-control">
+          <input
+            type="text"
+            placeholder="Busque por um local"
+            className="bg-transparent border rounded-tr-lg rounded-br-lg border-[#b2ccd633] p-[13px] w-32 md:w-auto text-sm text-gray-400"
+            defaultValue={searchParams.get('query')?.toString()}
+            onChange={(e) => {
+              handleSearch(e.target.value);
+            }}
+          />
+        </div>
+      ) : (
+        <div className="form-control">
+          <input
+            type="text"
+            placeholder="Busque por um usuário"
+            className="bg-transparent border rounded-tr-lg rounded-br-lg border-[#b2ccd633] p-[13px] w-32 md:w-auto text-sm text-gray-400"
+            defaultValue={searchParams.get('query')?.toString()}
+            onChange={(e) => {
+              handleSearch(e.target.value);
+            }}
+          />
+        </div>
+      )}
     </div>
   )
 }

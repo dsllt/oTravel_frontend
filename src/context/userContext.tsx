@@ -7,12 +7,14 @@ type UserContextType = {
   places: Place[];
   setPlaces: Dispatch<SetStateAction<Place[]>>;
   cities: string[];
+  categories: string[];
 };
 
 export const UserContext = createContext<UserContextType>({
   places: [],
   setPlaces: () => { },
   cities: [],
+  categories: [],
 });
 
 type Props = {
@@ -22,15 +24,19 @@ type Props = {
 function UserProvider({ children }: Props) {
   const [places, setPlaces] = useState<Place[]>([])
   const [cities, setCities] = useState<string[]>([])
+  const [categories, setCategories] = useState<string[]>([])
 
   useEffect(() => {
     async function fetchData() {
       const placesResponse = await fetchPlaces();
       const cities = placesResponse.map((place: Place) => place.city);
+      const categories = placesResponse.map((place: Place) => place.category).flat();
 
       const uniqueCities: string[] = cities.filter((city: string, index: number, self: string[]) => self.indexOf(city) === index);
+      const uniqueCategories: string[] = categories.filter((category: string, index: number, self: string[]) => self.indexOf(category) === index);
 
       setCities(uniqueCities);
+      setCategories(uniqueCategories);
       setPlaces(placesResponse);
     }
 
@@ -40,7 +46,8 @@ function UserProvider({ children }: Props) {
   const userInfo = {
     places,
     setPlaces,
-    cities
+    cities,
+    categories
   };
 
   return <UserContext.Provider value={userInfo}>{children}</UserContext.Provider>;

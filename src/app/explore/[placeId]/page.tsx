@@ -1,8 +1,7 @@
 'use client'
 import { fetchMenu, fetchPlace } from "../../../services/data";
-import { Place, UserDTO } from "../../../utils/type-definitions";
+import { Place } from "../../../utils/type-definitions";
 import Image from "next/image";
-import ReviewBox from "../../../components/review-box";
 import MenuContainer from "@ui/explore/menu-container";
 import React, { useEffect, useState } from "react";
 
@@ -56,7 +55,7 @@ export default function PlacePage({ params }: { params: { placeId: string } }) {
     longitude: 0,
     phone: "",
     slug: "",
-    category: "",
+    category: [],
     rating: 0,
     created_at: new Date(),
   })
@@ -89,37 +88,16 @@ export default function PlacePage({ params }: { params: { placeId: string } }) {
             priority
           />
         </div>
-        <div className="flex flex-col gap-4 font-dmSans">
+        <div className="flex flex-col gap-4 font-dmSans min-w-[500px]">
           <h1 className="text-5xl uppercase font-semibold mb-4 max-w-[500px] break-words">{placeName}</h1>
           <p className="text-lg text-gray-400 mb-2">{place.address}</p>
-          <p className="max-w-[500px] leading-8 text-justify">
-            {place.description.split('\n').map((line, i) => (
-              <p key={i} className="mb-4 indent-10">
-                {line}
-              </p>
-            ))}
-          </p>
+          <div className="">
+            <h1 className="font-bold text-xl font-dmSans mb-4">Menu</h1>
+            <MenuContainer menu={placeMenu} />
+          </div>
         </div>
       </div>
 
-      <div className="w-2/4">
-        <h1 className="font-bold text-xl font-dmSans mb-4">Menu</h1>
-        <MenuContainer menu={placeMenu} />
-      </div>
-
-      {/* <div className="w-2/4">
-        <h1 className="font-bold text-xl font-dmSans mb-4">
-          Reviews
-        </h1>
-        {reviews.map(review => {
-          const user = users.find(user => user.id === review.user_id);
-
-          if (user !== undefined) {
-            return <ReviewBox key={review.id} review={review} user={user} />
-          }
-
-        })}
-      </div> */}
       <div className="flex w-full justify-center items-center">
         <a href="/explore#search" className="btn btn-primary ">Voltar</a>
       </div>
