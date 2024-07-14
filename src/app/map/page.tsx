@@ -15,9 +15,9 @@ export default function Page({ }) {
     }
   ), [])
   return (
-    <div className='flex items-center justify-between w-full h-full gap-4 overflow-hidden'>
+    <div className='flex items-center justify-between w-full h-full overflow-hidden gap-8'>
       <Map places={places} />
-      <div className='pr-12 flex flex-col items-start justify-start h-full overflow-y-scroll gap-4 pb-8'>
+      <div className='pr-12 flex flex-col items-start justify-start h-full overflow-y-scroll gap-4 pb-8 w-full'>
         <h2 className='font-dmSans font-3xl font-bold mb-5 mt-3'>Encontre sua próxima experiência</h2>
         {places.map(place => <MapPlaceBox key={place.id} placeInfo={place} />)}
       </div>

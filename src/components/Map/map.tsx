@@ -13,7 +13,7 @@ export default function Map({ places }: MapProps) {
   return (
     <div>
       <MapContainer
-        style={{ height: '93vh', width: '80vw' }}
+        style={{ height: '93vh', width: '75vw' }}
         center={[-30.0352, -51.2109]}
         zoom={15}
         scrollWheelZoom={true}

@@ -18,7 +18,7 @@ export function SearchFilters({ handleFilter, handleSearchPlace, handleSearchUse
   return (
     <div className='flex gap-2'>
       <select
-        className="select select-bordered max-w-xs text-gray-400"
+        className="select select-bordered max-w-xs bg-transparent text-gray-400"
         onChange={e => handleFilter(e, 'category')}
       >
         <option value="">Filtre por uma categoria</option>
@@ -27,22 +27,25 @@ export function SearchFilters({ handleFilter, handleSearchPlace, handleSearchUse
         ))}
       </select>
       <select
-        className="select select-bordered max-w-xs text-gray-400"
+        className="select select-bordered max-w-xs text-gray-400 bg-transparent"
         onChange={e => handleFilter(e, 'city')}
       >
         <option value="" className=''>Filtre por uma cidade</option>
         {cities.map((c: string) => <option key={c}>{c}</option>)}
       </select>
+
       <SearchInput handleSearchPlace={handleSearchPlace} handleSearchUser={handleSearchUser} />
+
       <div className="flex flex-col">
         <button
-          className="text-sm w-full h-full pl-2 pr-2 hover:bg-[#b2ccd633] rounded-lg"
+          className="text-sm w-full h-full pl-2 pr-2 hover:bg-[#18181b] rounded-lg"
           onClick={clearSearchParams}
         >
           Limpar filtros
         </button>
+
         <button
-          className="text-sm w-full h-full pl-2 pr-2 hover:bg-[#b2ccd633] rounded-lg"
+          className="text-sm w-full h-full pl-2 pr-2 hover:bg-[#18181b] rounded-lg"
           onClick={() => { setDisplayFilters(false) }}
         >
           Ocultar filtros

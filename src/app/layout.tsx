@@ -29,7 +29,7 @@ export default function RootLayout({
 
   return (
     <html lang="en" data-theme="dim">
-      <body suppressHydrationWarning={true} className='h-screen overflow-hidden flex flex-col'>
+      <body suppressHydrationWarning={true} className='h-screen overflow-hidden flex flex-col bg-zinc-950 text-zinc-50 '>
         <UserProvider>
           <div className='fixed top-0 left-0 right-0 z-50'>
             <Navbar isLogged={isLogged} isAdmin={isAdmin} />

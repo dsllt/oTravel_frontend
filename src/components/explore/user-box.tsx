@@ -13,8 +13,9 @@ export function UserBox({ userInfo }: UserBoxProps) {
   function handleClickUsersBox(id: string) {
     router.push(`/user/${id}`)
   }
+
   return (
-    <div className="card w-96 bg-base-100 shadow-xl hover:opacity-50 hover:cursor-pointer" onClick={() => handleClickUsersBox(userInfo.id)}>
+    <div className="card w-96 bg-zinc-900 text-zinc-50 shadow-shape hover:opacity-50 hover:cursor-pointer" onClick={() => handleClickUsersBox(userInfo.id)}>
       <figure className='h-52'>
         <Image src={userInfo.image_url} alt={userInfo.name} width={500} height={200} style={{ objectFit: "contain" }} />
       </figure>

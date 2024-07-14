@@ -8,8 +8,8 @@ export function MapPlaceBox({ placeInfo }: any) {
     router.push(`/explore/${id}`)
   }
   return (
-    <div className="bg-base-200 rounded-lg shadow-xl hover:opacity-50 hover:cursor-pointer flex w-full max-h-18" onClick={() => handleClickPlaceBox(placeInfo.id)}>
-      <figure className="w-48 h-32 overflow-hidden rounded-tl-lg rounded-bl-lg">
+    <div className="bg-zinc-900 rounded-lg shadow-xl hover:opacity-50 hover:cursor-pointer flex w-full min-h-18 max-h-18" onClick={() => handleClickPlaceBox(placeInfo.id)}>
+      <figure className="w-48 h-40 overflow-hidden rounded-tl-lg rounded-bl-lg">
         <img src={placeInfo.image_url} alt={placeInfo.name} className="object-cover w-full h-full" />
       </figure>
       <div className="flex flex-col p-4 w-4/5 gap-2">
