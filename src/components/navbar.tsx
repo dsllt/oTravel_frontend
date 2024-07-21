@@ -1,7 +1,13 @@
 'use client'
 import { usePathname } from 'next/navigation';
 
-export function Navbar({ isLogged, isAdmin }: { isLogged: boolean, isAdmin: boolean }) {
+type NavbarProps = {
+  isLogged: boolean;
+  isAdmin: boolean;
+  setDisplayLogin: (value: boolean) => void;
+};
+
+export function Navbar({ isLogged, isAdmin, setDisplayLogin }: NavbarProps) {
   const links = [
     { name: 'Explorar', href: '/explore', display: true },
     { name: 'Mapa', href: '/map', display: true },
@@ -29,7 +35,7 @@ export function Navbar({ isLogged, isAdmin }: { isLogged: boolean, isAdmin: bool
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn btn-ghost" href="/login">Login</a>
+        <button className="btn btn-ghost" onClick={() => setDisplayLogin(true)}>Login</button>
       </div>
     </div>
   )
