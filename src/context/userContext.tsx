@@ -88,6 +88,10 @@ type UserContextType = {
   setUsersWithFavorites: Dispatch<SetStateAction<UserFavorites[]>>;
   cities: string[];
   categories: string[];
+  displayLogin: boolean;
+  setDisplayLogin: Dispatch<SetStateAction<boolean>>;
+  displayProfile: boolean;
+  setDisplayProfile: Dispatch<SetStateAction<boolean>>;
 };
 
 export const UserContext = createContext<UserContextType>({
@@ -97,6 +101,10 @@ export const UserContext = createContext<UserContextType>({
   setUsersWithFavorites: () => { },
   cities: [],
   categories: [],
+  displayLogin: false,
+  setDisplayLogin: () => { },
+  displayProfile: false,
+  setDisplayProfile: () => { },
 });
 
 type Props = {
@@ -108,6 +116,8 @@ function UserProvider({ children }: Props) {
   const [places, setPlaces] = useState<Place[]>([])
   const [cities, setCities] = useState<string[]>([])
   const [categories, setCategories] = useState<string[]>([])
+  const [displayLogin, setDisplayLogin] = useState(false)
+  const [displayProfile, setDisplayProfile] = useState(false)
 
   useEffect(() => {
     async function fetchData() {
@@ -132,7 +142,11 @@ function UserProvider({ children }: Props) {
     cities,
     categories,
     usersWithFavorites,
-    setUsersWithFavorites
+    setUsersWithFavorites,
+    displayLogin,
+    setDisplayLogin,
+    displayProfile,
+    setDisplayProfile
   };
 
   return <UserContext.Provider value={userInfo}>{children}</UserContext.Provider>;

@@ -1,17 +1,17 @@
 'use client'
 import { usePathname } from 'next/navigation';
+import { useContext } from 'react';
+import { UserContext } from '../context/userContext';
 
 type NavbarProps = {
   isLogged: boolean;
   isAdmin: boolean;
-  setDisplayLogin: (value: boolean) => void;
 };
 
-export function Navbar({ isLogged, isAdmin, setDisplayLogin }: NavbarProps) {
+export function Navbar({ isLogged, isAdmin }: NavbarProps) {
   const links = [
     { name: 'Explorar', href: '/explore', display: true },
     { name: 'Mapa', href: '/map', display: true },
-    { name: 'Perfil', href: '/profile', display: isLogged },
     { name: 'Incluir café', href: '/new-place', display: isAdmin },
   ];
 
@@ -19,6 +19,9 @@ export function Navbar({ isLogged, isAdmin, setDisplayLogin }: NavbarProps) {
   const isPathMatch = (path: string) => {
     return currentPath === path.split('#')[0];
   };
+
+  const { setDisplayLogin, setDisplayProfile } = useContext(UserContext);
+
 
   return (
     <div className="navbar bg-zinc-900 h-16">
@@ -34,9 +37,16 @@ export function Navbar({ isLogged, isAdmin, setDisplayLogin }: NavbarProps) {
           })}
         </ul>
       </div>
-      <div className="navbar-end">
-        <button className="btn btn-ghost" onClick={() => setDisplayLogin(true)}>Login</button>
-      </div>
+      {!isLogged ? (
+        <div className="navbar-end">
+          <button className="btn btn-ghost" onClick={() => setDisplayLogin(true)}>Login</button>
+        </div>
+      ) : (
+        <div className="navbar-end">
+          <button className="btn btn-ghost" onClick={() => setDisplayProfile(true)}>Menu</button>
+        </div>
+      )}
+
     </div>
   )
 }

@@ -3,6 +3,8 @@ import './globals.css'
 import { Navbar } from '../components/navbar'
 import { cookies } from 'next/headers'
 import UserProvider from '../context/userContext'
+import { LoginModal } from '@ui/login/login-modal'
+import { ProfileModal } from '@ui/profile/profile-modal'
 
 export const metadata: Metadata = {
   title: 'OTravel',
@@ -14,7 +16,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  let isLogged = false;
+  let isLogged = true;
   let isAdmin = false;
   const cookieStore = cookies()
   const tokenCookie = cookieStore.get('token')
@@ -37,6 +39,8 @@ export default function RootLayout({
           <div className='flex-1 overflow-y-auto pt-16'>
             {children}
           </div>
+          <LoginModal />
+          <ProfileModal />
         </UserProvider>
       </body>
     </html>
