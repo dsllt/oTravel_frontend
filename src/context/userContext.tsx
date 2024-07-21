@@ -1,6 +1,6 @@
 'use client'
 import { fetchPlaces } from "../services/data";
-import { Place, UserFavorites } from "../utils/type-definitions";
+import { Place, UserDTO, UserFavorites } from "../utils/type-definitions";
 import React, { Dispatch, SetStateAction, createContext, useEffect, useState } from "react";
 
 const UserFavoritesExample: UserFavorites[] = [{
@@ -81,6 +81,16 @@ const UserFavoritesExample: UserFavorites[] = [{
 }
 ]
 
+const UserData = {
+  id: "",
+  firstName: "John",
+  lastName: "Doe",
+  email: "email@example.com",
+  image: "",
+  is_admin: false,
+  created_at: "2024-02-13T15:56:56.376Z",
+}
+
 type UserContextType = {
   places: Place[];
   setPlaces: Dispatch<SetStateAction<Place[]>>;
@@ -92,6 +102,8 @@ type UserContextType = {
   setDisplayLogin: Dispatch<SetStateAction<boolean>>;
   displayProfile: boolean;
   setDisplayProfile: Dispatch<SetStateAction<boolean>>;
+  userData: UserDTO;
+  setUserData: React.Dispatch<React.SetStateAction<UserDTO>>;
 };
 
 export const UserContext = createContext<UserContextType>({
@@ -105,6 +117,8 @@ export const UserContext = createContext<UserContextType>({
   setDisplayLogin: () => { },
   displayProfile: false,
   setDisplayProfile: () => { },
+  userData: { id: '', firstName: '', lastName: '', email: '', image: '', is_admin: false, created_at: '', },
+  setUserData: () => { },
 });
 
 type Props = {
@@ -118,6 +132,7 @@ function UserProvider({ children }: Props) {
   const [categories, setCategories] = useState<string[]>([])
   const [displayLogin, setDisplayLogin] = useState(false)
   const [displayProfile, setDisplayProfile] = useState(false)
+  const [userData, setUserData] = useState(UserData)
 
   useEffect(() => {
     async function fetchData() {
@@ -146,7 +161,9 @@ function UserProvider({ children }: Props) {
     displayLogin,
     setDisplayLogin,
     displayProfile,
-    setDisplayProfile
+    setDisplayProfile,
+    userData,
+    setUserData
   };
 
   return <UserContext.Provider value={userInfo}>{children}</UserContext.Provider>;
