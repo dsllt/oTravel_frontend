@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 type ProfileFavoriteProps = {
   favorite: {
     id: number;
@@ -8,8 +10,8 @@ type ProfileFavoriteProps = {
 
 export function ProfileFavorite({ favorite }: ProfileFavoriteProps) {
   return (
-    <a className='btn' href={`/explore/${favorite.coffee_id}`}>
+    <Link className='btn' href={`/explore/${favorite.coffee_id}`}>
       {favorite.id} Nome do lugar
-    </a>
+    </Link>
   )
 }

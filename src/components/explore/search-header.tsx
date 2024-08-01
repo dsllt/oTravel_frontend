@@ -66,13 +66,13 @@ export function SearchHeader() {
   return (
     <div className="flex w-full justify-between mb-6">
       <div>
-        <a className="btn btn-ghost text-xl">Busque por um local</a>
+        <button className="btn btn-ghost text-xl">Busque por um local</button>
       </div>
       {displayFilters ? (
         <SearchFilters cities={cities} handleFilter={handleFilter} handleSearchPlace={handleSearchPlace} handleSearchUser={handleSearchUser} mappedCategories={mappedCategories} searchParams={searchParams} setDisplayFilters={setDisplayFilters} clearSearchParams={clearSearchParams} />
       ) : (
         <div>
-          <a className="btn btn-primary text-md" onClick={() => setDisplayFilters(true)}>Filtros</a>
+          <button className="btn btn-primary text-md" onClick={() => setDisplayFilters(true)}>Filtros</button>
         </div>
       )}
 

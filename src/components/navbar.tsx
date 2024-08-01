@@ -2,6 +2,7 @@
 import { usePathname } from 'next/navigation';
 import { useContext } from 'react';
 import { UserContext } from '../context/userContext';
+import Link from 'next/link';
 
 type NavbarProps = {
   isLogged: boolean;
@@ -26,13 +27,13 @@ export function Navbar({ isLogged, isAdmin }: NavbarProps) {
   return (
     <div className="navbar bg-zinc-900 h-16">
       <div className="navbar-start">
-        <a className="btn btn-ghost text-xl" href="/explore">OTravel</a>
+        <Link className="btn btn-ghost text-xl" href="/explore">OTravel</Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           {links.map(link => {
             return (
-              link.display && <li key={link.name}><a href={link.href} className={isPathMatch(link.href) ? 'font-bold text-zinc-50' : 'text-zinc-400'}>{link.name}</a></li>
+              link.display && <li key={link.name}><Link href={link.href} className={isPathMatch(link.href) ? 'font-bold text-zinc-50' : 'text-zinc-400'}>{link.name}</Link></li>
             )
           })}
         </ul>

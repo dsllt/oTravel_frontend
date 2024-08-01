@@ -4,6 +4,7 @@ import 'leaflet/dist/leaflet.css'
 import { MapContainer, TileLayer, Marker, Popup, Tooltip } from 'react-leaflet'
 import CoffeeIcon from '../../../public/assets/icons/coffee-icon.svg'
 import { Place } from '../../utils/type-definitions'
+import Link from 'next/link'
 
 type MapProps = {
   places: Place[]
@@ -35,7 +36,7 @@ export default function Map({ places }: MapProps) {
               position={[Number(place.latitude), Number(place.longitude)]}
             >
               <Popup offset={[0, -20]}>
-                <a href={`/explore/${place.id}`}>Visitar página</a>
+                <Link href={`/explore/${place.id}`}>Visitar página</Link>
               </Popup>
               <Tooltip direction="bottom" offset={[0, 0]} opacity={1}>
                 <div className="flex flex-col">

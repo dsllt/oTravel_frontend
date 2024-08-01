@@ -49,11 +49,10 @@ function CategorySelect({ availableCategories, selectedCategories, initialCatego
 
   return (
     <label htmlFor="placeCategory" className="text-sm mb-4 flex flex-col w-full">
-      Categoria
-      <div className="flex items-center justify-between gap-2 h-12 p-4 mt-2 rounded-lg border-2 border-[#b2ccd633] bg-[#2a303c]">
+      <div className="flex items-center justify-between gap-2 h-12 pl-1 pr-4 mt-2 border border-transparent border-b-gray-950 focus:outline-none">
         <select
           id="placeCategory"
-          className="bg-transparent pr-5 focus:outline-none"
+          className="bg-transparent pr-5 focus:outline-none text-gray-400"
           onChange={handleSelectCategory}
         >
           <option selected>Selecione a categoria</option>
@@ -61,11 +60,11 @@ function CategorySelect({ availableCategories, selectedCategories, initialCatego
         </select>
         <div className="flex gap-2">
           {Object.keys(selectedCategories).map((category) => (
-            <div key={category} className="bg-[#20252e] rounded-lg p-2 flex items-center gap-1">
+            <div key={category} className="bg-zinc-900 rounded-lg py-1 pl-3 pr-1 flex items-center gap-1">
               <span>
                 {selectedCategories[category]}
               </span>
-              <XMarkIcon className="w-6 h-6 text-red-300 cursor-pointer hover:bg-slate-700 rounded-lg p-1" onClick={() => handleRemoveCategory(category)} />
+              <XMarkIcon className="w-4 h-4 text-red-300 cursor-pointer hover:bg-slate-700 rounded-lg" onClick={() => handleRemoveCategory(category)} />
             </div>
           ))}
         </div>

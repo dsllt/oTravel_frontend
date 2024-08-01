@@ -63,7 +63,7 @@ export default function Page({ }) {
       <div className='pr-12 flex flex-col items-start justify-start h-full w-full gap-3'>
         <div className='flex justify-between items-center w-full'>
           <h2 className='font-dmSans font-3xl font-bold mb-5 mt-3'>Encontre sua próxima experiência</h2>
-          <a className="btn btn-primary text-md min-h-1 h-8" onClick={() => setDisplayFilters(true)}>Filtros</a>
+          <button className="btn btn-primary text-md min-h-1 h-8" onClick={() => setDisplayFilters(true)}>Filtros</button>
         </div>
         {displayFilters && (
           <MapPlacesFilter

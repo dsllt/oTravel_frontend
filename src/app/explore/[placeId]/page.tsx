@@ -4,6 +4,7 @@ import { Place } from "../../../utils/type-definitions";
 import Image from "next/image";
 import MenuContainer from "@ui/explore/menu-container";
 import React, { useEffect, useState } from "react";
+import Link from 'next/link';
 
 export default function PlacePage({ params }: { params: { placeId: string } }) {
   const [place, setPlace] = useState<Place>({
@@ -77,7 +78,7 @@ export default function PlacePage({ params }: { params: { placeId: string } }) {
         })}
       </div> */}
       <div className="flex w-full justify-center items-center">
-        <a href="/explore#search" className="btn btn-primary ">Voltar</a>
+        <Link href="/explore#search" className="btn btn-primary ">Voltar</Link>
       </div>
     </div>
   )
