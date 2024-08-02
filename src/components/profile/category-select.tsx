@@ -1,7 +1,7 @@
-import { Categories, NewPlaceSchema } from '@app/new-place/page';
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import React, { useEffect } from 'react'
 import { UseFormRegister, UseFormSetValue } from 'react-hook-form';
+import { Categories, NewPlaceSchema } from './register-new-place-modal';
 
 
 type Props = {

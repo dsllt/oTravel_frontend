@@ -2,8 +2,13 @@
 
 import { Info, Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation'
+import { Place } from '../../utils/type-definitions';
 
-export function FavoritePlaceBox({ placeInfo }: any) {
+type FavoritePlaceBoxProps = {
+  placeInfo: Place
+}
+
+export function FavoritePlaceBox({ placeInfo }: FavoritePlaceBoxProps) {
   const router = useRouter();
   function handleClickPlaceBox(id: string) {
     router.push(`/explore/${id}`)

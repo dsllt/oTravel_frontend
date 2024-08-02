@@ -1,6 +1,6 @@
-import { NewPlaceSchema } from '@app/new-place/page';
 import React, { useState } from 'react'
 import { UseFormRegister } from 'react-hook-form';
+import { NewPlaceSchema } from './register-new-place-modal';
 
 type Props = {
   label: string;
