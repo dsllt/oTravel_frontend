@@ -1,4 +1,4 @@
-import { Menu, Place, Review } from './type-definitions';
+import { Favorite, Menu, Place, Review } from './type-definitions';
 
 export const placesMock: Place[] = [
 {
@@ -98,47 +98,26 @@ export const placesMock: Place[] = [
 }
 ]
 
-export const favoritesMock: Place[] = [
+export const favoritesMock: Favorite[] = [
 {
     "id": "c2e8f0ef-4cc9-4a4f-b7b1-1ef2bb5cd956",
     "name": "Mercado Brasco - Bom Fim",
     "image_url": "https://lh3.googleusercontent.com/p/AF1QipMbhgupk-fNIQu7L-x5GQq1rXoXyDrSjnuem7_e=s680-w680-h510",
-    "description": "Localizado no charmoso bairro do Bom Fim, Brasco é muito mais do que apenas um local para refeições, é um ponto de encontro para amigos, famílias e colegas de trabalho. \n Desde a sua inauguração em 2020, Brasco tem sido um espaço querido pelos frequentadores, que o consideram quase como uma segunda casa. E não é para menos, pois Brasco oferece uma experiência completa, com uma variedade de ambientes para desfrutar. \nA diversidade gastronômica é um dos pontos altos do Brasco, que abriga diversos estabelecimentos em um só lugar: mercado, café, sorveteria, cantinho saudável, burritos e padaria. \n Além disso, a estrutura ótima do espaço superior proporciona um ambiente ideal para trabalhar ou estudar, garantindo conforto e tranquilidade aos clientes.",
     "address": "Rua Fernandes Vieira, 286 - Bom Fim",
     "city": "Porto Alegre",
     "country": "Brazil",
-    "latitude": -30.0319164,
-    "longitude": -51.2107576,
     "slug": "mercado-brasco-bom-fim",
-    "phone": "",
-    "category": [
-        "coffee",
-        "restaurant",
-        "market"
-    ],
     "rating": 4.5,
-    "created_at": "2024-05-21T12:54:57.820588Z"
 },
 {
     "id": "dc9ce62f-4e9d-45e3-ab9f-d72ecfe2129b",
     "name": "Mercado Brasco - Padre Chagas",
     "image_url": "https://onnerevista.com.br/images/news/3781_2.jpg",
-    "description": "O Mercado Brasco é um espaço moderno e aconchegante que oferece uma experiência gastronômica diversificada e de alta qualidade. Com dois andares, o local é ideal para diversas ocasiões, seja um café da manhã tranquilo, um happy hour ou um encontro casual. No andar de cima, você encontra mesinhas perfeitas para relaxar, enquanto o andar de baixo abriga o balcão de atendimento, prateleiras com itens do mercado e mesas para sentar.\n\nO cardápio autoral é variado, com opções saudáveis como iogurte com sementes e granola, ovos mexidos, e lanches sem glúten. Além disso, todos os cafés podem ser preparados com leite vegetal sem custo adicional, uma ótima notícia para veganos e intolerantes à lactose. O café, de excelente qualidade, é feito com grãos do William and Sons, e as opções de sanduíches, como o de cogumelos, são imperdíveis.\n\nO espaço é pet friendly, possui um mini market com produtos diferenciados, incluindo vinhos que podem ser degustados no local e flores em diversas apresentações. O ambiente acolhedor é complementado por um atendimento atencioso e opções para todas as horas do dia, incluindo pizzas da Brizza e o famoso pão de queijo da Williams and Sons.",
     "address": "R. Padre Chagas, 300 - Moinhos de Vento",
     "city": "Porto Alegre",
     "country": "Brazil",
-    "latitude": -30.0246204,
-    "longitude": -51.2056722,
     "slug": "mercado-brasco-padre-chagas",
-    "phone": "",
     "rating": 4.5,
-    "category": [
-        "restaurant",
-        "coffee",
-        "market",
-        "bakery"
-    ],
-    "created_at": "2024-05-28T08:55:06.93938Z"
 }
 ]
 
@@ -219,40 +198,39 @@ export const reviewsMock: Review[] = [
 ]
 
 export const placeScheduleMock = [
-    {
-      week_day: 'Segunda-feira',
-      open_time: '08:00',
-      close_time: '18:00'
-    },
-    {
-      week_day: 'Terça-feira',
-      open_time: '08:00',
-      close_time: '18:00'
-    },
-    {
-      week_day: 'Quarta-feira',
-      open_time: '08:00',
-      close_time: '18:00'
-    },
-    {
-      week_day: 'Quinta-feira',
-      open_time: '08:00',
-      close_time: '18:00'
-    },
-    {
-      week_day: 'Sexta-feira',
-      open_time: '08:00',
-      close_time: '18:00'
-    },
-    {
-      week_day: 'Sábado',
-      open_time: '08:00',
-      close_time: '18:00'
-    },
-    {
-      week_day: 'Domingo',
-      open_time: '08:00',
-      close_time: '18:00'
-    }
-  ]
-  
+{
+  week_day: 'Segunda-feira',
+  open_time: '08:00',
+  close_time: '18:00'
+},
+{
+  week_day: 'Terça-feira',
+  open_time: '08:00',
+  close_time: '18:00'
+},
+{
+  week_day: 'Quarta-feira',
+  open_time: '08:00',
+  close_time: '18:00'
+},
+{
+  week_day: 'Quinta-feira',
+  open_time: '08:00',
+  close_time: '18:00'
+},
+{
+  week_day: 'Sexta-feira',
+  open_time: '08:00',
+  close_time: '18:00'
+},
+{
+  week_day: 'Sábado',
+  open_time: '08:00',
+  close_time: '18:00'
+},
+{
+  week_day: 'Domingo',
+  open_time: '08:00',
+  close_time: '18:00'
+}
+]

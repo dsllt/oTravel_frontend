@@ -11,10 +11,11 @@ import { Info, PlusIcon, Star } from 'lucide-react';
 import ReviewBox from '@ui/review-box';
 import dynamic from 'next/dynamic';
 import ScheduleEditModal from '@ui/explore/schedule-edit-modal';
+import { StarIcon } from '@heroicons/react/16/solid';
 
 
 export default function PlacePage({ params }: { params: { placeSlug: string } }) {
-  const { places } = useContext(UserContext);
+  const { places, favorites } = useContext(UserContext);
   const [place, setPlace] = useState<Place>({
     id: "",
     image_url: "",
@@ -31,6 +32,7 @@ export default function PlacePage({ params }: { params: { placeSlug: string } })
     rating: 0,
     created_at: "",
   })
+  const [isFavorite, setIsFavorite] = useState(false);
   const [placeMenu, setPlaceMenu] = useState<Menu[]>([])
   const [placeSchedule, setPlaceSchedule] = useState<Schedule[]>(placeScheduleMock)
 
@@ -54,6 +56,10 @@ export default function PlacePage({ params }: { params: { placeSlug: string } })
     return isFetched;
   };
 
+  function handleFavorites() {
+    setIsFavorite(!isFavorite);
+  }
+
   useEffect(() => {
     // async function fetchData() {
     //   const placesResponse = await fetchPlace(params.placeSlug);
@@ -72,7 +78,11 @@ export default function PlacePage({ params }: { params: { placeSlug: string } })
       setPlaceMenu(currentMenu);
     }
 
-  }, [params.placeSlug, places])
+    const isFavorite = favorites.some(favorite => place.id === favorite.id);
+    setIsFavorite(isFavorite);
+
+
+  }, [params.placeSlug, places, favorites, place.id])
 
   const Map = useMemo(() => dynamic(
     () => import('../../../components/map/small-map'),
@@ -103,9 +113,15 @@ export default function PlacePage({ params }: { params: { placeSlug: string } })
               <h1 className="text-5xl uppercase font-semibold mb-4 max-w-[500px] break-words">{place.name}</h1>
               <div className='flex justify-between'>
                 <div className="badge badge-secondary">{place.rating}</div>
-                <div className="flex items-center gap-2 text-sm cursor-pointer hover:bg-gray-700 rounded-lg p-2" >
-                  <Star className='size-5 text-blue-600' />
-                  Favoritar
+                <div className="flex items-center gap-2 text-sm cursor-pointer hover:bg-gray-700 rounded-lg p-2" onClick={handleFavorites}>
+                  {isFavorite ? (
+                    <StarIcon className='size-5 text-blue-600' />
+                  ) : (
+                    <>
+                      <Star className='size-5 text-blue-600' />
+                      Favoritar
+                    </>
+                  )}
                 </div>
               </div>
               <p className="text-lg text-gray-400 mb-2">{place.address}</p>
