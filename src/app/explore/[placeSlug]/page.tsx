@@ -1,13 +1,12 @@
 'use client'
-import { fetchMenu, fetchPlace } from "../../../services/data";
 import { Menu, Place, Schedule } from "../../../utils/type-definitions";
 import Image from "next/image";
 import MenuContainer from "@ui/explore/menu-container";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import Link from 'next/link';
 import { UserContext } from '../../../context/userContext';
-import { menuMock, placeScheduleMock, reviewsMock } from '../../../utils/mocks';
-import { Info, PlusIcon, Star } from 'lucide-react';
+import { placeScheduleMock, reviewsMock } from '../../../utils/mocks';
+import { Star } from 'lucide-react';
 import ReviewBox from '@ui/review-box';
 import dynamic from 'next/dynamic';
 import ScheduleEditModal from '@ui/explore/schedule-edit-modal';
@@ -15,7 +14,7 @@ import { StarIcon } from '@heroicons/react/16/solid';
 
 
 export default function PlacePage({ params }: { params: { placeSlug: string } }) {
-  const { places, favorites } = useContext(UserContext);
+  const { places, favorites, menu, setMenu } = useContext(UserContext);
   const [place, setPlace] = useState<Place>({
     id: "",
     image_url: "",
@@ -73,7 +72,7 @@ export default function PlacePage({ params }: { params: { placeSlug: string } })
 
     const currentPlace = places.find(place => place.slug === params.placeSlug);
     if (currentPlace) {
-      const currentMenu: Menu[] = menuMock.filter(menu => menu.place_id === currentPlace.id);
+      const currentMenu: Menu[] = menu.filter(menu => menu.place_id === currentPlace.id);
       setPlace(currentPlace);
       setPlaceMenu(currentMenu);
     }
@@ -82,7 +81,7 @@ export default function PlacePage({ params }: { params: { placeSlug: string } })
     setIsFavorite(isFavorite);
 
 
-  }, [params.placeSlug, places, favorites, place.id])
+  }, [params.placeSlug, places, favorites, place.id, menu])
 
   const Map = useMemo(() => dynamic(
     () => import('../../../components/map/small-map'),
@@ -173,7 +172,7 @@ export default function PlacePage({ params }: { params: { placeSlug: string } })
           <div className='flex w-full justify-between gap-12'>
             <div className="w-full">
               <h1 className="font-bold text-xl font-dmSans mb-4">Menu</h1>
-              <MenuContainer menu={placeMenu} />
+              <MenuContainer menu={placeMenu} setMenu={setMenu} />
             </div>
           </div>
 

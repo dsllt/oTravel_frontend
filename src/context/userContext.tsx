@@ -1,7 +1,7 @@
 'use client'
 import { fetchPlaces } from "../services/data";
-import { favoritesMock, placesMock } from '../utils/mocks';
-import { Favorite, Place, UserDTO, UserFavorites } from "../utils/type-definitions";
+import { favoritesMock, menuMock, placesMock } from '../utils/mocks';
+import { Favorite, Menu, Place, UserDTO, UserFavorites } from "../utils/type-definitions";
 import React, { Dispatch, SetStateAction, createContext, useEffect, useState } from "react";
 
 const UserFavoritesExample: UserFavorites[] = [{
@@ -97,6 +97,8 @@ type UserContextType = {
   setPlaces: Dispatch<SetStateAction<Place[]>>;
   favorites: Favorite[];
   setFavorites: Dispatch<SetStateAction<Favorite[]>>;
+  menu: Menu[];
+  setMenu: Dispatch<SetStateAction<Menu[]>>;
   usersWithFavorites: UserFavorites[];
   setUsersWithFavorites: Dispatch<SetStateAction<UserFavorites[]>>;
   cities: string[];
@@ -114,6 +116,8 @@ export const UserContext = createContext<UserContextType>({
   setPlaces: () => { },
   favorites: [],
   setFavorites: () => { },
+  menu: [],
+  setMenu: () => { },
   usersWithFavorites: [],
   setUsersWithFavorites: () => { },
   cities: [],
@@ -134,6 +138,7 @@ function UserProvider({ children }: Props) {
   const [usersWithFavorites, setUsersWithFavorites] = useState<UserFavorites[]>(UserFavoritesExample)
   const [places, setPlaces] = useState<Place[]>(placesMock)
   const [favorites, setFavorites] = useState<Favorite[]>(favoritesMock)
+  const [menu, setMenu] = useState<Menu[]>(menuMock)
   const [cities, setCities] = useState<string[]>([])
   const [categories, setCategories] = useState<string[]>([])
   const [displayLogin, setDisplayLogin] = useState(false)
@@ -171,6 +176,8 @@ function UserProvider({ children }: Props) {
     setPlaces,
     favorites,
     setFavorites,
+    menu,
+    setMenu,
     cities,
     categories,
     usersWithFavorites,
