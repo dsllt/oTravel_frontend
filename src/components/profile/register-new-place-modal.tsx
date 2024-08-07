@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import CategorySelect from '@ui/profile/category-select'
-import Input from '@ui/new-place/Input'
-import TextArea from '@ui/new-place/TextArea'
+import Input from '@ui/profile/modal-input'
+import TextArea from '@ui/profile/modal-text-area'
 import { X } from 'lucide-react';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';

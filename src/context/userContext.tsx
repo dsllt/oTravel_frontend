@@ -1,5 +1,6 @@
 'use client'
 import { fetchPlaces } from "../services/data";
+import { placesMock } from '../utils/mocks';
 import { Place, UserDTO, UserFavorites } from "../utils/type-definitions";
 import React, { Dispatch, SetStateAction, createContext, useEffect, useState } from "react";
 
@@ -127,7 +128,7 @@ type Props = {
 
 function UserProvider({ children }: Props) {
   const [usersWithFavorites, setUsersWithFavorites] = useState<UserFavorites[]>(UserFavoritesExample)
-  const [places, setPlaces] = useState<Place[]>([])
+  const [places, setPlaces] = useState<Place[]>(placesMock)
   const [cities, setCities] = useState<string[]>([])
   const [categories, setCategories] = useState<string[]>([])
   const [displayLogin, setDisplayLogin] = useState(false)
@@ -135,21 +136,30 @@ function UserProvider({ children }: Props) {
   const [userData, setUserData] = useState(UserData)
 
   useEffect(() => {
-    async function fetchData() {
-      const placesResponse = await fetchPlaces();
-      const cities = placesResponse.map((place: Place) => place.city);
-      const categories = placesResponse.map((place: Place) => place.category).flat();
+    // async function fetchData() {
+    //   const placesResponse = await fetchPlaces();
+    //   const cities = placesResponse.map((place: Place) => place.city);
+    //   const categories = placesResponse.map((place: Place) => place.category).flat();
 
-      const uniqueCities: string[] = cities.filter((city: string, index: number, self: string[]) => self.indexOf(city) === index);
-      const uniqueCategories: string[] = categories.filter((category: string, index: number, self: string[]) => self.indexOf(category) === index);
+    //   const uniqueCities: string[] = cities.filter((city: string, index: number, self: string[]) => self.indexOf(city) === index);
+    //   const uniqueCategories: string[] = categories.filter((category: string, index: number, self: string[]) => self.indexOf(category) === index);
 
-      setCities(uniqueCities);
-      setCategories(uniqueCategories);
-      setPlaces(placesResponse);
-    }
+    //   setCities(uniqueCities);
+    //   setCategories(uniqueCategories);
+    //   setPlaces(placesResponse);
+    // }
 
-    fetchData();
-  }, [])
+    // fetchData();
+
+    const cities = places.map((place: Place) => place.city);
+    const categories = places.map((place: Place) => place.category).flat();
+
+    const uniqueCities: string[] = cities.filter((city: string, index: number, self: string[]) => self.indexOf(city) === index);
+    const uniqueCategories: string[] = categories.filter((category: string, index: number, self: string[]) => self.indexOf(category) === index);
+
+    setCities(uniqueCities);
+    setCategories(uniqueCategories);
+  }, [places])
 
   const userInfo = {
     places,

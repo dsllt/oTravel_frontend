@@ -5,6 +5,7 @@ import { HousePlus, LogOut, Star, User, X } from 'lucide-react';
 import FavoritesModal from './favorites-modal';
 import PersonalInfoModal from './personal-info-modal';
 import RegisterNewPlaceModal from './register-new-place-modal';
+import { favoritesMock } from '../../utils/mocks';
 
 export function ProfileModal() {
   const { displayProfile, setDisplayProfile, places, userData } = useContext(UserContext);
@@ -90,7 +91,7 @@ export function ProfileModal() {
           </div>
 
           {displayFavorites && (
-            <FavoritesModal places={places} setDisplayFavorites={setDisplayFavorites} />
+            <FavoritesModal places={favoritesMock} setDisplayFavorites={setDisplayFavorites} />
           )}
 
           {displayPersonalInfo && (

@@ -13,35 +13,6 @@ export default function MenuContainer({ menu }: MenuContainerProps) {
   const drinks = menu != null ? menu.filter(menu => menu.menu_type === 'drink') : [];
   const foods = menu != null ? menu.filter(menu => menu.menu_type === 'food') : [];
 
-  function displayDrinksList() {
-    if (drinks.length > 0) {
-      return drinks.map((drink) => {
-        return (
-          <tr className="hover:bg-base-100" key={drink.id}>
-            <td className="rounded-l-md">{drink.item}</td>
-            <td className="rounded-r-md">{drink.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
-          </tr>
-        )
-      })
-    } else {
-      return <div className="mt-3">Sem bebidas resgistradas</div>
-    }
-  }
-  function displayFoodsList() {
-    if (foods.length > 0) {
-      return foods.map((food) => {
-        return (
-          <tr className="hover:bg-base-100" key={food.id}>
-            <td className="rounded-l-md">{food.item}</td>
-            <td className="rounded-r-md">{food.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
-          </tr>
-        )
-      })
-    } else {
-      return <div className="mt-3">Sem comidas resgistradas</div>
-    }
-  }
-
   function handleDisplayModal(id: string) {
     const modal = document.getElementById(id) as HTMLDialogElement;
     if (modal) {
@@ -59,11 +30,22 @@ export default function MenuContainer({ menu }: MenuContainerProps) {
         ><PlusIcon className="w-3 h-3 " /></button>
         <Modal drink />
       </div>
-      <table className="table">
-        <tbody>
-          {displayDrinksList()}
-        </tbody>
-      </table>
+      {drinks.length > 0 ? (
+        <table className="table">
+          <tbody>
+            {drinks.map((drink) => (
+              <tr className="hover:bg-base-100" key={drink.id}>
+                <td className="rounded-l-md">{drink.item}</td>
+                <td className="rounded-r-md">
+                  {drink.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <div className="mt-3">Sem bebidas resgistradas</div>
+      )}
     </div>
     <div className="bg-base-300 p-4 rounded-lg w-1/2">
       <div className="flex justify-between items-center">
@@ -74,14 +56,24 @@ export default function MenuContainer({ menu }: MenuContainerProps) {
         ><PlusIcon className="w-3 h-3 " /></button>
         <Modal food />
       </div>
-      <table className="table">
-        <tbody>
-          {displayFoodsList()}
-        </tbody>
-      </table>
+      {foods.length > 0 ? (
+        <table className="table">
+          <tbody>
+            {foods.map((food) => (
+              <tr className="hover:bg-base-100" key={food.id}>
+                <td className="rounded-l-md">{food.item}</td>
+                <td className="rounded-r-md">{food.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <div className="mt-3">Sem comidas resgistradas</div>
+      )}
     </div>
   </div>)
 }
+
 type ModalProps = {
   drink?: boolean;
   food?: boolean;

@@ -1,7 +1,3 @@
-// This file contains type definitions for your data.
-// It describes the shape of the data, and what data type each property should accept.
-// For simplicity of teaching, we're manually defining these types.
-// However, these types are generated automatically if you're using an ORM such as Prisma.
 export type User = {
   id: string;
   name: string;
@@ -36,10 +32,17 @@ export type Place = {
   slug: string;// 'the-coffee',
   category: string[]; // 'coffee',
   rating: number; // 4.5,
-  created_at: Date;// 2024-01-13T15:56:56.376Z
+  created_at: string;// 2024-01-13T15:56:56.376Z
 };
 
-export type PlaceFavorite ={
+export type PlaceDTO = {
+  id:  string; // '3958dc9e-742f-4377-85e9-fec4b6a6442a',
+  name:  string; // 'THE COFFEE',
+  slug: string;// 'the-coffee',
+  rating: number; // 4.5,
+};
+
+export type PlaceFavorite = {
   name: string;
   image_url: string;
   address: string;
@@ -95,6 +98,20 @@ export type Review =   {
   review: string; // "Fui apenas uma vez e eu pedi um chocolate quente, mas achei muito forte! Claro isso vai de pessoa para pessoa. Não consegui tomar todo por conta disso. O ambiente é pequeno mas é bem organizado, um lugar muito bonito. O atendimento é ótimo.",
   rating: number; // 4.5,
   created_at: string; // "2024-01-21T09:46:10.477Z",
-  user_id: number; // 1,
-  place_id: number; // 1
+  user: UserDTO; // 1,
+  place: PlaceDTO; // 1
+}
+
+export type Menu = {
+  id: string // "b0855a01-765c-4803-8961-5ad9e85f13df",
+	item: string // "Espresso",
+	price: number // 10,
+	menu_type: string // "drink",
+	place_id: string // "c2e8f0ef-4cc9-4a4f-b7b1-1ef2bb5cd956"
+}
+
+export type Schedule =   {
+  week_day: string //'Segunda-feira',
+  open_time: string //'08:00',
+  close_time: string //'18:00'
 }
