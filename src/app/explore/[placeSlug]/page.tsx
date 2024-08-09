@@ -14,7 +14,7 @@ import { StarIcon } from '@heroicons/react/16/solid';
 
 
 export default function PlacePage({ params }: { params: { placeSlug: string } }) {
-  const { places, favorites, menu, setMenu } = useContext(UserContext);
+  const { places, favorites, menu } = useContext(UserContext);
   const [place, setPlace] = useState<Place>({
     id: "",
     image_url: "",
@@ -172,7 +172,7 @@ export default function PlacePage({ params }: { params: { placeSlug: string } })
           <div className='flex w-full justify-between gap-12'>
             <div className="w-full">
               <h1 className="font-bold text-xl font-dmSans mb-4">Menu</h1>
-              <MenuContainer menu={placeMenu} setMenu={setMenu} />
+              <MenuContainer menu={placeMenu} placeId={place.id} />
             </div>
           </div>
 

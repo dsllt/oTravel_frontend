@@ -1,6 +1,8 @@
 import { PlusIcon } from "@heroicons/react/24/outline";
-import React, { Dispatch, SetStateAction, useState } from 'react';
-import { Menu } from '../../utils/type-definitions';
+import { Pencil, Trash } from 'lucide-react';
+import { MenuModal } from './menu-modal';
+import { useContext } from 'react';
+import { UserContext } from '../../context/userContext';
 
 type MenuContainerProps = {
   menu: {
@@ -9,20 +11,32 @@ type MenuContainerProps = {
     price: number;
     menu_type: string;
     place_id: string;
-  }[]
-  setMenu: Dispatch<SetStateAction<Menu[]>>
+  }[],
+  placeId: string;
 }
-export default function MenuContainer({ menu, setMenu }: MenuContainerProps) {
+export default function MenuContainer({ menu, placeId }: MenuContainerProps) {
+  const { setMenu } = useContext(UserContext);
+
   const drinks = menu != null ? menu.filter(menu => menu.menu_type === 'drink') : [];
   const foods = menu != null ? menu.filter(menu => menu.menu_type === 'food') : [];
-
-  const placeId = menu[0].place_id;
 
   function handleDisplayModal(id: string) {
     const modal = document.getElementById(id) as HTMLDialogElement;
     if (modal) {
       modal.showModal();
     }
+  }
+
+  function handleEditMenu(id: string) {
+    console.log(id)
+    const modal = document.getElementById(id) as HTMLDialogElement;
+    if (modal) {
+      modal.showModal();
+    }
+  }
+
+  function handleDeleteMenu(id: string) {
+    setMenu(prevState => prevState.filter(item => item.id !== id));
   }
 
   return (<div className="flex gap-10 w-full justify-between">
@@ -33,18 +47,33 @@ export default function MenuContainer({ menu, setMenu }: MenuContainerProps) {
           className="hover:bg-slate-700 p-1 rounded-lg mb-3"
           onClick={() => handleDisplayModal('new_drink_modal')}
         ><PlusIcon className="w-3 h-3 " /></button>
-        <Modal drink placeId={placeId} setMenu={setMenu} />
+        <MenuModal drink placeId={placeId} currentItem='' id='new_drink_modal' />
       </div>
       {drinks.length > 0 ? (
         <table className="table">
           <tbody>
             {drinks.map((drink) => (
-              <tr className="hover:bg-base-100" key={drink.id}>
-                <td className="rounded-l-md capitalize">{drink.item}</td>
-                <td className="rounded-r-md">
-                  {drink.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-                </td>
-              </tr>
+              <>
+                <tr className="hover:bg-base-100" key={drink.id}>
+                  <td className="rounded-l-md capitalize">{drink.item}</td>
+                  <td className="">
+                    {drink.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                  </td>
+                  <td className='w-3'>
+                    <Pencil
+                      className='size-4 text-blue-600 hover:bg-gray-600 rounded-md cursor-pointer'
+                      onClick={() => { handleEditMenu(drink.id) }}
+                    />
+                  </td>
+                  <td className='rounded-r-md w-3'>
+                    <Trash
+                      className='size-4 text-red-300 hover:bg-gray-600 rounded-md cursor-pointer'
+                      onClick={() => { handleDeleteMenu(drink.id) }}
+                    />
+                  </td>
+                </tr>
+                <MenuModal id={drink.id} placeId={placeId} currentPrice={Number(drink.price)} currentItem={drink.item} />
+              </>
             ))}
           </tbody>
         </table>
@@ -59,16 +88,20 @@ export default function MenuContainer({ menu, setMenu }: MenuContainerProps) {
           className="hover:bg-slate-700 p-1 rounded-lg mb-3"
           onClick={() => handleDisplayModal('new_food_modal')}
         ><PlusIcon className="w-3 h-3 " /></button>
-        <Modal food placeId={placeId} setMenu={setMenu} />
+        <MenuModal food placeId={placeId} currentItem='' id='new_food_modal' />
       </div>
       {foods.length > 0 ? (
         <table className="table">
           <tbody>
             {foods.map((food) => (
-              <tr className="hover:bg-base-100" key={food.id}>
-                <td className="rounded-l-md capitalize">{food.item}</td>
-                <td className="rounded-r-md">{food.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
-              </tr>
+              <>
+                <tr className="hover:bg-base-100" key={food.id}>
+                  <td className="rounded-l-md capitalize">{food.item}</td>
+                  <td className="rounded-r-md">{food.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+                </tr>
+                <MenuModal id={food.id} placeId={placeId} currentPrice={Number(food.price)} currentItem={food.item} />
+              </>
+
             ))}
           </tbody>
         </table>
@@ -79,65 +112,3 @@ export default function MenuContainer({ menu, setMenu }: MenuContainerProps) {
   </div>)
 }
 
-type ModalProps = {
-  drink?: boolean;
-  food?: boolean;
-  setMenu: Dispatch<SetStateAction<Menu[]>>
-  placeId: string;
-};
-function Modal({ drink, food, setMenu, placeId }: ModalProps) {
-  const [item, setItem] = useState('');
-  const [price, setPrice] = useState('');
-
-  function handleUpdateMenu(event: React.MouseEvent<HTMLButtonElement>) {
-    console.log(item, price)
-    const newItem: Menu = {
-      id: "",
-      item: item,
-      price: Number(price),
-      menu_type: drink ? 'drink' : 'food',
-      place_id: placeId
-    }
-
-    setMenu(prevState => [...prevState, newItem])
-
-    const elementId = drink ? 'new_drink_modal' : 'new_food_modal';
-    const dialog = document.getElementById(elementId) as HTMLDialogElement;
-    if (dialog) {
-      dialog.close();
-    }
-  }
-
-  return (
-    <dialog id={food ? 'new_food_modal' : 'new_drink_modal'} className="modal">
-      <div className="modal-box p-8">
-        {food ? (
-          <h3 className="font-bold text-lg">Inclua uma nova comida</h3>
-        ) : (
-          <h3 className="font-bold text-lg">Inclua uma nova bebida</h3>
-        )}
-        <div className="flex flex-col mb-3 mt-6 gap-2">
-          <label >Defina o nome item</label>
-          <input
-            type="text"
-            placeholder="Item"
-            className="input input-bordered"
-            onChange={(e) => setItem(e.target.value)}
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <label>Defina o preço</label>
-          <input
-            type="text"
-            placeholder="Preço"
-            className="input input-bordered"
-            onChange={(e) => setPrice(e.target.value)}
-          />
-        </div>
-        <div className="modal-action flex justify-center">
-          <button className="btn" onClick={handleUpdateMenu}>Salvar</button>
-        </div>
-      </div>
-    </dialog>
-  )
-}
