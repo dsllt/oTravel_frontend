@@ -46,6 +46,8 @@ const nextConfig = {
   },
   basePath: '/oTravel_frontend',
   assetPrefix: '/oTravel_frontend/',
+  output: "export",
+  distDir: "dist"
 }
 
 module.exports = nextConfig

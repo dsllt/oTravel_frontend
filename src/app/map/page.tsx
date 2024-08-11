@@ -8,7 +8,7 @@ import { CategoryDictionary } from '@ui/explore/search-header';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { MapPlacesFilter } from '@ui/map/map-places-filter';
 
-export default function Page({ }) {
+export default function Page() {
   const { places, categories, cities } = useContext(UserContext);
   const searchParams = useSearchParams();
   const { replace } = useRouter();

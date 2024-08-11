@@ -5,15 +5,18 @@ import { useContext, useState } from "react";
 import { UserContext } from "../../context/userContext";
 import { UserBox } from "@ui/explore/user-box";
 import { HeroSearchInputs } from '@ui/explore/hero-search-inputs';
+import { useSearchParams } from 'next/navigation';
 
 
-export default function Page({ searchParams }: { searchParams?: { queryPlace?: string, category?: string, city?: string, queryUser?: string, } }) {
+
+export default function Page() {
   const { places, usersWithFavorites } = useContext(UserContext);
+  const searchParams = useSearchParams();
 
-  const queryPlace = searchParams?.queryPlace || '';
-  const queryUsers = searchParams?.queryUser || '';
-  const category = searchParams?.category || '';
-  const city = searchParams?.city || '';
+  const queryPlace = searchParams.get('queryPlace') || '';
+  const queryUsers = searchParams.get('queryUser') || '';
+  const category = searchParams.get('category') || '';
+  const city = searchParams.get('city') || '';
 
 
   let filteredPlaces = places.filter(place => {

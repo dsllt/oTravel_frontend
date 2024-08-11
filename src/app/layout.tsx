@@ -18,16 +18,6 @@ export default function RootLayout({
 }) {
   let isLogged = true;
   let isAdmin = false;
-  const cookieStore = cookies()
-  const tokenCookie = cookieStore.get('token')
-  const isAdminCookie = cookieStore.get('isAdmin')
-
-  if (tokenCookie != undefined) {
-    isLogged = true;
-    if (isAdminCookie?.value === 'true') {
-      isAdmin = true
-    }
-  }
 
   return (
     <html lang="en" data-theme="dim">
