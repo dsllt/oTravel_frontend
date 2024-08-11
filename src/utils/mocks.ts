@@ -95,7 +95,187 @@ export const placesMock: Place[] = [
         "coffee"
     ],
     "created_at": "2024-05-19T22:12:59.210402Z"
-}
+},
+{
+    "id": "d7dfaad4-4942-4b9b-b9d4-86a440a875a7",
+    "name": "Café Porto Farrô",
+    "image_url": "https://lh3.googleusercontent.com/p/AF1QipPbACYI3oBIuHf3gdv8fhH9taAnra9Bd9S6jew=s1360-w1360-h1020",
+    "description": "",
+    "address": "Av. Venâncio Aires, 1031",
+    "city": "Porto Alegre",
+    "country": "Brazil",
+    "latitude": -30.0379052,
+    "longitude": -51.2107758,
+    "slug": "cafe-porto-farro",
+    "phone": "",
+    "category": [
+        "coffee"
+    ],
+    "rating": 4.5,
+    "created_at": "2024-05-21T12:54:57.820588Z"
+},
+{
+    "id": "b10028fc-5809-42c9-aa94-07dc42470c2a",
+    "name": "Síndico Torra e Café",
+    "image_url": "https://lh3.googleusercontent.com/p/AF1QipPj47YnWPE7PzyRkJASw1NA0bQBYNCE3eRN58ng=s1360-w1360-h1020",
+    "description": "",
+    "address": "R. dos Andradas, 419",
+    "city": "Porto Alegre",
+    "country": "Brazil",
+    "latitude": -30.0326438,
+    "longitude": -51.2374101,
+    "slug": "sindico-torra-cafe",
+    "phone": "",
+    "category": [
+        "coffee"
+    ],
+    "rating": 4.5,
+    "created_at": "2024-05-21T12:54:57.820588Z"
+},
+{
+    "id": "c599ef67-b42b-4b88-a17e-4d27cf307b73",
+    "name": "Café República Cup",
+    "image_url": "https://lh3.googleusercontent.com/p/AF1QipPcxE3kiRVqR1nS-ShBqVCC7UH0UHjuUPG7d6u9=s1360-w1360-h1020",
+    "description": "",
+    "address": "R. da República, 358",
+    "city": "Porto Alegre",
+    "country": "Brazil",
+    "latitude": -30.0385201,
+    "longitude": -51.2231726,
+    "slug": "cafe-republica-cup",
+    "phone": "",
+    "category": [
+        "coffee"
+    ],
+    "rating": 4.5,
+    "created_at": "2024-05-21T12:54:57.820588Z"
+},
+{
+    "id": "ac4d6338-8cc6-4b22-a02b-f6639c556ada",
+    "name": "Casa de Pelotas",
+    "image_url": "https://lh3.googleusercontent.com/p/AF1QipNjIZQRNfz5khgCcZXRpXEt-NYXSp6nYDHP0vAb=s1360-w1360-h1020",
+    "description": "",
+    "address": "R. da República, 421",
+    "city": "Porto Alegre",
+    "country": "Brazil",
+    "latitude": -30.0387123,
+    "longitude": -51.2238261,
+    "slug": "casa-pelotas",
+    "phone": "",
+    "category": [
+        "coffee"
+    ],
+    "rating": 4.5,
+    "created_at": "2024-05-21T12:54:57.820588Z"
+},
+{
+    "id": "07a53bd6-8640-4d48-b5b8-015c6361eeeb",
+    "name": "Macun Livraria e Café",
+    "image_url": "https://lh3.googleusercontent.com/p/AF1QipMWdFrsmf8eBShqiDg_5A0E0oarQ3Ffhv0nN1DK=s1360-w1360-h1020",
+    "description": "",
+    "address": "R. Octávio Corrêa, 67",
+    "city": "Porto Alegre",
+    "country": "Brazil",
+    "latitude": -30.0396478,
+    "longitude": -51.2186717,
+    "slug": "macun-livraria-cafe",
+    "phone": "",
+    "category": [
+        "coffee"
+    ],
+    "rating": 4.5,
+    "created_at": "2024-05-21T12:54:57.820588Z"
+},
+{
+    "id": "d1a9dbaf-ef8e-4e88-a0f6-f0708ad0e831",
+    "name": "Yami Café",
+    "image_url": "https://lh3.googleusercontent.com/p/AF1QipNdp73QnDRwMRW0YWl_Ae6JrfkhJxEj0xYuRrjG=s1360-w1360-h1020",
+    "description": "",
+    "address": "R. Tenente Coronel Fabricio Pillar, 198",
+    "city": "Porto Alegre",
+    "country": "Brazil",
+    "latitude": -30.0259032,
+    "longitude": -51.1954156,
+    "slug": "yami-cafe",
+    "phone": "",
+    "category": [
+        "coffee"
+    ],
+    "rating": 4.5,
+    "created_at": "2024-05-21T12:54:57.820588Z"
+},
+{
+    "id": "0b0ded95-9b1b-4e1a-803c-1b3b90152241",
+    "name": "William & Sons Coffee Co. - Torrefação",
+    "image_url": "https://lh3.googleusercontent.com/p/AF1QipO-KedvzzG1yjJZ3U2ioOYsbxYxIQMRfbIvdQ4S=s1360-w1360-h1020",
+    "description": "",
+    "address": "R. Pedro Ivo, 492",
+    "city": "Porto Alegre",
+    "country": "Brazil",
+    "latitude": -30.0259032,
+    "longitude": -51.1954156,
+    "slug": "william-sons-coffee",
+    "phone": "",
+    "category": [
+        "coffee"
+    ],
+    "rating": 4.5,
+    "created_at": "2024-05-21T12:54:57.820588Z"
+},
+{
+    "id": "0b0ded95-9b1b-4e1a-803c-1b3b90152241",
+    "name": "William & Sons Coffee Co. - Garagem",
+    "image_url": "https://lh3.googleusercontent.com/p/AF1QipM8Z8SAP6Xfo28VJh7MIEYmhMan4X695qnzASo-=s1360-w1360-h1020",
+    "description": "",
+    "address": "R. Dinarte Ribeiro, 214",
+    "city": "Porto Alegre",
+    "country": "Brazil",
+    "latitude": -30.023669,
+    "longitude": -51.2022351,
+    "slug": "william-sons-coffee-garagem",
+    "phone": "",
+    "category": [
+        "coffee"
+    ],
+    "rating": 4.5,
+    "created_at": "2024-05-21T12:54:57.820588Z"
+},
+{
+    "id": "9ac6805c-932e-4b2f-ba6c-3cc89f28e115",
+    "name": "Startt & Brothers Café",
+    "image_url": "https://lh3.googleusercontent.com/p/AF1QipOkbLpYUunksGdzFYEPc1OHKwXZmeZsY9LfUv6V=s1360-w1360-h1020",
+    "description": "",
+    "address": "R. Eudoro Berlink, 520",
+    "city": "Porto Alegre",
+    "country": "Brazil",
+    "latitude": -30.0242863,
+    "longitude": -51.1924936,
+    "slug": "startt-brothers-cafe",
+    "phone": "",
+    "category": [
+        "coffee"
+    ],
+    "rating": 4.5,
+    "created_at": "2024-05-21T12:54:57.820588Z"
+},
+{
+    "id": "93319b81-8f3e-4702-8513-a8c467f1e3d5",
+    "name": "Ginkgo",
+    "image_url": "https://lh3.googleusercontent.com/p/AF1QipMn7U3adzGDphBsWvoUWvY-l8XpyBUE9CTEWmT6=s1360-w1360-h1020",
+    "description": "",
+    "address": "R. Cel. Bordini, 332",
+    "city": "Porto Alegre",
+    "country": "Brazil",
+    "latitude": -30.0209428,
+    "longitude": -51.1969999,
+    "slug": "ginkgo",
+    "phone": "",
+    "category": [
+        "coffee"
+    ],
+    "rating": 4.5,
+    "created_at": "2024-05-21T12:54:57.820588Z"
+},
 ]
 
 export const favoritesMock: Favorite[] = [
