@@ -1,14 +1,17 @@
 import { X } from 'lucide-react';
 import { FavoritePlaceBox } from './favorite-place-box';
 import { Place } from '../../utils/type-definitions';
+import { useContext } from 'react';
+import { UserContext } from '../../context/userContext';
 
 
 type FavoritesModalProps = {
-  places: Place[];
   setDisplayFavorites: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function FavoritesModal({ places, setDisplayFavorites }: FavoritesModalProps) {
+export default function FavoritesModal({ setDisplayFavorites }: FavoritesModalProps) {
+  const { favorites } = useContext(UserContext);
+
   return (
     <div className='py-5 px-6 gap-8 h-full flex flex-col p-6 shadow-shape bg-zinc-700 w-6/12'>
       <div className='w-full flex justify-end items-end' >
@@ -17,9 +20,16 @@ export default function FavoritesModal({ places, setDisplayFavorites }: Favorite
         </button>
       </div>
       <h2 className='text-2xl'>Favoritos</h2>
-      <div className='flex flex-col items-start justify-start h-full overflow-y-scroll gap-4 pb-8 w-full'>
-        {places.map(place => <FavoritePlaceBox key={place.id} placeInfo={place} />)}
-      </div>
+      {favorites.length > 0 ? (
+        <div className='flex flex-col items-start justify-start h-full overflow-y-scroll gap-4 pb-8 w-full'>
+          {favorites.map(favorite => <FavoritePlaceBox key={favorite.id} placeInfo={favorite} />)}
+        </div>
+      ) : (
+        <div>
+          Você ainda não favoritou nenhum lugar.
+        </div>
+      )}
+
     </div>
   )
 }

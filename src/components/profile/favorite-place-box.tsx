@@ -2,16 +2,25 @@
 
 import { Info, Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation'
-import { Place } from '../../utils/type-definitions';
+import { Favorite, Place } from '../../utils/type-definitions';
+import { useContext } from 'react';
+import { UserContext } from '../../context/userContext';
 
 type FavoritePlaceBoxProps = {
-  placeInfo: Place
+  placeInfo: Favorite
 }
 
 export function FavoritePlaceBox({ placeInfo }: FavoritePlaceBoxProps) {
+  const { setFavorites, favorites } = useContext(UserContext);
+
   const router = useRouter();
-  function handleClickPlaceBox(id: string) {
-    router.push(`/explore/${id}`)
+  function handleClickPlaceBox(slug: string) {
+    router.push(`/explore/${slug}`)
+  }
+
+  function handleDeleteFavorite(id: string) {
+    setFavorites(prevState => prevState.filter(favorite => favorite.id !== id));
+    console.log(favorites)
   }
 
   return (
@@ -25,11 +34,11 @@ export function FavoritePlaceBox({ placeInfo }: FavoritePlaceBoxProps) {
         </h2>
         <p className='text-xs'>{placeInfo.city}</p>
         <div className="mt-auto">
-          <div className="btn btn-ghost" onClick={() => handleClickPlaceBox(placeInfo.id)}>
+          <div className="btn btn-ghost" onClick={() => handleClickPlaceBox(placeInfo.slug)}>
             <Info className='size-5 text-blue-600' />
             Informações
           </div>
-          <div className="btn btn-ghost">
+          <div className="btn btn-ghost" onClick={() => handleDeleteFavorite(placeInfo.id)}>
             <Trash className='size-5 text-red-300' />
             Remover
           </div>

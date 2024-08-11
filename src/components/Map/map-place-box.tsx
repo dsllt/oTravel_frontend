@@ -4,11 +4,11 @@ import { useRouter } from 'next/navigation'
 
 export function MapPlaceBox({ placeInfo }: any) {
   const router = useRouter();
-  function handleClickPlaceBox(id: string) {
-    router.push(`/explore/${id}`)
+  function handleClickPlaceBox(slug: string) {
+    router.push(`/explore/${slug}`)
   }
   return (
-    <div className="bg-zinc-900 rounded-lg shadow-xl hover:opacity-50 hover:cursor-pointer flex w-full min-h-18 max-h-18" onClick={() => handleClickPlaceBox(placeInfo.id)}>
+    <div className="bg-zinc-900 rounded-lg shadow-xl hover:opacity-50 hover:cursor-pointer flex w-full min-h-18 max-h-18" onClick={() => handleClickPlaceBox(placeInfo.slug)}>
       <figure className="w-48 h-40 overflow-hidden rounded-tl-lg rounded-bl-lg">
         <img src={placeInfo.image_url} alt={placeInfo.name} className="object-cover w-full h-full" />
       </figure>

@@ -17,7 +17,7 @@ function TextArea({ label, id, required = false, register, errors }: Props) {
     setTextValue(event.target.value);
   };
   return (
-    <div className="flex w-1/2 h-[130px]">
+    <div className="flex w-1/2 h-[190px]">
       <label htmlFor={id} className="text-sm mb-4 flex flex-col w-full">
         {textValue ? <span className='text-xs'>{label}</span> : <span></span>}
         <textarea

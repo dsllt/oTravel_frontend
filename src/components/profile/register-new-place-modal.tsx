@@ -3,9 +3,10 @@ import CategorySelect from '@ui/profile/category-select'
 import Input from '@ui/profile/modal-input'
 import TextArea from '@ui/profile/modal-text-area'
 import { X } from 'lucide-react';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { UserContext } from '../../context/userContext';
 
 export type Categories = {
   [key: string]: string;
@@ -42,6 +43,7 @@ const newPlaceSchema = z.object({
   placeDescription: z.string(),
   placeSlug: z.string().transform(value => value.toLowerCase().replace(/\s+/g, '-')),
   placePhone: z.string(),
+  placeRating: z.string(),
 });
 
 export type NewPlaceSchema = z.infer<typeof newPlaceSchema>;
@@ -51,6 +53,8 @@ type RegisterNewPlaceModalProps = {
   setDisplayRegisterNewPlace: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export default function RegisterNewPlaceModal({ setDisplayRegisterNewPlace }: RegisterNewPlaceModalProps) {
+  const { setPlaces } = useContext(UserContext);
+
   const { register, handleSubmit, setValue, formState: { errors }, reset } = useForm<NewPlaceSchema>({
     resolver: zodResolver(newPlaceSchema)
   })
@@ -60,6 +64,7 @@ export default function RegisterNewPlaceModal({ setDisplayRegisterNewPlace }: Re
   async function handleIncludeNewPlace(data: NewPlaceSchema) {
     const placeCategory = Object.keys(data.placeCategory);
     const place = {
+      id: Math.random().toString(),
       name: data.placeName,
       image_url: data.placeImage,
       description: data.placeDescription,
@@ -71,19 +76,22 @@ export default function RegisterNewPlaceModal({ setDisplayRegisterNewPlace }: Re
       phone: data.placePhone,
       slug: data.placeSlug,
       category: placeCategory,
-      rating: 0,
+      rating: Number(data.placeRating),
+      created_at: new Date().toISOString(),
     }
-    const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+    // const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-    await fetch(`${baseUrl}/places`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(place),
-    });
+    // await fetch(`${baseUrl}/places`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(place),
+    // });
+    setPlaces(prevState => [...prevState, place])
     reset();
   }
+
   return (
     <div className='py-5 px-6 gap-8 h-full flex flex-col shadow-shape bg-zinc-700 w-6/12'>
       <div className='w-full flex justify-end items-end' >
@@ -128,6 +136,7 @@ export default function RegisterNewPlaceModal({ setDisplayRegisterNewPlace }: Re
             <div className="flex w-1/2 flex-col">
               <Input label="Slug" id="placeSlug" required register={register} errors={errors} />
               <Input label="Telefone" id="placePhone" required={false} register={register} errors={errors} />
+              <Input label="Nota" id="placeRating" required={false} register={register} errors={errors} />
             </div>
           </div>
 

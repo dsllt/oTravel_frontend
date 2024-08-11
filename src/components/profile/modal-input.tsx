@@ -1,10 +1,10 @@
-import { NewPlaceSchema } from '@app/new-place/page';
 import React, { useState } from 'react'
 import { UseFormRegister } from 'react-hook-form';
+import { NewPlaceSchema } from './register-new-place-modal';
 
 type Props = {
   label: string;
-  id: "placeName" | "placeAddress" | "placeCity" | "placeCountry" | "placeLatitude" | "placeLongitude" | "placeImage" | "placeCategory" | "placeDescription" | "placeSlug" | "placePhone";
+  id: "placeName" | "placeAddress" | "placeCity" | "placeCountry" | "placeLatitude" | "placeLongitude" | "placeImage" | "placeCategory" | "placeDescription" | "placeSlug" | "placePhone" | "placeRating";
   required: boolean;
   type?: string;
   register: UseFormRegister<NewPlaceSchema>;

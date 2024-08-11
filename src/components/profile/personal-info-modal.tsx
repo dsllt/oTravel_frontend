@@ -1,13 +1,24 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { UserDTO } from '../../utils/type-definitions';
 import { X } from 'lucide-react';
+import { UserContext } from '../../context/userContext';
 
 type PersonalInfoModalProps = {
   setDisplayPersonalInfo: React.Dispatch<React.SetStateAction<boolean>>;
-  userData: UserDTO;
 }
 
-export default function PersonalInfoModal({ setDisplayPersonalInfo, userData }: PersonalInfoModalProps) {
+export default function PersonalInfoModal({ setDisplayPersonalInfo }: PersonalInfoModalProps) {
+  const { userData, setUserData } = useContext(UserContext);
+  const [firstName, setFirstName] = useState(userData.firstName)
+  const [lastName, setLastName] = useState(userData.lastName)
+  const [email, setEmail] = useState(userData.email)
+
+  function handleUpdateUserData() {
+    const updatedUser = { ...userData, firstName, lastName, email }
+    setUserData(updatedUser)
+  }
+
+
   return (
     <div className='py-5 px-6 gap-8 h-full flex flex-col  p-6 shadow-shape bg-zinc-700 w-6/12'>
       <div className='w-full flex justify-end items-end' >
@@ -29,7 +40,8 @@ export default function PersonalInfoModal({ setDisplayPersonalInfo, userData }: 
               <input
                 type="text"
                 placeholder="Seu nome"
-                value={userData.firstName}
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
                 className="bg-transparent border border-transparent border-b-gray-950 focus:outline-none w-full"
               />
             </label>
@@ -41,7 +53,8 @@ export default function PersonalInfoModal({ setDisplayPersonalInfo, userData }: 
               <input
                 type="text"
                 placeholder="Seu sobrenome"
-                value={userData.lastName}
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
                 className="bg-transparent border border-transparent border-b-gray-950 focus:outline-none w-full"
               />
             </label>
@@ -54,13 +67,15 @@ export default function PersonalInfoModal({ setDisplayPersonalInfo, userData }: 
             <input
               type="text"
               placeholder="Seu email"
-              value={userData.email}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="bg-transparent border border-transparent border-b-gray-950 focus:outline-none w-full"
             />
           </label>
 
           <button
             className='rounded-lg px-5 py-2 flex items-center gap-2 justify-center bg-primary text-primary-content text-sm font-semibold'
+            onClick={handleUpdateUserData}
           >
             Atualizar
           </button>

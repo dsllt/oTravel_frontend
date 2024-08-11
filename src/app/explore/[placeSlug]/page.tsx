@@ -11,10 +11,11 @@ import ReviewBox from '@ui/review-box';
 import dynamic from 'next/dynamic';
 import ScheduleEditModal from '@ui/explore/schedule-edit-modal';
 import { StarIcon } from '@heroicons/react/16/solid';
+import { randomUUID } from 'crypto';
 
 
 export default function PlacePage({ params }: { params: { placeSlug: string } }) {
-  const { places, favorites, menu } = useContext(UserContext);
+  const { places, favorites, menu, userData, setFavorites } = useContext(UserContext);
   const [place, setPlace] = useState<Place>({
     id: "",
     image_url: "",
@@ -34,6 +35,9 @@ export default function PlacePage({ params }: { params: { placeSlug: string } })
   const [isFavorite, setIsFavorite] = useState(false);
   const [placeMenu, setPlaceMenu] = useState<Menu[]>([])
   const [placeSchedule, setPlaceSchedule] = useState<Schedule[]>(placeScheduleMock)
+  const [newReview, setNewReview] = useState('');
+  const [rating, setRating] = useState('');
+  const [reviews, setReview] = useState(reviewsMock);
 
   function displayScheduleModal() {
     console.log('displaying schedule modal')
@@ -57,6 +61,31 @@ export default function PlacePage({ params }: { params: { placeSlug: string } })
 
   function handleFavorites() {
     setIsFavorite(!isFavorite);
+    const newFavorite = {
+      id: place.id,
+      name: place.name,
+      image_url: place.image_url,
+      address: place.address,
+      city: place.city,
+      country: place.country,
+      slug: place.slug,
+      rating: place.rating,
+    }
+    setFavorites(prevState => [...prevState, newFavorite]);
+  }
+
+  function handleSubmitReview() {
+    const review = {
+      "id": "",
+      "review": newReview,
+      "rating": Number(rating),
+      "created_at": new Date().toDateString(),
+      "user": userData,
+      "place": place
+    }
+    setReview(prevState => [...prevState, review])
+    setNewReview('');
+    setRating('');
   }
 
   useEffect(() => {
@@ -79,7 +108,6 @@ export default function PlacePage({ params }: { params: { placeSlug: string } })
 
     const isFavorite = favorites.some(favorite => place.id === favorite.id);
     setIsFavorite(isFavorite);
-
 
   }, [params.placeSlug, places, favorites, place.id, menu])
 
@@ -188,10 +216,16 @@ export default function PlacePage({ params }: { params: { placeSlug: string } })
             <h1 className="font-bold text-xl font-dmSans mb-4">
               Reviews
             </h1>
-            {reviewsMock.map(review => {
+            {reviews.map(review => {
               return <ReviewBox key={review.id} review={review} />
-
             })}
+            <div className='w-full flex gap-5'>
+              <textarea placeholder="Escreva sua review" className="w-full px-6 py-6 rounded-lg bg-gray-900 border border-base-300" value={newReview} onChange={(e) => setNewReview(e.target.value)} />
+              <div className='space-y-3 w-36'>
+                <input type="number" placeholder="Dê uma nota" className="w-36 p-4 rounded-lg bg-gray-900 border border-base-300" value={rating} onChange={(e) => setRating(e.target.value)} max={5} />
+                <button className='rounded-lg bg-gray-900 p-4 w-36' onClick={handleSubmitReview}>Review</button>
+              </div>
+            </div>
           </div>
 
           <div className="flex w-full justify-center items-center">

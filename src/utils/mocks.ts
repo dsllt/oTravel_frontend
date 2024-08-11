@@ -154,7 +154,7 @@ export const menuMock: Menu[] = [
 
 export const reviewsMock: Review[] = [
     { 
-            "id": 1,
+            "id": "1",
             "review":  "Fui apenas uma vez e eu pedi um chocolate quente, mas achei muito forte! Claro isso vai de pessoa para pessoa. Não consegui tomar todo por conta disso. O ambiente é pequeno mas é bem organizado, um lugar muito bonito. O atendimento é ótimo.",
             "rating": 4.5,
             "created_at": "2024-01-21T09:46:10.477Z",
@@ -175,7 +175,7 @@ export const reviewsMock: Review[] = [
             }
     },
     { 
-            "id": 2,
+            "id": "2",
             "review":  "Fui no lugar e pedi um café e um pão de queijo. O café estava muito bom, mas o pão de queijo estava um pouco frio. O ambiente é muito bonito e aconchegante. O atendimento é muito bom.",
             "rating": 4.5,
             "created_at": "2024-01-21T09:46:10.477Z",

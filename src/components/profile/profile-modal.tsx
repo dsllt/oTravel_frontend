@@ -5,10 +5,9 @@ import { HousePlus, LogOut, Star, User, X } from 'lucide-react';
 import FavoritesModal from './favorites-modal';
 import PersonalInfoModal from './personal-info-modal';
 import RegisterNewPlaceModal from './register-new-place-modal';
-import { favoritesMock } from '../../utils/mocks';
 
 export function ProfileModal() {
-  const { displayProfile, setDisplayProfile, places, userData } = useContext(UserContext);
+  const { displayProfile, setDisplayProfile, userData } = useContext(UserContext);
   const [displayFavorites, setDisplayFavorites] = useState(false);
   const [displayPersonalInfo, setDisplayPersonalInfo] = useState(false);
   const [displayRegisterNewPlace, setDisplayRegisterNewPlace] = useState(false);
@@ -51,8 +50,7 @@ export function ProfileModal() {
 
             <div className='flex flex-col gap-28 min-w-64'>
               <div>
-                <h2 className='text-3xl text-center'>John Doe</h2>
-                <p className='text-center'>@johndoe</p>
+                <h2 className='text-3xl text-center'>{userData.firstName} {userData.lastName}</h2>
               </div>
               <div>
                 <button
@@ -91,11 +89,11 @@ export function ProfileModal() {
           </div>
 
           {displayFavorites && (
-            <FavoritesModal places={favoritesMock} setDisplayFavorites={setDisplayFavorites} />
+            <FavoritesModal setDisplayFavorites={setDisplayFavorites} />
           )}
 
           {displayPersonalInfo && (
-            <PersonalInfoModal setDisplayPersonalInfo={setDisplayPersonalInfo} userData={userData} />
+            <PersonalInfoModal setDisplayPersonalInfo={setDisplayPersonalInfo} />
           )}
 
           {displayRegisterNewPlace && (
