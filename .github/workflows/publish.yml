@@ -27,7 +27,7 @@ jobs:
           node-version: '18.17.0'
       
       - name: Install dependencies 🔧
-        run: npm install
+        run: npm ci
 
       - name: Setup Pages ⚙️
         uses: actions/configure-pages@v4
