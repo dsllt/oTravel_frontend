@@ -12,6 +12,13 @@ import dynamic from 'next/dynamic';
 import ScheduleEditModal from '@ui/explore/schedule-edit-modal';
 import { StarIcon } from '@heroicons/react/16/solid';
 
+const Map = dynamic(
+  () => import('../../../components/map/small-map'),
+  {
+    loading: () => <p>Um mapa está sendo carregado</p>,
+    ssr: false
+  }
+)
 
 export default function PlacePageClient({ slug }: { slug: string }) {
   const { places, favorites, menu, userData, setFavorites } = useContext(UserContext);
@@ -110,13 +117,7 @@ export default function PlacePageClient({ slug }: { slug: string }) {
 
   }, [slug, places, favorites, place.id, menu])
 
-  const Map = useMemo(() => dynamic(
-    () => import('../../../components/map/small-map'),
-    {
-      loading: () => <p>Um mapa está sendo carregado</p>,
-      ssr: false
-    }
-  ), [])
+
 
   return (
     <div className="w-full px-40 flex flex-col gap-10 mt-10 mb-20 items-center justify-center">

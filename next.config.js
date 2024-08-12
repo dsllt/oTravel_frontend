@@ -33,6 +33,7 @@ const nextConfig = {
         port: '',
       },
     ],
+    unoptimized: true
   },
   async redirects() {
     return [

@@ -7,6 +7,13 @@ import { categoryDictionary } from '../../utils/dictionary';
 import { CategoryDictionary } from '@ui/explore/search-header';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { MapPlacesFilter } from '@ui/map/map-places-filter';
+const Map = dynamic(
+  () => import('../../components/map/map'),
+  {
+    loading: () => <p>Um mapa está sendo carregado</p>,
+    ssr: false
+  }
+)
 
 export default function Page() {
   const { places, categories, cities } = useContext(UserContext);
@@ -49,13 +56,6 @@ export default function Page() {
     replace(`${pathname}?${params.toString()}`, { scroll: false });
   }
 
-  const Map = useMemo(() => dynamic(
-    () => import('../../components/map/map'),
-    {
-      loading: () => <p>Um mapa está sendo carregado</p>,
-      ssr: false
-    }
-  ), [])
 
   return (
     <div className='flex items-center justify-between w-full h-full overflow-hidden gap-8'>
