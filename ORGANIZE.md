@@ -1,4 +1,5 @@
 ## TO-DO:
+
 - [x] Seguir com tutorial até autenticação
 - [x] Pesquisa na página de explorar
 - [x] Fazer a página de inclusão de café
@@ -8,10 +9,8 @@
 - [ ] Fazer a página de login
 - [ ] Fazer autenticação com Google
 
-
-
-
 ### Database diagram
+
 https://drawsql.app/teams/days-team/diagrams/poacoffee
 
 ###Mock API

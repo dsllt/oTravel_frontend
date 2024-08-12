@@ -1,33 +1,33 @@
-'use server'
-import { z } from 'zod';
-import { fetchCreatePlace, fetchUpdatePlace } from './data';
+"use server";
+import { z } from "zod";
+import { fetchCreatePlace, fetchUpdatePlace } from "./data";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 const PlaceFormSchema = z.object({
-  id:  z.string(),
-  name:  z.string({
-    invalid_type_error: 'Defina o nome do local.',
+  id: z.string(),
+  name: z.string({
+    invalid_type_error: "Defina o nome do local.",
   }),
-  image_url:  z.string({
-    invalid_type_error: 'Defina uma imagem para o local.',
+  image_url: z.string({
+    invalid_type_error: "Defina uma imagem para o local.",
   }),
-  description:  z.string({
-    invalid_type_error: 'Defina uma descrição para o local.',
+  description: z.string({
+    invalid_type_error: "Defina uma descrição para o local.",
   }),
-  address:  z.string({
-    invalid_type_error: 'Defina um endereço para o local.',
+  address: z.string({
+    invalid_type_error: "Defina um endereço para o local.",
   }),
-  phone:  z.string(),
+  phone: z.string(),
   rating: z.coerce.number(),
   slug: z.string({
-    invalid_type_error: 'Defina um slug para o local.',
+    invalid_type_error: "Defina um slug para o local.",
   }),
   latitude: z.coerce.number({
-    invalid_type_error: 'Defina a latitude do endereço do local.',
+    invalid_type_error: "Defina a latitude do endereço do local.",
   }),
   longitude: z.coerce.number({
-    invalid_type_error: 'Defina a longitude do endereço do local.',
+    invalid_type_error: "Defina a longitude do endereço do local.",
   }),
   created_at: z.date(),
 });
@@ -49,69 +49,75 @@ export type State = {
   message?: string | null;
 };
 
-export async function includePlace(prevState: State, formData: FormData){
-
+export async function includePlace(prevState: State, formData: FormData) {
   const validatedFields = CreatePlace.safeParse({
-    name: formData.get('placeName'),
-    image_url: formData.get('placeImage'),
-    description: formData.get('placeDescription'),
-    address: formData.get('placeAddress'),
-    latitude: formData.get('placeLatitude'),
-    longitude: formData.get('placeLongitude'),
-    phone: formData.get('placePhone'),
-    slug: formData.get('placeSlug'),
-    rating: 0
+    name: formData.get("placeName"),
+    image_url: formData.get("placeImage"),
+    description: formData.get("placeDescription"),
+    address: formData.get("placeAddress"),
+    latitude: formData.get("placeLatitude"),
+    longitude: formData.get("placeLongitude"),
+    phone: formData.get("placePhone"),
+    slug: formData.get("placeSlug"),
+    rating: 0,
   });
 
-  if (!validatedFields.success){
+  if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: 'Existem campos não preenchidos. Falha ao criar novo local.'
-    }
+      message: "Existem campos não preenchidos. Falha ao criar novo local.",
+    };
   }
 
-  try{
+  try {
     await fetchCreatePlace(validatedFields.data);
   } catch (err) {
-    return{
-      message: 'Database Error: Falha ao criar local'
-    }
+    return {
+      message: "Database Error: Falha ao criar local",
+    };
   }
 
-  revalidatePath('/new-place');
-  redirect('/');
+  revalidatePath("/new-place");
+  redirect("/");
 }
 
-const UpdatePlace = PlaceFormSchema.omit({ id: true, created_at: true, rating: true});
+const UpdatePlace = PlaceFormSchema.omit({
+  id: true,
+  created_at: true,
+  rating: true,
+});
 
-export async function updatePlace(id: string,
-  prevState: State, formData: FormData){
+export async function updatePlace(
+  id: string,
+  prevState: State,
+  formData: FormData,
+) {
   const validatedFields = UpdatePlace.safeParse({
-    name: formData.get('placeName'),
-    address: formData.get('placeAddress'),
-    latitude: formData.get('placeLatitude'),
-    longitude: formData.get('placeLongitude'),
-    phone: formData.get('placePhone'),
-    image: formData.get('placeImage'),
-    description: formData.get('placeDescription'),
-    slug: formData.get('placeSlug'),
+    name: formData.get("placeName"),
+    address: formData.get("placeAddress"),
+    latitude: formData.get("placeLatitude"),
+    longitude: formData.get("placeLongitude"),
+    phone: formData.get("placePhone"),
+    image: formData.get("placeImage"),
+    description: formData.get("placeDescription"),
+    slug: formData.get("placeSlug"),
   });
 
-  if (!validatedFields.success){
+  if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: 'Existem campos não preenchidos. Falha ao editar local.'
-    }
+      message: "Existem campos não preenchidos. Falha ao editar local.",
+    };
   }
 
-  try{
+  try {
     await fetchUpdatePlace(validatedFields.data, id);
   } catch (err) {
-    return{
-      message: 'Database Error: Falha ao editar local'
-    }
+    return {
+      message: "Database Error: Falha ao editar local",
+    };
   }
 
-  revalidatePath('/');
-  redirect('/');
+  revalidatePath("/");
+  redirect("/");
 }

@@ -3,20 +3,22 @@ import { useEffect, useState } from "react";
 import { DebouncedState } from "use-debounce";
 
 type SearchInputProps = {
-  handleSearchPlace: DebouncedState<(term: any) => void>,
-  handleSearchUser: DebouncedState<(term: any) => void>,
-}
+  handleSearchPlace: DebouncedState<(term: any) => void>;
+  handleSearchUser: DebouncedState<(term: any) => void>;
+};
 
-export function SearchInput({ handleSearchPlace, handleSearchUser }: SearchInputProps) {
-  const [searchInput, setSearchInput] = useState('place');
-  const [placeValue, setPlaceValue] = useState('');
-  const [userValue, setUserValue] = useState('');
+export function SearchInput({
+  handleSearchPlace,
+  handleSearchUser,
+}: SearchInputProps) {
+  const [searchInput, setSearchInput] = useState("place");
+  const [placeValue, setPlaceValue] = useState("");
+  const [userValue, setUserValue] = useState("");
   const searchParams = useSearchParams();
 
-
   useEffect(() => {
-    const placeQuery = searchParams.get('queryPlace')?.toString();
-    const userQuery = searchParams.get('queryUser')?.toString();
+    const placeQuery = searchParams.get("queryPlace")?.toString();
+    const userQuery = searchParams.get("queryUser")?.toString();
 
     if (placeQuery) {
       return setPlaceValue(placeQuery);
@@ -25,30 +27,34 @@ export function SearchInput({ handleSearchPlace, handleSearchUser }: SearchInput
     if (userQuery) {
       return setPlaceValue(userQuery);
     }
-    setPlaceValue('');
-    setUserValue('');
+    setPlaceValue("");
+    setUserValue("");
   }, [searchParams]);
 
-
   return (
-    <div className='flex'>
-      <div className='flex flex-col justify-between items-start'>
+    <div className="flex">
+      <div className="flex flex-col justify-between items-start">
         <button
           className="text-sm w-full h-full rounded-tl-md pl-2 pr-2"
-          style={{ backgroundColor: searchInput === 'place' ? '#18181b' : 'transparent' }}
-          onClick={() => setSearchInput('place')}
+          style={{
+            backgroundColor:
+              searchInput === "place" ? "#18181b" : "transparent",
+          }}
+          onClick={() => setSearchInput("place")}
         >
           Local
         </button>
         <button
           className="text-sm w-full h-full rounded-bl-md pl-2 pr-2"
-          onClick={() => setSearchInput('user')}
-          style={{ backgroundColor: searchInput === 'user' ? '#18181b' : 'transparent' }}
+          onClick={() => setSearchInput("user")}
+          style={{
+            backgroundColor: searchInput === "user" ? "#18181b" : "transparent",
+          }}
         >
           Usuário
         </button>
       </div>
-      {searchInput === 'place' ? (
+      {searchInput === "place" ? (
         <div className="form-control">
           <input
             type="text"
@@ -76,5 +82,5 @@ export function SearchInput({ handleSearchPlace, handleSearchUser }: SearchInput
         </div>
       )}
     </div>
-  )
+  );
 }

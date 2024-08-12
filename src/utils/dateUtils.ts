@@ -1,10 +1,10 @@
 import { differenceInSeconds, format } from "date-fns";
 
-export function dateDifference(dateISO: string): string{
+export function dateDifference(dateISO: string): string {
   const date = new Date(dateISO);
   const now = new Date();
-  
-  const diffInSeconds = differenceInSeconds(now, date)
+
+  const diffInSeconds = differenceInSeconds(now, date);
   if (diffInSeconds < 60) {
     if (diffInSeconds < 2) return `há ${diffInSeconds} segundo`;
     return `há ${diffInSeconds} segundos`;
@@ -40,5 +40,5 @@ export function dateDifference(dateISO: string): string{
     return `há ${diffInMonths} meses`;
   }
 
-  return format(date, 'dd/MM/yyyy');
+  return format(date, "dd/MM/yyyy");
 }
