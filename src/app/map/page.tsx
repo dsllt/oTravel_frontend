@@ -2,14 +2,14 @@
 import dynamic from 'next/dynamic';
 import React, { useContext, useState } from 'react';
 import { UserContext } from '../../context/userContext';
-import { MapPlaceBox } from '@ui/map/map-place-box';
+import { MapPlaceBox } from '@ui/maps/map-place-box';
 import { categoryDictionary } from '../../utils/dictionary';
 import { CategoryDictionary } from '@ui/explore/search-header';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { MapPlacesFilter } from '@ui/map/map-places-filter';
+import { MapPlacesFilter } from '@ui/maps/map-places-filter';
 
 const Map = dynamic(
-  () => import('../../components/map/map'),
+  () => import('../../components/maps/map'),
   {
     loading: () => <p>Um mapa está sendo carregado</p>,
     ssr: false

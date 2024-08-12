@@ -13,7 +13,7 @@ import ScheduleEditModal from '@ui/explore/schedule-edit-modal';
 import { StarIcon } from '@heroicons/react/16/solid';
 
 const Map = dynamic(
-  () => import('../../../components/map/small-map'),
+  () => import('../../../components/maps/small-map'),
 
   {
     loading: () => <p>Um mapa está sendo carregado</p>,
