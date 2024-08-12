@@ -1,6 +1,6 @@
 'use client'
 import dynamic from 'next/dynamic';
-import React, { useContext, useMemo, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { UserContext } from '../../context/userContext';
 import { MapPlaceBox } from '@ui/map/map-place-box';
 import { categoryDictionary } from '../../utils/dictionary';
@@ -9,7 +9,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { MapPlacesFilter } from '@ui/map/map-places-filter';
 
 const Map = dynamic(
-  () => import('../../../src/components/map/map'),
+  () => import('../../components/map/map'),
   {
     loading: () => <p>Um mapa está sendo carregado</p>,
     ssr: false
