@@ -1,4 +1,3 @@
-
 # oTravel
 
 This is a personal project with the goal of saving and organizing cafés around the world that I like and still want to visit. The idea is to create a space where these places can be recorded, with details about location, reviews, and personal experiences, but I also hope it can be collaborative, allowing others to contribute recommendations. In the future, I plan to expand this idea to include other types of establishments, like restaurants, but for now, the main focus is on cafés.
@@ -16,7 +15,6 @@ Beyond using this project to deepen my knowledge of this framework, my goal is a
 - Map with location;
 - Café page with address, hours, and menu items with prices;
 
-    
 ## Run Locally
 
 Clone the project:
@@ -43,7 +41,6 @@ Start the server:
   npm run start
 ```
 
-
 ## Tech Stack
 
 In the development of this project, the following technologies were used:
@@ -53,13 +50,12 @@ In the development of this project, the following technologies were used:
 - Vite: A fast build tool for web projects.
 - Tailwind CSS: A utility-first CSS framework for rapid styling.
 
-
 ## Roadmap
 
 - Additional browser support
 
 - Add more integrations
 
-
 ## Author
+
 <a href="https://www.linkedin.com/in/dayanesallet/" target="_blank"><img align="left" src="https://raw.githubusercontent.com/yushi1007/yushi1007/main/images/linkedin.svg" alt="" width="21px"/></a>
