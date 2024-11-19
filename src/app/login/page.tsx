@@ -1,17 +1,17 @@
-"use client";
-import Image from "next/image";
+'use client'
+import Image from 'next/image'
 
 export default function Page() {
   function handleGoogleLogin() {
-    console.log("Google login");
+    console.log('Google login')
   }
 
   function handleEmailLogin() {
-    console.log("Email login");
+    console.log('Email login')
   }
 
   function handleVisitorLogin() {
-    console.log("Visitor login");
+    console.log('Visitor login')
   }
 
   return (
@@ -19,7 +19,7 @@ export default function Page() {
       <div
         className="h-[80vh] w-[50vw] flex rounded-lg bg-center bg-no-repeat bg-cover opacity-60"
         style={{
-          backgroundImage: `url('/assets/images/login-background.jpg')`,
+          backgroundImage: `url('assets/images/login-background.jpg')`,
         }}
       ></div>
 
@@ -34,11 +34,11 @@ export default function Page() {
           onClick={handleGoogleLogin}
         >
           <Image
-            src="/assets/icons/google-icon.svg"
+            src="assets/icons/google-icon.svg"
             alt="Google Logo"
             width={32}
             height={32}
-          />{" "}
+          />{' '}
           Entrar com o Google
         </button>
         <button
@@ -46,11 +46,11 @@ export default function Page() {
           onClick={handleEmailLogin}
         >
           <Image
-            src="/assets/icons/email-icon.svg"
+            src="assets/icons/email-icon.svg"
             alt="Email Logo"
             width={32}
             height={32}
-          />{" "}
+          />{' '}
           Entrar com email &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </button>
         <button
@@ -58,14 +58,14 @@ export default function Page() {
           onClick={handleVisitorLogin}
         >
           <Image
-            src="/assets/icons/visitor-icon.svg"
+            src="assets/icons/visitor-icon.svg"
             alt="Visitor Logo"
             width={32}
             height={32}
-          />{" "}
+          />{' '}
           Entrar como visitante
         </button>
       </div>
     </div>
-  );
+  )
 }
