@@ -1,9 +1,10 @@
 'use client'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { UserContext } from '../../context/userContext'
 import { useSearchParams } from 'next/navigation'
 import PlacesUsersContainer from '@ui/explore/places-users-container'
 import { HeroContainer } from '@ui/explore/hero-container'
+import { getPlaces } from '@lib/data'
 
 export default function Page() {
   const { places, usersWithFavorites } = useContext(UserContext)
@@ -36,6 +37,13 @@ export default function Page() {
       .includes(queryUsers.toLocaleLowerCase())
     return matchesName
   })
+
+  useEffect(() => {
+    async function getInitialData() {
+      const places = await getPlaces()
+    }
+    getInitialData()
+  }, [])
 
   return (
     <main className="flex flex-col w-full items-center mb-16">

@@ -1,69 +1,62 @@
-"use client";
-import dynamic from "next/dynamic";
-import React, { useContext, useState } from "react";
-import { UserContext } from "../../context/userContext";
-import { MapPlaceBox } from "@ui/maps/map-place-box";
-import { categoryDictionary } from "../../utils/dictionary";
-import { CategoryDictionary } from "@ui/explore/search-header";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { MapPlacesFilter } from "@ui/maps/map-places-filter";
-
-const Map = dynamic(() => import("../../components/maps/map"), {
-  loading: () => <p>Um mapa está sendo carregado</p>,
-  ssr: false,
-});
+'use client'
+import dynamic from 'next/dynamic'
+import React, { useContext, useState } from 'react'
+import { UserContext } from '../../context/userContext'
+import { MapPlaceBox } from '@ui/maps/map-place-box'
+import { categoryDictionary } from '../../utils/dictionary'
+import { CategoryDictionary } from '@ui/explore/search-header'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { MapPlacesFilter } from '@ui/maps/map-places-filter'
+import Map from '@ui/maps/map'
 
 export default function Page() {
-  const { places, categories, cities } = useContext(UserContext);
-  const searchParams = useSearchParams();
-  const { replace } = useRouter();
-  const pathname = usePathname();
+  const { places, categories, cities } = useContext(UserContext)
+  const searchParams = useSearchParams()
+  const { replace } = useRouter()
+  const pathname = usePathname()
 
-  const [displayFilters, setDisplayFilters] = useState(false);
+  const [displayFilters, setDisplayFilters] = useState(false)
 
-  const category = searchParams.get("category") || "";
-  const city = searchParams.get("city") || "";
+  const category = searchParams.get('category') || ''
+  const city = searchParams.get('city') || ''
 
   let filteredPlaces = places.filter((place) => {
     const matchesCategory =
       !category ||
-      place.category.some(
-        (cat) => cat.toLowerCase() === category.toLowerCase(),
-      );
+      place.category.some((cat) => cat.toLowerCase() === category.toLowerCase())
 
-    const matchesCity =
-      !city || place.city.toLowerCase() === city.toLowerCase();
+    const matchesCity = !city || place.city.toLowerCase() === city.toLowerCase()
 
-    return matchesCategory && matchesCity;
-  });
+    return matchesCategory && matchesCity
+  })
 
   const mappedCategories = categories.reduce<CategoryDictionary>(
     (acc, category) => {
-      acc[category] = categoryDictionary[category];
-      return acc;
+      acc[category] = categoryDictionary[category]
+      return acc
     },
-    {},
-  );
+    {}
+  )
 
   const handleFilter = (
     event: React.ChangeEvent<HTMLSelectElement>,
-    type: string,
+    type: string
   ) => {
-    const params = new URLSearchParams(searchParams);
+    const params = new URLSearchParams(searchParams)
 
-    if (type === "city") {
-      params.set("city", event.target.value);
-    } else if (type === "category") {
-      params.set("category", event.target.value);
+    if (type === 'city') {
+      params.set('city', event.target.value)
+    } else if (type === 'category') {
+      params.set('category', event.target.value)
     }
-    replace(`${pathname}?${params.toString()}`, { scroll: false });
-  };
+    replace(`${pathname}?${params.toString()}`, { scroll: false })
+  }
 
   const clearSearchParams = () => {
-    const params = new URLSearchParams();
+    const params = new URLSearchParams()
 
-    replace(`${pathname}?${params.toString()}`, { scroll: false });
-  };
+    replace(`${pathname}?${params.toString()}`, { scroll: false })
+  }
 
   return (
     <div className="flex items-center justify-between w-full h-full overflow-hidden gap-8">
@@ -97,5 +90,5 @@ export default function Page() {
         </div>
       </div>
     </div>
-  );
+  )
 }

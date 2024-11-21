@@ -1,57 +1,107 @@
-import { CreatePlaceDTO, UpdatePlaceDTO } from "../utils/type-definitions";
+import { CreatePlaceDTO, UpdatePlaceDTO } from '../utils/type-definitions'
 
-const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
 
-export async function fetchPlaces() {
+export async function register(
+  firstName: string,
+  lastName: string,
+  email: string,
+  password: string
+) {
+  const body = JSON.stringify({
+    firstName,
+    lastName,
+    email,
+    password,
+  })
   try {
-    const response = await fetch(`${baseUrl}/places`, { cache: "no-store" });
-    const data = await response.json();
-    return data;
+    const response = await fetch(`${baseUrl}/api/v1/auth/register`, {
+      cache: 'no-store',
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: body,
+    })
+    const data = await response.json()
+    return data
   } catch (e) {
-    console.error("Failed to fetch places data.", e);
-    throw new Error("Failed to fetch places data.");
+    console.error('Failed to register.', e)
+  }
+}
+export async function login(email: string, password: string) {
+  const body = JSON.stringify({
+    email,
+    password,
+  })
+  try {
+    const response = await fetch(`${baseUrl}/api/v1/auth`, {
+      cache: 'no-store',
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: body,
+    })
+    const data = await response.json()
+    return data
+  } catch (e) {
+    console.error('Failed to login.', e)
+  }
+}
+
+export async function getPlaces() {
+  try {
+    const response = await fetch(`${baseUrl}/api/v1/place`, {
+      cache: 'no-store',
+    })
+    const data = await response.json()
+    return data
+  } catch (e) {
+    console.error('Failed to fetch places data.', e)
+    throw new Error('Failed to fetch places data.')
   }
 }
 
 export async function fetchPlace(placeId: string) {
   try {
     const data = await fetch(`${baseUrl}/places/${placeId}`, {
-      cache: "no-store",
-    });
+      cache: 'no-store',
+    })
 
-    return data.json();
+    return data.json()
   } catch (e) {
-    console.error("Failed to fetch place data.", e);
-    throw new Error("Failed to fetch place data.");
+    console.error('Failed to fetch place data.', e)
+    throw new Error('Failed to fetch place data.')
   }
 }
 
 export async function fetchMenu(placeId: string) {
   try {
     const data = await fetch(`${baseUrl}/menus/place/${placeId}`, {
-      cache: "no-store",
-    });
+      cache: 'no-store',
+    })
 
-    return data.json();
+    return data.json()
   } catch (e) {
-    console.error("Failed to fetch place data.", e);
-    throw new Error("Failed to fetch place data.");
+    console.error('Failed to fetch place data.', e)
+    throw new Error('Failed to fetch place data.')
   }
 }
 
 export async function fetchCreatePlace(data: CreatePlaceDTO) {
   try {
     // await fetch('http://127.0.0.1:3333/register/places', {
-    await fetch("https://65a2bb8542ecd7d7f0a825df.mockapi.io/api/v1/places", {
-      method: "POST",
+    await fetch('https://65a2bb8542ecd7d7f0a825df.mockapi.io/api/v1/places', {
+      method: 'POST',
       body: JSON.stringify(data),
-      cache: "no-cache",
+      cache: 'no-cache',
       headers: new Headers({
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       }),
-    });
+    })
   } catch (err) {
-    console.error("Failed to create place.", err);
+    console.error('Failed to create place.', err)
   }
 }
 
@@ -60,15 +110,15 @@ export async function fetchUpdatePlace(data: UpdatePlaceDTO, id: string) {
     await fetch(
       `https://65a2bb8542ecd7d7f0a825df.mockapi.io/api/v1/places/${id}`,
       {
-        method: "PUT",
+        method: 'PUT',
         body: JSON.stringify(data),
-        cache: "no-cache",
+        cache: 'no-cache',
         headers: new Headers({
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         }),
-      },
-    );
+      }
+    )
   } catch (err) {
-    console.error("Failed to update place.", err);
+    console.error('Failed to update place.', err)
   }
 }

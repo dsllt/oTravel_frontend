@@ -9,11 +9,12 @@ export async function generateStaticParams() {
   return places;
 }
 
-export default function PlacePage({
-  params,
-}: {
-  params: { placeSlug: string };
-}) {
+export default async function PlacePage(
+  props: {
+    params: Promise<{ placeSlug: string }>;
+  }
+) {
+  const params = await props.params;
   const { placeSlug } = params;
 
   return <PlacePageClient slug={placeSlug} />;
