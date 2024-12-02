@@ -8,24 +8,33 @@ import { LoginModal } from '@ui/login/login-modal'
 
 export function Navbar() {
   const { data, callback } = useNavbar()
-  console.log('navbar', data)
+  console.log(data)
 
   return (
     <div className="navbar bg-zinc-900 h-16">
       <NavbarLogo />
       <NavbarLinks links={data.links} />
       {!data.isLogged ? (
-        <NavbarButton title="Login" onClick={callback.handleOpenLogin} />
+        <NavbarButton title="Login" onClick={callback.handleOpenLoginModal} />
       ) : (
         <NavbarButton
           title="Menu"
-          onClick={() => callback.setDisplayProfile(true)}
+          onClick={() => callback.setDisplayProfileModal(true)}
         />
       )}
-      {data.displayLogin && (
-        <LoginModal onClickCloseModal={callback.handleCloseLogin} />
+      {data.displayLoginModal && (
+        <LoginModal
+          onClickCloseModal={callback.onClickCloseLoginModal}
+          onClickRegister={callback.onClickRegister}
+          onClickLogin={callback.onClickLogin}
+        />
       )}
-      {data.displayProfile && <ProfileModal />}
+      {data.displayMenuModal && (
+        <ProfileModal
+          onClickCloseModal={callback.onClickCloseMenuModal}
+          onClickLogout={callback.onClickLogout}
+        />
+      )}
     </div>
   )
 }

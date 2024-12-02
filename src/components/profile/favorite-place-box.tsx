@@ -1,28 +1,27 @@
-"use client";
+'use client'
 
-import { Info, Trash } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { Favorite, Place } from "../../utils/type-definitions";
-import { useContext } from "react";
-import { UserContext } from "../../context/userContext";
+import { Info, Trash } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { Favorite, Place } from '../../utils/type-definitions'
+import { useContext } from 'react'
+import { UserContext } from '../../context/userContext'
 
 type FavoritePlaceBoxProps = {
-  placeInfo: Favorite;
-};
+  placeInfo: Favorite
+}
 
 export function FavoritePlaceBox({ placeInfo }: FavoritePlaceBoxProps) {
-  const { setFavorites, favorites } = useContext(UserContext);
+  const { setFavorites, favorites } = useContext(UserContext)
 
-  const router = useRouter();
+  const router = useRouter()
   function handleClickPlaceBox(slug: string) {
-    router.push(`/explore/${slug}`);
+    router.push(`/explore/${slug}`)
   }
 
   function handleDeleteFavorite(id: string) {
     setFavorites((prevState) =>
-      prevState.filter((favorite) => favorite.id !== id),
-    );
-    console.log(favorites);
+      prevState.filter((favorite) => favorite.id !== id)
+    )
   }
 
   return (
@@ -55,5 +54,5 @@ export function FavoritePlaceBox({ placeInfo }: FavoritePlaceBoxProps) {
         </div>
       </div>
     </div>
-  );
+  )
 }

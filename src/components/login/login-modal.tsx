@@ -3,29 +3,28 @@ import { useState } from 'react'
 import { Plus, X } from 'lucide-react'
 import { LoginModalButton } from './login-modal-button'
 import LoginModalInputs from './loginModalInputs'
-import { login, register } from '@lib/data'
 import RegisterModalInputs from './registerModalInputs'
+import { UserDTO } from '../../utils/type-definitions'
 type LoginModalProps = {
   onClickCloseModal: () => void
+  onClickRegister: (formData: any) => Promise<UserDTO>
+  onClickLogin: (formData: any) => Promise<void>
 }
 
-export function LoginModal({ onClickCloseModal }: LoginModalProps) {
+export function LoginModal({
+  onClickCloseModal,
+  onClickRegister,
+  onClickLogin,
+}: LoginModalProps) {
   const [displayLoginInputs, setDisplayLoginInputs] = useState(false)
   const [displayRegisterInputs, setDisplayRegisterInputs] = useState(false)
 
-  async function handleLogin(formData: any) {
-    const email = formData.get('email')
-    const password = formData.get('password')
-    const response = await login(email, password)
-    console.log(response)
-  }
   async function handleRegister(formData: any) {
-    const firstName = formData.get('firstName')
-    const lastName = formData.get('lastName')
-    const email = formData.get('email')
-    const password = formData.get('password')
-    const response = await register(firstName, lastName, email, password)
-    console.log(response)
+    const response = await onClickRegister(formData)
+    if (response.firstName) {
+      setDisplayRegisterInputs(false)
+      setDisplayLoginInputs(true)
+    }
   }
 
   return (
@@ -38,11 +37,11 @@ export function LoginModal({ onClickCloseModal }: LoginModalProps) {
             </button>
           </div>
 
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-8 w-80">
             <h1 className="text-3xl text-center">Olá!</h1>
             <p>Faça seu login ou acesse como visitante.</p>
 
-            {!displayLoginInputs && (
+            {!displayLoginInputs && !displayRegisterInputs && (
               <div className="space-y-5">
                 <LoginModalButton
                   onClickFn={() => setDisplayLoginInputs(true)}
@@ -74,14 +73,14 @@ export function LoginModal({ onClickCloseModal }: LoginModalProps) {
 
             {displayLoginInputs && (
               <LoginModalInputs
-                onClickLogin={handleLogin}
+                onClickLogin={onClickLogin}
                 onClickVoltar={() => setDisplayLoginInputs(false)}
               />
             )}
             {displayRegisterInputs && (
               <RegisterModalInputs
                 onClickRegister={handleRegister}
-                onClickVoltar={() => setDisplayLoginInputs(false)}
+                onClickVoltar={() => setDisplayRegisterInputs(false)}
               />
             )}
           </div>
