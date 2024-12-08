@@ -45,8 +45,8 @@ const nextConfig = {
       },
     ];
   },
-  basePath: "/oTravel_frontend",
-  assetPrefix: "/oTravel_frontend/",
+  basePath: "",
+  assetPrefix: "/",
   output: "export",
   distDir: "dist",
 };

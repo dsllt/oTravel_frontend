@@ -2,9 +2,59 @@ import { CreatePlaceDTO, UpdatePlaceDTO } from "../utils/type-definitions";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-export async function fetchPlaces() {
+export async function register(
+  firstName: string,
+  lastName: string,
+  email: string,
+  password: string,
+) {
+  const body = JSON.stringify({
+    firstName,
+    lastName,
+    email,
+    password,
+  });
   try {
-    const response = await fetch(`${baseUrl}/places`, { cache: "no-store" });
+    const response = await fetch(`${baseUrl}/api/v1/auth/register`, {
+      cache: "no-store",
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: body,
+    });
+    const data = await response.json();
+    return data;
+  } catch (e) {
+    console.error("Failed to register.", e);
+  }
+}
+export async function login(email: string, password: string) {
+  const body = JSON.stringify({
+    email,
+    password,
+  });
+  try {
+    const response = await fetch(`${baseUrl}/api/v1/auth`, {
+      cache: "no-store",
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: body,
+    });
+    const data = await response.json();
+    return data;
+  } catch (e) {
+    console.error("Failed to login.", e);
+  }
+}
+
+export async function getPlaces() {
+  try {
+    const response = await fetch(`${baseUrl}/api/v1/place`, {
+      cache: "no-store",
+    });
     const data = await response.json();
     return data;
   } catch (e) {

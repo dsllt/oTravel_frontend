@@ -30,7 +30,6 @@ export default function MenuContainer({ menu, placeId }: MenuContainerProps) {
   }
 
   function handleEditMenu(id: string) {
-    console.log(id);
     const modal = document.getElementById(id) as HTMLDialogElement;
     if (modal) {
       modal.showModal();

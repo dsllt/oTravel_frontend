@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Navbar } from "../components/navbar";
-import { cookies } from "next/headers";
+import { Navbar } from "../components/navbar/navbar";
 import UserProvider from "../context/userContext";
-import { LoginModal } from "@ui/login/login-modal";
-import { ProfileModal } from "@ui/profile/profile-modal";
 
 export const metadata: Metadata = {
   title: "OTravel",
@@ -16,9 +13,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  let isLogged = true;
-  let isAdmin = false;
-
   return (
     <html lang="en" data-theme="dim">
       <body
@@ -27,11 +21,9 @@ export default function RootLayout({
       >
         <UserProvider>
           <div className="fixed top-0 left-0 right-0 z-50">
-            <Navbar isLogged={isLogged} isAdmin={isAdmin} />
+            <Navbar />
           </div>
           <div className="flex-1 overflow-y-auto pt-16">{children}</div>
-          <LoginModal />
-          <ProfileModal />
         </UserProvider>
       </body>
     </html>

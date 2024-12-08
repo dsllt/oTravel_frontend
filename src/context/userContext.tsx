@@ -1,5 +1,4 @@
 "use client";
-import { fetchPlaces } from "../services/data";
 import { favoritesMock, menuMock, placesMock } from "../utils/mocks";
 import {
   Favorite,

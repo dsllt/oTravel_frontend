@@ -49,7 +49,6 @@ export default function PlacePageClient({ slug }: { slug: string }) {
   const [reviews, setReview] = useState(reviewsMock);
 
   function displayScheduleModal() {
-    console.log("displaying schedule modal");
     const modal = document.getElementById("schedule-edit") as HTMLDialogElement;
     if (modal) {
       modal.showModal();

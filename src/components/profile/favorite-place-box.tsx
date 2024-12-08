@@ -22,7 +22,6 @@ export function FavoritePlaceBox({ placeInfo }: FavoritePlaceBoxProps) {
     setFavorites((prevState) =>
       prevState.filter((favorite) => favorite.id !== id),
     );
-    console.log(favorites);
   }
 
   return (
