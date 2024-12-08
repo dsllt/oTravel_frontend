@@ -1,6 +1,6 @@
-import { redirect } from 'next/navigation'
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  redirect('/explore')
-  return null
+  redirect("/explore");
+  return null;
 }

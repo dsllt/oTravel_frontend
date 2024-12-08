@@ -1,7 +1,7 @@
 type NavbarButtonProps = {
-  title: string
-  onClick: () => void
-}
+  title: string;
+  onClick: () => void;
+};
 export default function NavbarButton({ title, onClick }: NavbarButtonProps) {
   return (
     <div className="navbar-end">
@@ -9,5 +9,5 @@ export default function NavbarButton({ title, onClick }: NavbarButtonProps) {
         {title}
       </button>
     </div>
-  )
+  );
 }

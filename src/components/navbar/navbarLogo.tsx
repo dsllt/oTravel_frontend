@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function NavbarLogo() {
   return (
@@ -7,5 +7,5 @@ export default function NavbarLogo() {
         OTravel
       </Link>
     </div>
-  )
+  );
 }

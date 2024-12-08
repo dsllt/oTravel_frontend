@@ -1,17 +1,17 @@
-import type { Metadata } from 'next'
-import './globals.css'
-import { Navbar } from '../components/navbar/navbar'
-import UserProvider from '../context/userContext'
+import type { Metadata } from "next";
+import "./globals.css";
+import { Navbar } from "../components/navbar/navbar";
+import UserProvider from "../context/userContext";
 
 export const metadata: Metadata = {
-  title: 'OTravel',
-  description: 'Encontre os melhores lugares na cidade',
-}
+  title: "OTravel",
+  description: "Encontre os melhores lugares na cidade",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en" data-theme="dim">
@@ -27,5 +27,5 @@ export default function RootLayout({
         </UserProvider>
       </body>
     </html>
-  )
+  );
 }

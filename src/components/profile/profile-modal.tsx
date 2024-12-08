@@ -1,49 +1,49 @@
-'use client'
-import { useContext, useState } from 'react'
-import { UserContext } from '../../context/userContext'
-import { HousePlus, LogOut, Star, User, X } from 'lucide-react'
-import FavoritesModal from './favorites-modal'
-import PersonalInfoModal from './personal-info-modal'
-import RegisterNewPlaceModal from './register-new-place-modal'
+"use client";
+import { useContext, useState } from "react";
+import { UserContext } from "../../context/userContext";
+import { HousePlus, LogOut, Star, User, X } from "lucide-react";
+import FavoritesModal from "./favorites-modal";
+import PersonalInfoModal from "./personal-info-modal";
+import RegisterNewPlaceModal from "./register-new-place-modal";
 
 type ProfileModalProps = {
-  onClickCloseModal: () => void
-  onClickLogout: () => void
-}
+  onClickCloseModal: () => void;
+  onClickLogout: () => void;
+};
 
 export function ProfileModal({
   onClickCloseModal,
   onClickLogout,
 }: ProfileModalProps) {
   const { displayProfile, setDisplayProfile, userData } =
-    useContext(UserContext)
-  const [displayFavorites, setDisplayFavorites] = useState(false)
-  const [displayPersonalInfo, setDisplayPersonalInfo] = useState(false)
-  const [displayRegisterNewPlace, setDisplayRegisterNewPlace] = useState(false)
+    useContext(UserContext);
+  const [displayFavorites, setDisplayFavorites] = useState(false);
+  const [displayPersonalInfo, setDisplayPersonalInfo] = useState(false);
+  const [displayRegisterNewPlace, setDisplayRegisterNewPlace] = useState(false);
 
   function handleCloseDisplayProfile() {
-    setDisplayProfile(false)
-    setDisplayFavorites(false)
-    setDisplayPersonalInfo(false)
-    setDisplayRegisterNewPlace(false)
+    setDisplayProfile(false);
+    setDisplayFavorites(false);
+    setDisplayPersonalInfo(false);
+    setDisplayRegisterNewPlace(false);
   }
 
   function handleDisplayFavorites() {
-    setDisplayFavorites(true)
-    setDisplayPersonalInfo(false)
-    setDisplayRegisterNewPlace(false)
+    setDisplayFavorites(true);
+    setDisplayPersonalInfo(false);
+    setDisplayRegisterNewPlace(false);
   }
 
   function handleDisplayPersonalInfo() {
-    setDisplayFavorites(false)
-    setDisplayPersonalInfo(true)
-    setDisplayRegisterNewPlace(false)
+    setDisplayFavorites(false);
+    setDisplayPersonalInfo(true);
+    setDisplayRegisterNewPlace(false);
   }
 
   function handleDisplayCreateNewPlace() {
-    setDisplayFavorites(false)
-    setDisplayPersonalInfo(false)
-    setDisplayRegisterNewPlace(true)
+    setDisplayFavorites(false);
+    setDisplayPersonalInfo(false);
+    setDisplayRegisterNewPlace(true);
   }
 
   return (
@@ -113,5 +113,5 @@ export function ProfileModal({
         )}
       </div>
     </>
-  )
+  );
 }

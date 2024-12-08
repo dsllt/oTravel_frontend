@@ -1,8 +1,8 @@
 type LoginModalInputs = {
-  onClickLogin: (formData: any) => void
-  onClickVoltar: () => void
-  loginError: string
-}
+  onClickLogin: (formData: any) => void;
+  onClickVoltar: () => void;
+  loginError: string;
+};
 export default function LoginModalInputs({
   onClickLogin,
   onClickVoltar,
@@ -32,5 +32,5 @@ export default function LoginModalInputs({
         </button>
       </form>
     </div>
-  )
+  );
 }

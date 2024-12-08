@@ -1,22 +1,22 @@
-import { login, register } from '@lib/data'
-import { on } from 'process'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { login, register } from "@lib/data";
+import { on } from "process";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 export default function useNavbar() {
-  const [displayLoginModal, setDisplayLoginModal] = useState(false)
-  const [displayMenuModal, setDisplayProfileModal] = useState(false)
-  const [isAdmin, setIsAdmin] = useState(false)
-  const [isLogged, setIsLogged] = useState(false)
-  const [loginError, setLoginError] = useState('')
+  const [displayLoginModal, setDisplayLoginModal] = useState(false);
+  const [displayMenuModal, setDisplayProfileModal] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isLogged, setIsLogged] = useState(false);
+  const [loginError, setLoginError] = useState("");
 
   const links = useMemo(
     () => [
-      { name: 'Explorar', href: '/explore', display: true },
-      { name: 'Mapa', href: '/map', display: true },
-      { name: 'Incluir café', href: '/new-place', display: isAdmin },
+      { name: "Explorar", href: "/explore", display: true },
+      { name: "Mapa", href: "/map", display: true },
+      { name: "Incluir café", href: "/new-place", display: isAdmin },
     ],
-    [isAdmin]
-  )
+    [isAdmin],
+  );
 
   const data = useMemo(
     () => ({
@@ -27,49 +27,49 @@ export default function useNavbar() {
       displayMenuModal,
       loginError,
     }),
-    [isAdmin, isLogged, links, displayLoginModal, displayMenuModal, loginError]
-  )
+    [isAdmin, isLogged, links, displayLoginModal, displayMenuModal, loginError],
+  );
 
   const handleOpenLoginModal = useCallback(() => {
-    setDisplayLoginModal(true)
-  }, [setDisplayLoginModal])
+    setDisplayLoginModal(true);
+  }, [setDisplayLoginModal]);
 
   const onClickCloseLoginModal = useCallback(() => {
-    setDisplayLoginModal(false)
-  }, [setDisplayLoginModal])
+    setDisplayLoginModal(false);
+  }, [setDisplayLoginModal]);
 
   const onClickCloseMenuModal = useCallback(() => {
-    setDisplayProfileModal(false)
-  }, [setDisplayProfileModal])
+    setDisplayProfileModal(false);
+  }, [setDisplayProfileModal]);
 
   const onClickRegister = useCallback(async (formData: any) => {
-    const firstName = formData.get('firstName')
-    const lastName = formData.get('lastName')
-    const email = formData.get('email')
-    const password = formData.get('password')
-    return await register(firstName, lastName, email, password)
-  }, [])
+    const firstName = formData.get("firstName");
+    const lastName = formData.get("lastName");
+    const email = formData.get("email");
+    const password = formData.get("password");
+    return await register(firstName, lastName, email, password);
+  }, []);
 
   const onClickLogin = useCallback(async (formData: any) => {
-    const email = formData.get('email')
-    const password = formData.get('password')
-    const response = await login(email, password)
+    const email = formData.get("email");
+    const password = formData.get("password");
+    const response = await login(email, password);
     if (response && response.token) {
-      localStorage.setItem('token', response.token)
-      setIsLogged(true)
-      setDisplayLoginModal(false)
-      setLoginError('')
+      localStorage.setItem("token", response.token);
+      setIsLogged(true);
+      setDisplayLoginModal(false);
+      setLoginError("");
     } else {
-      setLoginError(response.message)
+      setLoginError(response.message);
     }
-  }, [])
+  }, []);
 
   const onClickLogout = useCallback(() => {
-    console.log(`logout`)
-    localStorage.removeItem('token')
-    setIsLogged(false)
-    setDisplayProfileModal(false)
-  }, [])
+    console.log(`logout`);
+    localStorage.removeItem("token");
+    setIsLogged(false);
+    setDisplayProfileModal(false);
+  }, []);
 
   const callback = useMemo(
     () => ({
@@ -89,15 +89,15 @@ export default function useNavbar() {
       onClickLogin,
       onClickCloseMenuModal,
       onClickLogout,
-    ]
-  )
+    ],
+  );
 
   useEffect(() => {
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem("token");
     if (token) {
-      setIsLogged(true)
+      setIsLogged(true);
     }
-  }, [])
+  }, []);
 
-  return { data, callback }
+  return { data, callback };
 }

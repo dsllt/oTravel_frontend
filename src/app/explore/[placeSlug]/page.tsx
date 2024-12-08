@@ -9,11 +9,9 @@ export async function generateStaticParams() {
   return places;
 }
 
-export default async function PlacePage(
-  props: {
-    params: Promise<{ placeSlug: string }>;
-  }
-) {
+export default async function PlacePage(props: {
+  params: Promise<{ placeSlug: string }>;
+}) {
   const params = await props.params;
   const { placeSlug } = params;
 

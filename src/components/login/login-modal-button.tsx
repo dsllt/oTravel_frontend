@@ -1,12 +1,12 @@
-import Image from 'next/image'
+import Image from "next/image";
 
 type LoginModalButtonProps = {
-  onClickFn: () => void
-  text: string
-  imgSrc?: string
-  imgAlt?: string
-  icon?: React.ReactNode
-}
+  onClickFn: () => void;
+  text: string;
+  imgSrc?: string;
+  imgAlt?: string;
+  icon?: React.ReactNode;
+};
 
 export function LoginModalButton({
   onClickFn,
@@ -24,8 +24,8 @@ export function LoginModalButton({
         <>{icon}</>
       ) : (
         <Image src={imgSrc!} alt={imgAlt!} width={32} height={32} />
-      )}{' '}
+      )}{" "}
       {text} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     </button>
-  )
+  );
 }

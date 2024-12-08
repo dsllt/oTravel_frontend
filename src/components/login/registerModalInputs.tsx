@@ -1,7 +1,7 @@
 type RegisterModalInputsProps = {
-  onClickRegister: (formData: any) => void
-  onClickVoltar: () => void
-}
+  onClickRegister: (formData: any) => void;
+  onClickVoltar: () => void;
+};
 export default function RegisterModalInputs({
   onClickRegister,
   onClickVoltar,
@@ -41,5 +41,5 @@ export default function RegisterModalInputs({
         </button>
       </form>
     </div>
-  )
+  );
 }
