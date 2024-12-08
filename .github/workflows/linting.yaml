@@ -13,8 +13,7 @@ jobs:
         with:
           node-version: "lts/hydrogen"
 
-      - run: npm cache clean --force
-      - run: npm install --legacy-peer-deps
+      - run: npm ci
 
       - run: npm run lint:prettier:check
 
@@ -28,7 +27,6 @@ jobs:
         with:
           node-version: "lts/hydrogen"
 
-      - run: npm cache clean --force
-      - run: npm install --legacy-peer-deps
+      - run: npm ci
 
       - run: npm run lint:eslint:check
