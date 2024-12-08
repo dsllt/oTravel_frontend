@@ -7,6 +7,7 @@ export default function useNavbar() {
   const [displayMenuModal, setDisplayProfileModal] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
   const [isLogged, setIsLogged] = useState(false)
+  const [loginError, setLoginError] = useState('')
 
   const links = useMemo(
     () => [
@@ -24,8 +25,9 @@ export default function useNavbar() {
       links,
       displayLoginModal,
       displayMenuModal,
+      loginError,
     }),
-    [isAdmin, isLogged, links, displayLoginModal, displayMenuModal]
+    [isAdmin, isLogged, links, displayLoginModal, displayMenuModal, loginError]
   )
 
   const handleOpenLoginModal = useCallback(() => {
@@ -56,8 +58,9 @@ export default function useNavbar() {
       localStorage.setItem('token', response.token)
       setIsLogged(true)
       setDisplayLoginModal(false)
+      setLoginError('')
     } else {
-      console.error('Falha no login:', response)
+      setLoginError(response.message)
     }
   }, [])
 

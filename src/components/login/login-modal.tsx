@@ -9,12 +9,14 @@ type LoginModalProps = {
   onClickCloseModal: () => void
   onClickRegister: (formData: any) => Promise<UserDTO>
   onClickLogin: (formData: any) => Promise<void>
+  loginError: string
 }
 
 export function LoginModal({
   onClickCloseModal,
   onClickRegister,
   onClickLogin,
+  loginError,
 }: LoginModalProps) {
   const [displayLoginInputs, setDisplayLoginInputs] = useState(false)
   const [displayRegisterInputs, setDisplayRegisterInputs] = useState(false)
@@ -49,13 +51,12 @@ export function LoginModal({
                   imgSrc="assets/icons/email-icon.svg"
                   imgAlt="Email Logo"
                 />
-                <LoginModalButton
+                {/* <LoginModalButton
                   onClickFn={() => setDisplayLoginInputs(true)}
                   text="Entrar com o Google"
                   imgSrc="assets/icons/google-icon.svg"
                   imgAlt="Google Logo"
-                />
-
+                /> */}
                 <LoginModalButton
                   onClickFn={() => setDisplayRegisterInputs(true)}
                   text="Criar nova conta"
@@ -75,6 +76,7 @@ export function LoginModal({
               <LoginModalInputs
                 onClickLogin={onClickLogin}
                 onClickVoltar={() => setDisplayLoginInputs(false)}
+                loginError={loginError}
               />
             )}
             {displayRegisterInputs && (

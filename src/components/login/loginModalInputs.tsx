@@ -1,10 +1,12 @@
 type LoginModalInputs = {
   onClickLogin: (formData: any) => void
   onClickVoltar: () => void
+  loginError: string
 }
 export default function LoginModalInputs({
   onClickLogin,
   onClickVoltar,
+  loginError,
 }: LoginModalInputs) {
   return (
     <div>
@@ -21,6 +23,7 @@ export default function LoginModalInputs({
           placeholder="Senha"
           className="input input-primary"
         />
+        <p>{loginError}</p>
         <button className="btn btn-primary" type="submit">
           Entrar
         </button>

@@ -8,7 +8,6 @@ import { LoginModal } from '@ui/login/login-modal'
 
 export function Navbar() {
   const { data, callback } = useNavbar()
-  console.log(data)
 
   return (
     <div className="navbar bg-zinc-900 h-16">
@@ -27,6 +26,7 @@ export function Navbar() {
           onClickCloseModal={callback.onClickCloseLoginModal}
           onClickRegister={callback.onClickRegister}
           onClickLogin={callback.onClickLogin}
+          loginError={data.loginError}
         />
       )}
       {data.displayMenuModal && (
