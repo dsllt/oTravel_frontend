@@ -7,7 +7,11 @@ import { categoryDictionary } from "../../utils/dictionary";
 import { CategoryDictionary } from "@ui/explore/search-header";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { MapPlacesFilter } from "@ui/maps/map-places-filter";
-import Map from "@ui/maps/map";
+
+const Map = dynamic(() => import("../../components/maps/map"), {
+  loading: () => <p>Um mapa está sendo carregado</p>,
+  ssr: false,
+});
 
 export default function Page() {
   const { places, categories, cities } = useContext(UserContext);
@@ -63,7 +67,7 @@ export default function Page() {
 
   return (
     <div className="flex items-center justify-between w-full h-full overflow-hidden gap-8">
-      <Map places={places} />
+      <Map places={places} key={`${category}-${city}`} />
       <div className="pr-12 flex flex-col items-start justify-start h-full w-full gap-3">
         <div className="flex justify-between items-center w-full">
           <h2 className="font-dmSans font-3xl font-bold mb-5 mt-3">
