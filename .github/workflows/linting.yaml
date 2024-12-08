@@ -29,6 +29,6 @@ jobs:
           node-version: "lts/hydrogen"
 
       - run: npm cache clean --force
-      - run: npm ci
+      - run: npm install --legacy-peer-deps
 
       - run: npm run lint:eslint:check
