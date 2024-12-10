@@ -7,7 +7,7 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { UserContext } from "../../context/userContext";
-import { postPlace } from "@lib/data";
+import { postPlace } from "@lib/post-place";
 
 export type Categories = {
   [key: string]: string;
