@@ -66,7 +66,7 @@ function CategorySelect({
           className="bg-transparent pr-5 focus:outline-none text-gray-400"
           onChange={handleSelectCategory}
         >
-          <option selected>Selecione a categoria</option>
+          <option value="">Selecione a categoria</option>
           {Object.keys(availableCategories).map((category) => (
             <option key={category} value={category}>
               {availableCategories[category]}

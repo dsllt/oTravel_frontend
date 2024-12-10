@@ -7,6 +7,7 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { UserContext } from "../../context/userContext";
+import { postPlace } from "@lib/data";
 
 export type Categories = {
   [key: string]: string;
@@ -81,9 +82,10 @@ export default function RegisterNewPlaceModal({
     useState<Categories>(initialCategories);
 
   async function handleIncludeNewPlace(data: NewPlaceSchema) {
-    const placeCategory = Object.keys(data.placeCategory);
+    const placeCategory = Object.keys(data.placeCategory).map((category) =>
+      category.toUpperCase(),
+    );
     const place = {
-      id: Math.random().toString(),
       name: data.placeName,
       image_url: data.placeImage,
       description: data.placeDescription,
@@ -95,19 +97,8 @@ export default function RegisterNewPlaceModal({
       phone: data.placePhone,
       slug: data.placeSlug,
       category: placeCategory,
-      rating: Number(data.placeRating),
-      created_at: new Date().toISOString(),
     };
-    // const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-
-    // await fetch(`${baseUrl}/places`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(place),
-    // });
-    setPlaces((prevState) => [...prevState, place]);
+    await postPlace(place);
     reset();
   }
 

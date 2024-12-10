@@ -89,16 +89,16 @@ export async function fetchMenu(placeId: string) {
   }
 }
 
-export async function fetchCreatePlace(data: CreatePlaceDTO) {
+export async function postPlace(data: CreatePlaceDTO) {
+  const token = localStorage.getItem("token");
   try {
-    // await fetch('http://127.0.0.1:3333/register/places', {
-    await fetch("https://65a2bb8542ecd7d7f0a825df.mockapi.io/api/v1/places", {
+    await fetch(`${baseUrl}/api/v1/place`, {
       method: "POST",
-      body: JSON.stringify(data),
-      cache: "no-cache",
-      headers: new Headers({
+      headers: {
         "Content-Type": "application/json",
-      }),
+        authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(data),
     });
   } catch (err) {
     console.error("Failed to create place.", err);

@@ -68,11 +68,13 @@ export type CreatePlaceDTO = {
   image_url: string; //'https://loremflickr.com/640/480/business',
   description: string; //'secondary',
   address: string; //'Rua Fernandes Vieira, 656 - Bom Fim',
+  city: string;
+  country: string;
   latitude: number; //-30.035212829644085,
   longitude: number; //-51.210918285789916
   phone: string; //'1-392-289-9430',
   slug: string; //'the-coffee',
-  rating: number; //0,
+  category: string[];
 };
 
 export type UpdatePlaceDTO = {
