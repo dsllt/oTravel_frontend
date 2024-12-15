@@ -1,72 +1,28 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import CategorySelect from "@ui/profile/category-select";
-import Input from "@ui/profile/modal-input";
-import TextArea from "@ui/profile/modal-text-area";
-import { X } from "lucide-react";
-import React, { useContext, useState } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { UserContext } from "../../context/userContext";
-
-export type Categories = {
-  [key: string]: string;
-};
+import { zodResolver } from '@hookform/resolvers/zod';
+import CategorySelect from '@ui/profile/category-select';
+import Input from '@ui/profile/modal-input';
+import TextArea from '@ui/profile/modal-text-area';
+import { X } from 'lucide-react';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { postPlace } from '@lib/post-place';
+import { NewPlaceSchema, newPlaceSchema } from '../../utils/new-place-schema';
+import { Categories, CreatePlaceDTO } from '../../domain/models/place';
 
 const initialCategories: Categories = {
-  restaurant: "Restaurante",
-  coffee: "Café",
-  bakery: "Padaria",
-  market: "Mercado",
+  restaurant: 'Restaurante',
+  coffee: 'Café',
+  bakery: 'Padaria',
+  market: 'Mercado',
 };
-const urlPattern = new RegExp(
-  "^(https?:\\/\\/)?" + // protocol
-    "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name and extension
-    "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
-    "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
-    "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
-    "(\\#[-a-z\\d_]*)?$",
-  "i",
-); // fragment locator
-
-const newPlaceSchema = z.object({
-  placeName: z.string(),
-  placeAddress: z.string(),
-  placeCity: z.string(),
-  placeCountry: z.string(),
-  placeLatitude: z
-    .string()
-    .transform((value) => parseFloat(value.replace(",", ".")))
-    .refine((value) => !isNaN(value), {
-      message: "Latitude must be a valid number",
-    }),
-  placeLongitude: z
-    .string()
-    .transform((value) => parseFloat(value.replace(",", ".")))
-    .refine((value) => !isNaN(value), {
-      message: "Longitude must be a valid number",
-    }),
-  placeImage: z.string().refine((value) => urlPattern.test(value), {
-    message: "Must be a valid URL",
-  }),
-  placeCategory: z.record(z.string()),
-  placeDescription: z.string(),
-  placeSlug: z
-    .string()
-    .transform((value) => value.toLowerCase().replace(/\s+/g, "-")),
-  placePhone: z.string(),
-  placeRating: z.string(),
-});
-
-export type NewPlaceSchema = z.infer<typeof newPlaceSchema>;
 
 type RegisterNewPlaceModalProps = {
   setDisplayRegisterNewPlace: React.Dispatch<React.SetStateAction<boolean>>;
 };
+
 export default function RegisterNewPlaceModal({
   setDisplayRegisterNewPlace,
 }: RegisterNewPlaceModalProps) {
-  const { setPlaces } = useContext(UserContext);
-
   const {
     register,
     handleSubmit,
@@ -81,9 +37,10 @@ export default function RegisterNewPlaceModal({
     useState<Categories>(initialCategories);
 
   async function handleIncludeNewPlace(data: NewPlaceSchema) {
-    const placeCategory = Object.keys(data.placeCategory);
-    const place = {
-      id: Math.random().toString(),
+    const placeCategory = Object.keys(data.placeCategory).map((category) =>
+      category.toUpperCase(),
+    );
+    const place: CreatePlaceDTO = {
       name: data.placeName,
       image_url: data.placeImage,
       description: data.placeDescription,
@@ -95,19 +52,8 @@ export default function RegisterNewPlaceModal({
       phone: data.placePhone,
       slug: data.placeSlug,
       category: placeCategory,
-      rating: Number(data.placeRating),
-      created_at: new Date().toISOString(),
     };
-    // const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-
-    // await fetch(`${baseUrl}/places`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(place),
-    // });
-    setPlaces((prevState) => [...prevState, place]);
+    await postPlace(place);
     reset();
   }
 
@@ -118,7 +64,7 @@ export default function RegisterNewPlaceModal({
           <X className="size-5 text-zinc-400" />
         </button>
       </div>
-      <h2 className="text-2xl">Resgistrar novo local</h2>
+      <h2 className="text-2xl">Registrar novo local</h2>
       <div className="flex flex-col overflow-y-scroll gap-4 w-full border border-gray-400 rounded-lg px-5 py-5">
         <form
           onSubmit={handleSubmit(handleIncludeNewPlace)}

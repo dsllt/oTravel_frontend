@@ -1,4 +1,4 @@
-import { HeroSearchInputs } from "./hero-search-inputs";
+import { HeroSearchInputs } from './hero-search-inputs';
 
 export function HeroContainer() {
   return (
@@ -6,7 +6,7 @@ export function HeroContainer() {
       className="hero min-h-screen"
       style={{
         backgroundImage:
-          "url(https://images.unsplash.com/photo-1538334421852-687c439c92f4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)",
+          'url(https://images.unsplash.com/photo-1538334421852-687c439c92f4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)',
       }}
     >
       <div className="hero-overlay bg-opacity-60"></div>
@@ -17,7 +17,7 @@ export function HeroContainer() {
           </h1>
           <p className="mb-5 max-w-md">
             Descubra restaurantes e cafés com ambientes perfeitos perto de você
-            com apenas alguns cliques.{" "}
+            com apenas alguns cliques.{' '}
           </p>
           <HeroSearchInputs />
         </div>

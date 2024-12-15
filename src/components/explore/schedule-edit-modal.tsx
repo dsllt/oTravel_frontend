@@ -1,5 +1,5 @@
-import React, { useRef } from "react";
-import { Schedule } from "../../utils/type-definitions";
+import React, { useRef } from 'react';
+import { Schedule } from '../../domain/models/place';
 
 type ScheduleEditModalProps = {
   placeSchedule: Schedule[];
@@ -25,7 +25,7 @@ export default function ScheduleEditModal({
     setPlaceSchedule(updatedSchedule);
 
     const dialog = document.getElementById(
-      "schedule-edit",
+      'schedule-edit',
     ) as HTMLDialogElement;
     if (dialog) {
       dialog.close();

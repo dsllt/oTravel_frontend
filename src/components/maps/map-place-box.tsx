@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 
 export function MapPlaceBox({ placeInfo }: any) {
   const router = useRouter();

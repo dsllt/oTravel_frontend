@@ -1,8 +1,7 @@
-import { X } from "lucide-react";
-import { FavoritePlaceBox } from "./favorite-place-box";
-import { Place } from "../../utils/type-definitions";
-import { useContext } from "react";
-import { UserContext } from "../../context/userContext";
+import { X } from 'lucide-react';
+import { FavoritePlaceBox } from './favorite-place-box';
+import { useContext } from 'react';
+import { UserContext } from '../../context/userContext';
 
 type FavoritesModalProps = {
   setDisplayFavorites: React.Dispatch<React.SetStateAction<boolean>>;

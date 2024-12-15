@@ -1,10 +1,11 @@
-"use client";
-import { useState } from "react";
-import { Plus, X } from "lucide-react";
-import { LoginModalButton } from "./login-modal-button";
-import LoginModalInputs from "./loginModalInputs";
-import RegisterModalInputs from "./registerModalInputs";
-import { UserDTO } from "../../utils/type-definitions";
+'use client';
+import { useState } from 'react';
+import { Plus, X } from 'lucide-react';
+import { LoginModalButton } from './login-modal-button';
+import LoginModalInputs from './loginModalInputs';
+import RegisterModalInputs from './registerModalInputs';
+import { UserDTO } from '../../domain/models/user';
+
 type LoginModalProps = {
   onClickCloseModal: () => void;
   onClickRegister: (formData: any) => Promise<UserDTO>;

@@ -1,19 +1,19 @@
-"use client";
-import { Menu, Place, Schedule } from "../../../utils/type-definitions";
-import Image from "next/image";
-import MenuContainer from "@ui/explore/menu-container";
-import React, { useContext, useEffect, useMemo, useState } from "react";
-import Link from "next/link";
-import { UserContext } from "../../../context/userContext";
-import { placeScheduleMock, reviewsMock } from "../../../utils/mocks";
-import { Star } from "lucide-react";
-import ReviewBox from "@ui/review-box";
-import dynamic from "next/dynamic";
-import ScheduleEditModal from "@ui/explore/schedule-edit-modal";
-import { StarIcon } from "@heroicons/react/16/solid";
+'use client';
+import Image from 'next/image';
+import MenuContainer from '@ui/explore/menu-container';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
+import Link from 'next/link';
+import { UserContext } from '../../../context/userContext';
+import { placeScheduleMock, reviewsMock } from '../../../utils/mocks';
+import { Star } from 'lucide-react';
+import ReviewBox from '@ui/review-box';
+import dynamic from 'next/dynamic';
+import ScheduleEditModal from '@ui/explore/schedule-edit-modal';
+import { StarIcon } from '@heroicons/react/16/solid';
+import { Menu, Place, Schedule } from '../../../domain/models/place';
 
 const Map = dynamic(
-  () => import("../../../components/maps/small-map"),
+  () => import('../../../components/maps/small-map'),
 
   {
     loading: () => <p>Um mapa está sendo carregado</p>,
@@ -25,31 +25,31 @@ export default function PlacePageClient({ slug }: { slug: string }) {
   const { places, favorites, menu, userData, setFavorites } =
     useContext(UserContext);
   const [place, setPlace] = useState<Place>({
-    id: "",
-    image_url: "",
-    name: "",
-    description: "",
-    address: "",
-    city: "",
-    country: "",
+    id: '',
+    image_url: '',
+    name: '',
+    description: '',
+    address: '',
+    city: '',
+    country: '',
     latitude: 0,
     longitude: 0,
-    phone: "",
-    slug: "",
+    phone: '',
+    slug: '',
     category: [],
     rating: 0,
-    created_at: "",
+    created_at: '',
   });
   const [isFavorite, setIsFavorite] = useState(false);
   const [placeMenu, setPlaceMenu] = useState<Menu[]>([]);
   const [placeSchedule, setPlaceSchedule] =
     useState<Schedule[]>(placeScheduleMock);
-  const [newReview, setNewReview] = useState("");
-  const [rating, setRating] = useState("");
+  const [newReview, setNewReview] = useState('');
+  const [rating, setRating] = useState('');
   const [reviews, setReview] = useState(reviewsMock);
 
   function displayScheduleModal() {
-    const modal = document.getElementById("schedule-edit") as HTMLDialogElement;
+    const modal = document.getElementById('schedule-edit') as HTMLDialogElement;
     if (modal) {
       modal.showModal();
     }
@@ -58,8 +58,8 @@ export default function PlacePageClient({ slug }: { slug: string }) {
   const isPlaceDataFetched = (place: Place): boolean => {
     let isFetched = false;
     Object.values(place).every((value) => {
-      if (typeof value === "string") {
-        isFetched = value.trim() !== "";
+      if (typeof value === 'string') {
+        isFetched = value.trim() !== '';
       } else if (Array.isArray(value)) {
         isFetched = value.length > 0;
       }
@@ -84,7 +84,7 @@ export default function PlacePageClient({ slug }: { slug: string }) {
 
   function handleSubmitReview() {
     const review = {
-      id: "",
+      id: '',
       review: newReview,
       rating: Number(rating),
       created_at: new Date().toDateString(),
@@ -92,8 +92,8 @@ export default function PlacePageClient({ slug }: { slug: string }) {
       place: place,
     };
     setReview((prevState) => [...prevState, review]);
-    setNewReview("");
-    setRating("");
+    setNewReview('');
+    setRating('');
   }
 
   useEffect(() => {
@@ -129,7 +129,7 @@ export default function PlacePageClient({ slug }: { slug: string }) {
               <Image
                 src={place.image_url}
                 alt=""
-                style={{ objectFit: "cover", borderRadius: "1rem" }}
+                style={{ objectFit: 'cover', borderRadius: '1rem' }}
                 width={600}
                 height={700}
                 priority

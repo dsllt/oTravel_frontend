@@ -1,6 +1,6 @@
-import { Dispatch, SetStateAction, useContext, useState } from "react";
-import { Menu } from "../../utils/type-definitions";
-import { UserContext } from "../../context/userContext";
+import { useContext, useState } from 'react';
+import { UserContext } from '../../context/userContext';
+import { Menu } from '../../domain/models/place';
 
 type ModalProps = {
   drink?: boolean;
@@ -22,17 +22,17 @@ export function MenuModal({
   const { setMenu, menu } = useContext(UserContext);
 
   const [item, setItem] = useState(currentItem);
-  const [price, setPrice] = useState(currentPrice !== 0 ? currentPrice : "");
+  const [price, setPrice] = useState(currentPrice !== 0 ? currentPrice : '');
   const elementId = id;
 
   function handleUpdateMenu() {
-    if (item !== "" || price !== "") {
+    if (item !== '' || price !== '') {
       const menuItem = menu.find((item) => item.id === id);
       let newItem: Menu = {
         id: id,
         item: item,
         price: Number(price),
-        menu_type: drink ? "drink" : "food",
+        menu_type: drink ? 'drink' : 'food',
         place_id: placeId,
       };
       if (menuItem) {
@@ -49,8 +49,8 @@ export function MenuModal({
       } else {
         setMenu((prevState) => [...prevState, newItem]);
 
-        setItem("");
-        setPrice("");
+        setItem('');
+        setPrice('');
       }
     }
 

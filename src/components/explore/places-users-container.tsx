@@ -1,7 +1,8 @@
-import { Place, UserFavorites } from "../../utils/type-definitions";
-import { PlaceBox } from "./place-box";
-import { SearchHeader } from "./search-header";
-import { UserBox } from "./user-box";
+import { Place } from '../../domain/models/place';
+import { UserFavorites } from '../../domain/models/user';
+import { PlaceBox } from './place-box';
+import { SearchHeader } from './search-header';
+import { UserBox } from './user-box';
 
 type PlacesUsersContainerProps = {
   users: UserFavorites[];

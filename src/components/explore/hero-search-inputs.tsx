@@ -1,14 +1,14 @@
-import { LandPlot, MapPin } from "lucide-react";
-import { useContext, useState } from "react";
-import { UserContext } from "../../context/userContext";
-import { categoryDictionary } from "../../utils/dictionary";
-import { CategoryDictionary } from "./search-header";
-import { useDebouncedCallback } from "use-debounce";
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { LandPlot, MapPin } from 'lucide-react';
+import { useContext, useState } from 'react';
+import { UserContext } from '../../context/userContext';
+import { categoryDictionary } from '../../utils/dictionary';
+import { CategoryDictionary } from './search-header';
+import { useDebouncedCallback } from 'use-debounce';
+import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 
 export function HeroSearchInputs() {
-  const [selectCity, setSelectedCity] = useState("");
-  const [selectCategory, setSelectedCategory] = useState("");
+  const [selectCity, setSelectedCity] = useState('');
+  const [selectCategory, setSelectedCategory] = useState('');
   const { cities, categories } = useContext(UserContext);
 
   const mappedCategories = categories.reduce<CategoryDictionary>(
@@ -26,13 +26,13 @@ export function HeroSearchInputs() {
   const findPlaces = useDebouncedCallback((term) => {
     const params = new URLSearchParams(searchParams);
 
-    params.set("city", selectCity);
-    params.set("category", selectCategory);
+    params.set('city', selectCity);
+    params.set('category', selectCategory);
 
     replace(`${pathname}?${params.toString()}`, { scroll: false });
-    const searchDiv = document.getElementById("search");
+    const searchDiv = document.getElementById('search');
     if (searchDiv) {
-      searchDiv.scrollIntoView({ behavior: "smooth" });
+      searchDiv.scrollIntoView({ behavior: 'smooth' });
     }
   }, 300);
 

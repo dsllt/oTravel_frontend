@@ -1,14 +1,14 @@
-"use client";
-import dynamic from "next/dynamic";
-import React, { useContext, useState } from "react";
-import { MapPlaceBox } from "@ui/maps/map-place-box";
-import { CategoryDictionary } from "@ui/explore/search-header";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { MapPlacesFilter } from "@ui/maps/map-places-filter";
-import { UserContext } from "../../../context/userContext";
-import { categoryDictionary } from "../../../utils/dictionary";
+'use client';
+import dynamic from 'next/dynamic';
+import React, { useContext, useState } from 'react';
+import { MapPlaceBox } from '@ui/maps/map-place-box';
+import { CategoryDictionary } from '@ui/explore/search-header';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { MapPlacesFilter } from '@ui/maps/map-places-filter';
+import { UserContext } from '../../../context/userContext';
+import { categoryDictionary } from '../../../utils/dictionary';
 
-const Map = dynamic(() => import("../../../components/maps/map"), {
+const Map = dynamic(() => import('../../../components/maps/map'), {
   loading: () => <p>Um mapa está sendo carregado</p>,
   ssr: false,
 });
@@ -21,14 +21,14 @@ export default function MapPage() {
 
   const [displayFilters, setDisplayFilters] = useState(false);
 
-  const category = searchParams.get("category") || "";
-  const city = searchParams.get("city") || "";
+  const category = searchParams.get('category') || '';
+  const city = searchParams.get('city') || '';
 
   let filteredPlaces = places.filter((place) => {
     const matchesCategory =
       !category ||
       place.category.some(
-        (cat) => cat.toLowerCase() === category.toLowerCase(),
+        (cat: string) => cat.toLowerCase() === category.toLowerCase(),
       );
 
     const matchesCity =
@@ -51,10 +51,10 @@ export default function MapPage() {
   ) => {
     const params = new URLSearchParams(searchParams);
 
-    if (type === "city") {
-      params.set("city", event.target.value);
-    } else if (type === "category") {
-      params.set("category", event.target.value);
+    if (type === 'city') {
+      params.set('city', event.target.value);
+    } else if (type === 'category') {
+      params.set('category', event.target.value);
     }
     replace(`${pathname}?${params.toString()}`, { scroll: false });
   };

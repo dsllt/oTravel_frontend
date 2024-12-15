@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { Place } from "../../utils/type-definitions";
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { Place } from '../../domain/models/place';
 
 type PlaceBoxProps = {
   placeInfo: Place;
@@ -24,7 +24,7 @@ export function PlaceBox({ placeInfo }: PlaceBoxProps) {
           alt={placeInfo.name}
           width={500}
           height={200}
-          style={{ objectFit: "contain" }}
+          style={{ objectFit: 'contain' }}
         />
       </figure>
       <div className="card-body">

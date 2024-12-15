@@ -1,28 +1,28 @@
-import React, { useState } from "react";
-import { UseFormRegister } from "react-hook-form";
-import { NewPlaceSchema } from "./register-new-place-modal";
+import React, { useState } from 'react';
+import { UseFormRegister } from 'react-hook-form';
+import { NewPlaceSchema } from '../../utils/new-place-schema';
 
 type Props = {
   label: string;
   id:
-    | "placeName"
-    | "placeAddress"
-    | "placeCity"
-    | "placeCountry"
-    | "placeLatitude"
-    | "placeLongitude"
-    | "placeImage"
-    | "placeCategory"
-    | "placeDescription"
-    | "placeSlug"
-    | "placePhone";
+    | 'placeName'
+    | 'placeAddress'
+    | 'placeCity'
+    | 'placeCountry'
+    | 'placeLatitude'
+    | 'placeLongitude'
+    | 'placeImage'
+    | 'placeCategory'
+    | 'placeDescription'
+    | 'placeSlug'
+    | 'placePhone';
   required: boolean;
   register: UseFormRegister<NewPlaceSchema>;
   errors: any;
 };
 
 function TextArea({ label, id, required = false, register, errors }: Props) {
-  const [textValue, setTextValue] = useState("");
+  const [textValue, setTextValue] = useState('');
 
   const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTextValue(event.target.value);

@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import { UseFormRegister } from "react-hook-form";
-import { NewPlaceSchema } from "./register-new-place-modal";
+import React, { useState } from 'react';
+import { UseFormRegister } from 'react-hook-form';
+import { NewPlaceSchema } from '../../utils/new-place-schema';
 
 type Props = {
   label: string;
   id:
-    | "placeName"
-    | "placeAddress"
-    | "placeCity"
-    | "placeCountry"
-    | "placeLatitude"
-    | "placeLongitude"
-    | "placeImage"
-    | "placeCategory"
-    | "placeDescription"
-    | "placeSlug"
-    | "placePhone"
-    | "placeRating";
+    | 'placeName'
+    | 'placeAddress'
+    | 'placeCity'
+    | 'placeCountry'
+    | 'placeLatitude'
+    | 'placeLongitude'
+    | 'placeImage'
+    | 'placeCategory'
+    | 'placeDescription'
+    | 'placeSlug'
+    | 'placePhone'
+    | 'placeRating';
   required: boolean;
   type?: string;
   register: UseFormRegister<NewPlaceSchema>;
@@ -26,12 +26,12 @@ type Props = {
 export default function Input({
   label,
   id,
-  type = "text",
+  type = 'text',
   required = false,
   register,
   errors,
 }: Props) {
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState('');
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);

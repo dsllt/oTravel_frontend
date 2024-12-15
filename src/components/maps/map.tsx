@@ -1,10 +1,10 @@
-"use client";
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
-import { MapContainer, TileLayer, Marker, Popup, Tooltip } from "react-leaflet";
-import CoffeeIcon from "../../../public/assets/icons/coffee-icon.svg";
-import { Place } from "../../utils/type-definitions";
-import Link from "next/link";
+'use client';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import { MapContainer, TileLayer, Marker, Popup, Tooltip } from 'react-leaflet';
+import CoffeeIcon from '../../../public/assets/icons/coffee-icon.svg';
+import Link from 'next/link';
+import { Place } from '../../domain/models/place';
 
 type MapProps = {
   places: Place[];
@@ -14,7 +14,7 @@ export default function Map({ places }: MapProps) {
   return (
     <div>
       <MapContainer
-        style={{ height: "93vh", width: "75vw", zIndex: 0 }}
+        style={{ height: '93vh', width: '75vw', zIndex: 0 }}
         center={[-30.0352, -51.2109]}
         zoom={15}
         scrollWheelZoom={true}

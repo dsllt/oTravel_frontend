@@ -1,7 +1,6 @@
-import React, { useContext, useState } from "react";
-import { UserDTO } from "../../utils/type-definitions";
-import { X } from "lucide-react";
-import { UserContext } from "../../context/userContext";
+import React, { useContext, useState } from 'react';
+import { X } from 'lucide-react';
+import { UserContext } from '../../context/userContext';
 
 type PersonalInfoModalProps = {
   setDisplayPersonalInfo: React.Dispatch<React.SetStateAction<boolean>>;

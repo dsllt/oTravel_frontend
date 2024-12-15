@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { Info, Trash } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { Favorite, Place } from "../../utils/type-definitions";
-import { useContext } from "react";
-import { UserContext } from "../../context/userContext";
+import { Info, Trash } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useContext } from 'react';
+import { UserContext } from '../../context/userContext';
+import { Favorite } from '../../domain/models/favorite';
 
 type FavoritePlaceBoxProps = {
   placeInfo: Favorite;

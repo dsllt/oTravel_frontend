@@ -1,21 +1,21 @@
-"use client";
-import { useContext, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
-import PlacesUsersContainer from "@ui/explore/places-users-container";
-import { HeroContainer } from "@ui/explore/hero-container";
-import { getPlaces } from "@lib/data";
-import { UserContext } from "../../../context/userContext";
+'use client';
+import { useContext, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
+import PlacesUsersContainer from '@ui/explore/places-users-container';
+import { HeroContainer } from '@ui/explore/hero-container';
+import { getPlaces } from '@lib/data';
+import { UserContext } from '../../../context/userContext';
 
 export default function ExplorePage() {
   const { places, usersWithFavorites } = useContext(UserContext);
   const searchParams = useSearchParams();
 
-  const queryPlace = searchParams.get("queryPlace") || "";
-  const queryUsers = searchParams.get("queryUser") || "";
-  const category = searchParams.get("category") || "";
-  const city = searchParams.get("city") || "";
+  const queryPlace = searchParams.get('queryPlace') || '';
+  const queryUsers = searchParams.get('queryUser') || '';
+  const category = searchParams.get('category') || '';
+  const city = searchParams.get('city') || '';
 
-  const displayUsers = queryUsers !== "";
+  const displayUsers = queryUsers !== '';
 
   let filteredPlaces = places.filter((place) => {
     const matchesName = place.name
@@ -25,7 +25,7 @@ export default function ExplorePage() {
     const matchesCategory =
       !category ||
       place.category.some(
-        (cat) => cat.toLowerCase() === category.toLowerCase(),
+        (cat: string) => cat.toLowerCase() === category.toLowerCase(),
       );
 
     const matchesCity =

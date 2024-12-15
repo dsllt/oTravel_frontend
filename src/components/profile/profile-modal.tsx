@@ -1,10 +1,10 @@
-"use client";
-import { useContext, useState } from "react";
-import { UserContext } from "../../context/userContext";
-import { HousePlus, LogOut, Star, User, X } from "lucide-react";
-import FavoritesModal from "./favorites-modal";
-import PersonalInfoModal from "./personal-info-modal";
-import RegisterNewPlaceModal from "./register-new-place-modal";
+'use client';
+import { useContext, useState } from 'react';
+import { UserContext } from '../../context/userContext';
+import { HousePlus, LogOut, Star, User, X } from 'lucide-react';
+import FavoritesModal from './favorites-modal';
+import PersonalInfoModal from './personal-info-modal';
+import RegisterNewPlaceModal from './register-new-place-modal';
 
 type ProfileModalProps = {
   onClickCloseModal: () => void;

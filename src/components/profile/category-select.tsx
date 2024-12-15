@@ -1,7 +1,8 @@
-import { XMarkIcon } from "@heroicons/react/24/outline";
-import React, { useEffect } from "react";
-import { UseFormRegister, UseFormSetValue } from "react-hook-form";
-import { Categories, NewPlaceSchema } from "./register-new-place-modal";
+import { XMarkIcon } from '@heroicons/react/24/outline';
+import React, { useEffect } from 'react';
+import { UseFormRegister, UseFormSetValue } from 'react-hook-form';
+import { Categories } from '../../domain/models/place';
+import { NewPlaceSchema } from '../../utils/new-place-schema';
 
 type Props = {
   availableCategories: Categories;
@@ -52,7 +53,7 @@ function CategorySelect({
     });
   }
   useEffect(() => {
-    setValue("placeCategory", selectedCategories);
+    setValue('placeCategory', selectedCategories);
   }, [selectedCategories, setValue]);
 
   return (
@@ -66,7 +67,7 @@ function CategorySelect({
           className="bg-transparent pr-5 focus:outline-none text-gray-400"
           onChange={handleSelectCategory}
         >
-          <option selected>Selecione a categoria</option>
+          <option value="">Selecione a categoria</option>
           {Object.keys(availableCategories).map((category) => (
             <option key={category} value={category}>
               {availableCategories[category]}

@@ -1,4 +1,4 @@
-import { differenceInSeconds, format } from "date-fns";
+import { differenceInSeconds, format } from 'date-fns';
 
 export function dateDifference(dateISO: string): string {
   const date = new Date(dateISO);
@@ -40,5 +40,5 @@ export function dateDifference(dateISO: string): string {
     return `há ${diffInMonths} meses`;
   }
 
-  return format(date, "dd/MM/yyyy");
+  return format(date, 'dd/MM/yyyy');
 }

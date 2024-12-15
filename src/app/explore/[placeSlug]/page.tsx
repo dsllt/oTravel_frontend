@@ -1,6 +1,6 @@
-import React from "react";
-import PlacePageClient from "./places-page-client";
-import { placesMock } from "../../../utils/mocks";
+import React from 'react';
+import PlacePageClient from './places-page-client';
+import { placesMock } from '../../../utils/mocks';
 
 export async function generateStaticParams() {
   const places = placesMock.map((place) => ({
