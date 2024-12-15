@@ -1,16 +1,17 @@
-"use client";
-import { useState } from "react";
-import { Plus, X } from "lucide-react";
-import { LoginModalButton } from "./login-modal-button";
-import LoginModalInputs from "./loginModalInputs";
-import RegisterModalInputs from "./registerModalInputs";
-import { UserDTO } from "../../utils/type-definitions";
+'use client'
+import { useState } from 'react'
+import { Plus, X } from 'lucide-react'
+import { LoginModalButton } from './login-modal-button'
+import LoginModalInputs from './loginModalInputs'
+import RegisterModalInputs from './registerModalInputs'
+import { UserDTO } from '../../domain/models/user'
+
 type LoginModalProps = {
-  onClickCloseModal: () => void;
-  onClickRegister: (formData: any) => Promise<UserDTO>;
-  onClickLogin: (formData: any) => Promise<void>;
-  loginError: string;
-};
+  onClickCloseModal: () => void
+  onClickRegister: (formData: any) => Promise<UserDTO>
+  onClickLogin: (formData: any) => Promise<void>
+  loginError: string
+}
 
 export function LoginModal({
   onClickCloseModal,
@@ -18,14 +19,14 @@ export function LoginModal({
   onClickLogin,
   loginError,
 }: LoginModalProps) {
-  const [displayLoginInputs, setDisplayLoginInputs] = useState(false);
-  const [displayRegisterInputs, setDisplayRegisterInputs] = useState(false);
+  const [displayLoginInputs, setDisplayLoginInputs] = useState(false)
+  const [displayRegisterInputs, setDisplayRegisterInputs] = useState(false)
 
   async function handleRegister(formData: any) {
-    const response = await onClickRegister(formData);
+    const response = await onClickRegister(formData)
     if (response.firstName) {
-      setDisplayRegisterInputs(false);
-      setDisplayLoginInputs(true);
+      setDisplayRegisterInputs(false)
+      setDisplayLoginInputs(true)
     }
   }
 
@@ -89,5 +90,5 @@ export function LoginModal({
         </div>
       </div>
     </>
-  );
+  )
 }

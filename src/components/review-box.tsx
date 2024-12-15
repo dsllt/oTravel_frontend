@@ -1,11 +1,9 @@
-import Image from "next/image";
-import styles from "./review-box.module.css";
-import { Review, UserDTO } from "../utils/type-definitions";
-import { dateDifference } from "../utils/dateUtils";
+import { Review } from '../domain/models/review'
+import { dateDifference } from '../utils/date-utils'
 
 type ReviewBoxProps = {
-  review: Review;
-};
+  review: Review
+}
 
 export default function ReviewBox({ review }: ReviewBoxProps) {
   return (
@@ -21,11 +19,11 @@ export default function ReviewBox({ review }: ReviewBoxProps) {
           </div>
         </div>
         <span className="badge badge-secondary">
-          {" "}
-          {review.rating.toFixed(1)}{" "}
+          {' '}
+          {review.rating.toFixed(1)}{' '}
         </span>
       </div>
       <p className="text-md">{review.review}</p>
     </div>
-  );
+  )
 }

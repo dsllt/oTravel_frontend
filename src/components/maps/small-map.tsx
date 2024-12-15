@@ -1,20 +1,20 @@
-"use client";
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
-import { MapContainer, TileLayer, Marker, Popup, Tooltip } from "react-leaflet";
-import CoffeeIcon from "../../../public/assets/icons/coffee-icon.svg";
-import { Place } from "../../utils/type-definitions";
-import Link from "next/link";
+'use client'
+import L from 'leaflet'
+import 'leaflet/dist/leaflet.css'
+import { MapContainer, TileLayer, Marker, Popup, Tooltip } from 'react-leaflet'
+import CoffeeIcon from '../../../public/assets/icons/coffee-icon.svg'
+import Link from 'next/link'
+import { Place } from '../../domain/models/place'
 
 type MapProps = {
-  place: Place;
-};
+  place: Place
+}
 
 export default function SmallMap({ place }: MapProps) {
   return (
     <div>
       <MapContainer
-        style={{ height: "40vh", width: "78vw", zIndex: 0 }}
+        style={{ height: '40vh', width: '78vw', zIndex: 0 }}
         center={[place.latitude, place.longitude]}
         zoom={15}
         scrollWheelZoom={false}
@@ -51,5 +51,5 @@ export default function SmallMap({ place }: MapProps) {
         </Marker>
       </MapContainer>
     </div>
-  );
+  )
 }

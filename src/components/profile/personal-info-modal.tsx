@@ -1,23 +1,22 @@
-import React, { useContext, useState } from "react";
-import { UserDTO } from "../../utils/type-definitions";
-import { X } from "lucide-react";
-import { UserContext } from "../../context/userContext";
+import React, { useContext, useState } from 'react'
+import { X } from 'lucide-react'
+import { UserContext } from '../../context/userContext'
 
 type PersonalInfoModalProps = {
-  setDisplayPersonalInfo: React.Dispatch<React.SetStateAction<boolean>>;
-};
+  setDisplayPersonalInfo: React.Dispatch<React.SetStateAction<boolean>>
+}
 
 export default function PersonalInfoModal({
   setDisplayPersonalInfo,
 }: PersonalInfoModalProps) {
-  const { userData, setUserData } = useContext(UserContext);
-  const [firstName, setFirstName] = useState(userData.firstName);
-  const [lastName, setLastName] = useState(userData.lastName);
-  const [email, setEmail] = useState(userData.email);
+  const { userData, setUserData } = useContext(UserContext)
+  const [firstName, setFirstName] = useState(userData.firstName)
+  const [lastName, setLastName] = useState(userData.lastName)
+  const [email, setEmail] = useState(userData.email)
 
   function handleUpdateUserData() {
-    const updatedUser = { ...userData, firstName, lastName, email };
-    setUserData(updatedUser);
+    const updatedUser = { ...userData, firstName, lastName, email }
+    setUserData(updatedUser)
   }
 
   return (
@@ -83,5 +82,5 @@ export default function PersonalInfoModal({
         </div>
       </div>
     </div>
-  );
+  )
 }

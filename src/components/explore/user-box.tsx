@@ -1,17 +1,17 @@
-"use client";
+'use client'
 
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { UserFavorites } from "../../utils/type-definitions";
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import { UserFavorites } from '../../domain/models/user'
 
 type UserBoxProps = {
-  userInfo: UserFavorites;
-};
+  userInfo: UserFavorites
+}
 
 export function UserBox({ userInfo }: UserBoxProps) {
-  const router = useRouter();
+  const router = useRouter()
   function handleClickUsersBox(id: string) {
-    router.push(`/user/${id}`);
+    router.push(`/user/${id}`)
   }
 
   return (
@@ -25,7 +25,7 @@ export function UserBox({ userInfo }: UserBoxProps) {
           alt={userInfo.name}
           width={500}
           height={200}
-          style={{ objectFit: "contain" }}
+          style={{ objectFit: 'contain' }}
         />
       </figure>
       <div className="card-body">
@@ -34,5 +34,5 @@ export function UserBox({ userInfo }: UserBoxProps) {
         </h2>
       </div>
     </div>
-  );
+  )
 }

@@ -1,18 +1,19 @@
-import { XMarkIcon } from "@heroicons/react/24/outline";
-import React, { useEffect } from "react";
-import { UseFormRegister, UseFormSetValue } from "react-hook-form";
-import { Categories, NewPlaceSchema } from "./register-new-place-modal";
+import { XMarkIcon } from '@heroicons/react/24/outline'
+import React, { useEffect } from 'react'
+import { UseFormRegister, UseFormSetValue } from 'react-hook-form'
+import { Categories } from '../../domain/models/place'
+import { NewPlaceSchema } from '../../utils/new-place-schema'
 
 type Props = {
-  availableCategories: Categories;
-  selectedCategories: Categories;
-  initialCategories: Categories;
-  setSelectedCategories: React.Dispatch<React.SetStateAction<Categories>>;
-  setAvailableCategories: React.Dispatch<React.SetStateAction<Categories>>;
-  register: UseFormRegister<NewPlaceSchema>;
-  errors: any;
-  setValue: UseFormSetValue<NewPlaceSchema>;
-};
+  availableCategories: Categories
+  selectedCategories: Categories
+  initialCategories: Categories
+  setSelectedCategories: React.Dispatch<React.SetStateAction<Categories>>
+  setAvailableCategories: React.Dispatch<React.SetStateAction<Categories>>
+  register: UseFormRegister<NewPlaceSchema>
+  errors: any
+  setValue: UseFormSetValue<NewPlaceSchema>
+}
 
 function CategorySelect({
   availableCategories,
@@ -25,35 +26,35 @@ function CategorySelect({
   setValue,
 }: Props) {
   function handleSelectCategory(event: React.ChangeEvent<HTMLSelectElement>) {
-    const selectedCategory = event.target.value as keyof Categories;
+    const selectedCategory = event.target.value as keyof Categories
 
     setSelectedCategories((prevSelectedCategories) => ({
       ...prevSelectedCategories,
       [selectedCategory]: initialCategories[selectedCategory],
-    }));
+    }))
 
     setAvailableCategories((prevAvailableCategories) => {
-      const newAvailableCategories = { ...prevAvailableCategories };
-      delete newAvailableCategories[selectedCategory];
-      return newAvailableCategories;
-    });
+      const newAvailableCategories = { ...prevAvailableCategories }
+      delete newAvailableCategories[selectedCategory]
+      return newAvailableCategories
+    })
   }
 
   function handleRemoveCategory(category: string) {
     setAvailableCategories((prevAvailableCategories) => ({
       ...prevAvailableCategories,
       [category]: initialCategories[category],
-    }));
+    }))
 
     setSelectedCategories((prevSelectedCategories) => {
-      const newAvailableCategories = { ...prevSelectedCategories };
-      delete newAvailableCategories[category];
-      return newAvailableCategories;
-    });
+      const newAvailableCategories = { ...prevSelectedCategories }
+      delete newAvailableCategories[category]
+      return newAvailableCategories
+    })
   }
   useEffect(() => {
-    setValue("placeCategory", selectedCategories);
-  }, [selectedCategories, setValue]);
+    setValue('placeCategory', selectedCategories)
+  }, [selectedCategories, setValue])
 
   return (
     <label
@@ -89,7 +90,7 @@ function CategorySelect({
         </div>
       </div>
     </label>
-  );
+  )
 }
 
-export default CategorySelect;
+export default CategorySelect

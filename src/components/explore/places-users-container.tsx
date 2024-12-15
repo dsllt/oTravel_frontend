@@ -1,13 +1,14 @@
-import { Place, UserFavorites } from "../../utils/type-definitions";
-import { PlaceBox } from "./place-box";
-import { SearchHeader } from "./search-header";
-import { UserBox } from "./user-box";
+import { Place } from '../../domain/models/place'
+import { UserFavorites } from '../../domain/models/user'
+import { PlaceBox } from './place-box'
+import { SearchHeader } from './search-header'
+import { UserBox } from './user-box'
 
 type PlacesUsersContainerProps = {
-  users: UserFavorites[];
-  places: Place[];
-  displayUsers: boolean;
-};
+  users: UserFavorites[]
+  places: Place[]
+  displayUsers: boolean
+}
 
 export default function PlacesUsersContainer({
   users,
@@ -20,12 +21,12 @@ export default function PlacesUsersContainer({
       <div className="flex flex-wrap gap-5 justify-center items-center mt-4">
         {displayUsers
           ? users.map((user) => {
-              return <UserBox key={user.id} userInfo={user} />;
+              return <UserBox key={user.id} userInfo={user} />
             })
           : places.map((place) => {
-              return <PlaceBox key={place.id} placeInfo={place} />;
+              return <PlaceBox key={place.id} placeInfo={place} />
             })}
       </div>
     </div>
-  );
+  )
 }
