@@ -3,7 +3,7 @@ import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import React, { useContext, useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { UserContext } from '../../context/userContext';
-import { categoryDictionary } from '../../utils/dictionary';
+import { categoryDictionary } from '../../domain/constants/category-dictionary';
 import { SearchFilters } from './search-filters';
 
 export interface CategoryDictionary {

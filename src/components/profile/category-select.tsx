@@ -2,7 +2,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline';
 import React, { useEffect } from 'react';
 import { UseFormRegister, UseFormSetValue } from 'react-hook-form';
 import { Categories } from '../../domain/models/place';
-import { NewPlaceSchema } from '../../utils/new-place-schema';
+import { NewPlaceSchema } from '../../domain/schemas/new-place-schema';
 
 type Props = {
   availableCategories: Categories;

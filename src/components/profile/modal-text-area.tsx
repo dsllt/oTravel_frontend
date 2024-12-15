@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { UseFormRegister } from 'react-hook-form';
-import { NewPlaceSchema } from '../../utils/new-place-schema';
+import { NewPlaceSchema } from '../../domain/schemas/new-place-schema';
 
 type Props = {
   label: string;
