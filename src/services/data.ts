@@ -1,19 +1,19 @@
-import { UpdatePlaceDTO } from '../domain/models/place'
+import { UpdatePlaceDTO } from '../domain/models/place';
 
-const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
+const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export async function register(
   firstName: string,
   lastName: string,
   email: string,
-  password: string
+  password: string,
 ) {
   const body = JSON.stringify({
     firstName,
     lastName,
     email,
     password,
-  })
+  });
   try {
     const response = await fetch(`${baseUrl}/api/v1/auth/register`, {
       cache: 'no-store',
@@ -22,18 +22,18 @@ export async function register(
         'Content-Type': 'application/json',
       },
       body: body,
-    })
-    const data = await response.json()
-    return data
+    });
+    const data = await response.json();
+    return data;
   } catch (e) {
-    console.error('Failed to register.', e)
+    console.error('Failed to register.', e);
   }
 }
 export async function login(email: string, password: string) {
   const body = JSON.stringify({
     email,
     password,
-  })
+  });
   try {
     const response = await fetch(`${baseUrl}/api/v1/auth`, {
       cache: 'no-store',
@@ -42,11 +42,11 @@ export async function login(email: string, password: string) {
         'Content-Type': 'application/json',
       },
       body: body,
-    })
-    const data = await response.json()
-    return data
+    });
+    const data = await response.json();
+    return data;
   } catch (e) {
-    console.error('Failed to login.', e)
+    console.error('Failed to login.', e);
   }
 }
 
@@ -54,12 +54,12 @@ export async function getPlaces() {
   try {
     const response = await fetch(`${baseUrl}/api/v1/place`, {
       cache: 'no-store',
-    })
-    const data = await response.json()
-    return data
+    });
+    const data = await response.json();
+    return data;
   } catch (e) {
-    console.error('Failed to fetch places data.', e)
-    throw new Error('Failed to fetch places data.')
+    console.error('Failed to fetch places data.', e);
+    throw new Error('Failed to fetch places data.');
   }
 }
 
@@ -67,12 +67,12 @@ export async function fetchPlace(placeId: string) {
   try {
     const data = await fetch(`${baseUrl}/places/${placeId}`, {
       cache: 'no-store',
-    })
+    });
 
-    return data.json()
+    return data.json();
   } catch (e) {
-    console.error('Failed to fetch place data.', e)
-    throw new Error('Failed to fetch place data.')
+    console.error('Failed to fetch place data.', e);
+    throw new Error('Failed to fetch place data.');
   }
 }
 
@@ -80,12 +80,12 @@ export async function fetchMenu(placeId: string) {
   try {
     const data = await fetch(`${baseUrl}/menus/place/${placeId}`, {
       cache: 'no-store',
-    })
+    });
 
-    return data.json()
+    return data.json();
   } catch (e) {
-    console.error('Failed to fetch place data.', e)
-    throw new Error('Failed to fetch place data.')
+    console.error('Failed to fetch place data.', e);
+    throw new Error('Failed to fetch place data.');
   }
 }
 
@@ -100,9 +100,9 @@ export async function fetchUpdatePlace(data: UpdatePlaceDTO, id: string) {
         headers: new Headers({
           'Content-Type': 'application/json',
         }),
-      }
-    )
+      },
+    );
   } catch (err) {
-    console.error('Failed to update place.', err)
+    console.error('Failed to update place.', err);
   }
 }

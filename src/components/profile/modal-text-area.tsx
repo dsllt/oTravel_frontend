@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
-import { UseFormRegister } from 'react-hook-form'
-import { NewPlaceSchema } from '../../utils/new-place-schema'
+import React, { useState } from 'react';
+import { UseFormRegister } from 'react-hook-form';
+import { NewPlaceSchema } from '../../utils/new-place-schema';
 
 type Props = {
-  label: string
+  label: string;
   id:
     | 'placeName'
     | 'placeAddress'
@@ -15,18 +15,18 @@ type Props = {
     | 'placeCategory'
     | 'placeDescription'
     | 'placeSlug'
-    | 'placePhone'
-  required: boolean
-  register: UseFormRegister<NewPlaceSchema>
-  errors: any
-}
+    | 'placePhone';
+  required: boolean;
+  register: UseFormRegister<NewPlaceSchema>;
+  errors: any;
+};
 
 function TextArea({ label, id, required = false, register, errors }: Props) {
-  const [textValue, setTextValue] = useState('')
+  const [textValue, setTextValue] = useState('');
 
   const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setTextValue(event.target.value)
-  }
+    setTextValue(event.target.value);
+  };
   return (
     <div className="flex w-1/2 h-[190px]">
       <label htmlFor={id} className="text-sm mb-4 flex flex-col w-full">
@@ -41,7 +41,7 @@ function TextArea({ label, id, required = false, register, errors }: Props) {
         />
       </label>
     </div>
-  )
+  );
 }
 
-export default TextArea
+export default TextArea;

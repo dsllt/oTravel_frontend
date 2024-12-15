@@ -1,6 +1,6 @@
-import { Favorite } from '../domain/models/favorite'
-import { Menu, Place } from '../domain/models/place'
-import { Review } from '../domain/models/review'
+import { Favorite } from '../domain/models/favorite';
+import { Menu, Place } from '../domain/models/place';
+import { Review } from '../domain/models/review';
 
 export const placesMock: Place[] = [
   {
@@ -262,7 +262,7 @@ export const placesMock: Place[] = [
     rating: 4.5,
     created_at: '2024-05-21T12:54:57.820588Z',
   },
-]
+];
 
 export const favoritesMock: Favorite[] = [
   {
@@ -286,7 +286,7 @@ export const favoritesMock: Favorite[] = [
     slug: 'mercado-brasco-padre-chagas',
     rating: 4.5,
   },
-]
+];
 
 export const menuMock: Menu[] = [
   {
@@ -317,7 +317,7 @@ export const menuMock: Menu[] = [
     menu_type: 'drink',
     place_id: '057e9cd9-883a-4af7-aad8-fd77a2d0043a',
   },
-]
+];
 
 export const reviewsMock: Review[] = [
   {
@@ -364,7 +364,7 @@ export const reviewsMock: Review[] = [
       rating: 4.5,
     },
   },
-]
+];
 
 export const placeScheduleMock = [
   {
@@ -402,4 +402,4 @@ export const placeScheduleMock = [
     open_time: '08:00',
     close_time: '18:00',
   },
-]
+];

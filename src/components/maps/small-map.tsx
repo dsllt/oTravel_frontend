@@ -1,14 +1,14 @@
-'use client'
-import L from 'leaflet'
-import 'leaflet/dist/leaflet.css'
-import { MapContainer, TileLayer, Marker, Popup, Tooltip } from 'react-leaflet'
-import CoffeeIcon from '../../../public/assets/icons/coffee-icon.svg'
-import Link from 'next/link'
-import { Place } from '../../domain/models/place'
+'use client';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import { MapContainer, TileLayer, Marker, Popup, Tooltip } from 'react-leaflet';
+import CoffeeIcon from '../../../public/assets/icons/coffee-icon.svg';
+import Link from 'next/link';
+import { Place } from '../../domain/models/place';
 
 type MapProps = {
-  place: Place
-}
+  place: Place;
+};
 
 export default function SmallMap({ place }: MapProps) {
   return (
@@ -51,5 +51,5 @@ export default function SmallMap({ place }: MapProps) {
         </Marker>
       </MapContainer>
     </div>
-  )
+  );
 }

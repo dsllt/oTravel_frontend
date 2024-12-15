@@ -1,4 +1,4 @@
-import NavbarLink from "./navbarLink";
+import NavbarLink from './navbarLink';
 
 export type LinkType = {
   name: string;

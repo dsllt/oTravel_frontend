@@ -1,7 +1,7 @@
-import { DebouncedState } from "use-debounce";
-import { SearchInput } from "./search-input";
-import { ReadonlyURLSearchParams } from "next/navigation";
-import { CategoryDictionary } from "./search-header";
+import { DebouncedState } from 'use-debounce';
+import { SearchInput } from './search-input';
+import { ReadonlyURLSearchParams } from 'next/navigation';
+import { CategoryDictionary } from './search-header';
 
 type SearchFiltersProps = {
   handleFilter: (
@@ -30,7 +30,7 @@ export function SearchFilters({
     <div className="flex gap-2">
       <select
         className="select select-bordered max-w-xs bg-transparent text-gray-400"
-        onChange={(e) => handleFilter(e, "category")}
+        onChange={(e) => handleFilter(e, 'category')}
       >
         <option value="">Filtre por uma categoria</option>
         {Object.entries(mappedCategories).map(([key, value]) => (
@@ -41,7 +41,7 @@ export function SearchFilters({
       </select>
       <select
         className="select select-bordered max-w-xs text-gray-400 bg-transparent"
-        onChange={(e) => handleFilter(e, "city")}
+        onChange={(e) => handleFilter(e, 'city')}
       >
         <option value="" className="">
           Filtre por uma cidade

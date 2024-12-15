@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
-import { UseFormRegister } from 'react-hook-form'
-import { NewPlaceSchema } from '../../utils/new-place-schema'
+import React, { useState } from 'react';
+import { UseFormRegister } from 'react-hook-form';
+import { NewPlaceSchema } from '../../utils/new-place-schema';
 
 type Props = {
-  label: string
+  label: string;
   id:
     | 'placeName'
     | 'placeAddress'
@@ -16,12 +16,12 @@ type Props = {
     | 'placeDescription'
     | 'placeSlug'
     | 'placePhone'
-    | 'placeRating'
-  required: boolean
-  type?: string
-  register: UseFormRegister<NewPlaceSchema>
-  errors: any
-}
+    | 'placeRating';
+  required: boolean;
+  type?: string;
+  register: UseFormRegister<NewPlaceSchema>;
+  errors: any;
+};
 
 export default function Input({
   label,
@@ -31,11 +31,11 @@ export default function Input({
   register,
   errors,
 }: Props) {
-  const [inputValue, setInputValue] = useState('')
+  const [inputValue, setInputValue] = useState('');
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value)
-  }
+    setInputValue(event.target.value);
+  };
 
   return (
     <label
@@ -56,5 +56,5 @@ export default function Input({
         <span className="mt-2 text-red-300"> {errors[id].message} </span>
       )}
     </label>
-  )
+  );
 }

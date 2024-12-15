@@ -1,16 +1,16 @@
-import { X } from 'lucide-react'
-import { FavoritePlaceBox } from './favorite-place-box'
-import { useContext } from 'react'
-import { UserContext } from '../../context/userContext'
+import { X } from 'lucide-react';
+import { FavoritePlaceBox } from './favorite-place-box';
+import { useContext } from 'react';
+import { UserContext } from '../../context/userContext';
 
 type FavoritesModalProps = {
-  setDisplayFavorites: React.Dispatch<React.SetStateAction<boolean>>
-}
+  setDisplayFavorites: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 export default function FavoritesModal({
   setDisplayFavorites,
 }: FavoritesModalProps) {
-  const { favorites } = useContext(UserContext)
+  const { favorites } = useContext(UserContext);
 
   return (
     <div className="py-5 px-6 gap-8 h-full flex flex-col p-6 shadow-shape bg-zinc-700 w-6/12">
@@ -30,5 +30,5 @@ export default function FavoritesModal({
         <div>Você ainda não favoritou nenhum lugar.</div>
       )}
     </div>
-  )
+  );
 }

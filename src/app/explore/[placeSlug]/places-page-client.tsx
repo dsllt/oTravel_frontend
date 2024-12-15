@@ -1,16 +1,16 @@
-'use client'
-import Image from 'next/image'
-import MenuContainer from '@ui/explore/menu-container'
-import React, { useContext, useEffect, useMemo, useState } from 'react'
-import Link from 'next/link'
-import { UserContext } from '../../../context/userContext'
-import { placeScheduleMock, reviewsMock } from '../../../utils/mocks'
-import { Star } from 'lucide-react'
-import ReviewBox from '@ui/review-box'
-import dynamic from 'next/dynamic'
-import ScheduleEditModal from '@ui/explore/schedule-edit-modal'
-import { StarIcon } from '@heroicons/react/16/solid'
-import { Menu, Place, Schedule } from '../../../domain/models/place'
+'use client';
+import Image from 'next/image';
+import MenuContainer from '@ui/explore/menu-container';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
+import Link from 'next/link';
+import { UserContext } from '../../../context/userContext';
+import { placeScheduleMock, reviewsMock } from '../../../utils/mocks';
+import { Star } from 'lucide-react';
+import ReviewBox from '@ui/review-box';
+import dynamic from 'next/dynamic';
+import ScheduleEditModal from '@ui/explore/schedule-edit-modal';
+import { StarIcon } from '@heroicons/react/16/solid';
+import { Menu, Place, Schedule } from '../../../domain/models/place';
 
 const Map = dynamic(
   () => import('../../../components/maps/small-map'),
@@ -18,12 +18,12 @@ const Map = dynamic(
   {
     loading: () => <p>Um mapa está sendo carregado</p>,
     ssr: false,
-  }
-)
+  },
+);
 
 export default function PlacePageClient({ slug }: { slug: string }) {
   const { places, favorites, menu, userData, setFavorites } =
-    useContext(UserContext)
+    useContext(UserContext);
   const [place, setPlace] = useState<Place>({
     id: '',
     image_url: '',
@@ -39,36 +39,36 @@ export default function PlacePageClient({ slug }: { slug: string }) {
     category: [],
     rating: 0,
     created_at: '',
-  })
-  const [isFavorite, setIsFavorite] = useState(false)
-  const [placeMenu, setPlaceMenu] = useState<Menu[]>([])
+  });
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [placeMenu, setPlaceMenu] = useState<Menu[]>([]);
   const [placeSchedule, setPlaceSchedule] =
-    useState<Schedule[]>(placeScheduleMock)
-  const [newReview, setNewReview] = useState('')
-  const [rating, setRating] = useState('')
-  const [reviews, setReview] = useState(reviewsMock)
+    useState<Schedule[]>(placeScheduleMock);
+  const [newReview, setNewReview] = useState('');
+  const [rating, setRating] = useState('');
+  const [reviews, setReview] = useState(reviewsMock);
 
   function displayScheduleModal() {
-    const modal = document.getElementById('schedule-edit') as HTMLDialogElement
+    const modal = document.getElementById('schedule-edit') as HTMLDialogElement;
     if (modal) {
-      modal.showModal()
+      modal.showModal();
     }
   }
 
   const isPlaceDataFetched = (place: Place): boolean => {
-    let isFetched = false
+    let isFetched = false;
     Object.values(place).every((value) => {
       if (typeof value === 'string') {
-        isFetched = value.trim() !== ''
+        isFetched = value.trim() !== '';
       } else if (Array.isArray(value)) {
-        isFetched = value.length > 0
+        isFetched = value.length > 0;
       }
-    })
-    return isFetched
-  }
+    });
+    return isFetched;
+  };
 
   function handleFavorites() {
-    setIsFavorite(!isFavorite)
+    setIsFavorite(!isFavorite);
     const newFavorite = {
       id: place.id,
       name: place.name,
@@ -78,8 +78,8 @@ export default function PlacePageClient({ slug }: { slug: string }) {
       country: place.country,
       slug: place.slug,
       rating: place.rating,
-    }
-    setFavorites((prevState) => [...prevState, newFavorite])
+    };
+    setFavorites((prevState) => [...prevState, newFavorite]);
   }
 
   function handleSubmitReview() {
@@ -90,10 +90,10 @@ export default function PlacePageClient({ slug }: { slug: string }) {
       created_at: new Date().toDateString(),
       user: userData,
       place: place,
-    }
-    setReview((prevState) => [...prevState, review])
-    setNewReview('')
-    setRating('')
+    };
+    setReview((prevState) => [...prevState, review]);
+    setNewReview('');
+    setRating('');
   }
 
   useEffect(() => {
@@ -107,18 +107,18 @@ export default function PlacePageClient({ slug }: { slug: string }) {
 
     // fetchData();
 
-    const currentPlace = places.find((place) => place.slug === slug)
+    const currentPlace = places.find((place) => place.slug === slug);
     if (currentPlace) {
       const currentMenu: Menu[] = menu.filter(
-        (menu) => menu.place_id === currentPlace.id
-      )
-      setPlace(currentPlace)
-      setPlaceMenu(currentMenu)
+        (menu) => menu.place_id === currentPlace.id,
+      );
+      setPlace(currentPlace);
+      setPlaceMenu(currentMenu);
     }
 
-    const isFavorite = favorites.some((favorite) => place.id === favorite.id)
-    setIsFavorite(isFavorite)
-  }, [slug, places, favorites, place.id, menu])
+    const isFavorite = favorites.some((favorite) => place.id === favorite.id);
+    setIsFavorite(isFavorite);
+  }, [slug, places, favorites, place.id, menu]);
 
   return (
     <div className="w-full px-40 flex flex-col gap-10 mt-10 mb-20 items-center justify-center">
@@ -190,7 +190,7 @@ export default function PlacePageClient({ slug }: { slug: string }) {
                                   {day.open_time} - {day.close_time}
                                 </td>
                               </tr>
-                            )
+                            );
                           })}
                         </tbody>
                       </table>
@@ -211,7 +211,7 @@ export default function PlacePageClient({ slug }: { slug: string }) {
                                   {day.open_time} - {day.close_time}
                                 </td>
                               </tr>
-                            )
+                            );
                           })}
                         </tbody>
                       </table>
@@ -239,7 +239,7 @@ export default function PlacePageClient({ slug }: { slug: string }) {
           <div className="w-full">
             <h1 className="font-bold text-xl font-dmSans mb-4">Reviews</h1>
             {reviews.map((review) => {
-              return <ReviewBox key={review.id} review={review} />
+              return <ReviewBox key={review.id} review={review} />;
             })}
             <div className="w-full flex gap-5">
               <textarea
@@ -279,5 +279,5 @@ export default function PlacePageClient({ slug }: { slug: string }) {
         </div>
       )}
     </div>
-  )
+  );
 }

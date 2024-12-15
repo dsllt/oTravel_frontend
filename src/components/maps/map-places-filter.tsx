@@ -1,4 +1,4 @@
-import { CategoryDictionary } from "@ui/explore/search-header";
+import { CategoryDictionary } from '@ui/explore/search-header';
 
 type MapPlacesFilterProps = {
   mappedCategories: CategoryDictionary;
@@ -22,7 +22,7 @@ export function MapPlacesFilter({
     <div className="w-full flex flex-col gap-2">
       <select
         className="select select-bordered max-w-xs bg-transparent text-gray-400"
-        onChange={(e) => handleFilter(e, "category")}
+        onChange={(e) => handleFilter(e, 'category')}
       >
         <option value="">Filtre por uma categoria</option>
         {Object.entries(mappedCategories).map(([key, value]) => (
@@ -33,7 +33,7 @@ export function MapPlacesFilter({
       </select>
       <select
         className="select select-bordered max-w-xs text-gray-400 bg-transparent"
-        onChange={(e) => handleFilter(e, "city")}
+        onChange={(e) => handleFilter(e, 'city')}
       >
         <option value="" className="">
           Filtre por uma cidade

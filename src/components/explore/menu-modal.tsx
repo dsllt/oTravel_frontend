@@ -1,15 +1,15 @@
-import { useContext, useState } from 'react'
-import { UserContext } from '../../context/userContext'
-import { Menu } from '../../domain/models/place'
+import { useContext, useState } from 'react';
+import { UserContext } from '../../context/userContext';
+import { Menu } from '../../domain/models/place';
 
 type ModalProps = {
-  drink?: boolean
-  food?: boolean
-  placeId: string
-  currentItem: string
-  currentPrice?: number
-  id: string
-}
+  drink?: boolean;
+  food?: boolean;
+  placeId: string;
+  currentItem: string;
+  currentPrice?: number;
+  id: string;
+};
 
 export function MenuModal({
   id,
@@ -19,22 +19,22 @@ export function MenuModal({
   currentItem,
   currentPrice,
 }: ModalProps) {
-  const { setMenu, menu } = useContext(UserContext)
+  const { setMenu, menu } = useContext(UserContext);
 
-  const [item, setItem] = useState(currentItem)
-  const [price, setPrice] = useState(currentPrice !== 0 ? currentPrice : '')
-  const elementId = id
+  const [item, setItem] = useState(currentItem);
+  const [price, setPrice] = useState(currentPrice !== 0 ? currentPrice : '');
+  const elementId = id;
 
   function handleUpdateMenu() {
     if (item !== '' || price !== '') {
-      const menuItem = menu.find((item) => item.id === id)
+      const menuItem = menu.find((item) => item.id === id);
       let newItem: Menu = {
         id: id,
         item: item,
         price: Number(price),
         menu_type: drink ? 'drink' : 'food',
         place_id: placeId,
-      }
+      };
       if (menuItem) {
         newItem = {
           id: id,
@@ -42,21 +42,21 @@ export function MenuModal({
           price: Number(price),
           menu_type: menuItem.menu_type,
           place_id: menuItem.place_id,
-        }
+        };
         setMenu((prevState) =>
-          prevState.map((item) => (item.id === id ? newItem : item))
-        )
+          prevState.map((item) => (item.id === id ? newItem : item)),
+        );
       } else {
-        setMenu((prevState) => [...prevState, newItem])
+        setMenu((prevState) => [...prevState, newItem]);
 
-        setItem('')
-        setPrice('')
+        setItem('');
+        setPrice('');
       }
     }
 
-    const dialog = document.getElementById(elementId) as HTMLDialogElement
+    const dialog = document.getElementById(elementId) as HTMLDialogElement;
     if (dialog) {
-      dialog.close()
+      dialog.close();
     }
   }
 
@@ -95,5 +95,5 @@ export function MenuModal({
         </div>
       </div>
     </dialog>
-  )
+  );
 }

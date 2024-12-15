@@ -1,32 +1,34 @@
-import React, { useRef } from 'react'
-import { Schedule } from '../../domain/models/place'
+import React, { useRef } from 'react';
+import { Schedule } from '../../domain/models/place';
 
 type ScheduleEditModalProps = {
-  placeSchedule: Schedule[]
-  setPlaceSchedule: React.Dispatch<React.SetStateAction<Schedule[]>>
-}
+  placeSchedule: Schedule[];
+  setPlaceSchedule: React.Dispatch<React.SetStateAction<Schedule[]>>;
+};
 
 export default function ScheduleEditModal({
   placeSchedule,
   setPlaceSchedule,
 }: ScheduleEditModalProps) {
-  const openTimeRefs = useRef<(HTMLInputElement | null)[]>([])
-  const closeTimeRefs = useRef<(HTMLInputElement | null)[]>([])
+  const openTimeRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const closeTimeRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   function handleUpdateSchedule(event: React.MouseEvent<HTMLButtonElement>) {
-    event.preventDefault()
+    event.preventDefault();
 
     const updatedSchedule = placeSchedule.map((day, index) => ({
       ...day,
       open_time: openTimeRefs.current[index]?.value || day.open_time,
       close_time: closeTimeRefs.current[index]?.value || day.close_time,
-    }))
+    }));
 
-    setPlaceSchedule(updatedSchedule)
+    setPlaceSchedule(updatedSchedule);
 
-    const dialog = document.getElementById('schedule-edit') as HTMLDialogElement
+    const dialog = document.getElementById(
+      'schedule-edit',
+    ) as HTMLDialogElement;
     if (dialog) {
-      dialog.close()
+      dialog.close();
     }
   }
 
@@ -56,7 +58,7 @@ export default function ScheduleEditModal({
                           className="bg-transparent rounded-lg border border-gray-600 py-2 px-3"
                           defaultValue={day.open_time}
                           ref={(el) => {
-                            openTimeRefs.current[index] = el
+                            openTimeRefs.current[index] = el;
                           }}
                         />
                       </td>
@@ -66,12 +68,12 @@ export default function ScheduleEditModal({
                           className="bg-transparent rounded-lg border border-gray-600 py-2 px-3"
                           defaultValue={day.close_time}
                           ref={(el) => {
-                            closeTimeRefs.current[index] = el
+                            closeTimeRefs.current[index] = el;
                           }}
                         />
                       </td>
                     </tr>
-                  )
+                  );
                 })}
               </tbody>
             </table>
@@ -85,5 +87,5 @@ export default function ScheduleEditModal({
         </form>
       </div>
     </dialog>
-  )
+  );
 }

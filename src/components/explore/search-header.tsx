@@ -1,10 +1,10 @@
-"use client";
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import React, { useContext, useState } from "react";
-import { useDebouncedCallback } from "use-debounce";
-import { UserContext } from "../../context/userContext";
-import { categoryDictionary } from "../../utils/dictionary";
-import { SearchFilters } from "./search-filters";
+'use client';
+import { usePathname, useSearchParams, useRouter } from 'next/navigation';
+import React, { useContext, useState } from 'react';
+import { useDebouncedCallback } from 'use-debounce';
+import { UserContext } from '../../context/userContext';
+import { categoryDictionary } from '../../utils/dictionary';
+import { SearchFilters } from './search-filters';
 
 export interface CategoryDictionary {
   [key: string]: string;
@@ -28,9 +28,9 @@ export function SearchHeader() {
     const params = new URLSearchParams(searchParams);
 
     if (term) {
-      params.set("queryPlace", term);
+      params.set('queryPlace', term);
     } else {
-      params.delete("queryPlace");
+      params.delete('queryPlace');
     }
 
     replace(`${pathname}?${params.toString()}`, { scroll: false });
@@ -40,9 +40,9 @@ export function SearchHeader() {
     const params = new URLSearchParams(searchParams);
 
     if (term) {
-      params.set("queryUser", term);
+      params.set('queryUser', term);
     } else {
-      params.delete("queryUser");
+      params.delete('queryUser');
     }
 
     replace(`${pathname}?${params.toString()}`, { scroll: false });
@@ -54,10 +54,10 @@ export function SearchHeader() {
   ) => {
     const params = new URLSearchParams(searchParams);
 
-    if (type === "city") {
-      params.set("city", event.target.value);
-    } else if (type === "category") {
-      params.set("category", event.target.value);
+    if (type === 'city') {
+      params.set('city', event.target.value);
+    } else if (type === 'category') {
+      params.set('category', event.target.value);
     }
     replace(`${pathname}?${params.toString()}`, { scroll: false });
   };

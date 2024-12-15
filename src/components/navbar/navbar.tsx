@@ -1,10 +1,10 @@
-"use client";
-import NavbarButton from "./navbarButton";
-import NavbarLinks from "./navbarLinks";
-import NavbarLogo from "./navbarLogo";
-import useNavbar from "../../containers/useNavbar";
-import { ProfileModal } from "@ui/profile/profile-modal";
-import { LoginModal } from "@ui/login/login-modal";
+'use client';
+import NavbarButton from './navbarButton';
+import NavbarLinks from './navbarLinks';
+import NavbarLogo from './navbarLogo';
+import useNavbar from '../../containers/useNavbar';
+import { ProfileModal } from '@ui/profile/profile-modal';
+import { LoginModal } from '@ui/login/login-modal';
 
 export function Navbar() {
   const { data, callback } = useNavbar();

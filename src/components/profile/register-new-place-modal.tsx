@@ -1,24 +1,24 @@
-import { zodResolver } from '@hookform/resolvers/zod'
-import CategorySelect from '@ui/profile/category-select'
-import Input from '@ui/profile/modal-input'
-import TextArea from '@ui/profile/modal-text-area'
-import { X } from 'lucide-react'
-import React, { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { postPlace } from '@lib/post-place'
-import { NewPlaceSchema, newPlaceSchema } from '../../utils/new-place-schema'
-import { Categories, CreatePlaceDTO } from '../../domain/models/place'
+import { zodResolver } from '@hookform/resolvers/zod';
+import CategorySelect from '@ui/profile/category-select';
+import Input from '@ui/profile/modal-input';
+import TextArea from '@ui/profile/modal-text-area';
+import { X } from 'lucide-react';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { postPlace } from '@lib/post-place';
+import { NewPlaceSchema, newPlaceSchema } from '../../utils/new-place-schema';
+import { Categories, CreatePlaceDTO } from '../../domain/models/place';
 
 const initialCategories: Categories = {
   restaurant: 'Restaurante',
   coffee: 'Café',
   bakery: 'Padaria',
   market: 'Mercado',
-}
+};
 
 type RegisterNewPlaceModalProps = {
-  setDisplayRegisterNewPlace: React.Dispatch<React.SetStateAction<boolean>>
-}
+  setDisplayRegisterNewPlace: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 export default function RegisterNewPlaceModal({
   setDisplayRegisterNewPlace,
@@ -31,15 +31,15 @@ export default function RegisterNewPlaceModal({
     reset,
   } = useForm<NewPlaceSchema>({
     resolver: zodResolver(newPlaceSchema),
-  })
-  const [selectedCategories, setSelectedCategories] = useState<Categories>({})
+  });
+  const [selectedCategories, setSelectedCategories] = useState<Categories>({});
   const [availableCategories, setAvailableCategories] =
-    useState<Categories>(initialCategories)
+    useState<Categories>(initialCategories);
 
   async function handleIncludeNewPlace(data: NewPlaceSchema) {
     const placeCategory = Object.keys(data.placeCategory).map((category) =>
-      category.toUpperCase()
-    )
+      category.toUpperCase(),
+    );
     const place: CreatePlaceDTO = {
       name: data.placeName,
       image_url: data.placeImage,
@@ -52,9 +52,9 @@ export default function RegisterNewPlaceModal({
       phone: data.placePhone,
       slug: data.placeSlug,
       category: placeCategory,
-    }
-    await postPlace(place)
-    reset()
+    };
+    await postPlace(place);
+    reset();
   }
 
   return (
@@ -185,5 +185,5 @@ export default function RegisterNewPlaceModal({
         </form>
       </div>
     </div>
-  )
+  );
 }

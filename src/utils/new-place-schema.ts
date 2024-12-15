@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { z } from 'zod';
 
 const urlPattern = new RegExp(
   '^(https?:\\/\\/)?' +
@@ -7,8 +7,8 @@ const urlPattern = new RegExp(
     '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' +
     '(\\?[;&a-z\\d%_.~+=-]*)?' +
     '(\\#[-a-z\\d_]*)?$',
-  'i'
-)
+  'i',
+);
 
 export const newPlaceSchema = z.object({
   placeName: z.string(),
@@ -37,6 +37,6 @@ export const newPlaceSchema = z.object({
     .transform((value) => value.toLowerCase().replace(/\s+/g, '-')),
   placePhone: z.string(),
   placeRating: z.string(),
-})
+});
 
-export type NewPlaceSchema = z.infer<typeof newPlaceSchema>
+export type NewPlaceSchema = z.infer<typeof newPlaceSchema>;

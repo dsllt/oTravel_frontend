@@ -1,9 +1,9 @@
-import { Review } from '../domain/models/review'
-import { dateDifference } from '../utils/date-utils'
+import { Review } from '../domain/models/review';
+import { dateDifference } from '../utils/date-utils';
 
 type ReviewBoxProps = {
-  review: Review
-}
+  review: Review;
+};
 
 export default function ReviewBox({ review }: ReviewBoxProps) {
   return (
@@ -25,5 +25,5 @@ export default function ReviewBox({ review }: ReviewBoxProps) {
       </div>
       <p className="text-md">{review.review}</p>
     </div>
-  )
+  );
 }

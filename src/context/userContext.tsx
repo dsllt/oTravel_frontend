@@ -1,15 +1,15 @@
-'use client'
-import { Favorite } from '../domain/models/favorite'
-import { Menu, Place } from '../domain/models/place'
-import { UserDTO, UserFavorites } from '../domain/models/user'
-import { favoritesMock, menuMock, placesMock } from '../utils/mocks'
+'use client';
+import { Favorite } from '../domain/models/favorite';
+import { Menu, Place } from '../domain/models/place';
+import { UserDTO, UserFavorites } from '../domain/models/user';
+import { favoritesMock, menuMock, placesMock } from '../utils/mocks';
 import React, {
   Dispatch,
   SetStateAction,
   createContext,
   useEffect,
   useState,
-} from 'react'
+} from 'react';
 
 const UserFavoritesExample: UserFavorites[] = [
   {
@@ -94,7 +94,7 @@ const UserFavoritesExample: UserFavorites[] = [
       },
     ],
   },
-]
+];
 
 const UserData = {
   id: '',
@@ -104,26 +104,26 @@ const UserData = {
   image: '',
   is_admin: false,
   created_at: '2024-02-13T15:56:56.376Z',
-}
+};
 
 type UserContextType = {
-  places: Place[]
-  setPlaces: Dispatch<SetStateAction<Place[]>>
-  favorites: Favorite[]
-  setFavorites: Dispatch<SetStateAction<Favorite[]>>
-  menu: Menu[]
-  setMenu: Dispatch<SetStateAction<Menu[]>>
-  usersWithFavorites: UserFavorites[]
-  setUsersWithFavorites: Dispatch<SetStateAction<UserFavorites[]>>
-  cities: string[]
-  categories: string[]
-  displayLogin: boolean
-  setDisplayLogin: Dispatch<SetStateAction<boolean>>
-  displayProfile: boolean
-  setDisplayProfile: Dispatch<SetStateAction<boolean>>
-  userData: UserDTO
-  setUserData: React.Dispatch<React.SetStateAction<UserDTO>>
-}
+  places: Place[];
+  setPlaces: Dispatch<SetStateAction<Place[]>>;
+  favorites: Favorite[];
+  setFavorites: Dispatch<SetStateAction<Favorite[]>>;
+  menu: Menu[];
+  setMenu: Dispatch<SetStateAction<Menu[]>>;
+  usersWithFavorites: UserFavorites[];
+  setUsersWithFavorites: Dispatch<SetStateAction<UserFavorites[]>>;
+  cities: string[];
+  categories: string[];
+  displayLogin: boolean;
+  setDisplayLogin: Dispatch<SetStateAction<boolean>>;
+  displayProfile: boolean;
+  setDisplayProfile: Dispatch<SetStateAction<boolean>>;
+  userData: UserDTO;
+  setUserData: React.Dispatch<React.SetStateAction<UserDTO>>;
+};
 
 export const UserContext = createContext<UserContextType>({
   places: [],
@@ -150,23 +150,23 @@ export const UserContext = createContext<UserContextType>({
     created_at: '',
   },
   setUserData: () => {},
-})
+});
 
 type Props = {
-  children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 
 function UserProvider({ children }: Props) {
   const [usersWithFavorites, setUsersWithFavorites] =
-    useState<UserFavorites[]>(UserFavoritesExample)
-  const [places, setPlaces] = useState<Place[]>(placesMock)
-  const [favorites, setFavorites] = useState<Favorite[]>(favoritesMock)
-  const [menu, setMenu] = useState<Menu[]>(menuMock)
-  const [cities, setCities] = useState<string[]>([])
-  const [categories, setCategories] = useState<string[]>([])
-  const [displayLogin, setDisplayLogin] = useState(false)
-  const [displayProfile, setDisplayProfile] = useState(false)
-  const [userData, setUserData] = useState(UserData)
+    useState<UserFavorites[]>(UserFavoritesExample);
+  const [places, setPlaces] = useState<Place[]>(placesMock);
+  const [favorites, setFavorites] = useState<Favorite[]>(favoritesMock);
+  const [menu, setMenu] = useState<Menu[]>(menuMock);
+  const [cities, setCities] = useState<string[]>([]);
+  const [categories, setCategories] = useState<string[]>([]);
+  const [displayLogin, setDisplayLogin] = useState(false);
+  const [displayProfile, setDisplayProfile] = useState(false);
+  const [userData, setUserData] = useState(UserData);
 
   useEffect(() => {
     // async function fetchData() {
@@ -184,21 +184,21 @@ function UserProvider({ children }: Props) {
 
     // fetchData();
 
-    const cities = places.map((place: Place) => place.city)
-    const categories = places.map((place: Place) => place.category).flat()
+    const cities = places.map((place: Place) => place.city);
+    const categories = places.map((place: Place) => place.category).flat();
 
     const uniqueCities: string[] = cities.filter(
       (city: string, index: number, self: string[]) =>
-        self.indexOf(city) === index
-    )
+        self.indexOf(city) === index,
+    );
     const uniqueCategories: string[] = categories.filter(
       (category: string, index: number, self: string[]) =>
-        self.indexOf(category) === index
-    )
+        self.indexOf(category) === index,
+    );
 
-    setCities(uniqueCities)
-    setCategories(uniqueCategories)
-  }, [places])
+    setCities(uniqueCities);
+    setCategories(uniqueCategories);
+  }, [places]);
 
   const userInfo = {
     places,
@@ -217,11 +217,11 @@ function UserProvider({ children }: Props) {
     setDisplayProfile,
     userData,
     setUserData,
-  }
+  };
 
   return (
     <UserContext.Provider value={userInfo}>{children}</UserContext.Provider>
-  )
+  );
 }
 
-export default UserProvider
+export default UserProvider;

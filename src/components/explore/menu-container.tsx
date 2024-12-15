@@ -1,8 +1,8 @@
-import { PlusIcon } from "@heroicons/react/24/outline";
-import { Pencil, Trash } from "lucide-react";
-import { MenuModal } from "./menu-modal";
-import { useContext } from "react";
-import { UserContext } from "../../context/userContext";
+import { PlusIcon } from '@heroicons/react/24/outline';
+import { Pencil, Trash } from 'lucide-react';
+import { MenuModal } from './menu-modal';
+import { useContext } from 'react';
+import { UserContext } from '../../context/userContext';
 
 type MenuContainerProps = {
   menu: {
@@ -18,9 +18,9 @@ export default function MenuContainer({ menu, placeId }: MenuContainerProps) {
   const { setMenu } = useContext(UserContext);
 
   const drinks =
-    menu != null ? menu.filter((menu) => menu.menu_type === "drink") : [];
+    menu != null ? menu.filter((menu) => menu.menu_type === 'drink') : [];
   const foods =
-    menu != null ? menu.filter((menu) => menu.menu_type === "food") : [];
+    menu != null ? menu.filter((menu) => menu.menu_type === 'food') : [];
 
   function handleDisplayModal(id: string) {
     const modal = document.getElementById(id) as HTMLDialogElement;
@@ -47,7 +47,7 @@ export default function MenuContainer({ menu, placeId }: MenuContainerProps) {
           <h1 className="mb-3 font-bold">Bebidas</h1>
           <button
             className="hover:bg-slate-700 p-1 rounded-lg mb-3"
-            onClick={() => handleDisplayModal("new_drink_modal")}
+            onClick={() => handleDisplayModal('new_drink_modal')}
           >
             <PlusIcon className="w-3 h-3 " />
           </button>
@@ -66,9 +66,9 @@ export default function MenuContainer({ menu, placeId }: MenuContainerProps) {
                   <tr className="hover:bg-base-100" key={drink.id}>
                     <td className="rounded-l-md capitalize">{drink.item}</td>
                     <td className="">
-                      {drink.price.toLocaleString("pt-BR", {
-                        style: "currency",
-                        currency: "BRL",
+                      {drink.price.toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL',
                       })}
                     </td>
                     <td className="w-3">
@@ -107,7 +107,7 @@ export default function MenuContainer({ menu, placeId }: MenuContainerProps) {
           <h1 className="mb-3 font-bold">Comidas</h1>
           <button
             className="hover:bg-slate-700 p-1 rounded-lg mb-3"
-            onClick={() => handleDisplayModal("new_food_modal")}
+            onClick={() => handleDisplayModal('new_food_modal')}
           >
             <PlusIcon className="w-3 h-3 " />
           </button>
@@ -126,9 +126,9 @@ export default function MenuContainer({ menu, placeId }: MenuContainerProps) {
                   <tr className="hover:bg-base-100" key={food.id}>
                     <td className="rounded-l-md capitalize">{food.item}</td>
                     <td className="rounded-r-md">
-                      {food.price.toLocaleString("pt-BR", {
-                        style: "currency",
-                        currency: "BRL",
+                      {food.price.toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL',
                       })}
                     </td>
                   </tr>
