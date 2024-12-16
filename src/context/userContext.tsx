@@ -1,7 +1,7 @@
 'use client';
 import { Favorite } from '../domain/models/favorite';
 import { Menu, Place } from '../domain/models/place';
-import { UserDTO, UserFavorites } from '../domain/models/user';
+import { User, UserDTO, UserFavorites } from '../domain/models/user';
 import { favoritesMock, menuMock, placesMock } from '../utils/mocks';
 import React, {
   Dispatch,
@@ -121,7 +121,7 @@ type UserContextType = {
   setDisplayLogin: Dispatch<SetStateAction<boolean>>;
   displayProfile: boolean;
   setDisplayProfile: Dispatch<SetStateAction<boolean>>;
-  userData: UserDTO;
+  userData: UserDTO | undefined;
   setUserData: React.Dispatch<React.SetStateAction<UserDTO>>;
 };
 
@@ -166,24 +166,17 @@ function UserProvider({ children }: Props) {
   const [categories, setCategories] = useState<string[]>([]);
   const [displayLogin, setDisplayLogin] = useState(false);
   const [displayProfile, setDisplayProfile] = useState(false);
-  const [userData, setUserData] = useState(UserData);
+  const [userData, setUserData] = useState<UserDTO>({
+    id: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    image: '',
+    is_admin: false,
+    created_at: '',
+  });
 
   useEffect(() => {
-    // async function fetchData() {
-    //   const placesResponse = await fetchPlaces();
-    //   const cities = placesResponse.map((place: Place) => place.city);
-    //   const categories = placesResponse.map((place: Place) => place.category).flat();
-
-    //   const uniqueCities: string[] = cities.filter((city: string, index: number, self: string[]) => self.indexOf(city) === index);
-    //   const uniqueCategories: string[] = categories.filter((category: string, index: number, self: string[]) => self.indexOf(category) === index);
-
-    //   setCities(uniqueCities);
-    //   setCategories(uniqueCategories);
-    //   setPlaces(placesResponse);
-    // }
-
-    // fetchData();
-
     const cities = places.map((place: Place) => place.city);
     const categories = places.map((place: Place) => place.category).flat();
 
