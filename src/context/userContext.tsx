@@ -121,8 +121,18 @@ type UserContextType = {
   setDisplayLogin: Dispatch<SetStateAction<boolean>>;
   displayProfile: boolean;
   setDisplayProfile: Dispatch<SetStateAction<boolean>>;
-  userData: UserDTO | undefined;
+  userData: UserDTO;
   setUserData: React.Dispatch<React.SetStateAction<UserDTO>>;
+};
+
+const userDTODefaultValue: UserDTO = {
+  id: '',
+  firstName: '',
+  lastName: '',
+  email: '',
+  image: '',
+  is_admin: false,
+  created_at: '',
 };
 
 export const UserContext = createContext<UserContextType>({
@@ -140,15 +150,7 @@ export const UserContext = createContext<UserContextType>({
   setDisplayLogin: () => {},
   displayProfile: false,
   setDisplayProfile: () => {},
-  userData: {
-    id: '',
-    firstName: '',
-    lastName: '',
-    email: '',
-    image: '',
-    is_admin: false,
-    created_at: '',
-  },
+  userData: userDTODefaultValue,
   setUserData: () => {},
 });
 
