@@ -1,7 +1,7 @@
 import { LandPlot, MapPin } from 'lucide-react';
 import { useContext, useState } from 'react';
 import { UserContext } from '../../context/userContext';
-import { categoryDictionary } from '../../utils/dictionary';
+import { categoryDictionary } from '../../domain/constants/category-dictionary';
 import { CategoryDictionary } from './search-header';
 import { useDebouncedCallback } from 'use-debounce';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';

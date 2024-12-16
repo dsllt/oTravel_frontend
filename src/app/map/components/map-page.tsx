@@ -6,7 +6,7 @@ import { CategoryDictionary } from '@ui/explore/search-header';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { MapPlacesFilter } from '@ui/maps/map-places-filter';
 import { UserContext } from '../../../context/userContext';
-import { categoryDictionary } from '../../../utils/dictionary';
+import { categoryDictionary } from '../../../domain/constants/category-dictionary';
 
 const Map = dynamic(() => import('../../../components/maps/map'), {
   loading: () => <p>Um mapa está sendo carregado</p>,

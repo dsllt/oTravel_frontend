@@ -15,8 +15,7 @@ export function ProfileModal({
   onClickCloseModal,
   onClickLogout,
 }: ProfileModalProps) {
-  const { displayProfile, setDisplayProfile, userData } =
-    useContext(UserContext);
+  const { setDisplayProfile, userData } = useContext(UserContext);
   const [displayFavorites, setDisplayFavorites] = useState(false);
   const [displayPersonalInfo, setDisplayPersonalInfo] = useState(false);
   const [displayRegisterNewPlace, setDisplayRegisterNewPlace] = useState(false);

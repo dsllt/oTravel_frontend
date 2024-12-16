@@ -5,8 +5,11 @@ import TextArea from '@ui/profile/modal-text-area';
 import { X } from 'lucide-react';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { postPlace } from '@lib/post-place';
-import { NewPlaceSchema, newPlaceSchema } from '../../utils/new-place-schema';
+import { postPlace } from '@lib/usecases/post-place';
+import {
+  NewPlaceSchema,
+  newPlaceSchema,
+} from '../../domain/schemas/new-place-schema';
 import { Categories, CreatePlaceDTO } from '../../domain/models/place';
 
 const initialCategories: Categories = {

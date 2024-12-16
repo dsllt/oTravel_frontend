@@ -1,8 +1,11 @@
 import { login, register } from '@lib/data';
 import { on } from 'process';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { UserContext } from '../context/userContext';
+import { getUser } from '@lib/usecases/get-user';
 
 export default function useNavbar() {
+  const { setUserData } = useContext(UserContext);
   const [displayLoginModal, setDisplayLoginModal] = useState(false);
   const [displayMenuModal, setDisplayProfileModal] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -50,19 +53,24 @@ export default function useNavbar() {
     return await register(firstName, lastName, email, password);
   }, []);
 
-  const onClickLogin = useCallback(async (formData: any) => {
-    const email = formData.get('email');
-    const password = formData.get('password');
-    const response = await login(email, password);
-    if (response && response.token) {
-      localStorage.setItem('token', response.token);
-      setIsLogged(true);
-      setDisplayLoginModal(false);
-      setLoginError('');
-    } else {
-      setLoginError(response.message);
-    }
-  }, []);
+  const onClickLogin = useCallback(
+    async (formData: any) => {
+      const email = formData.get('email');
+      const password = formData.get('password');
+      const response = await login(email, password);
+      if (response && response.token) {
+        localStorage.setItem('token', response.token);
+        setIsLogged(true);
+        setDisplayLoginModal(false);
+        setLoginError('');
+        const userData = await getUser(response.userId);
+        setUserData(userData);
+      } else {
+        setLoginError(response.message);
+      }
+    },
+    [setUserData],
+  );
 
   const onClickLogout = useCallback(() => {
     console.log(`logout`);

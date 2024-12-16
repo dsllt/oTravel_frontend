@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { X } from 'lucide-react';
 import { UserContext } from '../../context/userContext';
+import { UserDTO } from '../../domain/models/user';
+import { putUser } from '@lib/usecases/put-user';
 
 type PersonalInfoModalProps = {
   setDisplayPersonalInfo: React.Dispatch<React.SetStateAction<boolean>>;
@@ -10,12 +12,15 @@ export default function PersonalInfoModal({
   setDisplayPersonalInfo,
 }: PersonalInfoModalProps) {
   const { userData, setUserData } = useContext(UserContext);
-  const [firstName, setFirstName] = useState(userData.firstName);
-  const [lastName, setLastName] = useState(userData.lastName);
-  const [email, setEmail] = useState(userData.email);
+  const [firstName, setFirstName] = useState(userData?.firstName);
+  const [lastName, setLastName] = useState(userData?.lastName);
+  const [email, setEmail] = useState(userData?.email);
 
-  function handleUpdateUserData() {
-    const updatedUser = { ...userData, firstName, lastName, email };
+  async function handleUpdateUserData() {
+    if (!firstName || !lastName || !email || !userData?.id) return;
+    const updatedUser: UserDTO = { ...userData, firstName, lastName, email };
+    console.log(updatedUser);
+    await putUser(updatedUser);
     setUserData(updatedUser);
   }
 
