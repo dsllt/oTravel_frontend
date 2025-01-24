@@ -37,7 +37,7 @@ export default function Map({ places }: MapProps) {
               position={[Number(place.latitude), Number(place.longitude)]}
             >
               <Popup offset={[0, -20]}>
-                <Link href={`/explore/${place.id}`}>Visitar página</Link>
+                <Link href={`/explore/${place.slug}`}>Visitar página</Link>
               </Popup>
               <Tooltip direction="bottom" offset={[0, 0]} opacity={1}>
                 <div className="flex flex-col">

@@ -5,8 +5,12 @@
 - [x] Fazer a página de inclusão de café
 - [x] Fazer a inclusão de cafés
 - [x] Fazer a edição de cafés
-- [ ] Fazer a página de perfil
-- [ ] Fazer a página de login
+- [x] Fazer a página de perfil
+- [x] Fazer a página de login
+- [x] Ajustar link ao navegar no mapa
+- [ ] Ajustar favoritar
+- [ ] Cancelar adicionar nova bebida e comida
+- [ ] Fazer integração
 - [ ] Fazer autenticação com Google
 
 ### Database diagram
