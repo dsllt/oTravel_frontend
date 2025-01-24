@@ -98,7 +98,10 @@ export function ProfileModal({
         </div>
 
         {displayFavorites && (
-          <FavoritesModal setDisplayFavorites={setDisplayFavorites} />
+          <FavoritesModal
+            setDisplayFavorites={setDisplayFavorites}
+            userId={userData.id}
+          />
         )}
 
         {displayPersonalInfo && (
