@@ -1,23 +1,14 @@
 import { LandPlot, MapPin } from 'lucide-react';
-import { useContext, useState } from 'react';
-import { UserContext } from '../../context/userContext';
-import { categoryDictionary } from '../../domain/constants/category-dictionary';
-import { CategoryDictionary } from './search-header';
+import { useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
+import useExplore from '../../containers/useExplore';
 
 export function HeroSearchInputs() {
   const [selectCity, setSelectedCity] = useState('');
   const [selectCategory, setSelectedCategory] = useState('');
-  const { cities, categories } = useContext(UserContext);
+  const { data } = useExplore();
 
-  const mappedCategories = categories.reduce<CategoryDictionary>(
-    (acc, category) => {
-      acc[category] = categoryDictionary[category];
-      return acc;
-    },
-    {},
-  );
   const searchParams = useSearchParams();
 
   const pathname = usePathname();
@@ -45,7 +36,7 @@ export function HeroSearchInputs() {
           onChange={(e) => setSelectedCity(e.target.value)}
         >
           <option value="">Para onde você vai?</option>
-          {cities.map((c: string) => (
+          {data.cities.map((c: string) => (
             <option key={c}>{c}</option>
           ))}
         </select>
@@ -58,7 +49,7 @@ export function HeroSearchInputs() {
           onChange={(e) => setSelectedCategory(e.target.value)}
         >
           <option value="">Que tipo de lugar você busca?</option>
-          {Object.entries(mappedCategories).map(([key, value]) => (
+          {Object.entries(data.categories).map(([key, value]) => (
             <option key={key} value={key}>
               {value}
             </option>

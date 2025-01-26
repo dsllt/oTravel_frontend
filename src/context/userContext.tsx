@@ -107,16 +107,10 @@ const UserData = {
 };
 
 type UserContextType = {
-  places: Place[];
-  setPlaces: Dispatch<SetStateAction<Place[]>>;
   favorites: Favorite[];
   setFavorites: Dispatch<SetStateAction<Favorite[]>>;
   menu: Menu[];
   setMenu: Dispatch<SetStateAction<Menu[]>>;
-  usersWithFavorites: UserFavorites[];
-  setUsersWithFavorites: Dispatch<SetStateAction<UserFavorites[]>>;
-  cities: string[];
-  categories: string[];
   displayLogin: boolean;
   setDisplayLogin: Dispatch<SetStateAction<boolean>>;
   displayProfile: boolean;
@@ -136,16 +130,10 @@ const userDTODefaultValue: UserDTO = {
 };
 
 export const UserContext = createContext<UserContextType>({
-  places: [],
-  setPlaces: () => {},
   favorites: [],
   setFavorites: () => {},
   menu: [],
   setMenu: () => {},
-  usersWithFavorites: [],
-  setUsersWithFavorites: () => {},
-  cities: [],
-  categories: [],
   displayLogin: false,
   setDisplayLogin: () => {},
   displayProfile: false,
@@ -159,13 +147,9 @@ type Props = {
 };
 
 function UserProvider({ children }: Props) {
-  const [usersWithFavorites, setUsersWithFavorites] =
-    useState<UserFavorites[]>(UserFavoritesExample);
-  const [places, setPlaces] = useState<Place[]>(placesMock);
   const [favorites, setFavorites] = useState<Favorite[]>(favoritesMock);
   const [menu, setMenu] = useState<Menu[]>(menuMock);
-  const [cities, setCities] = useState<string[]>([]);
-  const [categories, setCategories] = useState<string[]>([]);
+
   const [displayLogin, setDisplayLogin] = useState(false);
   const [displayProfile, setDisplayProfile] = useState(false);
   const [userData, setUserData] = useState<UserDTO>({
@@ -178,34 +162,13 @@ function UserProvider({ children }: Props) {
     created_at: '',
   });
 
-  useEffect(() => {
-    const cities = places.map((place: Place) => place.city);
-    const categories = places.map((place: Place) => place.category).flat();
-
-    const uniqueCities: string[] = cities.filter(
-      (city: string, index: number, self: string[]) =>
-        self.indexOf(city) === index,
-    );
-    const uniqueCategories: string[] = categories.filter(
-      (category: string, index: number, self: string[]) =>
-        self.indexOf(category) === index,
-    );
-
-    setCities(uniqueCities);
-    setCategories(uniqueCategories);
-  }, [places]);
+  useEffect(() => {}, []);
 
   const userInfo = {
-    places,
-    setPlaces,
     favorites,
     setFavorites,
     menu,
     setMenu,
-    cities,
-    categories,
-    usersWithFavorites,
-    setUsersWithFavorites,
     displayLogin,
     setDisplayLogin,
     displayProfile,
