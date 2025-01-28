@@ -4,3 +4,7 @@ export const categoryDictionary: { [key: string]: string } = {
   bakery: 'Padaria',
   market: 'Mercado',
 };
+
+export interface CategoryDictionary {
+  [key: string]: string;
+}

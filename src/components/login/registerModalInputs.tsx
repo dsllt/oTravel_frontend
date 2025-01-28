@@ -34,7 +34,7 @@ export default function RegisterModalInputs({
           className="input input-primary"
         />
         <button className="btn btn-primary" type="submit">
-          Entrar
+          Criar
         </button>
         <button className="btn btn-ghost" type="button" onClick={onClickVoltar}>
           Voltar

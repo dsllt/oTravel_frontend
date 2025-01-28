@@ -1,28 +1,16 @@
 'use client';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
-import { UserContext } from '../../context/userContext';
-import { categoryDictionary } from '../../domain/constants/category-dictionary';
 import { SearchFilters } from './search-filters';
-
-export interface CategoryDictionary {
-  [key: string]: string;
-}
+import useExplore from '../../containers/useExplore';
 
 export function SearchHeader() {
   const searchParams = useSearchParams();
   const [displayFilters, setDisplayFilters] = useState(false);
   const pathname = usePathname();
   const { replace } = useRouter();
-  const { cities, categories } = useContext(UserContext);
-  const mappedCategories = categories.reduce<CategoryDictionary>(
-    (acc, category) => {
-      acc[category] = categoryDictionary[category];
-      return acc;
-    },
-    {},
-  );
+  const { data } = useExplore();
 
   const handleSearchPlace = useDebouncedCallback((term) => {
     const params = new URLSearchParams(searchParams);
@@ -75,11 +63,11 @@ export function SearchHeader() {
       </div>
       {displayFilters ? (
         <SearchFilters
-          cities={cities}
+          cities={data.cities}
           handleFilter={handleFilter}
           handleSearchPlace={handleSearchPlace}
           handleSearchUser={handleSearchUser}
-          mappedCategories={mappedCategories}
+          mappedCategories={data.categories}
           searchParams={searchParams}
           setDisplayFilters={setDisplayFilters}
           clearSearchParams={clearSearchParams}

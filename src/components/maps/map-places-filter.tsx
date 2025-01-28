@@ -1,4 +1,4 @@
-import { CategoryDictionary } from '@ui/explore/search-header';
+import { CategoryDictionary } from '../../domain/constants/category-dictionary';
 
 type MapPlacesFilterProps = {
   mappedCategories: CategoryDictionary;

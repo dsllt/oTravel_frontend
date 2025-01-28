@@ -8,6 +8,8 @@
 - [x] Fazer a página de perfil
 - [x] Fazer a página de login
 - [x] Ajustar link ao navegar no mapa
+- [x] Integrar busca de lugares em todas páginas
+- [ ] Integrar busca usuários com favoritos
 - [ ] Ajustar favoritar
 - [ ] Cancelar adicionar nova bebida e comida
 - [ ] Fazer integração
