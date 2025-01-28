@@ -1,4 +1,4 @@
-import { ReadonlyURLSearchParams, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { DebouncedState } from 'use-debounce';
 

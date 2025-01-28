@@ -1,6 +1,6 @@
 'use client';
 import dynamic from 'next/dynamic';
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { MapPlaceBox } from '@ui/maps/map-place-box';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { MapPlacesFilter } from '@ui/maps/map-places-filter';

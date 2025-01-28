@@ -7,7 +7,6 @@ import {
   CategoryDictionary,
   categoryDictionary,
 } from '../domain/constants/category-dictionary';
-import { useDebouncedCallback } from 'use-debounce';
 
 const useMap = () => {
   const searchParams = useSearchParams();

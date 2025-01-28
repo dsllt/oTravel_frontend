@@ -1,12 +1,5 @@
-import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { useCallback, useContext, useMemo, useState } from 'react';
 import { Menu, Place, Schedule } from '../domain/models/place';
-import { getPlaces } from '@lib/data';
-import { useSearchParams } from 'next/navigation';
-import { UserFavorites } from '../domain/models/user';
-import {
-  CategoryDictionary,
-  categoryDictionary,
-} from '../domain/constants/category-dictionary';
 import { placeScheduleMock, reviewsMock } from '../utils/mocks';
 import { UserContext } from '../context/userContext';
 import { Favorite } from '../domain/models/favorite';

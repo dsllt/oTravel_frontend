@@ -1,9 +1,8 @@
 'use client';
 import Image from 'next/image';
 import MenuContainer from '@ui/explore/menu-container';
-import React, { useContext, useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import Link from 'next/link';
-import { UserContext } from '../../../context/userContext';
 import { Star } from 'lucide-react';
 import ReviewBox from '@ui/review-box';
 import dynamic from 'next/dynamic';
@@ -21,6 +20,14 @@ const Map = dynamic(
 );
 
 export default function PlacePageClient({ slug }: { slug: string }) {
+  return (
+    <Suspense>
+      <PlacePage slug={slug} />
+    </Suspense>
+  );
+}
+
+function PlacePage({ slug }: { slug: string }) {
   const { data, callback } = usePlacePage();
 
   useEffect(() => {
