@@ -1,7 +1,7 @@
 import { DebouncedState } from 'use-debounce';
 import { SearchInput } from './search-input';
 import { ReadonlyURLSearchParams } from 'next/navigation';
-import { CategoryDictionary } from './search-header';
+import { CategoryDictionary } from '../../domain/constants/category-dictionary';
 
 type SearchFiltersProps = {
   handleFilter: (
