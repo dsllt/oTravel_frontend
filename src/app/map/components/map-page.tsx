@@ -2,11 +2,9 @@
 import dynamic from 'next/dynamic';
 import React, { useContext, useState } from 'react';
 import { MapPlaceBox } from '@ui/maps/map-place-box';
-import { CategoryDictionary } from '@ui/explore/search-header';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { MapPlacesFilter } from '@ui/maps/map-places-filter';
-import { UserContext } from '../../../context/userContext';
-import { categoryDictionary } from '../../../domain/constants/category-dictionary';
+import useMap from '../../../containers/useMap';
 
 const Map = dynamic(() => import('../../../components/maps/map'), {
   loading: () => <p>Um mapa está sendo carregado</p>,
@@ -14,36 +12,15 @@ const Map = dynamic(() => import('../../../components/maps/map'), {
 });
 
 export default function MapPage() {
-  const { places, categories, cities } = useContext(UserContext);
-  const searchParams = useSearchParams();
+  const { data } = useMap();
   const { replace } = useRouter();
+  const searchParams = useSearchParams();
   const pathname = usePathname();
 
   const [displayFilters, setDisplayFilters] = useState(false);
 
   const category = searchParams.get('category') || '';
   const city = searchParams.get('city') || '';
-
-  let filteredPlaces = places.filter((place) => {
-    const matchesCategory =
-      !category ||
-      place.category.some(
-        (cat: string) => cat.toLowerCase() === category.toLowerCase(),
-      );
-
-    const matchesCity =
-      !city || place.city.toLowerCase() === city.toLowerCase();
-
-    return matchesCategory && matchesCity;
-  });
-
-  const mappedCategories = categories.reduce<CategoryDictionary>(
-    (acc, category) => {
-      acc[category] = categoryDictionary[category];
-      return acc;
-    },
-    {},
-  );
 
   const handleFilter = (
     event: React.ChangeEvent<HTMLSelectElement>,
@@ -67,7 +44,7 @@ export default function MapPage() {
 
   return (
     <div className="flex items-center justify-between w-full h-full overflow-hidden gap-8">
-      <Map places={places} key={`${category}-${city}`} />
+      <Map places={data.places} key={`${category}-${city}`} />
       <div className="pr-12 flex flex-col items-start justify-start h-full w-full gap-3">
         <div className="flex justify-between items-center w-full">
           <h2 className="font-dmSans font-3xl font-bold mb-5 mt-3">
@@ -82,8 +59,8 @@ export default function MapPage() {
         </div>
         {displayFilters && (
           <MapPlacesFilter
-            cities={cities}
-            mappedCategories={mappedCategories}
+            cities={data.cities}
+            mappedCategories={data.categories}
             handleFilter={handleFilter}
             clearSearchParams={clearSearchParams}
             setDisplayFilters={setDisplayFilters}
@@ -91,7 +68,7 @@ export default function MapPage() {
         )}
 
         <div className="flex flex-col items-start justify-start h-full overflow-y-scroll gap-4 pb-8 w-full">
-          {filteredPlaces.map((place) => (
+          {data.filteredPlaces.map((place) => (
             <MapPlaceBox key={place.id} placeInfo={place} />
           ))}
         </div>

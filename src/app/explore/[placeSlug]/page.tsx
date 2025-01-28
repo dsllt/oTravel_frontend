@@ -1,12 +1,13 @@
 import React from 'react';
 import PlacePageClient from './places-page-client';
-import { placesMock } from '../../../utils/mocks';
+import { getPlaces } from '@lib/data';
+import { Place } from '../../../domain/models/place';
 
 export async function generateStaticParams() {
-  const places = placesMock.map((place) => ({
+  const places: Place[] = await getPlaces();
+  return places.map((place) => ({
     placeSlug: place.slug,
   }));
-  return places;
 }
 
 export default async function PlacePage(props: {
