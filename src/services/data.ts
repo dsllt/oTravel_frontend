@@ -1,3 +1,4 @@
+import { ServiceError } from '../domain/errors/ServiceError';
 import { UpdatePlaceDTO } from '../domain/models/place';
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -58,8 +59,7 @@ export async function getPlaces() {
     const data = await response.json();
     return data;
   } catch (e) {
-    console.error('Failed to fetch places data.', e);
-    throw new Error('Failed to fetch places data.');
+    throw new ServiceError({ cause: e });
   }
 }
 
