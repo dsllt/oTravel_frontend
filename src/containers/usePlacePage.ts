@@ -1,17 +1,18 @@
-import { useCallback, useContext, useMemo, useState } from 'react';
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { Menu, Place, Schedule } from '../domain/models/place';
 import { placeScheduleMock, reviewsMock } from '../utils/mocks';
 import { UserContext } from '../context/userContext';
 import { Favorite } from '../domain/models/favorite';
 import useMap from './useMap';
+import useExplore from './useExplore';
 
 const usePlacePage = () => {
   const { userData } = useContext(UserContext);
-  const { data: mapData } = useMap();
+  const { data: exploreData } = useExplore();
 
   const [place, setPlace] = useState<Place>({
     id: '',
-    image_url: '',
+    imageUrl: '',
     name: '',
     description: '',
     address: '',
@@ -33,6 +34,7 @@ const usePlacePage = () => {
   const [newReview, setNewReview] = useState('');
   const [rating, setRating] = useState('');
   const [reviews, setReview] = useState(reviewsMock);
+  const [isLogged, setIsLogged] = useState(false);
 
   const data = useMemo(
     () => ({
@@ -43,8 +45,18 @@ const usePlacePage = () => {
       newReview,
       rating,
       reviews,
+      isLogged,
     }),
-    [place, isFavorite, placeMenu, placeSchedule, newReview, rating, reviews],
+    [
+      place,
+      isFavorite,
+      placeMenu,
+      placeSchedule,
+      newReview,
+      rating,
+      reviews,
+      isLogged,
+    ],
   );
 
   const onClickFavorite = useCallback(() => {
@@ -52,7 +64,7 @@ const usePlacePage = () => {
     const newFavorite = {
       id: place.id,
       name: place.name,
-      image_url: place.image_url,
+      image_url: place.imageUrl,
       address: place.address,
       city: place.city,
       country: place.country,
@@ -66,7 +78,7 @@ const usePlacePage = () => {
     place.city,
     place.country,
     place.id,
-    place.image_url,
+    place.imageUrl,
     place.name,
     place.rating,
     place.slug,
@@ -104,9 +116,10 @@ const usePlacePage = () => {
     });
     return isFetched;
   }, []);
+
   const defineCurrentPlace = useCallback(
     (slug: string) => {
-      const currentPlace = mapData.places.find(
+      const currentPlace = exploreData.places.find(
         (place: Place) => place.slug === slug,
       );
       if (currentPlace) {
@@ -121,7 +134,7 @@ const usePlacePage = () => {
       const isFavorite = favorites.some((favorite) => place.id === favorite.id);
       setIsFavorite(isFavorite);
     },
-    [favorites, mapData.places, place.id],
+    [favorites, exploreData.places, place.id],
   );
 
   const callback = useMemo(
@@ -146,6 +159,13 @@ const usePlacePage = () => {
       setNewReview,
     ],
   );
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      setIsLogged(true);
+    }
+  }, []);
 
   return { data, callback };
 };

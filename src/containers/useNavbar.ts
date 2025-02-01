@@ -1,15 +1,13 @@
 import { login, register } from '@lib/data';
-import { on } from 'process';
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { UserContext } from '../context/userContext';
 import { getUser } from '@lib/usecases/get-user';
 
 export default function useNavbar() {
-  const { setUserData } = useContext(UserContext);
+  const { setUserData, isLogged, setIsLogged } = useContext(UserContext);
   const [displayLoginModal, setDisplayLoginModal] = useState(false);
   const [displayMenuModal, setDisplayProfileModal] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [isLogged, setIsLogged] = useState(false);
   const [loginError, setLoginError] = useState('');
 
   const links = useMemo(
@@ -69,15 +67,14 @@ export default function useNavbar() {
         setLoginError(response.message);
       }
     },
-    [setUserData],
+    [setIsLogged, setUserData],
   );
 
   const onClickLogout = useCallback(() => {
-    console.log(`logout`);
     localStorage.removeItem('token');
     setIsLogged(false);
     setDisplayProfileModal(false);
-  }, []);
+  }, [setIsLogged]);
 
   const callback = useMemo(
     () => ({

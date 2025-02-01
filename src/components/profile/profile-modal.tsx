@@ -88,7 +88,7 @@ export function ProfileModal({
 
           <div className="mt-auto">
             <button
-              className="flex gap-3 w-full hover:bg-gray-700 rounded-lg p-5"
+              className="flex gap-3 w-full hover:bg-gray-700 rounded-lg p-5 items-center"
               onClick={onClickLogout}
             >
               <LogOut className="size-5 text-zinc-400" />

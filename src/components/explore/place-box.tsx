@@ -20,7 +20,7 @@ export function PlaceBox({ placeInfo }: PlaceBoxProps) {
     >
       <figure className="h-52">
         <Image
-          src={placeInfo.image_url}
+          src={placeInfo.imageUrl}
           alt={placeInfo.name}
           width={500}
           height={200}

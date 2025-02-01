@@ -1,6 +1,6 @@
 export interface Place {
   id: string; // '3958dc9e-742f-4377-85e9-fec4b6a6442a',
-  image_url: string; // 'https://res.cloudinary.com/hbhhv9rz9/image/upload/f_auto,c_limit,w_3840,q_auto/cafes/Cafe%20Landing%20Page/Cafe-Jackson-Square-Hero.jpg',
+  imageUrl: string; // 'https://res.cloudinary.com/hbhhv9rz9/image/upload/f_auto,c_limit,w_3840,q_auto/cafes/Cafe%20Landing%20Page/Cafe-Jackson-Square-Hero.jpg',
   name: string; // 'THE COFFEE',
   description: string; // '',
   address: string; // 'Rua Fernandes Vieira, 656 - Bom Fim',

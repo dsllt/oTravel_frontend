@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import MenuContainer from '@ui/explore/menu-container';
-import React, { Suspense, useEffect } from 'react';
+import React, { Suspense, useContext, useEffect } from 'react';
 import Link from 'next/link';
 import { Star } from 'lucide-react';
 import ReviewBox from '@ui/review-box';
@@ -9,6 +9,7 @@ import dynamic from 'next/dynamic';
 import ScheduleEditModal from '@ui/explore/schedule-edit-modal';
 import { StarIcon } from '@heroicons/react/16/solid';
 import usePlacePage from '../../../containers/usePlacePage';
+import useNavbar from '../../../containers/useNavbar';
 
 const Map = dynamic(
   () => import('../../../components/maps/small-map'),
@@ -29,6 +30,7 @@ export default function PlacePageClient({ slug }: { slug: string }) {
 
 function PlacePage({ slug }: { slug: string }) {
   const { data, callback } = usePlacePage();
+  const { data: dataNavbar } = useNavbar();
 
   useEffect(() => {
     callback.defineCurrentPlace(slug);
@@ -41,7 +43,7 @@ function PlacePage({ slug }: { slug: string }) {
           <div className="flex w-full h-full justify-center items-start gap-16">
             <div className="max-h-[700px] overflow-hidden w-3/5">
               <Image
-                src={data.place.image_url}
+                src={data.place.imageUrl}
                 alt=""
                 style={{ objectFit: 'cover', borderRadius: '1rem' }}
                 width={600}
@@ -55,19 +57,21 @@ function PlacePage({ slug }: { slug: string }) {
               </h1>
               <div className="flex justify-between">
                 <div className="badge badge-secondary">{data.place.rating}</div>
-                <div
-                  className="flex items-center gap-2 text-sm cursor-pointer hover:bg-gray-700 rounded-lg p-2"
-                  onClick={callback.onClickFavorite}
-                >
-                  {data.isFavorite ? (
-                    <StarIcon className="size-5 text-blue-600" />
-                  ) : (
-                    <>
-                      <Star className="size-5 text-blue-600" />
-                      Favoritar
-                    </>
-                  )}
-                </div>
+                {dataNavbar.isLogged && (
+                  <div
+                    className="flex items-center gap-2 text-sm cursor-pointer hover:bg-gray-700 rounded-lg p-2"
+                    onClick={callback.onClickFavorite}
+                  >
+                    {data.isFavorite ? (
+                      <StarIcon className="size-5 text-blue-600" />
+                    ) : (
+                      <>
+                        <Star className="size-5 text-blue-600" />
+                        Favoritar
+                      </>
+                    )}
+                  </div>
+                )}
               </div>
               <p className="text-lg text-gray-400 mb-2">{data.place.address}</p>
               <div className="">
