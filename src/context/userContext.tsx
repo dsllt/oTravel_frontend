@@ -1,4 +1,5 @@
 'use client';
+import { getUser } from '@lib/usecases/get-user';
 import { UserDTO } from '../domain/models/user';
 import React, {
   Dispatch,
@@ -53,7 +54,14 @@ function UserProvider({ children }: Props) {
     created_at: '',
   });
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    async function getData() {
+      const data = await getUser();
+      setUserData(data);
+    }
+
+    getData();
+  }, []);
 
   const userInfo = {
     isLogged,
