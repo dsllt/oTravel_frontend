@@ -3,8 +3,9 @@ import { Menu, Place, Schedule } from '../domain/models/place';
 import { placeScheduleMock, reviewsMock } from '../utils/mocks';
 import { UserContext } from '../context/userContext';
 import { Favorite } from '../domain/models/favorite';
-import useMap from './useMap';
 import useExplore from './useExplore';
+import { updateFavorite } from '@lib/usecases/update-favorite';
+import { getActiveFavorites } from '@lib/usecases/get-active-favorites';
 
 const usePlacePage = () => {
   const { userData } = useContext(UserContext);
@@ -59,30 +60,19 @@ const usePlacePage = () => {
     ],
   );
 
-  const onClickFavorite = useCallback(() => {
-    setIsFavorite(!isFavorite);
-    const newFavorite = {
-      id: place.id,
-      name: place.name,
-      image_url: place.imageUrl,
-      address: place.address,
-      city: place.city,
-      country: place.country,
-      slug: place.slug,
-      rating: place.rating,
-    };
-    setFavorites((prevState) => [...prevState, newFavorite]);
-  }, [
-    isFavorite,
-    place.address,
-    place.city,
-    place.country,
-    place.id,
-    place.imageUrl,
-    place.name,
-    place.rating,
-    place.slug,
-  ]);
+  const getIsFavorite = useCallback(async () => {
+    if (!place.id) return;
+    const activeFavorites = await getActiveFavorites();
+    const isFavorite = activeFavorites.some(
+      (favorite: Place) => favorite.id === place.id,
+    );
+    setIsFavorite(isFavorite);
+  }, [place.id]);
+
+  const onClickFavorite = useCallback(async () => {
+    await updateFavorite(userData.id, place.id);
+    await getIsFavorite();
+  }, [getIsFavorite, place.id, userData.id]);
 
   const onClickSubmitReview = useCallback(() => {
     const review = {
@@ -130,11 +120,8 @@ const usePlacePage = () => {
         setPlace(currentPlace);
         // setPlaceMenu(currentMenu);
       }
-
-      const isFavorite = favorites.some((favorite) => place.id === favorite.id);
-      setIsFavorite(isFavorite);
     },
-    [favorites, exploreData.places, place.id],
+    [exploreData.places],
   );
 
   const callback = useMemo(
@@ -166,6 +153,10 @@ const usePlacePage = () => {
       setIsLogged(true);
     }
   }, []);
+
+  useEffect(() => {
+    getIsFavorite();
+  }, [getIsFavorite]);
 
   return { data, callback };
 };
