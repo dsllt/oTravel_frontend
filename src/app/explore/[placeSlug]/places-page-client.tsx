@@ -44,7 +44,7 @@ function PlacePage({ slug }: { slug: string }) {
             <div className="max-h-[700px] overflow-hidden w-3/5">
               <Image
                 src={data.place.imageUrl}
-                alt=""
+                alt={data.place.name}
                 style={{ objectFit: 'cover', borderRadius: '1rem' }}
                 width={600}
                 height={700}
