@@ -1,9 +1,9 @@
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-export async function getUser(userId: string) {
+export async function getUser() {
   const token = localStorage.getItem('token');
   try {
-    const data = await fetch(`${baseUrl}/api/v1/user/${userId}`, {
+    const data = await fetch(`${baseUrl}/api/v1/user`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

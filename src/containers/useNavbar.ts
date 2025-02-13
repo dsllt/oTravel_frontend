@@ -61,7 +61,7 @@ export default function useNavbar() {
         setIsLogged(true);
         setDisplayLoginModal(false);
         setLoginError('');
-        const userData = await getUser(response.userId);
+        const userData = await getUser();
         setUserData(userData);
       } else {
         setLoginError(response.message);
