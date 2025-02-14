@@ -12,7 +12,11 @@ export async function getUser() {
       cache: 'no-store',
     });
 
-    return data.json();
+    const response = await data.json();
+    if (response.status === 200) return response;
+    if (response.status === 401) {
+      localStorage.removeItem('token');
+    }
   } catch (e) {
     console.error('Failed to fetch user data.', e);
     throw new Error('Failed to fetch user data.');
