@@ -1,25 +1,20 @@
 'use client';
 
 import { Info, Trash } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 import { Favorite } from '../../domain/models/favorite';
 import Image from 'next/image';
 
 type FavoritePlaceBoxProps = {
   placeInfo: Favorite;
+  handleClickInfo: () => void;
+  handleDeleteFavorite: () => void;
 };
 
-export function FavoritePlaceBox({ placeInfo }: FavoritePlaceBoxProps) {
-  const router = useRouter();
-  function handleClickPlaceBox(slug: string) {
-    router.push(`/explore/${slug}`);
-  }
-
-  function handleDeleteFavorite(id: string) {
-    setFavorites((prevState) =>
-      prevState.filter((favorite) => favorite.id !== id),
-    );
-  }
+export function FavoritePlaceBox({
+  placeInfo,
+  handleClickInfo,
+  handleDeleteFavorite,
+}: FavoritePlaceBoxProps) {
   return (
     <div className="bg-zinc-900 rounded-lg shadow-xl hover:opacity-80 hover:cursor-pointer flex w-full min-h-18 max-h-18">
       <Image
@@ -33,17 +28,11 @@ export function FavoritePlaceBox({ placeInfo }: FavoritePlaceBoxProps) {
         <h2 className="text-sm">{placeInfo.name}</h2>
         <p className="text-xs">{placeInfo.city}</p>
         <div className="mt-auto">
-          <div
-            className="btn btn-ghost"
-            onClick={() => handleClickPlaceBox(placeInfo.slug)}
-          >
+          <div className="btn btn-ghost" onClick={handleClickInfo}>
             <Info className="size-5 text-blue-600" />
             Informações
           </div>
-          <div
-            className="btn btn-ghost"
-            onClick={() => handleDeleteFavorite(placeInfo.id)}
-          >
+          <div className="btn btn-ghost" onClick={handleDeleteFavorite}>
             <Trash className="size-5 text-red-300" />
             Remover
           </div>

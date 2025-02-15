@@ -5,44 +5,38 @@ import { HousePlus, LogOut, Star, User, X } from 'lucide-react';
 import FavoritesModal from './favorites-modal';
 import PersonalInfoModal from './personal-info-modal';
 import RegisterNewPlaceModal from './register-new-place-modal';
+import useNavbar from '../../containers/useNavbar';
 
 type ProfileModalProps = {
   onClickCloseModal: () => void;
   onClickLogout: () => void;
+  onClickDisplayFavorites: () => void;
+  onClickDisplayPersonalInfo: () => void;
+  onClickDisplayCreateNewPlace: () => void;
+  onClickCloseInnerModal: (modal: string) => void;
+  displayPersonalInfoModal: boolean;
+  displayFavoritesModal: boolean;
+  displayRegisterNewPlaceModal: boolean;
 };
 
 export function ProfileModal({
   onClickCloseModal,
   onClickLogout,
+  onClickDisplayFavorites,
+  onClickDisplayPersonalInfo,
+  onClickDisplayCreateNewPlace,
+  onClickCloseInnerModal,
+  displayPersonalInfoModal,
+  displayFavoritesModal,
+  displayRegisterNewPlaceModal,
 }: ProfileModalProps) {
   const { setDisplayProfile, userData } = useContext(UserContext);
-  const [displayFavorites, setDisplayFavorites] = useState(false);
-  const [displayPersonalInfo, setDisplayPersonalInfo] = useState(false);
-  const [displayRegisterNewPlace, setDisplayRegisterNewPlace] = useState(false);
 
   function handleCloseDisplayProfile() {
-    setDisplayProfile(false);
-    setDisplayFavorites(false);
-    setDisplayPersonalInfo(false);
-    setDisplayRegisterNewPlace(false);
-  }
-
-  function handleDisplayFavorites() {
-    setDisplayFavorites(true);
-    setDisplayPersonalInfo(false);
-    setDisplayRegisterNewPlace(false);
-  }
-
-  function handleDisplayPersonalInfo() {
-    setDisplayFavorites(false);
-    setDisplayPersonalInfo(true);
-    setDisplayRegisterNewPlace(false);
-  }
-
-  function handleDisplayCreateNewPlace() {
-    setDisplayFavorites(false);
-    setDisplayPersonalInfo(false);
-    setDisplayRegisterNewPlace(true);
+    // setDisplayProfile(false);
+    // setDisplayFavorites(false);
+    // setDisplayPersonalInfo(false);
+    // setDisplayRegisterNewPlace(false);
   }
 
   return (
@@ -64,21 +58,21 @@ export function ProfileModal({
             <div>
               <button
                 className="flex gap-3 w-full hover:bg-gray-700 rounded-lg p-5"
-                onClick={handleDisplayFavorites}
+                onClick={onClickDisplayFavorites}
               >
                 <Star className="size-5 text-zinc-400" />
                 <span>Favoritos</span>
               </button>
               <button
                 className="flex gap-3 w-full hover:bg-gray-700 rounded-lg p-5"
-                onClick={handleDisplayPersonalInfo}
+                onClick={onClickDisplayPersonalInfo}
               >
                 <User className="size-5 text-zinc-400" />
                 <span>Informações pessoais</span>
               </button>
               <button
                 className="flex gap-3 w-full hover:bg-gray-700 rounded-lg p-5"
-                onClick={handleDisplayCreateNewPlace}
+                onClick={onClickDisplayCreateNewPlace}
               >
                 <HousePlus className="size-5 text-zinc-400" />
                 <span>Registrar novo local</span>
@@ -97,20 +91,25 @@ export function ProfileModal({
           </div>
         </div>
 
-        {displayFavorites && (
+        {displayFavoritesModal && (
           <FavoritesModal
-            setDisplayFavorites={setDisplayFavorites}
+            onClickCloseInnerModal={() => onClickCloseInnerModal('favorites')}
             userId={userData.id}
+            onClickCloseProfileModal={onClickCloseModal}
           />
         )}
 
-        {displayPersonalInfo && (
-          <PersonalInfoModal setDisplayPersonalInfo={setDisplayPersonalInfo} />
+        {displayPersonalInfoModal && (
+          <PersonalInfoModal
+            onClickCloseInnerModal={() =>
+              onClickCloseInnerModal('personalInfo')
+            }
+          />
         )}
 
-        {displayRegisterNewPlace && (
+        {displayRegisterNewPlaceModal && (
           <RegisterNewPlaceModal
-            setDisplayRegisterNewPlace={setDisplayRegisterNewPlace}
+            onClickCloseInnerModal={() => onClickCloseInnerModal('newPlace')}
           />
         )}
       </div>

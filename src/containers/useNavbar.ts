@@ -9,6 +9,11 @@ export default function useNavbar() {
   const [displayMenuModal, setDisplayProfileModal] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [loginError, setLoginError] = useState('');
+  const [displayFavoritesModal, setDisplayFavoritesModal] = useState(false);
+  const [displayPersonalInfoModal, setDisplayPersonalInfoModal] =
+    useState(false);
+  const [displayRegisterNewPlaceModal, setDisplayRegisterNewPlaceModal] =
+    useState(false);
 
   const links = useMemo(
     () => [
@@ -27,8 +32,27 @@ export default function useNavbar() {
       displayLoginModal,
       displayMenuModal,
       loginError,
+      displayFavoritesModal,
+      setDisplayFavoritesModal,
+      displayPersonalInfoModal,
+      setDisplayPersonalInfoModal,
+      displayRegisterNewPlaceModal,
+      setDisplayRegisterNewPlaceModal,
     }),
-    [isAdmin, isLogged, links, displayLoginModal, displayMenuModal, loginError],
+    [
+      isAdmin,
+      isLogged,
+      links,
+      displayLoginModal,
+      displayMenuModal,
+      loginError,
+      displayFavoritesModal,
+      setDisplayFavoritesModal,
+      displayPersonalInfoModal,
+      setDisplayPersonalInfoModal,
+      displayRegisterNewPlaceModal,
+      setDisplayRegisterNewPlaceModal,
+    ],
   );
 
   const handleOpenLoginModal = useCallback(() => {
@@ -76,6 +100,49 @@ export default function useNavbar() {
     setDisplayProfileModal(false);
   }, [setIsLogged]);
 
+  const handleCloseInnerModal = useCallback(
+    (modal: string) => {
+      console.log('modal', modal);
+      if (modal === 'favorites') {
+        setDisplayFavoritesModal(false);
+      }
+      if (modal === 'personalInfo') {
+        setDisplayPersonalInfoModal(false);
+      }
+      if (modal === 'newPlace') {
+        setDisplayRegisterNewPlaceModal(false);
+      }
+    },
+    [
+      setDisplayFavoritesModal,
+      setDisplayPersonalInfoModal,
+      setDisplayRegisterNewPlaceModal,
+    ],
+  );
+
+  const handleCloseFavoritesModal = useCallback(() => {
+    setDisplayFavoritesModal(false);
+    setDisplayProfileModal(false);
+  }, [setDisplayFavoritesModal, setDisplayProfileModal]);
+
+  const handleDisplayFavorites = useCallback(() => {
+    setDisplayFavoritesModal(true);
+    setDisplayPersonalInfoModal(false);
+    setDisplayRegisterNewPlaceModal(false);
+  }, []);
+
+  const handleDisplayPersonalInfo = useCallback(() => {
+    setDisplayFavoritesModal(false);
+    setDisplayPersonalInfoModal(true);
+    setDisplayRegisterNewPlaceModal(false);
+  }, []);
+
+  const handleDisplayCreateNewPlace = useCallback(() => {
+    setDisplayFavoritesModal(false);
+    setDisplayPersonalInfoModal(false);
+    setDisplayRegisterNewPlaceModal(true);
+  }, []);
+
   const callback = useMemo(
     () => ({
       handleOpenLoginModal,
@@ -85,6 +152,11 @@ export default function useNavbar() {
       onClickLogin,
       onClickCloseMenuModal,
       onClickLogout,
+      handleDisplayFavorites,
+      handleDisplayPersonalInfo,
+      handleDisplayCreateNewPlace,
+      handleCloseInnerModal,
+      handleCloseFavoritesModal,
     }),
     [
       handleOpenLoginModal,
@@ -94,6 +166,11 @@ export default function useNavbar() {
       onClickLogin,
       onClickCloseMenuModal,
       onClickLogout,
+      handleDisplayFavorites,
+      handleDisplayPersonalInfo,
+      handleDisplayCreateNewPlace,
+      handleCloseInnerModal,
+      handleCloseFavoritesModal,
     ],
   );
 
@@ -102,7 +179,7 @@ export default function useNavbar() {
     if (token) {
       setIsLogged(true);
     }
-  }, []);
+  }, [setIsLogged]);
 
   return { data, callback };
 }

@@ -65,7 +65,6 @@ const usePlacePage = () => {
     const isFavorite = activeFavorites.some(
       (favorite: Place) => favorite.id === place.id,
     );
-    console.log(activeFavorites);
     setIsFavorite(isFavorite);
   }, [place.id]);
 
