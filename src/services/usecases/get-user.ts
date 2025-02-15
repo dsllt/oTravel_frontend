@@ -13,10 +13,10 @@ export async function getUser() {
     });
 
     const response = await data.json();
-    if (response.status === 200) return response;
     if (response.status === 401) {
       localStorage.removeItem('token');
     }
+    return response;
   } catch (e) {
     console.error('Failed to fetch user data.', e);
     throw new Error('Failed to fetch user data.');

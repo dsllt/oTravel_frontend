@@ -28,7 +28,6 @@ const usePlacePage = () => {
     created_at: '',
   });
   const [isFavorite, setIsFavorite] = useState(false);
-  const [favorites, setFavorites] = useState<Favorite[]>([]);
   const [placeMenu, setPlaceMenu] = useState<Menu[]>([]);
   const [placeSchedule, setPlaceSchedule] =
     useState<Schedule[]>(placeScheduleMock);
@@ -66,6 +65,7 @@ const usePlacePage = () => {
     const isFavorite = activeFavorites.some(
       (favorite: Place) => favorite.id === place.id,
     );
+    console.log(activeFavorites);
     setIsFavorite(isFavorite);
   }, [place.id]);
 
