@@ -2,8 +2,9 @@ import { X } from 'lucide-react';
 import { FavoritePlaceBox } from './favorite-place-box';
 import { getFavorites } from '@lib/usecases/get-favorites';
 import { Favorite } from '../../domain/models/favorite';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { updateFavorite } from '@lib/usecases/update-favorite';
 
 type FavoritesModalProps = {
   userId: string;
@@ -19,12 +20,9 @@ export default function FavoritesModal({
   const [favorites, setFavorites] = useState<Favorite[]>();
   const router = useRouter();
 
-  useEffect(() => {
-    async function getData() {
-      const data = await getFavorites(userId);
-      setFavorites(data);
-    }
-    getData();
+  const getData = useCallback(async () => {
+    const data = await getFavorites(userId);
+    setFavorites(data);
   }, [userId]);
 
   const handleClickInfo = (slug: string) => {
@@ -32,6 +30,15 @@ export default function FavoritesModal({
     onClickCloseInnerModal();
     onClickCloseProfileModal();
   };
+
+  const handleRemoveFavorite = async (userId: string, placeId: string) => {
+    await updateFavorite(userId, placeId);
+    await getData();
+  };
+
+  useEffect(() => {
+    getData();
+  }, [getData, userId]);
 
   return (
     <div className="py-5 px-6 gap-8 h-full flex flex-col p-6 shadow-shape bg-zinc-700 w-6/12">
@@ -48,7 +55,9 @@ export default function FavoritesModal({
               key={favorite.id}
               placeInfo={favorite}
               handleClickInfo={() => handleClickInfo(favorite.slug)}
-              handleDeleteFavorite={() => {}}
+              handleDeleteFavorite={() =>
+                handleRemoveFavorite(userId, favorite.id)
+              }
             />
           ))}
         </div>
