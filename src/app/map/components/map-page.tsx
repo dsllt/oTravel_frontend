@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { MapPlaceBox } from '@ui/maps/map-place-box';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { MapPlacesFilter } from '@ui/maps/map-places-filter';
-import useMap from '../../../containers/useMap';
+import useExplore from '../../../containers/useExplore';
 
 const Map = dynamic(() => import('../../../components/maps/map'), {
   loading: () => <p>Um mapa está sendo carregado</p>,
@@ -12,7 +12,7 @@ const Map = dynamic(() => import('../../../components/maps/map'), {
 });
 
 export default function MapPage() {
-  const { data } = useMap();
+  const { data: exploreData } = useExplore();
   const { replace } = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -44,7 +44,7 @@ export default function MapPage() {
 
   return (
     <div className="flex items-center justify-between w-full h-full overflow-hidden gap-8">
-      <Map places={data.places} key={`${category}-${city}`} />
+      <Map places={exploreData.places} key={`${category}-${city}`} />
       <div className="pr-12 flex flex-col items-start justify-start h-full w-full gap-3">
         <div className="flex justify-between items-center w-full">
           <h2 className="font-dmSans font-3xl font-bold mb-5 mt-3">
@@ -59,8 +59,8 @@ export default function MapPage() {
         </div>
         {displayFilters && (
           <MapPlacesFilter
-            cities={data.cities}
-            mappedCategories={data.categories}
+            cities={exploreData.cities}
+            mappedCategories={exploreData.categories}
             handleFilter={handleFilter}
             clearSearchParams={clearSearchParams}
             setDisplayFilters={setDisplayFilters}
@@ -68,7 +68,7 @@ export default function MapPage() {
         )}
 
         <div className="flex flex-col items-start justify-start h-full overflow-y-scroll gap-4 pb-8 w-full">
-          {data.filteredPlaces.map((place) => (
+          {exploreData.filteredPlaces.map((place) => (
             <MapPlaceBox key={place.id} placeInfo={place} />
           ))}
         </div>

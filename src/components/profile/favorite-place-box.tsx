@@ -1,53 +1,38 @@
 'use client';
 
 import { Info, Trash } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { useContext } from 'react';
-import { UserContext } from '../../context/userContext';
 import { Favorite } from '../../domain/models/favorite';
+import Image from 'next/image';
 
 type FavoritePlaceBoxProps = {
   placeInfo: Favorite;
+  handleClickInfo: () => void;
+  handleDeleteFavorite: () => void;
 };
 
-export function FavoritePlaceBox({ placeInfo }: FavoritePlaceBoxProps) {
-  const { setFavorites, favorites } = useContext(UserContext);
-
-  const router = useRouter();
-  function handleClickPlaceBox(slug: string) {
-    router.push(`/explore/${slug}`);
-  }
-
-  function handleDeleteFavorite(id: string) {
-    setFavorites((prevState) =>
-      prevState.filter((favorite) => favorite.id !== id),
-    );
-  }
-
+export function FavoritePlaceBox({
+  placeInfo,
+  handleClickInfo,
+  handleDeleteFavorite,
+}: FavoritePlaceBoxProps) {
   return (
     <div className="bg-zinc-900 rounded-lg shadow-xl hover:opacity-80 hover:cursor-pointer flex w-full min-h-18 max-h-18">
-      <figure className="w-48 h-40 overflow-hidden rounded-tl-lg rounded-bl-lg">
-        <img
-          src={placeInfo.image_url}
-          alt={placeInfo.name}
-          className="object-cover w-full h-full"
-        />
-      </figure>
+      <Image
+        src={placeInfo.imageUrl}
+        alt={placeInfo.name}
+        width={100}
+        height={50}
+        className="w-48 h-48 overflow-hidden rounded-tl-lg rounded-bl-lg object-cover"
+      />
       <div className="flex flex-col p-4 gap-2">
         <h2 className="text-sm">{placeInfo.name}</h2>
         <p className="text-xs">{placeInfo.city}</p>
         <div className="mt-auto">
-          <div
-            className="btn btn-ghost"
-            onClick={() => handleClickPlaceBox(placeInfo.slug)}
-          >
+          <div className="btn btn-ghost" onClick={handleClickInfo}>
             <Info className="size-5 text-blue-600" />
             Informações
           </div>
-          <div
-            className="btn btn-ghost"
-            onClick={() => handleDeleteFavorite(placeInfo.id)}
-          >
+          <div className="btn btn-ghost" onClick={handleDeleteFavorite}>
             <Trash className="size-5 text-red-300" />
             Remover
           </div>

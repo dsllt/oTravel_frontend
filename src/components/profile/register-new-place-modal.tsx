@@ -20,11 +20,11 @@ const initialCategories: Categories = {
 };
 
 type RegisterNewPlaceModalProps = {
-  setDisplayRegisterNewPlace: React.Dispatch<React.SetStateAction<boolean>>;
+  onClickCloseInnerModal: () => void;
 };
 
 export default function RegisterNewPlaceModal({
-  setDisplayRegisterNewPlace,
+  onClickCloseInnerModal,
 }: RegisterNewPlaceModalProps) {
   const {
     register,
@@ -63,7 +63,7 @@ export default function RegisterNewPlaceModal({
   return (
     <div className="py-5 px-6 gap-8 h-full flex flex-col shadow-shape bg-zinc-700 w-6/12">
       <div className="w-full flex justify-end items-end">
-        <button onClick={() => setDisplayRegisterNewPlace(false)}>
+        <button onClick={() => onClickCloseInnerModal()}>
           <X className="size-5 text-zinc-400" />
         </button>
       </div>

@@ -15,6 +15,5 @@ export default async function PlacePage(props: {
 }) {
   const params = await props.params;
   const { placeSlug } = params;
-
   return <PlacePageClient slug={placeSlug} />;
 }

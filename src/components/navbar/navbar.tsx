@@ -33,6 +33,13 @@ export function Navbar() {
         <ProfileModal
           onClickCloseModal={callback.onClickCloseMenuModal}
           onClickLogout={callback.onClickLogout}
+          displayFavoritesModal={data.displayFavoritesModal}
+          displayPersonalInfoModal={data.displayPersonalInfoModal}
+          displayRegisterNewPlaceModal={data.displayRegisterNewPlaceModal}
+          onClickCloseInnerModal={callback.handleCloseInnerModal}
+          onClickDisplayCreateNewPlace={callback.handleDisplayCreateNewPlace}
+          onClickDisplayFavorites={callback.handleDisplayFavorites}
+          onClickDisplayPersonalInfo={callback.handleDisplayPersonalInfo}
         />
       )}
     </div>

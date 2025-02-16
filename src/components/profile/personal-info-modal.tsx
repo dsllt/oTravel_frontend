@@ -5,11 +5,11 @@ import { UserDTO } from '../../domain/models/user';
 import { putUser } from '@lib/usecases/put-user';
 
 type PersonalInfoModalProps = {
-  setDisplayPersonalInfo: React.Dispatch<React.SetStateAction<boolean>>;
+  onClickCloseInnerModal: () => void;
 };
 
 export default function PersonalInfoModal({
-  setDisplayPersonalInfo,
+  onClickCloseInnerModal,
 }: PersonalInfoModalProps) {
   const { userData, setUserData } = useContext(UserContext);
   const [firstName, setFirstName] = useState(userData?.firstName);
@@ -27,7 +27,7 @@ export default function PersonalInfoModal({
   return (
     <div className="py-5 px-6 gap-8 h-full flex flex-col  p-6 shadow-shape bg-zinc-700 w-6/12">
       <div className="w-full flex justify-end items-end">
-        <button onClick={() => setDisplayPersonalInfo(false)}>
+        <button onClick={() => onClickCloseInnerModal()}>
           <X className="size-5 text-zinc-400" />
         </button>
       </div>
