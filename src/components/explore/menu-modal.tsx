@@ -60,6 +60,13 @@ export function MenuModal({
     }
   }
 
+  const handleCancel = () => {
+    const dialog = document.getElementById(elementId) as HTMLDialogElement;
+    if (dialog) {
+      dialog.close();
+    }
+  };
+
   return (
     <dialog id={id} className="modal">
       <div className="modal-box p-8">
@@ -91,6 +98,9 @@ export function MenuModal({
         <div className="modal-action flex justify-center">
           <button className="btn" onClick={handleUpdateMenu}>
             Salvar
+          </button>
+          <button className="btn btn-outline btn-error" onClick={handleCancel}>
+            Cancelar
           </button>
         </div>
       </div>

@@ -56,7 +56,13 @@ function PlacePage({ slug }: { slug: string }) {
                 {data.place.name}
               </h1>
               <div className="flex justify-between">
-                <div className="badge badge-secondary">{data.place.rating}</div>
+                {data.place.rating ? (
+                  <div className="badge badge-secondary">
+                    {data.place.rating}
+                  </div>
+                ) : (
+                  <div className="w-5"></div>
+                )}
                 {dataNavbar.isLogged && (
                   <div
                     className="flex items-center gap-2 text-sm cursor-pointer hover:bg-gray-700 rounded-lg p-2"
