@@ -32,6 +32,17 @@ export default function ScheduleEditModal({
     }
   }
 
+  const handleCancel = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+
+    const dialog = document.getElementById(
+      'schedule-edit',
+    ) as HTMLDialogElement;
+    if (dialog) {
+      dialog.close();
+    }
+  };
+
   return (
     <dialog id="schedule-edit" className="modal">
       <div className="modal-box">
@@ -82,6 +93,12 @@ export default function ScheduleEditModal({
           <div className="modal-action flex justify-center">
             <button className="btn" onClick={handleUpdateSchedule}>
               Salvar
+            </button>
+            <button
+              className="btn btn-outline btn-error"
+              onClick={handleCancel}
+            >
+              Cancelar
             </button>
           </div>
         </form>
