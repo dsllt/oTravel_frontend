@@ -1,9 +1,9 @@
 'use client';
 import Image from 'next/image';
 import MenuContainer from '@ui/explore/menu-container';
-import React, { Suspense, useContext, useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import Link from 'next/link';
-import { Star } from 'lucide-react';
+import { Star, PencilIcon } from 'lucide-react';
 import ReviewBox from '@ui/review-box';
 import dynamic from 'next/dynamic';
 import ScheduleEditModal from '@ui/explore/schedule-edit-modal';
@@ -40,8 +40,8 @@ function PlacePage({ slug }: { slug: string }) {
     <div className="w-full px-40 flex flex-col gap-10 mt-10 mb-20 items-center justify-center">
       {callback.isPlaceDataFetched(data.place) ? (
         <>
-          <div className="flex w-full h-full justify-center items-start gap-16">
-            <div className="max-h-[700px] overflow-hidden w-3/5">
+          <div className="flex flex-col md:flex-row lg:flex-row w-full h-full justify-center items-start gap-16">
+            <div className="max-h-[700px] overflow-hidden w-full md:w-3/5 lg:w-3/5">
               <Image
                 src={data.place.imageUrl}
                 alt={data.place.name}
@@ -51,10 +51,21 @@ function PlacePage({ slug }: { slug: string }) {
                 priority
               />
             </div>
-            <div className="flex flex-col gap-4 font-dmSans min-w-[500px]">
-              <h1 className="text-5xl uppercase font-semibold mb-4 max-w-[500px] break-words">
-                {data.place.name}
-              </h1>
+            <div className="flex flex-col gap-0 md:gap-4 lg:gap-4 font-dmSans w-full md:w-full lg:min-w-[600px]">
+              <div className="flex w-full justify-between">
+                <h1 className="text-5xl uppercase font-semibold max-w-[500px] break-words w-11/12">
+                  {data.place.name}
+                </h1>
+                <div className="flex p-0 justify-start items-start">
+                  <button
+                    className="hover:bg-slate-700 p-1 rounded-lg text-sm"
+                    onClick={() => {}}
+                  >
+                    <PencilIcon className="size-5 " />
+                  </button>
+                </div>
+              </div>
+
               <div className="flex justify-between">
                 {data.place.rating ? (
                   <div className="badge badge-secondary">
@@ -79,7 +90,9 @@ function PlacePage({ slug }: { slug: string }) {
                   </div>
                 )}
               </div>
-              <p className="text-lg text-gray-400 mb-2">{data.place.address}</p>
+              <p className="text-lg text-gray-400 mb-2">
+                {data.place.address} - {data.place.city}, {data.place.country}
+              </p>
               <div className="">
                 <div className="flex justify-between items-center">
                   <h1 className="font-bold text-xl font-dmSans mb-4">
