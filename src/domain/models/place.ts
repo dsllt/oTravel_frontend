@@ -70,3 +70,10 @@ export interface Schedule {
 export type Categories = {
   [key: string]: string;
 };
+
+export const initialCategories: Categories = {
+  RESTAURANT: 'Restaurante',
+  COFFEE: 'Café',
+  BAKERY: 'Padaria',
+  MARKET: 'Mercado',
+};

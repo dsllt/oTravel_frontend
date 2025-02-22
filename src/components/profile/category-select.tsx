@@ -1,6 +1,6 @@
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import React, { useEffect } from 'react';
-import { UseFormRegister, UseFormSetValue } from 'react-hook-form';
+import { UseFormSetValue } from 'react-hook-form';
 import { Categories } from '../../domain/models/place';
 import { NewPlaceSchema } from '../../domain/schemas/new-place-schema';
 
@@ -10,8 +10,6 @@ type Props = {
   initialCategories: Categories;
   setSelectedCategories: React.Dispatch<React.SetStateAction<Categories>>;
   setAvailableCategories: React.Dispatch<React.SetStateAction<Categories>>;
-  register: UseFormRegister<NewPlaceSchema>;
-  errors: any;
   setValue: UseFormSetValue<NewPlaceSchema>;
 };
 
@@ -21,8 +19,6 @@ function CategorySelect({
   initialCategories,
   setSelectedCategories,
   setAvailableCategories,
-  register,
-  errors,
   setValue,
 }: Props) {
   function handleSelectCategory(event: React.ChangeEvent<HTMLSelectElement>) {
@@ -52,6 +48,7 @@ function CategorySelect({
       return newAvailableCategories;
     });
   }
+
   useEffect(() => {
     setValue('placeCategory', selectedCategories);
   }, [selectedCategories, setValue]);

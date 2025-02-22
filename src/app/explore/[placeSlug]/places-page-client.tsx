@@ -6,10 +6,11 @@ import Link from 'next/link';
 import { Star, PencilIcon } from 'lucide-react';
 import ReviewBox from '@ui/review-box';
 import dynamic from 'next/dynamic';
-import ScheduleEditModal from '@ui/explore/schedule-edit-modal';
 import { StarIcon } from '@heroicons/react/16/solid';
 import usePlacePage from '../../../containers/usePlacePage';
 import useNavbar from '../../../containers/useNavbar';
+import PlaceSchedule from '@ui/place/place-schedule';
+import EditPlaceModal from '@ui/place/edit-place-modal';
 
 const Map = dynamic(
   () => import('../../../components/maps/small-map'),
@@ -59,11 +60,15 @@ function PlacePage({ slug }: { slug: string }) {
                 <div className="flex p-0 justify-start items-start">
                   <button
                     className="hover:bg-slate-700 p-1 rounded-lg text-sm"
-                    onClick={() => {}}
+                    onClick={() => callback.displayEditModal()}
                   >
                     <PencilIcon className="size-5 " />
                   </button>
                 </div>
+                <EditPlaceModal
+                  placeSchedule={data.placeSchedule}
+                  place={data.place}
+                />
               </div>
 
               <div className="flex justify-between">
@@ -93,84 +98,19 @@ function PlacePage({ slug }: { slug: string }) {
               <p className="text-lg text-gray-400 mb-2">
                 {data.place.address} - {data.place.city}, {data.place.country}
               </p>
-              <div className="">
-                <div className="flex justify-between items-center">
-                  <h1 className="font-bold text-xl font-dmSans mb-4">
-                    Horários
-                  </h1>
-                  <button
-                    className="hover:bg-slate-700 p-1 rounded-lg mb-3 text-sm"
-                    onClick={() => callback.displayScheduleModal()}
-                  >
-                    Editar
-                  </button>
-                </div>
-                <ScheduleEditModal
-                  placeSchedule={data.placeSchedule}
-                  setPlaceSchedule={callback.setPlaceSchedule}
-                />
-                <div className="bg-base-300 p-4 rounded-lg">
-                  <div className="flex gap-8">
-                    <div className="align-top w-1/2">
-                      <table className="table">
-                        <tbody>
-                          {data.placeSchedule.slice(0, 4).map((day) => {
-                            return (
-                              <tr
-                                className="hover:bg-base-100 flex justify-between"
-                                key={day.week_day}
-                              >
-                                <td className="rounded-l-md py-2 px-1 whitespace-nowrap">
-                                  {day.week_day}
-                                </td>
-                                <td className="rounded-r-md py-2 px-1 whitespace-nowrap ">
-                                  {day.open_time} - {day.close_time}
-                                </td>
-                              </tr>
-                            );
-                          })}
-                        </tbody>
-                      </table>
-                    </div>
-                    <div className="align-top w-1/2">
-                      <table className="table">
-                        <tbody>
-                          {data.placeSchedule.slice(4, 7).map((day) => {
-                            return (
-                              <tr
-                                className="hover:bg-base-100 flex justify-between"
-                                key={day.week_day}
-                              >
-                                <td className="rounded-l-md py-2 px-1 whitespace-nowrap">
-                                  {day.week_day}
-                                </td>
-                                <td className="rounded-l-md py-2 px-1 whitespace-nowrap">
-                                  {day.open_time} - {day.close_time}
-                                </td>
-                              </tr>
-                            );
-                          })}
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <PlaceSchedule
+                placeSchedule={data.placeSchedule}
+                setPlaceSchedule={callback.setPlaceSchedule}
+              />
             </div>
           </div>
 
           <div className="flex w-full justify-between gap-12">
-            <div className="w-full">
-              <h1 className="font-bold text-xl font-dmSans mb-4">Menu</h1>
-              <MenuContainer menu={data.placeMenu} placeId={data.place.id} />
-            </div>
+            <MenuContainer menu={data.placeMenu} placeId={data.place.id} />
           </div>
 
           <div className="flex w-full justify-between gap-12">
-            <div className="w-full">
-              <h1 className="font-bold text-xl font-dmSans mb-4">Mapa</h1>
-              <Map place={data.place} />
-            </div>
+            <Map place={data.place} />
           </div>
 
           <div className="w-full">

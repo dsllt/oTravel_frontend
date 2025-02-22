@@ -19,10 +19,18 @@ type Props = {
   required: boolean;
   register: UseFormRegister<NewPlaceSchema>;
   errors: any;
+  initialValue?: string;
 };
 
-function TextArea({ label, id, required = false, register, errors }: Props) {
-  const [textValue, setTextValue] = useState('');
+function TextArea({
+  label,
+  id,
+  required = false,
+  register,
+  errors,
+  initialValue,
+}: Props) {
+  const [textValue, setTextValue] = useState(initialValue);
 
   const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTextValue(event.target.value);
@@ -38,6 +46,7 @@ function TextArea({ label, id, required = false, register, errors }: Props) {
           required={required}
           {...register(id)}
           onChange={handleTextChange}
+          value={initialValue}
         />
       </label>
     </div>

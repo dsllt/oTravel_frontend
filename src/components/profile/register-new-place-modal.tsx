@@ -10,14 +10,11 @@ import {
   NewPlaceSchema,
   newPlaceSchema,
 } from '../../domain/schemas/new-place-schema';
-import { Categories, CreatePlaceDTO } from '../../domain/models/place';
-
-const initialCategories: Categories = {
-  restaurant: 'Restaurante',
-  coffee: 'Café',
-  bakery: 'Padaria',
-  market: 'Mercado',
-};
+import {
+  Categories,
+  CreatePlaceDTO,
+  initialCategories,
+} from '../../domain/models/place';
 
 type RegisterNewPlaceModalProps = {
   onClickCloseInnerModal: () => void;
@@ -37,7 +34,7 @@ export default function RegisterNewPlaceModal({
   });
   const [selectedCategories, setSelectedCategories] = useState<Categories>({});
   const [availableCategories, setAvailableCategories] =
-    useState<Categories>(initialCategories);
+    useState<Categories>(InitialCategories);
 
   async function handleIncludeNewPlace(data: NewPlaceSchema) {
     const placeCategory = Object.keys(data.placeCategory).map((category) =>
@@ -138,8 +135,6 @@ export default function RegisterNewPlaceModal({
             selectedCategories={selectedCategories}
             setAvailableCategories={setAvailableCategories}
             setSelectedCategories={setSelectedCategories}
-            register={register}
-            errors={errors}
             setValue={setValue}
           />
 
