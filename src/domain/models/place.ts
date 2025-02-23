@@ -77,3 +77,17 @@ export const initialCategories: Categories = {
   BAKERY: 'Padaria',
   MARKET: 'Mercado',
 };
+
+export type WeekDays = {
+  [key: string]: string;
+};
+
+export const weekDays: WeekDays = {
+  monday: 'Segunda-feira',
+  tuesday: 'Terça-feira',
+  wednesday: 'Quarta-feira',
+  thursday: 'Quinta-feira',
+  friday: 'Sexta-feira',
+  saturday: 'Sábado',
+  sunday: 'Domingo',
+};

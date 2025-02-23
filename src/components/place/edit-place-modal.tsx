@@ -6,9 +6,7 @@ import EditPlaceInputs from './edit-place-inputs';
 import EditScheduleInputs from './edit-schedule-inputs';
 import {
   EditPlaceSchema,
-  EditScheduleSchema,
   editPlaceSchema,
-  editScheduleSchema,
 } from '../../domain/schemas/edit-place-schema';
 
 type ScheduleEditModalProps = {
@@ -29,15 +27,6 @@ export default function EditPlaceModal({
   } = useForm<EditPlaceSchema>({
     resolver: zodResolver(editPlaceSchema),
   });
-  const {
-    register: registerSchedule,
-    handleSubmit: handleSubmitSchedule,
-    setValue: setValueSchedule,
-    formState: { errors: errorsSchedule },
-    reset: resetSchedule,
-  } = useForm<EditScheduleSchema>({
-    resolver: zodResolver(editScheduleSchema),
-  });
 
   const handleCancel = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -51,18 +40,10 @@ export default function EditPlaceModal({
   const handleSave = (data: EditPlaceSchema) => {
     console.log(data);
   };
-  const handleSaveSchedule = (data: EditScheduleSchema) => {
-    console.log(data);
-  };
-  console.log(errors, errorsSchedule);
   return (
     <dialog id="place-edit" className="modal">
       <div className="modal-box max-w-2xl">
-        <form
-          onSubmit={
-            handleSubmit(handleSave) && handleSubmitSchedule(handleSaveSchedule)
-          }
-        >
+        <form onSubmit={handleSubmit(handleSave)}>
           <EditPlaceInputs
             place={place}
             errors={errors}
@@ -71,7 +52,7 @@ export default function EditPlaceModal({
           />
           <EditScheduleInputs
             placeSchedule={placeSchedule}
-            register={registerSchedule}
+            register={register}
           />
 
           <div className="modal-action flex justify-center">

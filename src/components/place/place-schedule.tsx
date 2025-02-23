@@ -1,15 +1,11 @@
 import ScheduleEditModal from '@ui/explore/schedule-edit-modal';
-import { Schedule } from '../../domain/models/place';
+import { Schedule, weekDays } from '../../domain/models/place';
 
 type PlaceScheduleProps = {
   placeSchedule: Schedule[];
-  setPlaceSchedule: React.Dispatch<React.SetStateAction<Schedule[]>>;
 };
 
-const PlaceSchedule = ({
-  placeSchedule,
-  setPlaceSchedule,
-}: PlaceScheduleProps) => {
+const PlaceSchedule = ({ placeSchedule }: PlaceScheduleProps) => {
   return (
     <div className="">
       <h1 className="font-bold text-xl font-dmSans mb-4">Horários</h1>
@@ -19,13 +15,15 @@ const PlaceSchedule = ({
             <table className="table">
               <tbody>
                 {placeSchedule.slice(0, 4).map((day) => {
+                  const formattedWeekDay = weekDays[day.week_day];
+
                   return (
                     <tr
                       className="hover:bg-base-100 flex justify-between"
                       key={day.week_day}
                     >
                       <td className="rounded-l-md py-2 px-1 whitespace-nowrap">
-                        {day.week_day}
+                        {formattedWeekDay}
                       </td>
                       <td className="rounded-r-md py-2 px-1 whitespace-nowrap ">
                         {day.open_time} - {day.close_time}
@@ -40,13 +38,15 @@ const PlaceSchedule = ({
             <table className="table">
               <tbody>
                 {placeSchedule.slice(4, 7).map((day) => {
+                  const formattedWeekDay = weekDays[day.week_day];
+
                   return (
                     <tr
                       className="hover:bg-base-100 flex justify-between"
                       key={day.week_day}
                     >
                       <td className="rounded-l-md py-2 px-1 whitespace-nowrap">
-                        {day.week_day}
+                        {formattedWeekDay}
                       </td>
                       <td className="rounded-l-md py-2 px-1 whitespace-nowrap">
                         {day.open_time} - {day.close_time}

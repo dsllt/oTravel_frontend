@@ -37,11 +37,6 @@ export const editPlaceSchema = z.object({
     .transform((value) => value.toLowerCase().replace(/\s+/g, '-')),
   placePhone: z.string(),
   placeRating: z.string(),
-});
-
-export type EditPlaceSchema = z.infer<typeof editPlaceSchema>;
-
-export const editScheduleSchema = z.object({
   mondayOpen: z.string(),
   mondayClose: z.string(),
   tuesdayOpen: z.string(),
@@ -58,4 +53,4 @@ export const editScheduleSchema = z.object({
   sundayClose: z.string(),
 });
 
-export type EditScheduleSchema = z.infer<typeof editScheduleSchema>;
+export type EditPlaceSchema = z.infer<typeof editPlaceSchema>;

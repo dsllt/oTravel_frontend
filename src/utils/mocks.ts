@@ -368,44 +368,6 @@ export const reviewsMock: Review[] = [
 
 export const placeScheduleMock = [
   {
-    week_day: 'Segunda-feira',
-    open_time: '08:00',
-    close_time: '18:00',
-  },
-  {
-    week_day: 'Terça-feira',
-    open_time: '08:00',
-    close_time: '18:00',
-  },
-  {
-    week_day: 'Quarta-feira',
-    open_time: '08:00',
-    close_time: '18:00',
-  },
-  {
-    week_day: 'Quinta-feira',
-    open_time: '08:00',
-    close_time: '18:00',
-  },
-  {
-    week_day: 'Sexta-feira',
-    open_time: '08:00',
-    close_time: '18:00',
-  },
-  {
-    week_day: 'Sábado',
-    open_time: '08:00',
-    close_time: '18:00',
-  },
-  {
-    week_day: 'Domingo',
-    open_time: '08:00',
-    close_time: '18:00',
-  },
-];
-
-export const placeScheduleMock1 = [
-  {
     week_day: 'monday',
     open_time: '08:00',
     close_time: '18:00',
