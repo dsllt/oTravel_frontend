@@ -1,4 +1,3 @@
-import ScheduleEditModal from '@ui/explore/schedule-edit-modal';
 import { Schedule, weekDays } from '../../domain/models/place';
 
 type PlaceScheduleProps = {

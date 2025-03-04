@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { UseFormRegister } from 'react-hook-form';
-import { NewPlaceSchema } from '../../domain/schemas/new-place-schema';
+import { PlaceSchema } from '../../domain/schemas/place-schema';
 
 type Props = {
   label: string;
@@ -17,7 +17,7 @@ type Props = {
     | 'placeSlug'
     | 'placePhone';
   required: boolean;
-  register: UseFormRegister<NewPlaceSchema>;
+  register: UseFormRegister<PlaceSchema>;
   errors: any;
   initialValue?: string;
 };
@@ -46,7 +46,7 @@ function TextArea({
           required={required}
           {...register(id)}
           onChange={handleTextChange}
-          value={initialValue}
+          value={textValue}
         />
       </label>
     </div>

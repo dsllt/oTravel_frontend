@@ -1,20 +1,10 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import CategorySelect from '@ui/profile/category-select';
-import Input from '@ui/profile/modal-input';
-import TextArea from '@ui/profile/modal-text-area';
 import { X } from 'lucide-react';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { postPlace } from '@lib/usecases/post-place';
-import {
-  NewPlaceSchema,
-  newPlaceSchema,
-} from '../../domain/schemas/new-place-schema';
-import {
-  Categories,
-  CreatePlaceDTO,
-  initialCategories,
-} from '../../domain/models/place';
+import PlaceInputs from '@ui/place/place-inputs';
+import { PlaceSchema, placeSchema } from '../../domain/schemas/place-schema';
+import EditScheduleInputs from '@ui/place/edit-schedule-inputs';
 
 type RegisterNewPlaceModalProps = {
   onClickCloseInnerModal: () => void;
@@ -29,31 +19,67 @@ export default function RegisterNewPlaceModal({
     setValue,
     formState: { errors },
     reset,
-  } = useForm<NewPlaceSchema>({
-    resolver: zodResolver(newPlaceSchema),
+  } = useForm<PlaceSchema>({
+    resolver: zodResolver(placeSchema),
   });
-  const [selectedCategories, setSelectedCategories] = useState<Categories>({});
-  const [availableCategories, setAvailableCategories] =
-    useState<Categories>(InitialCategories);
+  const [displayScheduleInputs, setDisplayScheduleInputs] = useState(false);
 
-  async function handleIncludeNewPlace(data: NewPlaceSchema) {
-    const placeCategory = Object.keys(data.placeCategory).map((category) =>
-      category.toUpperCase(),
-    );
-    const place: CreatePlaceDTO = {
-      name: data.placeName,
-      image_url: data.placeImage,
-      description: data.placeDescription,
-      address: data.placeAddress,
-      city: data.placeCity,
-      country: data.placeCountry,
-      latitude: data.placeLatitude,
-      longitude: data.placeLongitude,
-      phone: data.placePhone,
-      slug: data.placeSlug,
-      category: placeCategory,
-    };
-    await postPlace(place);
+  async function handleIncludeNewPlace(data: PlaceSchema) {
+    // const placeCategory = Object.keys(data.placeCategory).map((category) =>
+    //   category.toUpperCase(),
+    // );
+    // const place: CreatePlaceDTO = {
+    //   name: data.placeName,
+    //   image_url: data.placeImage,
+    //   description: data.placeDescription,
+    //   address: data.placeAddress,
+    //   city: data.placeCity,
+    //   country: data.placeCountry,
+    //   latitude: data.placeLatitude,
+    //   longitude: data.placeLongitude,
+    //   phone: data.placePhone,
+    //   slug: data.placeSlug,
+    //   category: placeCategory,
+    // };
+    // await postPlace(place);
+
+    const schedule = [
+      {
+        week_day: 'monday',
+        open_time: data.mondayOpen,
+        close_time: data.mondayClose,
+      },
+      {
+        week_day: 'tuesday',
+        open_time: data.tuesdayOpen,
+        close_time: data.tuesdayClose,
+      },
+      {
+        week_day: 'wednesday',
+        open_time: data.wednesdayOpen,
+        close_time: data.wednesdayClose,
+      },
+      {
+        week_day: 'thursday',
+        open_time: data.thursdayOpen,
+        close_time: data.thursdayClose,
+      },
+      {
+        week_day: 'friday',
+        open_time: data.fridayOpen,
+        close_time: data.fridayClose,
+      },
+      {
+        week_day: 'saturday',
+        open_time: data.saturdayOpen,
+        close_time: data.saturdayClose,
+      },
+      {
+        week_day: 'sunday',
+        open_time: data.sundayOpen,
+        close_time: data.sundayClose,
+      },
+    ];
     reset();
   }
 
@@ -70,109 +96,23 @@ export default function RegisterNewPlaceModal({
           onSubmit={handleSubmit(handleIncludeNewPlace)}
           className="min-w-[600px]"
         >
-          <Input
-            label="Nome do local"
-            id="placeName"
-            required
-            register={register}
+          <PlaceInputs
             errors={errors}
-          />
-
-          <Input
-            label="Endereço"
-            id="placeAddress"
-            required
             register={register}
-            errors={errors}
-          />
-
-          <div className="flex gap-4">
-            <Input
-              label="Cidade"
-              id="placeCity"
-              required
-              register={register}
-              errors={errors}
-            />
-            <Input
-              label="País"
-              id="placeCountry"
-              required
-              register={register}
-              errors={errors}
-            />
-          </div>
-
-          <div className="flex gap-4">
-            <Input
-              label="Latitude"
-              id="placeLatitude"
-              required
-              register={register}
-              errors={errors}
-            />
-            <Input
-              label="Longitude"
-              id="placeLongitude"
-              required
-              register={register}
-              errors={errors}
-            />
-          </div>
-
-          <Input
-            label="URL da imagem"
-            id="placeImage"
-            type="url"
-            required
-            register={register}
-            errors={errors}
-          />
-
-          <CategorySelect
-            availableCategories={availableCategories}
-            initialCategories={initialCategories}
-            selectedCategories={selectedCategories}
-            setAvailableCategories={setAvailableCategories}
-            setSelectedCategories={setSelectedCategories}
             setValue={setValue}
           />
+          {displayScheduleInputs && <EditScheduleInputs register={register} />}
 
-          <div className="flex justify-between gap-4">
-            <TextArea
-              label="Descrição"
-              id="placeDescription"
-              required
-              register={register}
-              errors={errors}
-            />
-
-            <div className="flex w-1/2 flex-col">
-              <Input
-                label="Slug"
-                id="placeSlug"
-                required
-                register={register}
-                errors={errors}
-              />
-              <Input
-                label="Telefone"
-                id="placePhone"
-                required={false}
-                register={register}
-                errors={errors}
-              />
-              <Input
-                label="Nota"
-                id="placeRating"
-                required={false}
-                register={register}
-                errors={errors}
-              />
-            </div>
-          </div>
-
-          <div className="flex items-center w-full justify-center py-4">
+          <div className="flex items-center w-full justify-center py-4 gap-4">
+            {!displayScheduleInputs && (
+              <button
+                type="button"
+                className="rounded-lg px-5 py-2 flex items-center gap-2 justify-center bg-secondary text-primary-content text-sm font-semibold"
+                onClick={() => setDisplayScheduleInputs(true)}
+              >
+                Definir horários
+              </button>
+            )}
             <button
               type="submit"
               className="rounded-lg px-5 py-2 flex items-center gap-2 justify-center bg-primary text-primary-content text-sm font-semibold"

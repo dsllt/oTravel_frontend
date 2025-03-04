@@ -1,9 +1,9 @@
 import { UseFormRegister } from 'react-hook-form';
-import { EditPlaceSchema } from '../../domain/schemas/edit-place-schema';
 import { weekDays } from '../../domain/models/place';
+import { PlaceSchema } from '../../domain/schemas/place-schema';
 
 type ScheduleTableRowProps = {
-  register: UseFormRegister<EditPlaceSchema>;
+  register: UseFormRegister<PlaceSchema>;
   weekDay: string;
   closeTime: string;
   openTime: string;
@@ -15,8 +15,8 @@ const ScheduleTableRow = ({
   weekDay,
 }: ScheduleTableRowProps) => {
   const formattedWeekDay = weekDays[weekDay];
-  const openId = `${weekDay}Open` as keyof EditPlaceSchema;
-  const closeId = `${weekDay}Close` as keyof EditPlaceSchema;
+  const openId = `${weekDay}Open` as keyof PlaceSchema;
+  const closeId = `${weekDay}Close` as keyof PlaceSchema;
   return (
     <tr className="flex justify-between items-center" key={weekDay}>
       <td className="whitespace-nowrap w-24">{formattedWeekDay}</td>
@@ -24,20 +24,18 @@ const ScheduleTableRow = ({
         <input
           type="time"
           className="bg-transparent rounded-lg border border-gray-600 py-2 px-3"
-          id={openId as string}
+          id={openId}
           {...register(openId)}
           defaultValue={openTime}
-          name={weekDay}
         />
       </td>
       <td className="rounded-l-md py-2 px-1 whitespace-nowrap">
         <input
           type="time"
           className="bg-transparent rounded-lg border border-gray-600 py-2 px-3"
-          defaultValue={closeTime}
           id={closeId as string}
           {...register(closeId)}
-          name={weekDay}
+          defaultValue={closeTime}
         />
       </td>
     </tr>

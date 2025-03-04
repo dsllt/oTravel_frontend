@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { UseFormRegister } from 'react-hook-form';
 import { NewPlaceSchema } from '../../domain/schemas/new-place-schema';
-import { EditPlaceSchema } from '../../domain/schemas/edit-place-schema';
+import { PlaceSchema } from '../../domain/schemas/place-schema';
 
 type Props = {
   label: string;
@@ -20,7 +20,7 @@ type Props = {
     | 'placeRating';
   required: boolean;
   type?: string;
-  register: UseFormRegister<NewPlaceSchema | EditPlaceSchema>;
+  register: UseFormRegister<PlaceSchema>;
   errors: any;
   initialValue?: string | number;
 };

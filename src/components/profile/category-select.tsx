@@ -2,7 +2,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline';
 import React, { useEffect } from 'react';
 import { UseFormSetValue } from 'react-hook-form';
 import { Categories } from '../../domain/models/place';
-import { NewPlaceSchema } from '../../domain/schemas/new-place-schema';
+import { PlaceSchema } from '../../domain/schemas/place-schema';
 
 type Props = {
   availableCategories: Categories;
@@ -10,7 +10,7 @@ type Props = {
   initialCategories: Categories;
   setSelectedCategories: React.Dispatch<React.SetStateAction<Categories>>;
   setAvailableCategories: React.Dispatch<React.SetStateAction<Categories>>;
-  setValue: UseFormSetValue<NewPlaceSchema>;
+  setValue: UseFormSetValue<PlaceSchema>;
 };
 
 function CategorySelect({
