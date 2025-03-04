@@ -1,15 +1,16 @@
 'use client';
 import Image from 'next/image';
 import MenuContainer from '@ui/explore/menu-container';
-import React, { Suspense, useContext, useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import Link from 'next/link';
-import { Star } from 'lucide-react';
+import { Star, PencilIcon } from 'lucide-react';
 import ReviewBox from '@ui/review-box';
 import dynamic from 'next/dynamic';
-import ScheduleEditModal from '@ui/explore/schedule-edit-modal';
 import { StarIcon } from '@heroicons/react/16/solid';
 import usePlacePage from '../../../containers/usePlacePage';
 import useNavbar from '../../../containers/useNavbar';
+import PlaceSchedule from '@ui/place/place-schedule';
+import EditPlaceModal from '@ui/place/edit-place-modal';
 
 const Map = dynamic(
   () => import('../../../components/maps/small-map'),
@@ -40,8 +41,8 @@ function PlacePage({ slug }: { slug: string }) {
     <div className="w-full px-40 flex flex-col gap-10 mt-10 mb-20 items-center justify-center">
       {callback.isPlaceDataFetched(data.place) ? (
         <>
-          <div className="flex w-full h-full justify-center items-start gap-16">
-            <div className="max-h-[700px] overflow-hidden w-3/5">
+          <div className="flex flex-col md:flex-row lg:flex-row w-full h-full justify-center items-start gap-16">
+            <div className="max-h-[700px] overflow-hidden w-full md:w-3/5 lg:w-3/5">
               <Image
                 src={data.place.imageUrl}
                 alt={data.place.name}
@@ -51,10 +52,25 @@ function PlacePage({ slug }: { slug: string }) {
                 priority
               />
             </div>
-            <div className="flex flex-col gap-4 font-dmSans min-w-[500px]">
-              <h1 className="text-5xl uppercase font-semibold mb-4 max-w-[500px] break-words">
-                {data.place.name}
-              </h1>
+            <div className="flex flex-col gap-0 md:gap-4 lg:gap-4 font-dmSans w-full md:w-full lg:min-w-[600px]">
+              <div className="flex w-full justify-between">
+                <h1 className="text-5xl uppercase font-semibold max-w-[500px] break-words w-11/12">
+                  {data.place.name}
+                </h1>
+                <div className="flex p-0 justify-start items-start">
+                  <button
+                    className="hover:bg-slate-700 p-1 rounded-lg text-sm"
+                    onClick={() => callback.displayEditModal()}
+                  >
+                    <PencilIcon className="size-5 " />
+                  </button>
+                </div>
+                <EditPlaceModal
+                  placeSchedule={data.placeSchedule}
+                  place={data.place}
+                />
+              </div>
+
               <div className="flex justify-between">
                 {data.place.rating ? (
                   <div className="badge badge-secondary">
@@ -79,85 +95,19 @@ function PlacePage({ slug }: { slug: string }) {
                   </div>
                 )}
               </div>
-              <p className="text-lg text-gray-400 mb-2">{data.place.address}</p>
-              <div className="">
-                <div className="flex justify-between items-center">
-                  <h1 className="font-bold text-xl font-dmSans mb-4">
-                    Horários
-                  </h1>
-                  <button
-                    className="hover:bg-slate-700 p-1 rounded-lg mb-3 text-sm"
-                    onClick={() => callback.displayScheduleModal()}
-                  >
-                    Editar
-                  </button>
-                </div>
-                <ScheduleEditModal
-                  placeSchedule={data.placeSchedule}
-                  setPlaceSchedule={callback.setPlaceSchedule}
-                />
-                <div className="bg-base-300 p-4 rounded-lg">
-                  <div className="flex gap-8">
-                    <div className="align-top w-1/2">
-                      <table className="table">
-                        <tbody>
-                          {data.placeSchedule.slice(0, 4).map((day) => {
-                            return (
-                              <tr
-                                className="hover:bg-base-100 flex justify-between"
-                                key={day.week_day}
-                              >
-                                <td className="rounded-l-md py-2 px-1 whitespace-nowrap">
-                                  {day.week_day}
-                                </td>
-                                <td className="rounded-r-md py-2 px-1 whitespace-nowrap ">
-                                  {day.open_time} - {day.close_time}
-                                </td>
-                              </tr>
-                            );
-                          })}
-                        </tbody>
-                      </table>
-                    </div>
-                    <div className="align-top w-1/2">
-                      <table className="table">
-                        <tbody>
-                          {data.placeSchedule.slice(4, 7).map((day) => {
-                            return (
-                              <tr
-                                className="hover:bg-base-100 flex justify-between"
-                                key={day.week_day}
-                              >
-                                <td className="rounded-l-md py-2 px-1 whitespace-nowrap">
-                                  {day.week_day}
-                                </td>
-                                <td className="rounded-l-md py-2 px-1 whitespace-nowrap">
-                                  {day.open_time} - {day.close_time}
-                                </td>
-                              </tr>
-                            );
-                          })}
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <p className="text-lg text-gray-400 mb-2">
+                {data.place.address} - {data.place.city}, {data.place.country}
+              </p>
+              <PlaceSchedule placeSchedule={data.placeSchedule} />
             </div>
           </div>
 
           <div className="flex w-full justify-between gap-12">
-            <div className="w-full">
-              <h1 className="font-bold text-xl font-dmSans mb-4">Menu</h1>
-              <MenuContainer menu={data.placeMenu} placeId={data.place.id} />
-            </div>
+            <MenuContainer menu={data.placeMenu} placeId={data.place.id} />
           </div>
 
           <div className="flex w-full justify-between gap-12">
-            <div className="w-full">
-              <h1 className="font-bold text-xl font-dmSans mb-4">Mapa</h1>
-              <Map place={data.place} />
-            </div>
+            <Map place={data.place} />
           </div>
 
           <div className="w-full">

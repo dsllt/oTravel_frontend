@@ -70,3 +70,24 @@ export interface Schedule {
 export type Categories = {
   [key: string]: string;
 };
+
+export const initialCategories: Categories = {
+  RESTAURANT: 'Restaurante',
+  COFFEE: 'Café',
+  BAKERY: 'Padaria',
+  MARKET: 'Mercado',
+};
+
+export type WeekDays = {
+  [key: string]: string;
+};
+
+export const weekDays: WeekDays = {
+  monday: 'Segunda-feira',
+  tuesday: 'Terça-feira',
+  wednesday: 'Quarta-feira',
+  thursday: 'Quinta-feira',
+  friday: 'Sexta-feira',
+  saturday: 'Sábado',
+  sunday: 'Domingo',
+};

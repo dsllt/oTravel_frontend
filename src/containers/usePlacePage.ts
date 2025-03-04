@@ -87,8 +87,8 @@ const usePlacePage = () => {
     setRating('');
   }, [newReview, place, rating, userData]);
 
-  const displayScheduleModal = useCallback(() => {
-    const modal = document.getElementById('schedule-edit') as HTMLDialogElement;
+  const displayEditModal = useCallback(() => {
+    const modal = document.getElementById('place-edit') as HTMLDialogElement;
     if (modal) {
       modal.showModal();
     }
@@ -127,7 +127,7 @@ const usePlacePage = () => {
     () => ({
       onClickSubmitReview,
       onClickFavorite,
-      displayScheduleModal,
+      displayEditModal,
       isPlaceDataFetched,
       defineCurrentPlace,
       setPlaceSchedule,
@@ -137,7 +137,7 @@ const usePlacePage = () => {
     [
       onClickSubmitReview,
       onClickFavorite,
-      displayScheduleModal,
+      displayEditModal,
       isPlaceDataFetched,
       defineCurrentPlace,
       setPlaceSchedule,
