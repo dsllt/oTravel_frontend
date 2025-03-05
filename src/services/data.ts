@@ -51,18 +51,6 @@ export async function login(email: string, password: string) {
   }
 }
 
-export async function getPlaces() {
-  try {
-    const response = await fetch(`${baseUrl}/api/v1/place`, {
-      cache: 'no-store',
-    });
-    const data = await response.json();
-    return data;
-  } catch (e) {
-    throw new ServiceError({ cause: e });
-  }
-}
-
 export async function fetchPlace(placeId: string) {
   try {
     const data = await fetch(`${baseUrl}/places/${placeId}`, {
