@@ -11,39 +11,39 @@ type EditScheduleInputsProps = {
 
 const emptySchedule = [
   {
-    week_day: 'monday',
-    open_time: '08:00',
-    close_time: '18:00',
+    weekDay: 'monday',
+    openAt: '08:00',
+    closeAt: '18:00',
   },
   {
-    week_day: 'tuesday',
-    open_time: '08:00',
-    close_time: '18:00',
+    weekDay: 'tuesday',
+    openAt: '08:00',
+    closeAt: '18:00',
   },
   {
-    week_day: 'wednesday',
-    open_time: '08:00',
-    close_time: '18:00',
+    weekDay: 'wednesday',
+    openAt: '08:00',
+    closeAt: '18:00',
   },
   {
-    week_day: 'thursday',
-    open_time: '08:00',
-    close_time: '18:00',
+    weekDay: 'thursday',
+    openAt: '08:00',
+    closeAt: '18:00',
   },
   {
-    week_day: 'friday',
-    open_time: '08:00',
-    close_time: '18:00',
+    weekDay: 'friday',
+    openAt: '08:00',
+    closeAt: '18:00',
   },
   {
-    week_day: 'saturday',
-    open_time: '08:00',
-    close_time: '18:00',
+    weekDay: 'saturday',
+    openAt: '08:00',
+    closeAt: '18:00',
   },
   {
-    week_day: 'sunday',
-    open_time: '08:00',
-    close_time: '18:00',
+    weekDay: 'sunday',
+    openAt: '08:00',
+    closeAt: '18:00',
   },
 ];
 
@@ -64,12 +64,12 @@ const EditScheduleInputs = ({
               <td className="whitespace-nowrap">Abertura</td>
               <td className=" whitespace-nowrap">Fechamento</td>
             </tr>
-            {schedule.map(({ close_time, open_time, week_day }) => (
+            {schedule.map(({ closeAt, openAt, weekDay }) => (
               <ScheduleTableRow
-                key={week_day}
-                openTime={open_time}
-                closeTime={close_time}
-                weekDay={week_day}
+                key={weekDay}
+                openTime={openAt}
+                closeTime={closeAt}
+                weekDay={weekDay}
                 register={register}
               />
             ))}

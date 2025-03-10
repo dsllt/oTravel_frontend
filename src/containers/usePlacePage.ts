@@ -6,6 +6,7 @@ import { Favorite } from '../domain/models/favorite';
 import useExplore from './useExplore';
 import { updateFavorite } from '@lib/usecases/update-favorite';
 import { getActiveFavorites } from '@lib/usecases/get-active-favorites';
+import { getSchedule } from '@lib/usecases/get-schedule';
 
 const usePlacePage = () => {
   const { userData } = useContext(UserContext);
@@ -29,8 +30,7 @@ const usePlacePage = () => {
   });
   const [isFavorite, setIsFavorite] = useState(false);
   const [placeMenu, setPlaceMenu] = useState<Menu[]>([]);
-  const [placeSchedule, setPlaceSchedule] =
-    useState<Schedule[]>(placeScheduleMock);
+  const [placeSchedule, setPlaceSchedule] = useState<Schedule[]>();
   const [newReview, setNewReview] = useState('');
   const [rating, setRating] = useState('');
   const [reviews, setReview] = useState(reviewsMock);
@@ -156,6 +156,19 @@ const usePlacePage = () => {
   useEffect(() => {
     getIsFavorite();
   }, [getIsFavorite]);
+
+  useEffect(() => {
+    async function loadSchedule() {
+      const response = await getSchedule(place.id);
+      const updatedSchedule = response.map((schedule: Schedule) => ({
+        ...schedule,
+        openAt: schedule.openAt.slice(0, -1),
+        closeAt: schedule.closeAt.slice(0, -1),
+      }));
+      setPlaceSchedule(updatedSchedule);
+    }
+    loadSchedule();
+  }, [place.id]);
 
   return { data, callback };
 };

@@ -62,9 +62,9 @@ export interface FoodType {
 }
 
 export interface Schedule {
-  week_day: string; //'Segunda-feira',
-  open_time: string; //'08:00',
-  close_time: string; //'18:00'
+  weekDay: string; //'Segunda-feira',
+  openAt: string; //'08:00',
+  closeAt: string; //'18:00'
 }
 
 export type Categories = {
@@ -83,11 +83,11 @@ export type WeekDays = {
 };
 
 export const weekDays: WeekDays = {
-  monday: 'Segunda-feira',
-  tuesday: 'Terça-feira',
-  wednesday: 'Quarta-feira',
-  thursday: 'Quinta-feira',
-  friday: 'Sexta-feira',
-  saturday: 'Sábado',
-  sunday: 'Domingo',
+  MONDAY: 'Segunda-feira',
+  TUESDAY: 'Terça-feira',
+  WEDNESDAY: 'Quarta-feira',
+  THURSDAY: 'Quinta-feira',
+  FRIDAY: 'Sexta-feira',
+  SATURDAY: 'Sábado',
+  SUNDAY: 'Domingo',
 };

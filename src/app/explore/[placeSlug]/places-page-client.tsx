@@ -66,7 +66,7 @@ function PlacePage({ slug }: { slug: string }) {
                   </button>
                 </div>
                 <EditPlaceModal
-                  placeSchedule={data.placeSchedule}
+                  placeSchedule={data.placeSchedule ?? []}
                   place={data.place}
                 />
               </div>
@@ -98,7 +98,9 @@ function PlacePage({ slug }: { slug: string }) {
               <p className="text-lg text-gray-400 mb-2">
                 {data.place.address} - {data.place.city}, {data.place.country}
               </p>
-              <PlaceSchedule placeSchedule={data.placeSchedule} />
+              {data.placeSchedule && (
+                <PlaceSchedule placeSchedule={data.placeSchedule} />
+              )}
             </div>
           </div>
 
