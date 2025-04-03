@@ -7,8 +7,8 @@ import { Star, PencilIcon } from 'lucide-react';
 import ReviewBox from '@ui/review-box';
 import dynamic from 'next/dynamic';
 import { StarIcon } from '@heroicons/react/16/solid';
-import usePlacePage from '../../../containers/usePlacePage';
-import useNavbar from '../../../containers/useNavbar';
+import usePlacePage from '../../../containers/use-place-page';
+import useNavbar from '../../../containers/use-navbar';
 import PlaceSchedule from '@ui/place/place-schedule';
 import EditPlaceModal from '@ui/place/edit-place-modal';
 

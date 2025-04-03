@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { MapPlaceBox } from '@ui/maps/map-place-box';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { MapPlacesFilter } from '@ui/maps/map-places-filter';
-import useExplore from '../../../containers/useExplore';
+import useExplore from '../../../containers/use-explore';
 
 const Map = dynamic(() => import('../../../components/maps/map'), {
   loading: () => <p>Um mapa está sendo carregado</p>,

@@ -2,7 +2,7 @@
 import NavbarButton from './navbarButton';
 import NavbarLinks from './navbarLinks';
 import NavbarLogo from './navbarLogo';
-import useNavbar from '../../containers/useNavbar';
+import useNavbar from '../../containers/use-navbar';
 import { ProfileModal } from '@ui/profile/profile-modal';
 import { LoginModal } from '@ui/login/login-modal';
 

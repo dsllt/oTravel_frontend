@@ -5,9 +5,17 @@ import { useForm } from 'react-hook-form';
 import PlaceInputs from '@ui/place/place-inputs';
 import { PlaceSchema, placeSchema } from '../../domain/schemas/place-schema';
 import EditScheduleInputs from '@ui/place/edit-schedule-inputs';
+import { postSchedule } from '@lib/usecases/post-schedule';
+import { CreatePlaceDTO } from '../../domain/models/place';
+import { postPlace } from '@lib/usecases/post-place';
+import { ServiceError } from '../../domain/errors/ServiceError';
 
 type RegisterNewPlaceModalProps = {
   onClickCloseInnerModal: () => void;
+};
+
+const convertToOffsetTime = (time: string): string => {
+  return `${time}:00+00:00`;
 };
 
 export default function RegisterNewPlaceModal({
@@ -25,62 +33,71 @@ export default function RegisterNewPlaceModal({
   const [displayScheduleInputs, setDisplayScheduleInputs] = useState(false);
 
   async function handleIncludeNewPlace(data: PlaceSchema) {
-    // const placeCategory = Object.keys(data.placeCategory).map((category) =>
-    //   category.toUpperCase(),
-    // );
-    // const place: CreatePlaceDTO = {
-    //   name: data.placeName,
-    //   image_url: data.placeImage,
-    //   description: data.placeDescription,
-    //   address: data.placeAddress,
-    //   city: data.placeCity,
-    //   country: data.placeCountry,
-    //   latitude: data.placeLatitude,
-    //   longitude: data.placeLongitude,
-    //   phone: data.placePhone,
-    //   slug: data.placeSlug,
-    //   category: placeCategory,
-    // };
-    // await postPlace(place);
+    try {
+      const placeCategory = Object.keys(data.placeCategory).map((category) =>
+        category.toUpperCase(),
+      );
+      const place: CreatePlaceDTO = {
+        name: data.placeName,
+        image_url: data.placeImage,
+        description: data.placeDescription,
+        address: data.placeAddress,
+        city: data.placeCity,
+        country: data.placeCountry,
+        latitude: data.placeLatitude,
+        longitude: data.placeLongitude,
+        phone: data.placePhone,
+        slug: data.placeSlug,
+        category: placeCategory,
+      };
+      const newPlace = await postPlace(place);
 
-    const schedule = [
-      {
-        week_day: 'monday',
-        open_time: data.mondayOpen,
-        close_time: data.mondayClose,
-      },
-      {
-        week_day: 'tuesday',
-        open_time: data.tuesdayOpen,
-        close_time: data.tuesdayClose,
-      },
-      {
-        week_day: 'wednesday',
-        open_time: data.wednesdayOpen,
-        close_time: data.wednesdayClose,
-      },
-      {
-        week_day: 'thursday',
-        open_time: data.thursdayOpen,
-        close_time: data.thursdayClose,
-      },
-      {
-        week_day: 'friday',
-        open_time: data.fridayOpen,
-        close_time: data.fridayClose,
-      },
-      {
-        week_day: 'saturday',
-        open_time: data.saturdayOpen,
-        close_time: data.saturdayClose,
-      },
-      {
-        week_day: 'sunday',
-        open_time: data.sundayOpen,
-        close_time: data.sundayClose,
-      },
-    ];
-    reset();
+      const schedule = [
+        {
+          weekDay: 'MONDAY',
+          openAt: convertToOffsetTime(data.mondayOpen ?? '08:00'),
+          closeAt: convertToOffsetTime(data.mondayClose ?? '18:00'),
+        },
+        {
+          weekDay: 'TUESDAY',
+          openAt: convertToOffsetTime(data.tuesdayOpen ?? '08:00'),
+          closeAt: convertToOffsetTime(data.tuesdayClose ?? '18:00'),
+        },
+        {
+          weekDay: 'WEDNESDAY',
+          openAt: convertToOffsetTime(data.wednesdayOpen ?? '08:00'),
+          closeAt: convertToOffsetTime(data.wednesdayClose ?? '18:00'),
+        },
+        {
+          weekDay: 'THURSDAY',
+          openAt: convertToOffsetTime(data.thursdayOpen ?? '08:00'),
+          closeAt: convertToOffsetTime(data.thursdayClose ?? '18:00'),
+        },
+        {
+          weekDay: 'FRIDAY',
+          openAt: convertToOffsetTime(data.fridayOpen ?? '08:00'),
+          closeAt: convertToOffsetTime(data.fridayClose ?? '18:00'),
+        },
+        {
+          weekDay: 'SATURDAY',
+          openAt: convertToOffsetTime(data.saturdayOpen ?? '08:00'),
+          closeAt: convertToOffsetTime(data.saturdayClose ?? '18:00'),
+        },
+        {
+          weekDay: 'SUNDAY',
+          openAt: convertToOffsetTime(data.sundayOpen ?? '08:00'),
+          closeAt: convertToOffsetTime(data.sundayClose ?? '18:00'),
+        },
+      ];
+      await postSchedule(schedule, newPlace.id);
+      // reset();
+    } catch (e) {
+      if (e instanceof ServiceError) {
+        console.error('Erro no serviço:', e.message, e.cause);
+      } else {
+        console.error('Erro inesperado:', e);
+      }
+    }
   }
 
   return (

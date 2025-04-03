@@ -5,7 +5,6 @@ import { HousePlus, LogOut, Star, User, X } from 'lucide-react';
 import FavoritesModal from './favorites-modal';
 import PersonalInfoModal from './personal-info-modal';
 import RegisterNewPlaceModal from './register-new-place-modal';
-import useNavbar from '../../containers/useNavbar';
 
 type ProfileModalProps = {
   onClickCloseModal: () => void;

@@ -56,6 +56,8 @@ function UserProvider({ children }: Props) {
 
   useEffect(() => {
     async function getData() {
+      const token = localStorage.getItem('token');
+      if (!token) return;
       const data = await getUser();
       setUserData(data);
     }

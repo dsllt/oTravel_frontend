@@ -3,7 +3,7 @@ import { Menu, Place, Schedule } from '../domain/models/place';
 import { placeScheduleMock, reviewsMock } from '../utils/mocks';
 import { UserContext } from '../context/userContext';
 import { Favorite } from '../domain/models/favorite';
-import useExplore from './useExplore';
+import useExplore from './use-explore';
 import { updateFavorite } from '@lib/usecases/update-favorite';
 import { getActiveFavorites } from '@lib/usecases/get-active-favorites';
 import { getSchedule } from '@lib/usecases/get-schedule';
@@ -62,6 +62,7 @@ const usePlacePage = () => {
   const getIsFavorite = useCallback(async () => {
     if (!place.id) return;
     const activeFavorites = await getActiveFavorites();
+    if (!activeFavorites) return;
     const isFavorite = activeFavorites.some(
       (favorite: Place) => favorite.id === place.id,
     );
@@ -160,6 +161,7 @@ const usePlacePage = () => {
   useEffect(() => {
     async function loadSchedule() {
       const response = await getSchedule(place.id);
+      if (!response || response.status !== 200) return;
       const updatedSchedule = response.map((schedule: Schedule) => ({
         ...schedule,
         openAt: schedule.openAt.slice(0, -1),

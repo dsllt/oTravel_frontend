@@ -11,37 +11,37 @@ type EditScheduleInputsProps = {
 
 const emptySchedule = [
   {
-    weekDay: 'monday',
+    weekDay: 'MONDAY',
     openAt: '08:00',
     closeAt: '18:00',
   },
   {
-    weekDay: 'tuesday',
+    weekDay: 'TUESDAY',
     openAt: '08:00',
     closeAt: '18:00',
   },
   {
-    weekDay: 'wednesday',
+    weekDay: 'WEDNESDAY',
     openAt: '08:00',
     closeAt: '18:00',
   },
   {
-    weekDay: 'thursday',
+    weekDay: 'THURSDAY',
     openAt: '08:00',
     closeAt: '18:00',
   },
   {
-    weekDay: 'friday',
+    weekDay: 'FRIDAY',
     openAt: '08:00',
     closeAt: '18:00',
   },
   {
-    weekDay: 'saturday',
+    weekDay: 'SATURDAY',
     openAt: '08:00',
     closeAt: '18:00',
   },
   {
-    weekDay: 'sunday',
+    weekDay: 'SUNDAY',
     openAt: '08:00',
     closeAt: '18:00',
   },

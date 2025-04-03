@@ -3,7 +3,7 @@ import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { SearchFilters } from './search-filters';
-import useExplore from '../../containers/useExplore';
+import useExplore from '../../containers/use-explore';
 
 export function SearchHeader() {
   const searchParams = useSearchParams();

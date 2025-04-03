@@ -2,7 +2,7 @@ import { LandPlot, MapPin } from 'lucide-react';
 import { useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
-import useExplore from '../../containers/useExplore';
+import useExplore from '../../containers/use-explore';
 
 export function HeroSearchInputs() {
   const [selectCity, setSelectedCity] = useState('');

@@ -1,7 +1,7 @@
 'use client';
 import PlacesUsersContainer from '@ui/explore/places-users-container';
 import { HeroContainer } from '@ui/explore/hero-container';
-import useExplore from '../../../containers/useExplore';
+import useExplore from '../../../containers/use-explore';
 
 export default function ExplorePage() {
   const { data } = useExplore();
