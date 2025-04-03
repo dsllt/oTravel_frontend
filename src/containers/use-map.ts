@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { UserFavorites } from '../domain/models/user';
-import useExplore from './useExplore';
+import useExplore from './use-explore';
 
 const useMap = () => {
   const searchParams = useSearchParams();

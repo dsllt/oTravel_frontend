@@ -3,6 +3,7 @@ const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export async function getActiveFavorites() {
   const token = localStorage.getItem('token');
+  if (!token) return;
   try {
     const response = await fetch(`${baseUrl}/api/v1/favorite/active`, {
       cache: 'no-store',

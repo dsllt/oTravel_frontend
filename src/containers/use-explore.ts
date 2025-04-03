@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Place } from '../domain/models/place';
-import { getPlaces } from '@lib/data';
 import { useSearchParams } from 'next/navigation';
 import { UserFavorites } from '../domain/models/user';
 import {
   CategoryDictionary,
   categoryDictionary,
 } from '../domain/constants/category-dictionary';
+import { getPlaces } from '@lib/usecases/get-places';
 
 const useExplore = () => {
   const searchParams = useSearchParams();

@@ -5,7 +5,7 @@ const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 export async function postPlace(data: CreatePlaceDTO) {
   const token = localStorage.getItem('token');
   try {
-    await fetch(`${baseUrl}/api/v1/place`, {
+    const response = await fetch(`${baseUrl}/api/v1/place`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -13,6 +13,7 @@ export async function postPlace(data: CreatePlaceDTO) {
       },
       body: JSON.stringify(data),
     });
+    return response.json();
   } catch (err) {
     console.error('Failed to create place.', err);
   }

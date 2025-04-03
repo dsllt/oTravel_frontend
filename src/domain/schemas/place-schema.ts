@@ -10,7 +10,7 @@ const urlPattern = new RegExp(
   'i',
 );
 
-export const editPlaceSchema = z.object({
+export const placeSchema = z.object({
   placeName: z.string(),
   placeAddress: z.string(),
   placeCity: z.string(),
@@ -37,20 +37,20 @@ export const editPlaceSchema = z.object({
     .transform((value) => value.toLowerCase().replace(/\s+/g, '-')),
   placePhone: z.string(),
   placeRating: z.string(),
-  mondayOpen: z.string(),
-  mondayClose: z.string(),
-  tuesdayOpen: z.string(),
-  tuesdayClose: z.string(),
-  wednesdayOpen: z.string(),
-  wednesdayClose: z.string(),
-  thursdayOpen: z.string(),
-  thursdayClose: z.string(),
-  fridayOpen: z.string(),
-  fridayClose: z.string(),
-  saturdayOpen: z.string(),
-  saturdayClose: z.string(),
-  sundayOpen: z.string(),
-  sundayClose: z.string(),
+  mondayOpen: z.string().optional(),
+  mondayClose: z.string().optional(),
+  tuesdayOpen: z.string().optional(),
+  tuesdayClose: z.string().optional(),
+  wednesdayOpen: z.string().optional(),
+  wednesdayClose: z.string().optional(),
+  thursdayOpen: z.string().optional(),
+  thursdayClose: z.string().optional(),
+  fridayOpen: z.string().optional(),
+  fridayClose: z.string().optional(),
+  saturdayOpen: z.string().optional(),
+  saturdayClose: z.string().optional(),
+  sundayOpen: z.string().optional(),
+  sundayClose: z.string().optional(),
 });
 
-export type EditPlaceSchema = z.infer<typeof editPlaceSchema>;
+export type PlaceSchema = z.infer<typeof placeSchema>;

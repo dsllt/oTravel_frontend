@@ -2,14 +2,11 @@ import React from 'react';
 import { Place, Schedule } from '../../domain/models/place';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import EditPlaceInputs from './edit-place-inputs';
+import PlaceInputs from './place-inputs';
 import EditScheduleInputs from './edit-schedule-inputs';
-import {
-  EditPlaceSchema,
-  editPlaceSchema,
-} from '../../domain/schemas/edit-place-schema';
+import { PlaceSchema, placeSchema } from '../../domain/schemas/place-schema';
 
-type ScheduleEditModalProps = {
+type EditPlaceModalProps = {
   placeSchedule: Schedule[];
   place: Place;
 };
@@ -17,15 +14,15 @@ type ScheduleEditModalProps = {
 export default function EditPlaceModal({
   placeSchedule,
   place,
-}: ScheduleEditModalProps) {
+}: EditPlaceModalProps) {
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors },
     reset,
-  } = useForm<EditPlaceSchema>({
-    resolver: zodResolver(editPlaceSchema),
+  } = useForm<PlaceSchema>({
+    resolver: zodResolver(placeSchema),
   });
 
   const handleCancel = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -37,14 +34,14 @@ export default function EditPlaceModal({
     }
   };
 
-  const handleSave = (data: EditPlaceSchema) => {
+  const handleSave = (data: PlaceSchema) => {
     console.log(data);
   };
   return (
     <dialog id="place-edit" className="modal">
       <div className="modal-box max-w-2xl">
         <form onSubmit={handleSubmit(handleSave)}>
-          <EditPlaceInputs
+          <PlaceInputs
             place={place}
             errors={errors}
             register={register}

@@ -7,8 +7,8 @@ import { Star, PencilIcon } from 'lucide-react';
 import ReviewBox from '@ui/review-box';
 import dynamic from 'next/dynamic';
 import { StarIcon } from '@heroicons/react/16/solid';
-import usePlacePage from '../../../containers/usePlacePage';
-import useNavbar from '../../../containers/useNavbar';
+import usePlacePage from '../../../containers/use-place-page';
+import useNavbar from '../../../containers/use-navbar';
 import PlaceSchedule from '@ui/place/place-schedule';
 import EditPlaceModal from '@ui/place/edit-place-modal';
 
@@ -66,7 +66,7 @@ function PlacePage({ slug }: { slug: string }) {
                   </button>
                 </div>
                 <EditPlaceModal
-                  placeSchedule={data.placeSchedule}
+                  placeSchedule={data.placeSchedule ?? []}
                   place={data.place}
                 />
               </div>
@@ -98,7 +98,9 @@ function PlacePage({ slug }: { slug: string }) {
               <p className="text-lg text-gray-400 mb-2">
                 {data.place.address} - {data.place.city}, {data.place.country}
               </p>
-              <PlaceSchedule placeSchedule={data.placeSchedule} />
+              {data.placeSchedule && (
+                <PlaceSchedule placeSchedule={data.placeSchedule} />
+              )}
             </div>
           </div>
 

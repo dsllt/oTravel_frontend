@@ -7,29 +7,30 @@ import {
   initialCategories,
 } from '../../domain/models/place';
 import { FieldErrors, UseFormRegister, UseFormSetValue } from 'react-hook-form';
-import { EditPlaceSchema } from '../../domain/schemas/edit-place-schema';
 import { useState } from 'react';
+import { PlaceSchema } from '../../domain/schemas/place-schema';
 
-type EditPlaceInputsProps = {
-  place: Place;
-  register: UseFormRegister<EditPlaceSchema>;
-  errors: FieldErrors<EditPlaceSchema>;
-  setValue: UseFormSetValue<EditPlaceSchema>;
+type PlaceInputsProps = {
+  place?: Place;
+  register: UseFormRegister<PlaceSchema>;
+  errors: FieldErrors<PlaceSchema>;
+  setValue: UseFormSetValue<PlaceSchema>;
 };
-const EditPlaceInputs = ({
+const PlaceInputs = ({
   place,
   register,
   errors,
   setValue,
-}: EditPlaceInputsProps) => {
-  const currentCategories = place.category.reduce((acc, category) => {
+}: PlaceInputsProps) => {
+  const currentCategories = place?.category.reduce((acc, category) => {
     if (initialCategories[category]) {
       acc[category] = initialCategories[category];
     }
     return acc;
   }, {} as Categories);
-  const [selectedCategories, setSelectedCategories] =
-    useState<Categories>(currentCategories);
+  const [selectedCategories, setSelectedCategories] = useState<Categories>(
+    currentCategories ?? {},
+  );
   const [availableCategories, setAvailableCategories] =
     useState<Categories>(initialCategories);
   return (
@@ -40,7 +41,7 @@ const EditPlaceInputs = ({
         required
         register={register}
         errors={errors}
-        initialValue={place.name}
+        initialValue={place?.name ?? ''}
       />
       <Input
         label="Endereço"
@@ -48,7 +49,7 @@ const EditPlaceInputs = ({
         required
         register={register}
         errors={errors}
-        initialValue={place.address}
+        initialValue={place?.address ?? ''}
       />
       <div className="flex gap-4">
         <Input
@@ -57,7 +58,7 @@ const EditPlaceInputs = ({
           required
           register={register}
           errors={errors}
-          initialValue={place.city}
+          initialValue={place?.city ?? ''}
         />
         <Input
           label="País"
@@ -65,7 +66,7 @@ const EditPlaceInputs = ({
           required
           register={register}
           errors={errors}
-          initialValue={place.country}
+          initialValue={place?.country ?? ''}
         />
       </div>
       <div className="flex gap-4">
@@ -75,7 +76,7 @@ const EditPlaceInputs = ({
           required
           register={register}
           errors={errors}
-          initialValue={place.latitude}
+          initialValue={place?.latitude ?? ''}
         />
         <Input
           label="Longitude"
@@ -83,7 +84,7 @@ const EditPlaceInputs = ({
           required
           register={register}
           errors={errors}
-          initialValue={place.longitude}
+          initialValue={place?.longitude ?? ''}
         />
       </div>
       <Input
@@ -93,7 +94,7 @@ const EditPlaceInputs = ({
         required
         register={register}
         errors={errors}
-        initialValue={place.imageUrl}
+        initialValue={place?.imageUrl ?? ''}
       />
       <CategorySelect
         availableCategories={availableCategories}
@@ -110,7 +111,7 @@ const EditPlaceInputs = ({
           required
           register={register}
           errors={errors}
-          initialValue={place.description}
+          initialValue={place?.description ?? ''}
         />
         <div className="flex w-1/2 flex-col">
           <Input
@@ -119,7 +120,7 @@ const EditPlaceInputs = ({
             required
             register={register}
             errors={errors}
-            initialValue={place.slug}
+            initialValue={place?.slug ?? ''}
           />
           <Input
             label="Telefone"
@@ -127,7 +128,7 @@ const EditPlaceInputs = ({
             required={false}
             register={register}
             errors={errors}
-            initialValue={place.phone}
+            initialValue={place?.phone ?? ''}
           />
           <Input
             label="Nota"
@@ -135,7 +136,7 @@ const EditPlaceInputs = ({
             required={false}
             register={register}
             errors={errors}
-            initialValue={place.rating}
+            initialValue={place?.rating ?? ''}
           />
         </div>
       </div>
@@ -143,4 +144,4 @@ const EditPlaceInputs = ({
   );
 };
 
-export default EditPlaceInputs;
+export default PlaceInputs;
