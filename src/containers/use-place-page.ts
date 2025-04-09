@@ -7,6 +7,8 @@ import useExplore from './use-explore';
 import { updateFavorite } from '@lib/usecases/update-favorite';
 import { getActiveFavorites } from '@lib/usecases/get-active-favorites';
 import { getSchedule } from '@lib/usecases/get-schedule';
+import { MenuDTO } from '../domain/models/menu-dto';
+import { postMenu } from '@lib/usecases/post-menu';
 
 const usePlacePage = () => {
   const { userData } = useContext(UserContext);
@@ -124,6 +126,33 @@ const usePlacePage = () => {
     [exploreData.places],
   );
 
+  const onClickDisplayModal = useCallback((modalId: string) => {
+    const modal = document.getElementById(modalId) as HTMLDialogElement;
+    if (modal) {
+      modal.showModal();
+    }
+  }, []);
+
+  const onClickDeleteMenuItem = useCallback((itemId: string) => {}, []);
+
+  const onClickEditMenuItem = useCallback((itemId: string) => {}, []);
+
+  const onClickCancelModal = useCallback((modalId: string) => {
+    const modal = document.getElementById(modalId) as HTMLDialogElement;
+    if (modal) {
+      modal.close();
+    }
+  }, []);
+
+  const onClickSaveModal = useCallback(
+    async (item: MenuDTO, modalId: string) => {
+      const response = await postMenu(item);
+      console.log(response);
+      onClickCancelModal(modalId);
+    },
+    [onClickCancelModal],
+  );
+
   const callback = useMemo(
     () => ({
       onClickSubmitReview,
@@ -134,6 +163,11 @@ const usePlacePage = () => {
       setPlaceSchedule,
       setRating,
       setNewReview,
+      onClickDisplayModal,
+      onClickDeleteMenuItem,
+      onClickEditMenuItem,
+      onClickCancelModal,
+      onClickSaveModal,
     }),
     [
       onClickSubmitReview,
@@ -144,6 +178,11 @@ const usePlacePage = () => {
       setPlaceSchedule,
       setRating,
       setNewReview,
+      onClickDisplayModal,
+      onClickDeleteMenuItem,
+      onClickEditMenuItem,
+      onClickCancelModal,
+      onClickSaveModal,
     ],
   );
 

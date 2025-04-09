@@ -1,14 +1,15 @@
-import { useContext, useState } from 'react';
-import { UserContext } from '../../context/userContext';
-import { Menu } from '../../domain/models/place';
+import { useState } from 'react';
+import { FoodType, MenuDTO } from '../../domain/models/menu-dto';
 
-type ModalProps = {
+type MenuModalProps = {
   drink?: boolean;
   food?: boolean;
   placeId: string;
   currentItem: string;
   currentPrice?: number;
   id: string;
+  onClickCancel: (modalId: string) => void;
+  onClickSave: (item: MenuDTO, modalId: string) => void;
 };
 
 export function MenuModal({
@@ -18,53 +19,30 @@ export function MenuModal({
   placeId,
   currentItem,
   currentPrice,
-}: ModalProps) {
-  const { setMenu, menu } = useContext(UserContext);
-
-  const [item, setItem] = useState(currentItem);
+  onClickCancel,
+  onClickSave,
+}: MenuModalProps) {
+  const [itemName, setItemName] = useState(currentItem);
   const [price, setPrice] = useState(currentPrice !== 0 ? currentPrice : '');
-  const elementId = id;
 
-  function handleUpdateMenu() {
-    if (item !== '' || price !== '') {
-      const menuItem = menu.find((item) => item.id === id);
-      let newItem: Menu = {
-        id: id,
-        item: item,
+  const handleClickSave = () => {
+    onClickSave(
+      {
+        name: itemName,
         price: Number(price),
-        menu_type: drink ? 'drink' : 'food',
-        place_id: placeId,
-      };
-      if (menuItem) {
-        newItem = {
-          id: id,
-          item: item,
-          price: Number(price),
-          menu_type: menuItem.menu_type,
-          place_id: menuItem.place_id,
-        };
-        setMenu((prevState) =>
-          prevState.map((item) => (item.id === id ? newItem : item)),
-        );
-      } else {
-        setMenu((prevState) => [...prevState, newItem]);
+        placeId,
+        type: drink ? FoodType.DRINK : FoodType.FOOD,
+      },
+      id,
+    );
+    setItemName('');
+    setPrice('');
+  };
 
-        setItem('');
-        setPrice('');
-      }
-    }
-
-    const dialog = document.getElementById(elementId) as HTMLDialogElement;
-    if (dialog) {
-      dialog.close();
-    }
-  }
-
-  const handleCancel = () => {
-    const dialog = document.getElementById(elementId) as HTMLDialogElement;
-    if (dialog) {
-      dialog.close();
-    }
+  const handleClickCancel = () => {
+    onClickCancel(id);
+    setItemName('');
+    setPrice('');
   };
 
   return (
@@ -81,8 +59,8 @@ export function MenuModal({
             type="text"
             placeholder="Item"
             className="input input-bordered"
-            value={item}
-            onChange={(e) => setItem(e.target.value)}
+            value={itemName}
+            onChange={(e) => setItemName(e.target.value)}
           />
         </div>
         <div className="flex flex-col gap-2">
@@ -96,10 +74,13 @@ export function MenuModal({
           />
         </div>
         <div className="modal-action flex justify-center">
-          <button className="btn" onClick={handleUpdateMenu}>
+          <button className="btn" onClick={() => handleClickSave()}>
             Salvar
           </button>
-          <button className="btn btn-outline btn-error" onClick={handleCancel}>
+          <button
+            className="btn btn-outline btn-error"
+            onClick={() => handleClickCancel()}
+          >
             Cancelar
           </button>
         </div>
