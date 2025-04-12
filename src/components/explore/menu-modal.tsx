@@ -6,7 +6,7 @@ type MenuModalProps = {
   drink?: boolean;
   food?: boolean;
   placeId: string;
-  currentItem: string;
+  currentItem?: string;
   currentPrice?: number;
   id: string;
   onClickCancel: (modalId: string) => void;
@@ -24,26 +24,26 @@ export function MenuModal({
   onClickSave,
 }: MenuModalProps) {
   const [itemName, setItemName] = useState(currentItem);
-  const [price, setPrice] = useState(currentPrice !== 0 ? currentPrice : '');
+  const [price, setPrice] = useState(currentPrice);
 
   const handleClickSave = () => {
     onClickSave(
       {
-        name: itemName,
+        name: itemName!,
         price: Number(price),
         placeId,
         type: drink ? FoodType.DRINK : FoodType.FOOD,
       },
       id,
     );
-    setItemName('');
-    setPrice('');
+    setItemName(undefined);
+    setPrice(undefined);
   };
 
   const handleClickCancel = () => {
     onClickCancel(id);
-    setItemName('');
-    setPrice('');
+    setItemName(undefined);
+    setPrice(undefined);
   };
 
   return (
@@ -71,7 +71,7 @@ export function MenuModal({
             placeholder="Preço"
             className="input input-bordered"
             value={price}
-            onChange={(e) => setPrice(e.target.value)}
+            onChange={(e) => setPrice(Number(e.target.value))}
           />
         </div>
         <div className="modal-action flex justify-center">

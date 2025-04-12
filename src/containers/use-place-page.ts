@@ -138,9 +138,12 @@ const usePlacePage = () => {
     }
   }, []);
 
-  const onClickDeleteMenuItem = useCallback((itemId: string) => {}, []);
-
-  const onClickEditMenuItem = useCallback((itemId: string) => {}, []);
+  const onClickDeleteMenuItem = useCallback((modalId: string) => {
+    const modal = document.getElementById(modalId) as HTMLDialogElement;
+    if (modal) {
+      modal.showModal();
+    }
+  }, []);
 
   const onClickCancelModal = useCallback((modalId: string) => {
     const modal = document.getElementById(modalId) as HTMLDialogElement;
@@ -151,8 +154,10 @@ const usePlacePage = () => {
 
   const onClickSaveModal = useCallback(
     async (item: MenuDTO, modalId: string) => {
-      const response = await postMenu(item);
-      console.log(response);
+      // const response = await postMenu(item);
+      // console.log(response);
+      console.log(item);
+      console.log('modal id ', modalId);
       onClickCancelModal(modalId);
     },
     [onClickCancelModal],
@@ -170,7 +175,6 @@ const usePlacePage = () => {
       setNewReview,
       onClickDisplayModal,
       onClickDeleteMenuItem,
-      onClickEditMenuItem,
       onClickCancelModal,
       onClickSaveModal,
     }),
@@ -185,7 +189,6 @@ const usePlacePage = () => {
       setNewReview,
       onClickDisplayModal,
       onClickDeleteMenuItem,
-      onClickEditMenuItem,
       onClickCancelModal,
       onClickSaveModal,
     ],
