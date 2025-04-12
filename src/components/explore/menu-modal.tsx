@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { FoodType, MenuDTO } from '../../domain/models/menu-dto';
+import { MenuDTO } from '../../domain/models/menu-dto';
+import { FoodType } from '../../domain/models/menu';
 
 type MenuModalProps = {
   drink?: boolean;

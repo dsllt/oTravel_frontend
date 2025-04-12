@@ -106,7 +106,8 @@ function PlacePage({ slug }: { slug: string }) {
 
           <div className="flex w-full justify-between gap-12">
             <MenuContainer
-              menu={data.placeMenu}
+              drinks={data.placeDrinks}
+              foods={data.placeFoods}
               placeId={data.place.id}
               onClickDisplayModal={callback.onClickDisplayModal}
               onClickDeleteMenuItem={callback.onClickDeleteMenuItem}

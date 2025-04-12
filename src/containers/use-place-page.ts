@@ -1,5 +1,5 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import { Menu, Place, Schedule } from '../domain/models/place';
+import { Place, Schedule } from '../domain/models/place';
 import { placeScheduleMock, reviewsMock } from '../utils/mocks';
 import { UserContext } from '../context/userContext';
 import { Favorite } from '../domain/models/favorite';
@@ -9,6 +9,8 @@ import { getActiveFavorites } from '@lib/usecases/get-active-favorites';
 import { getSchedule } from '@lib/usecases/get-schedule';
 import { MenuDTO } from '../domain/models/menu-dto';
 import { postMenu } from '@lib/usecases/post-menu';
+import { FoodType, Menu } from '../domain/models/menu';
+import { getMenu } from '@lib/usecases/get-menu';
 
 const usePlacePage = () => {
   const { userData } = useContext(UserContext);
@@ -31,7 +33,8 @@ const usePlacePage = () => {
     created_at: '',
   });
   const [isFavorite, setIsFavorite] = useState(false);
-  const [placeMenu, setPlaceMenu] = useState<Menu[]>([]);
+  const [placeDrinks, setPlaceDrinks] = useState<Menu[]>([]);
+  const [placeFoods, setPlaceFoods] = useState<Menu[]>([]);
   const [placeSchedule, setPlaceSchedule] = useState<Schedule[]>();
   const [newReview, setNewReview] = useState('');
   const [rating, setRating] = useState('');
@@ -42,7 +45,8 @@ const usePlacePage = () => {
     () => ({
       place,
       isFavorite,
-      placeMenu,
+      placeDrinks,
+      placeFoods,
       placeSchedule,
       newReview,
       rating,
@@ -52,7 +56,8 @@ const usePlacePage = () => {
     [
       place,
       isFavorite,
-      placeMenu,
+      placeDrinks,
+      placeFoods,
       placeSchedule,
       newReview,
       rating,
@@ -197,6 +202,21 @@ const usePlacePage = () => {
     getIsFavorite();
   }, [getIsFavorite]);
 
+  useEffect(() => {
+    async function loadMenu() {
+      if (!place.id) return;
+      const response = await getMenu(place.id);
+      const drinks = response.filter(
+        (item: Menu) => item.type === FoodType.DRINK,
+      );
+      const foods = response.filter(
+        (item: Menu) => item.type === FoodType.FOOD,
+      );
+      setPlaceDrinks(drinks);
+      setPlaceFoods(foods);
+    }
+    loadMenu();
+  }, [place.id]);
   useEffect(() => {
     async function loadSchedule() {
       const response = await getSchedule(place.id);

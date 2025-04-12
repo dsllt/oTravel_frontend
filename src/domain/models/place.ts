@@ -47,20 +47,6 @@ export interface UpdatePlaceDTO {
   slug: string; //'the-coffee',
 }
 
-export interface Menu {
-  id: string; // "b0855a01-765c-4803-8961-5ad9e85f13df",
-  item: string; // "Espresso",
-  price: number; // 10,
-  menu_type: string; // "drink",
-  place_id: string; // "c2e8f0ef-4cc9-4a4f-b7b1-1ef2bb5cd956"
-}
-
-export interface FoodType {
-  category: string;
-  name: string;
-  type: string;
-}
-
 export interface Schedule {
   weekDay: string; //'Segunda-feira',
   openAt: string; //'08:00',

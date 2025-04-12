@@ -1,8 +1,9 @@
 import { MenuModal } from './menu-modal';
 import { Pencil, Trash } from 'lucide-react';
 import { PlusIcon } from '@heroicons/react/24/outline';
-import { Menu } from '../../domain/models/place';
 import { MenuDTO } from '../../domain/models/menu-dto';
+import { Menu } from '../../domain/models/menu';
+import React from 'react';
 
 type MenuDrinksProps = {
   onClickDisplayModal: (modalId: string) => void;
@@ -50,41 +51,45 @@ export default function MenuDrinks({
         <table className="table">
           <tbody>
             {drinks.map((drink) => (
-              <>
+              <React.Fragment key={drink.id}>
                 <tr className="hover:bg-base-100" key={drink.id}>
-                  <td className="rounded-l-md capitalize">{drink.item}</td>
+                  <td className="rounded-l-md capitalize">{drink.name}</td>
                   <td className="">
                     {drink.price.toLocaleString('pt-BR', {
                       style: 'currency',
                       currency: 'BRL',
                     })}
                   </td>
-                  <td className="w-3">
-                    <Pencil
-                      className="size-4 text-blue-600 hover:bg-gray-600 rounded-md cursor-pointer"
-                      onClick={() => {
-                        onClickEditMenuItem(drink.id);
-                      }}
-                    />
-                  </td>
-                  <td className="rounded-r-md w-3">
-                    <Trash
-                      className="size-4 text-red-300 hover:bg-gray-600 rounded-md cursor-pointer"
-                      onClick={() => {
-                        onClickDeleteMenuItem(drink.id);
-                      }}
-                    />
-                  </td>
+                  {canEdit && (
+                    <>
+                      <td className="w-3">
+                        <Pencil
+                          className="size-4 text-blue-600 hover:bg-gray-600 rounded-md cursor-pointer"
+                          onClick={() => {
+                            onClickEditMenuItem(drink.id);
+                          }}
+                        />
+                      </td>
+                      <td className="rounded-r-md w-3">
+                        <Trash
+                          className="size-4 text-red-300 hover:bg-gray-600 rounded-md cursor-pointer"
+                          onClick={() => {
+                            onClickDeleteMenuItem(drink.id);
+                          }}
+                        />
+                      </td>
+                    </>
+                  )}
                 </tr>
                 <MenuModal
                   id={drink.id}
                   placeId={placeId}
                   currentPrice={Number(drink.price)}
-                  currentItem={drink.item}
+                  currentItem={drink.name}
                   onClickCancel={onClickCancelModal}
                   onClickSave={onClickSaveModal}
                 />
-              </>
+              </React.Fragment>
             ))}
           </tbody>
         </table>
