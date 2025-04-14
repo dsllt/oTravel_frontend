@@ -4,7 +4,7 @@ import { getFavorites } from '@lib/usecases/get-favorites';
 import { Favorite } from '../../domain/models/favorite';
 import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { updateFavorite } from '@lib/usecases/update-favorite';
+import { putFavorite } from '@lib/usecases/put-favorite';
 
 type FavoritesModalProps = {
   userId: string;
@@ -32,7 +32,7 @@ export default function FavoritesModal({
   };
 
   const handleRemoveFavorite = async (userId: string, placeId: string) => {
-    await updateFavorite(userId, placeId);
+    await putFavorite(userId, placeId);
     await getData();
   };
 

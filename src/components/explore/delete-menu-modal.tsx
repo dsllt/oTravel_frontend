@@ -1,8 +1,8 @@
 type DeleteMenuModalProps = {
   id: string;
-  itemId: string;
+  itemId: number;
   onClickCancel: (modalId: string) => void;
-  onClickDeleteMenuItem: (itemId: string) => void;
+  onClickDeleteMenuItem: (itemId: number) => void;
 };
 
 export function DeleteMenuModal({
@@ -14,7 +14,9 @@ export function DeleteMenuModal({
   return (
     <dialog id={id} className="modal">
       <div className="modal-box p-8">
-        <h3 className="font-bold text-lg">Você tem certeza que quer exclui?</h3>
+        <h3 className="font-bold text-lg">
+          Você tem certeza que quer excluir?
+        </h3>
 
         <div className="modal-action flex justify-center">
           <button className="btn" onClick={() => onClickDeleteMenuItem(itemId)}>
