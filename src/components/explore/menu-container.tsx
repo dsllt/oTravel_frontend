@@ -8,18 +8,20 @@ type MenuContainerProps = {
   foods: Menu[];
   placeId: string;
   onClickDisplayModal: (modalId: string) => void;
-  onClickDeleteMenuItem: (itemId: string) => void;
   onClickCancelModal: (modalId: string) => void;
   onClickSaveModal: (item: MenuDTO, modalId: string) => void;
+  onClickConfirmDelete: (food: Menu) => void;
+  onClickConfirmEdit: (food: Menu) => void;
 };
 export default function MenuContainer({
   drinks,
   foods,
   placeId,
-  onClickDeleteMenuItem,
   onClickDisplayModal,
   onClickCancelModal,
   onClickSaveModal,
+  onClickConfirmDelete,
+  onClickConfirmEdit,
 }: MenuContainerProps) {
   return (
     <div className="w-full">
@@ -31,7 +33,8 @@ export default function MenuContainer({
           onClickDisplayModal={onClickDisplayModal}
           onClickCancelModal={onClickCancelModal}
           onClickSaveModal={onClickSaveModal}
-          onClickDeleteMenuItem={onClickDeleteMenuItem}
+          onClickConfirmDelete={onClickConfirmDelete}
+          onClickConfirmEdit={onClickConfirmEdit}
         />
         <MenuFoods
           placeId={placeId}
@@ -39,7 +42,8 @@ export default function MenuContainer({
           onClickDisplayModal={onClickDisplayModal}
           onClickCancelModal={onClickCancelModal}
           onClickSaveModal={onClickSaveModal}
-          onClickDeleteMenuItem={onClickDeleteMenuItem}
+          onClickConfirmDelete={onClickConfirmDelete}
+          onClickConfirmEdit={onClickConfirmEdit}
         />
       </div>
     </div>

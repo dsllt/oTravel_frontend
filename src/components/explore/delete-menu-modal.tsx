@@ -1,15 +1,17 @@
+import { Menu } from '../../domain/models/menu';
+
 type DeleteMenuModalProps = {
   id: string;
-  itemId: number;
+  item: Menu;
   onClickCancel: (modalId: string) => void;
-  onClickDeleteMenuItem: (itemId: number) => void;
+  onClickConfirmDelete: (item: Menu) => void;
 };
 
 export function DeleteMenuModal({
   id,
   onClickCancel,
-  itemId,
-  onClickDeleteMenuItem,
+  item,
+  onClickConfirmDelete,
 }: DeleteMenuModalProps) {
   return (
     <dialog id={id} className="modal">
@@ -19,7 +21,7 @@ export function DeleteMenuModal({
         </h3>
 
         <div className="modal-action flex justify-center">
-          <button className="btn" onClick={() => onClickDeleteMenuItem(itemId)}>
+          <button className="btn" onClick={() => onClickConfirmDelete(item)}>
             Confirmar
           </button>
           <button

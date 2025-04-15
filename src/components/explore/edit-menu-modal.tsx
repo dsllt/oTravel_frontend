@@ -1,41 +1,27 @@
 import { useState } from 'react';
-import { MenuDTO } from '../../domain/models/menu-dto';
-import { FoodType } from '../../domain/models/menu';
+import { Menu } from '../../domain/models/menu';
 
 type MenuModalProps = {
-  drink?: boolean;
-  food?: boolean;
-  placeId: string;
-  currentItem?: string;
-  currentPrice?: number;
+  newItem?: boolean;
+  item?: Menu;
   id: string;
   onClickCancel: (modalId: string) => void;
-  onClickSave: (item: MenuDTO, modalId: string) => void;
+  onClickConfirmEdit?: (item: Menu) => void;
+  onClickConfirmSave?: (item: Menu) => void;
 };
 
-export function MenuModal({
+export function EditMenuModal({
   id,
-  drink,
-  food,
-  placeId,
-  currentItem,
-  currentPrice,
+  newItem,
+  item,
   onClickCancel,
-  onClickSave,
+  onClickConfirmEdit,
 }: MenuModalProps) {
-  const [itemName, setItemName] = useState(currentItem);
-  const [price, setPrice] = useState(currentPrice);
+  const [itemName, setItemName] = useState(item?.name);
+  const [price, setPrice] = useState(item?.price);
 
   const handleClickSave = () => {
-    onClickSave(
-      {
-        name: itemName!,
-        price: Number(price),
-        placeId,
-        type: drink ? FoodType.DRINK : FoodType.FOOD,
-      },
-      id,
-    );
+    if (item && onClickConfirmEdit) onClickConfirmEdit(item!);
     setItemName(undefined);
     setPrice(undefined);
   };
@@ -49,10 +35,10 @@ export function MenuModal({
   return (
     <dialog id={id} className="modal">
       <div className="modal-box p-8">
-        {food ? (
-          <h3 className="font-bold text-lg">Inclua uma nova comida</h3>
+        {newItem ? (
+          <h3 className="font-bold text-lg">Inclua novo item</h3>
         ) : (
-          <h3 className="font-bold text-lg">Inclua uma nova bebida</h3>
+          <h3 className="font-bold text-lg">Edite o item</h3>
         )}
         <div className="flex flex-col mb-3 mt-6 gap-2">
           <label>Defina o nome item</label>

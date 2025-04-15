@@ -1,16 +1,14 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { Place, Schedule } from '../domain/models/place';
-import { placeScheduleMock, reviewsMock } from '../utils/mocks';
+import { reviewsMock } from '../utils/mocks';
 import { UserContext } from '../context/userContext';
-import { Favorite } from '../domain/models/favorite';
 import useExplore from './use-explore';
-import { updateFavorite } from '@lib/usecases/update-favorite';
 import { getActiveFavorites } from '@lib/usecases/get-active-favorites';
 import { getSchedule } from '@lib/usecases/get-schedule';
 import { MenuDTO } from '../domain/models/menu-dto';
-import { postMenu } from '@lib/usecases/post-menu';
 import { FoodType, Menu } from '../domain/models/menu';
 import { getMenu } from '@lib/usecases/get-menu';
+import { putFavorite } from '@lib/usecases/put-favorite';
 
 const usePlacePage = () => {
   const { userData } = useContext(UserContext);
@@ -77,7 +75,7 @@ const usePlacePage = () => {
   }, [place.id]);
 
   const onClickFavorite = useCallback(async () => {
-    await updateFavorite(userData.id, place.id);
+    await putFavorite(userData.id, place.id);
     await getIsFavorite();
   }, [getIsFavorite, place.id, userData.id]);
 
@@ -138,17 +136,17 @@ const usePlacePage = () => {
     }
   }, []);
 
-  const onClickDeleteMenuItem = useCallback((modalId: string) => {
-    const modal = document.getElementById(modalId) as HTMLDialogElement;
-    if (modal) {
-      modal.showModal();
-    }
-  }, []);
-
   const onClickCancelModal = useCallback((modalId: string) => {
     const modal = document.getElementById(modalId) as HTMLDialogElement;
     if (modal) {
       modal.close();
+    }
+  }, []);
+
+  const onClickDeleteMenuItem = useCallback((modalId: string) => {
+    const modal = document.getElementById(modalId) as HTMLDialogElement;
+    if (modal) {
+      modal.showModal();
     }
   }, []);
 
@@ -159,6 +157,22 @@ const usePlacePage = () => {
       console.log(item);
       console.log('modal id ', modalId);
       onClickCancelModal(modalId);
+    },
+    [onClickCancelModal],
+  );
+
+  const onClickConfirmDelete = useCallback(
+    async (item: Menu) => {
+      console.log('confirm del', item);
+      onClickCancelModal('delete_item_modal');
+    },
+    [onClickCancelModal],
+  );
+
+  const onClickConfirmEdit = useCallback(
+    async (item: Menu) => {
+      console.log('confirm edit', item);
+      onClickCancelModal('edit_item_modal');
     },
     [onClickCancelModal],
   );
@@ -177,6 +191,8 @@ const usePlacePage = () => {
       onClickDeleteMenuItem,
       onClickCancelModal,
       onClickSaveModal,
+      onClickConfirmDelete,
+      onClickConfirmEdit,
     }),
     [
       onClickSubmitReview,
@@ -191,6 +207,8 @@ const usePlacePage = () => {
       onClickDeleteMenuItem,
       onClickCancelModal,
       onClickSaveModal,
+      onClickConfirmDelete,
+      onClickConfirmEdit,
     ],
   );
 
@@ -220,6 +238,7 @@ const usePlacePage = () => {
     }
     loadMenu();
   }, [place.id]);
+
   useEffect(() => {
     async function loadSchedule() {
       const response = await getSchedule(place.id);

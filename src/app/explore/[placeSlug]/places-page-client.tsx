@@ -110,7 +110,8 @@ function PlacePage({ slug }: { slug: string }) {
               foods={data.placeFoods}
               placeId={data.place.id}
               onClickDisplayModal={callback.onClickDisplayModal}
-              onClickDeleteMenuItem={callback.onClickDeleteMenuItem}
+              onClickConfirmDelete={callback.onClickConfirmDelete}
+              onClickConfirmEdit={callback.onClickConfirmEdit}
               onClickCancelModal={callback.onClickCancelModal}
               onClickSaveModal={callback.onClickSaveModal}
             />

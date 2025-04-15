@@ -1,6 +1,6 @@
 import { PlusIcon } from '@heroicons/react/24/outline';
-import { MenuModal } from './menu-modal';
 import { MenuDTO } from '../../domain/models/menu-dto';
+import { CreateMenuModal } from './create-menu-modal';
 
 type MenuHeaderProps = {
   title: string;
@@ -8,7 +8,7 @@ type MenuHeaderProps = {
   placeId: string;
   onClickDisplayModal: (modalId: string) => void;
   onClickCancelModal: (modalId: string) => void;
-  onClickSaveModal: (item: MenuDTO, modalId: string) => void;
+  onClickSaveModal: (item: MenuDTO) => void;
 };
 
 const MenuHeader = ({
@@ -25,17 +25,16 @@ const MenuHeader = ({
       {canEdit && (
         <button
           className="hover:bg-slate-700 p-1 rounded-lg mb-3"
-          onClick={() => onClickDisplayModal('new_food_modal')}
+          onClick={() => onClickDisplayModal('new_item_modal')}
         >
           <PlusIcon className="w-3 h-3 " />
         </button>
       )}
-      <MenuModal
-        food
+      <CreateMenuModal
+        modalId="new_item_modal"
         placeId={placeId}
-        id="new_food_modal"
         onClickCancel={onClickCancelModal}
-        onClickSave={onClickSaveModal}
+        onClickConfirmSave={onClickSaveModal}
       />
     </div>
   );

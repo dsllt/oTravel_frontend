@@ -1,6 +1,6 @@
 import { MenuDTO } from '../../domain/models/menu-dto';
 import { Menu } from '../../domain/models/menu';
-import React, { ReactNode } from 'react';
+import React from 'react';
 import MenuHeader from './menu-header';
 import { MenuList } from './menu-list';
 
@@ -8,31 +8,29 @@ type MenuDrinksProps = {
   onClickDisplayModal: (modalId: string) => void;
   onClickSaveModal: (item: MenuDTO, modalId: string) => void;
   onClickCancelModal: (modalId: string) => void;
-  onClickEditMenuItem: (item: Menu) => void;
-  onClickDeleteMenuItem: (itemId: number) => void;
-  renderModal: (item: Menu) => ReactNode;
+  onClickConfirmDelete: (food: Menu) => void;
+  onClickConfirmEdit: (food: Menu) => void;
   drinks: Menu[];
   placeId: string;
-  isLogged: boolean;
 };
 
 export default function MenuDrinks({
   drinks,
-  onClickDeleteMenuItem,
   onClickDisplayModal,
   onClickCancelModal,
   onClickSaveModal,
-  onClickEditMenuItem,
+  onClickConfirmDelete,
+  onClickConfirmEdit,
   placeId,
-  isLogged,
-  renderModal,
 }: MenuDrinksProps) {
+  const canEdit = Boolean(localStorage.getItem('token'));
+
   return (
     <div className="bg-base-300 p-4 rounded-lg w-1/2">
       <MenuHeader
         title="Bebidas"
         placeId={placeId}
-        canEdit={isLogged}
+        canEdit={canEdit}
         onClickCancelModal={onClickCancelModal}
         onClickDisplayModal={onClickDisplayModal}
         onClickSaveModal={onClickSaveModal}
@@ -41,10 +39,11 @@ export default function MenuDrinks({
         <>
           <MenuList
             itens={drinks}
-            canEdit={isLogged}
-            onClickEditMenuItem={onClickEditMenuItem}
-            onClickDeleteMenuItem={onClickDeleteMenuItem}
-            renderModal={renderModal}
+            canEdit={canEdit}
+            onClickDisplayModal={onClickDisplayModal}
+            onClickCancelModal={onClickCancelModal}
+            onClickConfirmDelete={onClickConfirmDelete}
+            onClickConfirmEdit={onClickConfirmEdit}
           />
         </>
       ) : (
