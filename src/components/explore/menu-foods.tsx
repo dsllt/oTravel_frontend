@@ -1,27 +1,40 @@
 import { MenuDTO } from '../../domain/models/menu-dto';
 import { Menu } from '../../domain/models/menu';
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { MenuList } from './menu-list';
 import MenuHeader from './menu-header';
+import { NewItem } from '../../containers/use-modal';
 
 type MenuFoodsProps = {
-  onClickDisplayModal: (modalId: string) => void;
-  onClickSaveModal: (item: MenuDTO) => void;
-  onClickCancelModal: (modalId: string) => void;
-  onClickConfirmDelete: (food: Menu) => void;
-  onClickConfirmEdit: (food: Menu) => void;
   foods: Menu[];
   placeId: string;
+  newItem: NewItem | undefined;
+  setNewItem: Dispatch<SetStateAction<NewItem | undefined>>;
+  activeModal: string | null;
+  selectedItem: Menu | null;
+  onClickDisplayModal: (modalId: string) => void;
+  onClickCancelModal: (modalId: string) => void;
+  onClickSaveCreateModal: (placeId: string, food: boolean) => void;
+  onClickConfirmDelete: (food: Menu) => void;
+  onClickConfirmEdit: (food: Menu) => void;
+  onClickOpenEditModal: (modalId: string, item: Menu) => void;
+  onClickCloseEditModal: () => void;
 };
 
 export default function MenuFoods({
   foods,
+  placeId,
+  newItem,
+  setNewItem,
+  activeModal,
+  selectedItem,
   onClickDisplayModal,
   onClickCancelModal,
-  onClickSaveModal,
   onClickConfirmDelete,
   onClickConfirmEdit,
-  placeId,
+  onClickSaveCreateModal,
+  onClickCloseEditModal,
+  onClickOpenEditModal,
 }: MenuFoodsProps) {
   const canEdit = Boolean(localStorage.getItem('token'));
 
@@ -31,17 +44,21 @@ export default function MenuFoods({
         title="Comidas"
         placeId={placeId}
         canEdit={canEdit}
-        onClickCancelModal={onClickCancelModal}
+        newItem={newItem}
+        setNewItem={setNewItem}
         onClickDisplayModal={onClickDisplayModal}
-        onClickSaveModal={onClickSaveModal}
+        onClickSaveCreateModal={onClickSaveCreateModal}
+        onClickCancelModal={onClickCancelModal}
       />
       {foods.length > 0 ? (
         <>
           <MenuList
             itens={foods}
             canEdit={canEdit}
-            onClickDisplayModal={onClickDisplayModal}
-            onClickCancelModal={onClickCancelModal}
+            activeModal={activeModal}
+            selectedItem={selectedItem}
+            onClickCloseEditModal={onClickCloseEditModal}
+            onClickOpenEditModal={onClickOpenEditModal}
             onClickConfirmDelete={onClickConfirmDelete}
             onClickConfirmEdit={onClickConfirmEdit}
           />

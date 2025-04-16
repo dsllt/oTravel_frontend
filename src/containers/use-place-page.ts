@@ -5,7 +5,6 @@ import { UserContext } from '../context/userContext';
 import useExplore from './use-explore';
 import { getActiveFavorites } from '@lib/usecases/get-active-favorites';
 import { getSchedule } from '@lib/usecases/get-schedule';
-import { MenuDTO } from '../domain/models/menu-dto';
 import { FoodType, Menu } from '../domain/models/menu';
 import { getMenu } from '@lib/usecases/get-menu';
 import { putFavorite } from '@lib/usecases/put-favorite';
@@ -93,13 +92,6 @@ const usePlacePage = () => {
     setRating('');
   }, [newReview, place, rating, userData]);
 
-  const displayEditModal = useCallback(() => {
-    const modal = document.getElementById('place-edit') as HTMLDialogElement;
-    if (modal) {
-      modal.showModal();
-    }
-  }, []);
-
   const isPlaceDataFetched = useCallback((place: Place): boolean => {
     let isFetched = false;
     Object.values(place).every((value) => {
@@ -129,86 +121,24 @@ const usePlacePage = () => {
     [exploreData.places],
   );
 
-  const onClickDisplayModal = useCallback((modalId: string) => {
-    const modal = document.getElementById(modalId) as HTMLDialogElement;
-    if (modal) {
-      modal.showModal();
-    }
-  }, []);
-
-  const onClickCancelModal = useCallback((modalId: string) => {
-    const modal = document.getElementById(modalId) as HTMLDialogElement;
-    if (modal) {
-      modal.close();
-    }
-  }, []);
-
-  const onClickDeleteMenuItem = useCallback((modalId: string) => {
-    const modal = document.getElementById(modalId) as HTMLDialogElement;
-    if (modal) {
-      modal.showModal();
-    }
-  }, []);
-
-  const onClickSaveModal = useCallback(
-    async (item: MenuDTO, modalId: string) => {
-      // const response = await postMenu(item);
-      // console.log(response);
-      console.log(item);
-      console.log('modal id ', modalId);
-      onClickCancelModal(modalId);
-    },
-    [onClickCancelModal],
-  );
-
-  const onClickConfirmDelete = useCallback(
-    async (item: Menu) => {
-      console.log('confirm del', item);
-      onClickCancelModal('delete_item_modal');
-    },
-    [onClickCancelModal],
-  );
-
-  const onClickConfirmEdit = useCallback(
-    async (item: Menu) => {
-      console.log('confirm edit', item);
-      onClickCancelModal('edit_item_modal');
-    },
-    [onClickCancelModal],
-  );
-
   const callback = useMemo(
     () => ({
       onClickSubmitReview,
       onClickFavorite,
-      displayEditModal,
       isPlaceDataFetched,
       defineCurrentPlace,
       setPlaceSchedule,
       setRating,
       setNewReview,
-      onClickDisplayModal,
-      onClickDeleteMenuItem,
-      onClickCancelModal,
-      onClickSaveModal,
-      onClickConfirmDelete,
-      onClickConfirmEdit,
     }),
     [
       onClickSubmitReview,
       onClickFavorite,
-      displayEditModal,
       isPlaceDataFetched,
       defineCurrentPlace,
       setPlaceSchedule,
       setRating,
       setNewReview,
-      onClickDisplayModal,
-      onClickDeleteMenuItem,
-      onClickCancelModal,
-      onClickSaveModal,
-      onClickConfirmDelete,
-      onClickConfirmEdit,
     ],
   );
 

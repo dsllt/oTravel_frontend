@@ -2,27 +2,20 @@ import MenuDrinks from './menu-drinks';
 import MenuFoods from './menu-foods';
 import { MenuDTO } from '../../domain/models/menu-dto';
 import { Menu } from '../../domain/models/menu';
+import useModal from '../../containers/use-modal';
 
 type MenuContainerProps = {
   drinks: Menu[];
   foods: Menu[];
   placeId: string;
-  onClickDisplayModal: (modalId: string) => void;
-  onClickCancelModal: (modalId: string) => void;
-  onClickSaveModal: (item: MenuDTO, modalId: string) => void;
-  onClickConfirmDelete: (food: Menu) => void;
-  onClickConfirmEdit: (food: Menu) => void;
 };
 export default function MenuContainer({
   drinks,
   foods,
   placeId,
-  onClickDisplayModal,
-  onClickCancelModal,
-  onClickSaveModal,
-  onClickConfirmDelete,
-  onClickConfirmEdit,
 }: MenuContainerProps) {
+  const { data, callback } = useModal();
+
   return (
     <div className="w-full">
       <h1 className="font-bold text-xl font-dmSans mb-4">Menu</h1>
@@ -30,20 +23,32 @@ export default function MenuContainer({
         <MenuDrinks
           placeId={placeId}
           drinks={drinks}
-          onClickDisplayModal={onClickDisplayModal}
-          onClickCancelModal={onClickCancelModal}
-          onClickSaveModal={onClickSaveModal}
-          onClickConfirmDelete={onClickConfirmDelete}
-          onClickConfirmEdit={onClickConfirmEdit}
+          newItem={data.newItem}
+          setNewItem={data.setNewItem}
+          activeModal={data.activeModal}
+          selectedItem={data.selectedItem}
+          onClickDisplayModal={callback.onClickDisplayModal}
+          onClickCancelModal={callback.onClickCancelModal}
+          onClickSaveCreateModal={callback.onClickSaveCreateModal}
+          onClickConfirmDelete={callback.onClickConfirmDelete}
+          onClickConfirmEdit={callback.onClickConfirmEdit}
+          onClickCloseEditModal={callback.onClickCloseEditModal}
+          onClickOpenEditModal={callback.onClickOpenEditModal}
         />
         <MenuFoods
           placeId={placeId}
           foods={foods}
-          onClickDisplayModal={onClickDisplayModal}
-          onClickCancelModal={onClickCancelModal}
-          onClickSaveModal={onClickSaveModal}
-          onClickConfirmDelete={onClickConfirmDelete}
-          onClickConfirmEdit={onClickConfirmEdit}
+          newItem={data.newItem}
+          setNewItem={data.setNewItem}
+          activeModal={data.activeModal}
+          selectedItem={data.selectedItem}
+          onClickDisplayModal={callback.onClickDisplayModal}
+          onClickCancelModal={callback.onClickCancelModal}
+          onClickSaveCreateModal={callback.onClickSaveCreateModal}
+          onClickConfirmDelete={callback.onClickConfirmDelete}
+          onClickConfirmEdit={callback.onClickConfirmEdit}
+          onClickCloseEditModal={callback.onClickCloseEditModal}
+          onClickOpenEditModal={callback.onClickOpenEditModal}
         />
       </div>
     </div>

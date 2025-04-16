@@ -7,42 +7,24 @@ import { EditMenuModal } from './edit-menu-modal';
 type MenuListProps = {
   itens: Menu[];
   canEdit: boolean;
-  onClickDisplayModal: (modalId: string) => void;
-  onClickCancelModal: (modalId: string) => void;
+  activeModal: string | null;
+  selectedItem: Menu | null;
   onClickConfirmDelete: (food: Menu) => void;
   onClickConfirmEdit: (food: Menu) => void;
+  onClickOpenEditModal: (modalId: string, item: Menu) => void;
+  onClickCloseEditModal: () => void;
 };
 
 export function MenuList({
   itens,
   canEdit,
-  onClickCancelModal,
-  onClickDisplayModal,
+  activeModal,
+  selectedItem,
   onClickConfirmDelete,
   onClickConfirmEdit,
+  onClickOpenEditModal,
+  onClickCloseEditModal,
 }: MenuListProps) {
-  const [activeModal, setActiveModal] = useState<string | null>(null);
-  const [selectedItem, setSelectedItem] = useState<Menu | null>(null);
-
-  const openModal = (modalId: string, item: Menu) => {
-    setActiveModal(modalId);
-    setSelectedItem(item);
-  };
-
-  useEffect(() => {
-    if (activeModal) {
-      onClickDisplayModal(activeModal);
-    }
-  }, [activeModal, onClickDisplayModal]);
-
-  const closeModal = () => {
-    if (activeModal) {
-      onClickCancelModal(activeModal);
-    }
-    setActiveModal(null);
-    setSelectedItem(null);
-  };
-
   return (
     <>
       <table className="table">
@@ -62,13 +44,17 @@ export function MenuList({
                     <td className="w-3">
                       <Pencil
                         className="size-4 text-blue-600 hover:bg-gray-600 rounded-md cursor-pointer"
-                        onClick={() => openModal('edit_item_modal', item)}
+                        onClick={() =>
+                          onClickOpenEditModal('edit_item_modal', item)
+                        }
                       />
                     </td>
                     <td className="rounded-r-md w-3">
                       <Trash
                         className="size-4 text-red-300 hover:bg-gray-600 rounded-md cursor-pointer"
-                        onClick={() => openModal('delete_item_modal', item)}
+                        onClick={() =>
+                          onClickOpenEditModal('delete_item_modal', item)
+                        }
                       />
                     </td>
                   </>
@@ -83,7 +69,7 @@ export function MenuList({
         <DeleteMenuModal
           id="delete_item_modal"
           item={selectedItem}
-          onClickCancel={closeModal}
+          onClickCancel={onClickCloseEditModal}
           onClickConfirmDelete={onClickConfirmDelete}
         />
       )}
@@ -91,7 +77,7 @@ export function MenuList({
         <EditMenuModal
           id="edit_item_modal"
           item={selectedItem}
-          onClickCancel={closeModal}
+          onClickCancel={onClickCloseEditModal}
           onClickConfirmEdit={onClickConfirmEdit}
         />
       )}

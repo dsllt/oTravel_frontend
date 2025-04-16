@@ -1,23 +1,28 @@
 import { PlusIcon } from '@heroicons/react/24/outline';
-import { MenuDTO } from '../../domain/models/menu-dto';
 import { CreateMenuModal } from './create-menu-modal';
+import { Dispatch, SetStateAction } from 'react';
+import { NewItem } from '../../containers/use-modal';
 
 type MenuHeaderProps = {
   title: string;
   canEdit: boolean;
   placeId: string;
-  onClickDisplayModal: (modalId: string) => void;
   onClickCancelModal: (modalId: string) => void;
-  onClickSaveModal: (item: MenuDTO) => void;
+  onClickSaveCreateModal: (placeId: string, food: boolean) => void;
+  newItem: NewItem | undefined;
+  setNewItem: Dispatch<SetStateAction<NewItem | undefined>>;
+  onClickDisplayModal: (modalId: string) => void;
 };
 
 const MenuHeader = ({
   title,
   canEdit,
   placeId,
-  onClickCancelModal,
   onClickDisplayModal,
-  onClickSaveModal,
+  onClickCancelModal,
+  onClickSaveCreateModal,
+  newItem,
+  setNewItem,
 }: MenuHeaderProps) => {
   return (
     <div className="flex justify-between items-center">
@@ -31,10 +36,11 @@ const MenuHeader = ({
         </button>
       )}
       <CreateMenuModal
-        modalId="new_item_modal"
         placeId={placeId}
-        onClickCancel={onClickCancelModal}
-        onClickConfirmSave={onClickSaveModal}
+        onClickCancelModal={onClickCancelModal}
+        onClickSaveCreateModal={onClickSaveCreateModal}
+        newItem={newItem}
+        setNewItem={setNewItem}
       />
     </div>
   );

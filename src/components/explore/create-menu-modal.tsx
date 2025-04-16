@@ -1,46 +1,25 @@
-import { useState } from 'react';
-import { FoodType, Menu } from '../../domain/models/menu';
-import { MenuDTO } from '../../domain/models/menu-dto';
+import { Dispatch, SetStateAction } from 'react';
+import { NewItem } from '../../containers/use-modal';
 
 type CreateMenuModalProps = {
   food?: boolean;
-  modalId: string;
   placeId: string;
-  onClickCancel: (modalId: string) => void;
-  onClickConfirmSave: (item: MenuDTO) => void;
+  onClickCancelModal: (modalId: string) => void;
+  onClickSaveCreateModal: (placeId: string, food: boolean) => void;
+  newItem: NewItem | undefined;
+  setNewItem: Dispatch<SetStateAction<NewItem | undefined>>;
 };
 
 export function CreateMenuModal({
   food,
-  modalId,
   placeId,
-  onClickCancel,
-  onClickConfirmSave,
+  onClickCancelModal,
+  onClickSaveCreateModal,
+  newItem,
+  setNewItem,
 }: CreateMenuModalProps) {
-  const [itemName, setItemName] = useState<string | undefined>('');
-  const [price, setPrice] = useState<number | undefined>(undefined);
-
-  const handleClickSave = () => {
-    if (!itemName || !price) return;
-    const item: MenuDTO = {
-      name: itemName,
-      price,
-      placeId,
-      type: food ? FoodType.FOOD : FoodType.DRINK,
-    };
-    onClickConfirmSave(item);
-    setItemName(undefined);
-    setPrice(undefined);
-  };
-
-  const handleClickCancel = () => {
-    onClickCancel(modalId);
-    setItemName(undefined);
-    setPrice(undefined);
-  };
-
   return (
-    <dialog id={modalId} className="modal">
+    <dialog id="new_item_modal" className="modal">
       <div className="modal-box p-8">
         {food ? (
           <h3 className="font-bold text-lg">Inclua uma nova comida</h3>
@@ -53,8 +32,10 @@ export function CreateMenuModal({
             type="text"
             placeholder="Item"
             className="input input-bordered"
-            value={itemName}
-            onChange={(e) => setItemName(e.target.value)}
+            value={newItem?.name}
+            onChange={(e) =>
+              setNewItem({ name: e.target.value, price: newItem?.price })
+            }
           />
         </div>
         <div className="flex flex-col gap-2">
@@ -63,17 +44,22 @@ export function CreateMenuModal({
             type="text"
             placeholder="Preço"
             className="input input-bordered"
-            value={price}
-            onChange={(e) => setPrice(Number(e.target.value))}
+            value={newItem?.price}
+            onChange={(e) =>
+              setNewItem({ name: newItem?.name, price: Number(e.target.value) })
+            }
           />
         </div>
         <div className="modal-action flex justify-center">
-          <button className="btn" onClick={() => handleClickSave()}>
+          <button
+            className="btn"
+            onClick={() => onClickSaveCreateModal(placeId, false)}
+          >
             Salvar
           </button>
           <button
             className="btn btn-outline btn-error"
-            onClick={() => handleClickCancel()}
+            onClick={() => onClickCancelModal('new_item_modal')}
           >
             Cancelar
           </button>
