@@ -19,7 +19,6 @@ export default function PersonalInfoModal({
   async function handleUpdateUserData() {
     if (!firstName || !lastName || !email || !userData?.id) return;
     const updatedUser: UserDTO = { ...userData, firstName, lastName, email };
-    console.log(updatedUser);
     await putUser(updatedUser);
     setUserData(updatedUser);
   }

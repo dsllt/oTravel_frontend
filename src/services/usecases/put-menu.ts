@@ -16,8 +16,8 @@ export async function putMenu(item: MenuDTO, menuId: number) {
       headers: {
         'Content-Type': 'application/json',
         authorization: `Bearer ${token}`,
-        body: JSON.stringify(menuBody),
       },
+      body: JSON.stringify(menuBody),
     });
     const data = await response.json();
     return data;

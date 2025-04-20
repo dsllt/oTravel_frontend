@@ -1,27 +1,32 @@
 import { Dispatch, SetStateAction } from 'react';
 import { NewItem } from '../../containers/use-modal';
+import { FoodType } from '../../domain/models/menu';
+
+export type CreateMenuModalId = 'new_drink_modal' | 'new_food_modal';
 
 type CreateMenuModalProps = {
-  food?: boolean;
+  id: CreateMenuModalId;
+  type: FoodType;
   placeId: string;
-  onClickCancelModal: (modalId: string) => void;
-  onClickSaveCreateModal: (placeId: string, food: boolean) => void;
+  onClickCancelCreateModal: (modalId: CreateMenuModalId) => void;
+  onClickSaveCreateModal: (placeId: string, type: FoodType) => void;
   newItem: NewItem | undefined;
   setNewItem: Dispatch<SetStateAction<NewItem | undefined>>;
 };
 
 export function CreateMenuModal({
-  food,
+  id,
+  type,
   placeId,
-  onClickCancelModal,
+  onClickCancelCreateModal,
   onClickSaveCreateModal,
   newItem,
   setNewItem,
 }: CreateMenuModalProps) {
   return (
-    <dialog id="new_item_modal" className="modal">
+    <dialog id={id} className="modal">
       <div className="modal-box p-8">
-        {food ? (
+        {type === FoodType.FOOD ? (
           <h3 className="font-bold text-lg">Inclua uma nova comida</h3>
         ) : (
           <h3 className="font-bold text-lg">Inclua uma nova bebida</h3>
@@ -32,7 +37,7 @@ export function CreateMenuModal({
             type="text"
             placeholder="Item"
             className="input input-bordered"
-            value={newItem?.name}
+            value={newItem?.name || ''}
             onChange={(e) =>
               setNewItem({ name: e.target.value, price: newItem?.price })
             }
@@ -44,7 +49,7 @@ export function CreateMenuModal({
             type="text"
             placeholder="Preço"
             className="input input-bordered"
-            value={newItem?.price}
+            value={newItem?.price || ''}
             onChange={(e) =>
               setNewItem({ name: newItem?.name, price: Number(e.target.value) })
             }
@@ -53,13 +58,17 @@ export function CreateMenuModal({
         <div className="modal-action flex justify-center">
           <button
             className="btn"
-            onClick={() => onClickSaveCreateModal(placeId, false)}
+            onClick={() => onClickSaveCreateModal(placeId, type)}
           >
             Salvar
           </button>
           <button
             className="btn btn-outline btn-error"
-            onClick={() => onClickCancelModal('new_item_modal')}
+            onClick={() =>
+              onClickCancelCreateModal(
+                type === FoodType.FOOD ? 'new_food_modal' : 'new_drink_modal',
+              )
+            }
           >
             Cancelar
           </button>

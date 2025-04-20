@@ -109,11 +109,18 @@ function PlacePage({ slug }: { slug: string }) {
               drinks={data.placeDrinks}
               foods={data.placeFoods}
               placeId={data.place.id}
-              onClickDisplayModal={callback.onClickDisplayModal}
+              activeModal={data.activeModal}
+              selectedItem={data.selectedItem}
+              onClickCloseEditModal={callback.onClickCloseEditModal}
+              onClickOpenEditModal={callback.onClickOpenEditModal}
               onClickConfirmDelete={callback.onClickConfirmDelete}
-              onClickConfirmEdit={callback.onClickConfirmEdit}
-              onClickCancelModal={callback.onClickCancelModal}
-              onClickSaveModal={callback.onClickSaveModal}
+              onClickSaveEditModal={callback.onClickConfirmEdit}
+              newItem={data.newItem}
+              setNewItem={data.setNewItem}
+              onClickDisplayCreateModal={callback.onClickDisplayCreateModal}
+              onClickSaveCreateModal={callback.onClickSaveCreateModal}
+              onClickCancelCreateModal={callback.onClickCancelCreateModal}
+              setSelectedItem={data.setSelectedItem}
             />
           </div>
 

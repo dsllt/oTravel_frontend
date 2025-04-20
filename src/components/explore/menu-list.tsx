@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Pencil, Trash } from 'lucide-react';
 import { Menu } from '../../domain/models/menu';
 import { DeleteMenuModal } from './delete-menu-modal';
@@ -10,9 +10,10 @@ type MenuListProps = {
   activeModal: string | null;
   selectedItem: Menu | null;
   onClickConfirmDelete: (food: Menu) => void;
-  onClickConfirmEdit: (food: Menu) => void;
+  onClickSaveEditModal: () => void;
   onClickOpenEditModal: (modalId: string, item: Menu) => void;
   onClickCloseEditModal: () => void;
+  setSelectedItem: Dispatch<SetStateAction<Menu | null>>;
 };
 
 export function MenuList({
@@ -21,9 +22,10 @@ export function MenuList({
   activeModal,
   selectedItem,
   onClickConfirmDelete,
-  onClickConfirmEdit,
+  onClickSaveEditModal,
   onClickOpenEditModal,
   onClickCloseEditModal,
+  setSelectedItem,
 }: MenuListProps) {
   return (
     <>
@@ -77,8 +79,9 @@ export function MenuList({
         <EditMenuModal
           id="edit_item_modal"
           item={selectedItem}
-          onClickCancel={onClickCloseEditModal}
-          onClickConfirmEdit={onClickConfirmEdit}
+          onClickSaveCancelModal={onClickCloseEditModal}
+          onClickSaveEditModal={onClickSaveEditModal}
+          setSelectedItem={setSelectedItem}
         />
       )}
     </>

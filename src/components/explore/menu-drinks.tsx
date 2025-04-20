@@ -1,5 +1,4 @@
-import { MenuDTO } from '../../domain/models/menu-dto';
-import { Menu } from '../../domain/models/menu';
+import { FoodType, Menu } from '../../domain/models/menu';
 import React, { Dispatch, SetStateAction } from 'react';
 import MenuHeader from './menu-header';
 import { MenuList } from './menu-list';
@@ -12,13 +11,14 @@ type MenuDrinksProps = {
   setNewItem: Dispatch<SetStateAction<NewItem | undefined>>;
   activeModal: string | null;
   selectedItem: Menu | null;
-  onClickDisplayModal: (modalId: string) => void;
-  onClickCancelModal: (modalId: string) => void;
-  onClickSaveCreateModal: (placeId: string, food: boolean) => void;
+  onClickDisplayCreateModal: (modalId: string) => void;
+  onClickCancelCreateModal: (modalId: string) => void;
+  onClickSaveCreateModal: (placeId: string, type: FoodType) => void;
   onClickConfirmDelete: (food: Menu) => void;
-  onClickConfirmEdit: (food: Menu) => void;
+  onClickSaveEditModal: () => void;
   onClickOpenEditModal: (modalId: string, item: Menu) => void;
   onClickCloseEditModal: () => void;
+  setSelectedItem: Dispatch<SetStateAction<Menu | null>>;
 };
 
 export default function MenuDrinks({
@@ -28,26 +28,28 @@ export default function MenuDrinks({
   setNewItem,
   activeModal,
   selectedItem,
-  onClickDisplayModal,
-  onClickCancelModal,
+  onClickDisplayCreateModal,
+  onClickCancelCreateModal,
   onClickConfirmDelete,
-  onClickConfirmEdit,
+  onClickSaveEditModal,
   onClickSaveCreateModal,
   onClickOpenEditModal,
   onClickCloseEditModal,
+  setSelectedItem,
 }: MenuDrinksProps) {
   const canEdit = Boolean(localStorage.getItem('token'));
   return (
     <div className="bg-base-300 p-4 rounded-lg w-1/2">
       <MenuHeader
         title="Bebidas"
+        type={FoodType.DRINK}
         placeId={placeId}
         canEdit={canEdit}
         newItem={newItem}
         setNewItem={setNewItem}
-        onClickDisplayModal={onClickDisplayModal}
+        onClickDisplayCreateModal={onClickDisplayCreateModal}
         onClickSaveCreateModal={onClickSaveCreateModal}
-        onClickCancelModal={onClickCancelModal}
+        onClickCancelCreateModal={onClickCancelCreateModal}
       />
       {drinks.length > 0 ? (
         <>
@@ -59,7 +61,8 @@ export default function MenuDrinks({
             onClickCloseEditModal={onClickCloseEditModal}
             onClickOpenEditModal={onClickOpenEditModal}
             onClickConfirmDelete={onClickConfirmDelete}
-            onClickConfirmEdit={onClickConfirmEdit}
+            onClickSaveEditModal={onClickSaveEditModal}
+            setSelectedItem={setSelectedItem}
           />
         </>
       ) : (
