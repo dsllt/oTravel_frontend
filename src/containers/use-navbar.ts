@@ -102,7 +102,6 @@ export default function useNavbar() {
 
   const handleCloseInnerModal = useCallback(
     (modal: string) => {
-      console.log('modal', modal);
       if (modal === 'favorites') {
         setDisplayFavoritesModal(false);
       }

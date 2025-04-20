@@ -1,17 +1,16 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import { Menu, Place, Schedule } from '../domain/models/place';
-import { placeScheduleMock, reviewsMock } from '../utils/mocks';
+import { Place, Schedule } from '../domain/models/place';
+import { reviewsMock } from '../utils/mocks';
 import { UserContext } from '../context/userContext';
-import { Favorite } from '../domain/models/favorite';
 import useExplore from './use-explore';
-import { updateFavorite } from '@lib/usecases/update-favorite';
 import { getActiveFavorites } from '@lib/usecases/get-active-favorites';
 import { getSchedule } from '@lib/usecases/get-schedule';
+import { FoodType, Menu } from '../domain/models/menu';
+import { getMenu } from '@lib/usecases/get-menu';
+import { putFavorite } from '@lib/usecases/put-favorite';
+import useModal from './use-modal';
 
 const usePlacePage = () => {
-  const { userData } = useContext(UserContext);
-  const { data: exploreData } = useExplore();
-
   const [place, setPlace] = useState<Place>({
     id: '',
     imageUrl: '',
@@ -29,33 +28,53 @@ const usePlacePage = () => {
     created_at: '',
   });
   const [isFavorite, setIsFavorite] = useState(false);
-  const [placeMenu, setPlaceMenu] = useState<Menu[]>([]);
+  const [placeDrinks, setPlaceDrinks] = useState<Menu[]>([]);
+  const [placeFoods, setPlaceFoods] = useState<Menu[]>([]);
   const [placeSchedule, setPlaceSchedule] = useState<Schedule[]>();
   const [newReview, setNewReview] = useState('');
   const [rating, setRating] = useState('');
   const [reviews, setReview] = useState(reviewsMock);
   const [isLogged, setIsLogged] = useState(false);
 
+  const loadMenu = useCallback(async () => {
+    if (!place.id) return;
+    const response = await getMenu(place.id);
+    const drinks = response.filter(
+      (item: Menu) => item.type === FoodType.DRINK,
+    );
+    const foods = response.filter((item: Menu) => item.type === FoodType.FOOD);
+    setPlaceDrinks(drinks);
+    setPlaceFoods(foods);
+  }, [place.id]);
+
+  const { userData } = useContext(UserContext);
+  const { data: exploreData } = useExplore();
+  const { data: dataModal, callback: callbackModal } = useModal({ loadMenu });
+
   const data = useMemo(
     () => ({
       place,
       isFavorite,
-      placeMenu,
+      placeDrinks,
+      placeFoods,
       placeSchedule,
       newReview,
       rating,
       reviews,
       isLogged,
+      ...dataModal,
     }),
     [
       place,
       isFavorite,
-      placeMenu,
+      placeDrinks,
+      placeFoods,
       placeSchedule,
       newReview,
       rating,
       reviews,
       isLogged,
+      dataModal,
     ],
   );
 
@@ -70,7 +89,7 @@ const usePlacePage = () => {
   }, [place.id]);
 
   const onClickFavorite = useCallback(async () => {
-    await updateFavorite(userData.id, place.id);
+    await putFavorite(userData.id, place.id);
     await getIsFavorite();
   }, [getIsFavorite, place.id, userData.id]);
 
@@ -87,13 +106,6 @@ const usePlacePage = () => {
     setNewReview('');
     setRating('');
   }, [newReview, place, rating, userData]);
-
-  const displayEditModal = useCallback(() => {
-    const modal = document.getElementById('place-edit') as HTMLDialogElement;
-    if (modal) {
-      modal.showModal();
-    }
-  }, []);
 
   const isPlaceDataFetched = useCallback((place: Place): boolean => {
     let isFetched = false;
@@ -128,22 +140,22 @@ const usePlacePage = () => {
     () => ({
       onClickSubmitReview,
       onClickFavorite,
-      displayEditModal,
       isPlaceDataFetched,
       defineCurrentPlace,
       setPlaceSchedule,
       setRating,
       setNewReview,
+      ...callbackModal,
     }),
     [
       onClickSubmitReview,
       onClickFavorite,
-      displayEditModal,
       isPlaceDataFetched,
       defineCurrentPlace,
       setPlaceSchedule,
       setRating,
       setNewReview,
+      callbackModal,
     ],
   );
 
@@ -157,6 +169,10 @@ const usePlacePage = () => {
   useEffect(() => {
     getIsFavorite();
   }, [getIsFavorite]);
+
+  useEffect(() => {
+    loadMenu();
+  }, [loadMenu, place.id]);
 
   useEffect(() => {
     async function loadSchedule() {
