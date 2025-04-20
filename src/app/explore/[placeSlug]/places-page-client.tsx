@@ -1,16 +1,12 @@
 'use client';
-import Image from 'next/image';
 import MenuContainer from '@ui/explore/menu-container';
 import React, { Suspense, useEffect } from 'react';
 import Link from 'next/link';
-import { Star, PencilIcon } from 'lucide-react';
 import ReviewBox from '@ui/review-box';
 import dynamic from 'next/dynamic';
-import { StarIcon } from '@heroicons/react/16/solid';
 import usePlacePage from '../../../containers/use-place-page';
-import useNavbar from '../../../containers/use-navbar';
-import PlaceSchedule from '@ui/place/place-schedule';
-import EditPlaceModal from '@ui/place/edit-place-modal';
+
+import PlaceMainInfo from '@ui/explore/place-main-info';
 
 const Map = dynamic(
   () => import('../../../components/maps/small-map'),
@@ -31,7 +27,6 @@ export default function PlacePageClient({ slug }: { slug: string }) {
 
 function PlacePage({ slug }: { slug: string }) {
   const { data, callback } = usePlacePage();
-  const { data: dataNavbar } = useNavbar();
 
   useEffect(() => {
     callback.defineCurrentPlace(slug);
@@ -41,68 +36,14 @@ function PlacePage({ slug }: { slug: string }) {
     <div className="w-full px-40 flex flex-col gap-10 mt-10 mb-20 items-center justify-center">
       {callback.isPlaceDataFetched(data.place) ? (
         <>
-          <div className="flex flex-col md:flex-row lg:flex-row w-full h-full justify-center items-start gap-16">
-            <div className="max-h-[700px] overflow-hidden w-full md:w-3/5 lg:w-3/5">
-              <Image
-                src={data.place.imageUrl}
-                alt={data.place.name}
-                style={{ objectFit: 'cover', borderRadius: '1rem' }}
-                width={600}
-                height={700}
-                priority
-              />
-            </div>
-            <div className="flex flex-col gap-0 md:gap-4 lg:gap-4 font-dmSans w-full md:w-full lg:min-w-[600px]">
-              <div className="flex w-full justify-between">
-                <h1 className="text-5xl uppercase font-semibold max-w-[500px] break-words w-11/12">
-                  {data.place.name}
-                </h1>
-                <div className="flex p-0 justify-start items-start">
-                  <button
-                    className="hover:bg-slate-700 p-1 rounded-lg text-sm"
-                    onClick={() => callback.displayEditModal()}
-                  >
-                    <PencilIcon className="size-5 " />
-                  </button>
-                </div>
-                <EditPlaceModal
-                  placeSchedule={data.placeSchedule ?? []}
-                  place={data.place}
-                />
-              </div>
-
-              <div className="flex justify-between">
-                {data.place.rating ? (
-                  <div className="badge badge-secondary">
-                    {data.place.rating}
-                  </div>
-                ) : (
-                  <div className="w-5"></div>
-                )}
-                {dataNavbar.isLogged && (
-                  <div
-                    className="flex items-center gap-2 text-sm cursor-pointer hover:bg-gray-700 rounded-lg p-2"
-                    onClick={callback.onClickFavorite}
-                  >
-                    {data.isFavorite ? (
-                      <StarIcon className="size-5 text-blue-600" />
-                    ) : (
-                      <>
-                        <Star className="size-5 text-blue-600" />
-                        Favoritar
-                      </>
-                    )}
-                  </div>
-                )}
-              </div>
-              <p className="text-lg text-gray-400 mb-2">
-                {data.place.address} - {data.place.city}, {data.place.country}
-              </p>
-              {data.placeSchedule && (
-                <PlaceSchedule placeSchedule={data.placeSchedule} />
-              )}
-            </div>
-          </div>
+          <PlaceMainInfo
+            displayEditModal={callback.displayEditModal}
+            isFavorite={data.isFavorite}
+            isLogged={data.isLogged}
+            onClickFavorite={callback.onClickFavorite}
+            place={data.place}
+            placeSchedule={data.placeSchedule}
+          />
 
           <div className="flex w-full justify-between gap-12">
             <MenuContainer
